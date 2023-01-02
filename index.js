@@ -1,10 +1,12 @@
 //For environment variables
 //require('dotenv').config()
 
+
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-
+const Ej6 = require('./Ejercicios/Bloque1/Ej6')
+const Ej3_4 = require('./Ejercicios/Bloque1/Ej3_4')
 //For Mongo DB
 //const Person = require('./models/exercises')
 
@@ -16,31 +18,23 @@ app.use(express.static('build'))
 
 //aqui va la logica de crear los objetos
 
+let ejemplo1 = new Ej3_4(
+                  "Escribe 2 números distintos comprendidos entre 23756 y 23834",
+                  "Escribe 2 números distintos comprendidos entre 23756 y 23834",
+                  "23700 23800",
+                  20)
+let ejemplo2 = new Ej6(
+                  "Redondea a las decenas, centenas, unidades de millar y decenas de millar",
+                  "374578 298765",
+                  "374580 374600 374000 270000_298770 298700 299000 300000",
+                  20)
+ejemplo1.obtenerResultado
+ejemplo2.obtenerResultado
+
+
 let exercises = [
-    { 
-        topic: "Matrix", 
-        content: "This is content of an exercise",
-        score: "10",
-        id: 1
-    },
-    { 
-        topic: "Matrix", 
-        content: "This is content of an exercise",
-        score: "5",
-        id: 2
-    },
-    { 
-        topic: "Functions", 
-        content: "This is content of an exercise",
-        score: "10",
-        id: 3
-    },
-    {
-        topic: "Geometry", 
-        content: "This is content of an exercise",
-        score: "20",
-        id: 4
-    }
+  ejemplo1,
+  ejemplo2
 ]
 
 morgan.token('body', (req, res) => JSON.stringify(req.body))

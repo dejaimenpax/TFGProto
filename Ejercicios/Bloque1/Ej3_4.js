@@ -1,6 +1,8 @@
+const EjBloque1 = require('./EjBloque1')
+
 class Ej3_4 extends EjBloque1{
-    constructor (enunciado, input, puntuacion) {
-        super(enunciado,input,puntuacion)
+    constructor (texto, enunciado, input, puntuacion) {
+        super(texto,enunciado,input,puntuacion)
         //enunciado es el mismo que el texto presentado en la pagina
     }
 
@@ -9,7 +11,7 @@ class Ej3_4 extends EjBloque1{
 
         this.input = split_num(this.input)
 
-        const palabras = text.split(" ")
+        const palabras = enunciado.split(" ")
         const cantidad = Number(palabras[1])
         const min = Number(palabras[6])
         const max = Number(palabras[8])
@@ -17,7 +19,7 @@ class Ej3_4 extends EjBloque1{
         const ejemplos = new Set() //conjunto para que no se repitan ejemplos aleatorios
         let lon_ej = ejemplos.size
 
-        for (num in input){
+        for (const num in input){
             if (min<num && num<max) {
                 this.nota += puntuacion/cantidad //Asumimos que puntuacion nos pasan un numero
                 this.explicacion.push(`${num} es correcto.`)
@@ -26,7 +28,7 @@ class Ej3_4 extends EjBloque1{
                 //creamos ejemplo de numero
                 let rand = 0
                 while (lon_ej===ejemplos.size){
-                    aux = (Math.random() * (max-1 - min+1 + 1)) + min+1
+                    let aux = (Math.random() * (max-1 - min+1 + 1)) + min+1
                     ejemplos.add(rand)
                 }
                 lon_ej++
@@ -41,4 +43,6 @@ class Ej3_4 extends EjBloque1{
         }
     }
 
-  }
+}
+
+module.exports = Ej3_4

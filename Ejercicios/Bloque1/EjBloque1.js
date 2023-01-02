@@ -1,5 +1,6 @@
 class EjBloque1 {
-    constructor (enunciado, input, puntuacion) {
+    constructor (texto, enunciado, input, puntuacion) {
+      this.texto=texto
       this.enunciado=enunciado
       this.input=input
       this.resultado=[] //array de la misma longitud que input
@@ -26,3 +27,5 @@ class EjBloque1 {
         return this.nota
     }
 }
+
+module.exports = EjBloque1 

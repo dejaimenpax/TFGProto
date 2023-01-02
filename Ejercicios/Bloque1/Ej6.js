@@ -1,6 +1,8 @@
+const EjBloque1 = require('./EjBloque1')
+
 class Ej6 extends EjBloque1{
-    constructor (enunciado, input, puntuacion) {
-        super(enunciado,input,puntuacion)
+    constructor (texto, enunciado, input, puntuacion) {
+        super(texto, enunciado,input,puntuacion)
         //enunciado no es el mismo que el texto, son numeros
     }
 
@@ -55,3 +57,5 @@ class Ej6 extends EjBloque1{
         }
     }
 }
+
+module.exports = Ej6
