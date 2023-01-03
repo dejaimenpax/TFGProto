@@ -28,13 +28,16 @@ let ejemplo2 = new Ej6(
                   "374578 298765",
                   "374580 374600 374000 270000_298770 298700 299000 300000",
                   20)
-ejemplo1.obtenerResultado
-ejemplo2.obtenerResultado
-
+let ejemplo3 = new Ej6(
+                  "Redondea a las decenas, centenas, unidades de millar y decenas de millar",
+                  "2948574 384864",
+                  "2948570 2948600 2950000 3000000_380000 380000 380000 380000",
+                  40)
 
 let exercises = [
   ejemplo1,
-  ejemplo2
+  ejemplo2,
+  ejemplo3
 ]
 
 morgan.token('body', (req, res) => JSON.stringify(req.body))
