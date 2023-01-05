@@ -1,15 +1,18 @@
 const EjBloque1 = require('./EjBloque1')
 
 class Ej6 extends EjBloque1{
-    constructor (texto, enunciado, input, puntuacion) {
-        super(texto, enunciado,input,puntuacion)
+    constructor (texto, enunciado, puntuacion, id) {
+        super(1.06, texto, enunciado, puntuacion, id) //1.06 dice bloque 1=> ej 6
         //enunciado no es el mismo que el texto, son numeros
+    }
 
+    resolver(input){
+        this.input=input
         //this.puntuacion sera siempre divisible entre 4*cantidad de números
 
-        this.enunciado = this.enunciado.split(" ").map(x=>Number(x))
+        const enunciado_aux = this.enunciado.split(" ").map(x=>Number(x))
         //divide primero cuando ve un "_" (cambio de fila) y luego por espacios
-        this.input = this.input.split("_").map(sub_arr => sub_arr.split(" ").map(x=>Number(x)))
+        const input_aux = this.input.split("_").map(sub_arr => sub_arr.split(" ").map(x=>Number(x)))
         //resultado: array de arrays [ [decenas, centenas, millares, decenas de millar], ...]
 
         const mapa = new Map()
@@ -18,7 +21,7 @@ class Ej6 extends EjBloque1{
         mapa.set(2, "unidades de millar")
         mapa.set(3, "decenas de millar")
 
-        this.enunciado.forEach(num => {
+        enunciado_aux.forEach(num => {
             this.resultado.push([
                 Math.round(num/10)*10,
                 Math.round(num/100)*100,
@@ -28,16 +31,16 @@ class Ej6 extends EjBloque1{
             this.explicacion.push(["","","",""])
         })
 
-        for (let fila=0; fila<this.input.length; fila++){
+        for (let fila=0; fila<input_aux.length; fila++){
             for(let modo=0; modo<4; modo++){
-                if (this.resultado[fila][modo]===this.input[fila][modo]){
+                if (this.resultado[fila][modo]===input_aux[fila][modo]){
                     this.explicacion[fila][modo]="¡Es correcto!"
-                    this.nota += this.puntuacion/this.enunciado.length/4
+                    this.nota += this.puntuacion/enunciado_aux.length/4
                 }
                 else{
 
                     let columna = mapa.get(modo)
-                    let aux = enunciado[fila].toString()
+                    let aux = enunciado_aux[fila].toString()
                     let derecha = Number(aux.charAt(aux.length-1 - modo))
 
                     let propuesta = this.resultado[fila][modo]
@@ -56,9 +59,8 @@ y a todos los de su derecha en 0, ${conclusion} obteniendo ${propuesta}.`
                 }
             }
         }
-
-
     }
 }
 
+export default Ej6
 module.exports = Ej6

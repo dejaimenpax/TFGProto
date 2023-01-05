@@ -5,8 +5,8 @@
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const Ej6 = require('./Ejercicios/Bloque1/Ej6')
-const Ej3_4 = require('./Ejercicios/Bloque1/Ej3_4')
+const Ej6 = require('./frontend/front/src/Clases/Bloque1/Ej6')
+const Ej3_4 = require('./frontend/front/src/Clases/Bloque1/Ej3_4')
 //For Mongo DB
 //const Person = require('./models/exercises')
 
@@ -21,18 +21,22 @@ app.use(express.static('build'))
 let ejemplo1 = new Ej3_4(
                   "Escribe 2 números distintos comprendidos entre 23756 y 23834",
                   "Escribe 2 números distintos comprendidos entre 23756 y 23834",
-                  "23700 23800",
-                  20)
+                  20,
+                  1)
 let ejemplo2 = new Ej6(
                   "Redondea a las decenas, centenas, unidades de millar y decenas de millar",
                   "374578 298765",
-                  "374580 374600 374000 270000_298770 298700 299000 300000",
-                  20)
+                  20,
+                  2)
 let ejemplo3 = new Ej6(
                   "Redondea a las decenas, centenas, unidades de millar y decenas de millar",
                   "2948574 384864",
-                  "2948570 2948600 2950000 3000000_380000 380000 380000 380000",
-                  40)
+                  40,
+                  3)
+
+//ejemplo1.resolver("23700 23800")
+//ejemplo2.resolver("374580 374600 374000 270000_298770 298700 299000 300000")
+//ejemplo3.resolver("2948570 2948600 2950000 3000000_380000 380000 380000 380000")
 
 let exercises = [
   ejemplo1,

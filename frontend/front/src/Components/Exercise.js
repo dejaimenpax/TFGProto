@@ -1,9 +1,18 @@
 
-const Exercise = ({ exercise, eraseExercise }) => {
+const Exercise = ({ exercise, addInput, newInput, handleInputChange }) => {
     return(
         <div>
-            {exercise.topic} {exercise.content} Score: {exercise.score}
-            <button onClick={() => eraseExercise(exercise)}>delete</button>
+        Tema:{exercise.tema}_Texto:{exercise.texto}
+            <div>Introduce tu respuesta al ejercicio: 
+                <input 
+                    value={newInput}
+                    onChange={handleInputChange}
+                />
+            </div>
+
+            <div><button onClick={() => addInput(exercise)}>Enviar</button></div>
+
+        
         </div>
     )
 }

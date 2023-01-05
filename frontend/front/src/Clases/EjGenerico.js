@@ -1,12 +1,15 @@
-class EjBloque1 {
-    constructor (texto, enunciado, input, puntuacion) {
+class EjGenerico {
+    constructor (tema, id_tema, texto, enunciado, puntuacion, id) {
+      this.tema=tema
+      this.id_tema=id_tema
       this.texto=texto
       this.enunciado=enunciado
-      this.input=input
+      this.input=' ' //el input lo mete resolver
       this.resultado=[] //array de la misma longitud que input
       this.explicacion=[] //array de la misma longitud que input
       this.puntuacion=puntuacion
       this.nota=0
+      this.id=id
     }
 
     //Aux
@@ -26,6 +29,8 @@ class EjBloque1 {
     getNota(){
         return this.nota
     }
+
+    
 }
 
-module.exports = EjBloque1 
+module.exports = EjGenerico

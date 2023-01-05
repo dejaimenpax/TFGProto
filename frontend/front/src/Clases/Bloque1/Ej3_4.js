@@ -2,13 +2,15 @@ const EjBloque1 = require('./EjBloque1')
 
 class Ej3_4 extends EjBloque1{
 
-
     // "Escribe 2/4 números distintos comprendidos entre Y y Z"
-    constructor (texto, enunciado, input, puntuacion) {
-        super(texto,enunciado,input,puntuacion)
+    constructor (texto, enunciado, puntuacion, id) {
+        super(1.03, texto, enunciado, puntuacion, id) //1.03 dice bloque 1 => ej3_4
         //enunciado es el mismo que el texto presentado en la pagina
+    }
 
-        this.input = this.input.split(" ").map(x=>Number(x))
+    resolver(input) {
+        this.input=input
+        const input_aux = this.input.split(" ").map(x=>Number(x))
 
         const palabras = this.enunciado.split(" ")
         const cantidad = Number(palabras[1])
@@ -18,9 +20,9 @@ class Ej3_4 extends EjBloque1{
         const ejemplos = new Set() //conjunto para que no se repitan ejemplos aleatorios
         let lon_ej = ejemplos.size
 
-        this.input.forEach(num => {
+        input_aux.forEach(num => {
             if (min<num && num<max) {
-                this.nota += puntuacion/cantidad //Asumimos que puntuacion nos pasan un numero
+                this.nota += this.puntuacion/cantidad //Asumimos que puntuacion nos pasan un numero
                 this.explicacion.push(`${num} es correcto.`)
                 this.resultado.push(num)
             }
@@ -44,9 +46,8 @@ class Ej3_4 extends EjBloque1{
             }
         })
         
-        
-
     }
 }
 
-module.exports = Ej3_4
+export default Ej3_4
+//module.exports = Ej3_4

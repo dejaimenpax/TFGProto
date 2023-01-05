@@ -1,20 +1,16 @@
 import { useState, useEffect} from 'react'
+import Ej3_4 from './Clases/Bloque1/Ej3_4'
+import Ej6 from './Clases/Bloque1/Ej6'
 import Exercises from './Components/Exercises'
 import Filter from './Components/Filter'
-import ExerciseForm from './Components/ExerciseForm'
-import Notification from './Components/Notification'
 
 import exerciseService from './Services/Exercises'
 
 
 const App = () => {
   const [exercises, setExercises] = useState([])
-  const [newTopic, setNewTopic] = useState('')
-  const [newContent, setNewContent] = useState('')
-  const [newScore, setNewScore] = useState('')
   const [newFilter, setNewFilter] = useState('')
-  const [feedbackMessage, setFeedbackMessage] = useState('')
-  const [feedbackType, setFeedBackType] = useState('')
+  const [newInput, setNewInput] = useState('')
 
   useEffect(() => {
     console.log('effect')
@@ -27,47 +23,59 @@ const App = () => {
   }, [])
   console.log('render', exercises.length, 'exercises')
  
+  const addInput = (exercise) => {
+    //event.preventDefault()
+    console.log("Entra por añadir input")
 
-  const addExercise = (event) => {
-    event.preventDefault()
 
-    console.log('Add exercise button clicked', event.target)
+    let exerciseObject = null
+    console.log("HE IDENTIFICADO QUE VAS A PUTEAR UN EJ3_4, TAL Y COMO INDICA EL ID", exercise.id_tema)
 
-    const exerciseObject = {
-      topic: newTopic,
-      content: newContent,
-      score: newScore
+    switch (exercise.id_tema){
+      case 1.03:
+        exerciseObject = new Ej3_4(
+          exercise.texto,
+          exercise.enunciado,
+          exercise.puntuacion,
+          exercise.id
+        )
+        break;
+      case 1.06:
+        exerciseObject = new Ej6(
+          exercise.texto,
+          exercise.enunciado,
+          exercise.puntuacion,
+          exercise.id
+        )
+        break;
+      default:
+        break;
     }
 
+    exerciseObject.resolver(newInput)
+    setNewInput('')
+    console.log("He quitado el newInput")
+
+
+    console.log("El id es", exerciseObject.id)
+
+
+      
     exerciseService
-      .create(exerciseObject)
-      .then(x => {
-        setFeedBackType('success')
-        setFeedbackMessage(`Added ${newTopic}`)
-        setTimeout(() => {
-          setFeedbackMessage('')
-          setFeedBackType('')
-        }, 5000)
-        setExercises(exercises.concat(x))
-      })   
-
-    setNewTopic('')
-    setNewContent('')
-    setNewScore('')
+      .update(exercise.id, exerciseObject)
+      .then(response => {
+        console.log("Entra por then")
+        setExercises(exercises.map(x=> x.id!==exercise.id ? x : response.data))
+      })
+  
+    setNewInput('')
   }
+  
 
-  const handleTopicChange = (event) => {
-    setNewTopic(event.target.value)
+  const handleInputChange = (event) => {
+    //event.preventDefault()
+    setNewInput(event.target.value)
   }
-
-  const handleContentChange = (event) => {
-    setNewContent(event.target.value)
-  }
-
-  const handleScoreChange = (event) => {
-    setNewScore(event.target.value)
-  }
-
 
   const handleFilterChange = (event) => {
     const auxFilter = event.target.value.toLowerCase() //innecesario
@@ -75,41 +83,20 @@ const App = () => {
     setNewFilter(auxFilter)
   }
 
-  const eraseExercise = (exercise) => {
-    console.log('Entra por el borrado')
-    //mucho cuidado como llamamos en Exercise.js a esta funcion, debe ser como () => eraseExercise(id)
-    if (window.confirm(`Delete ${exercise.id}?`)){
-      exerciseService
-      .erase(exercise.id)
-      .then(response => {
-        setExercises(exercises.filter(x => x.id!==exercise.id))
-      })
-    }
-  }
-
   return (
     <>
-      <h2>Lista de ejercicios</h2>
-      
-      <Notification message={feedbackMessage} type={feedbackType}/>
+      <h1>Aprende matemáticas</h1>
 
       <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} />
 
-      <h3>Añadir un nuevo ejercicio</h3>
-
-      <ExerciseForm 
-        addExercise={addExercise}
-        newTopic={newTopic}
-        handleTopicChange={handleTopicChange}
-        newContent={newContent}
-        handleContentChange={handleContentChange}
-        newScore={newScore}
-        handleScoreChange={handleScoreChange}
-      />
-
       <h3>Listado de ejercicios</h3>
 
-      <Exercises exercises={exercises} newFilter={newFilter} eraseExercise={eraseExercise} />
+      <Exercises 
+        exercises={exercises} 
+        newFilter={newFilter} 
+        addInput={addInput} 
+        handleInputChange={handleInputChange}
+      />
 
     </>
   )
