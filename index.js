@@ -1,16 +1,20 @@
 //For environment variables
 //require('dotenv').config()
 
+const Ej6 = require('./Clases_back/Bloque1/Ej6')
+const Ej3_4 = require('./Clases_back/Bloque1/Ej3_4')
+//import Ej6 from './frontend/front/src/Clases/Bloque1/Ej6.mjs'
+//import Ej3_4 from './frontend/front/src/Clases/Bloque1/Ej3_4.mjs'
+
 
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const Ej6 = require('./frontend/front/src/Clases/Bloque1/Ej6')
-const Ej3_4 = require('./frontend/front/src/Clases/Bloque1/Ej3_4')
+
 //For Mongo DB
 //const Person = require('./models/exercises')
 
-
+ 
 const app = express()
 
 app.use(cors())

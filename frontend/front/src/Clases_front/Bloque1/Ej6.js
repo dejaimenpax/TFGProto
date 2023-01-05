@@ -1,4 +1,5 @@
-const EjBloque1 = require('./EjBloque1')
+//const EjBloque1 = require('./EjBloque1.js')
+import EjBloque1 from './EjBloque1'
 
 class Ej6 extends EjBloque1{
     constructor (texto, enunciado, puntuacion, id) {
@@ -62,5 +63,5 @@ y a todos los de su derecha en 0, ${conclusion} obteniendo ${propuesta}.`
     }
 }
 
+//module.exports = Ej6
 export default Ej6
-module.exports = Ej6

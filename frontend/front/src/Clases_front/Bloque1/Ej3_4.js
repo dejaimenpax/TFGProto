@@ -1,4 +1,5 @@
-const EjBloque1 = require('./EjBloque1')
+//const EjBloque1 = require('./EjBloque1')
+import EjBloque1 from './EjBloque1'
 
 class Ej3_4 extends EjBloque1{
 
@@ -49,5 +50,6 @@ class Ej3_4 extends EjBloque1{
     }
 }
 
-export default Ej3_4
+
 //module.exports = Ej3_4
+export default Ej3_4

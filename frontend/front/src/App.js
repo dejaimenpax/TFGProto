@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react'
-import Ej3_4 from './Clases/Bloque1/Ej3_4'
-import Ej6 from './Clases/Bloque1/Ej6'
+import Ej3_4 from './Clases_front/Bloque1/Ej3_4'
+import Ej6 from './Clases_front/Bloque1/Ej6'
 import Exercises from './Components/Exercises'
 import Filter from './Components/Filter'
 

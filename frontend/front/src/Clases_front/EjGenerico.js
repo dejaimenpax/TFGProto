@@ -33,4 +33,5 @@ class EjGenerico {
     
 }
 
-module.exports = EjGenerico
+export default EjGenerico
+//module.exports = EjGenerico

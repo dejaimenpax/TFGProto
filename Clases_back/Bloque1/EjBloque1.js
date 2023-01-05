@@ -1,4 +1,5 @@
-const EjGenerico = require('../EjGenerico')
+const EjGenerico = require('../EjGenerico.js')
+//import EjGenerico from '../EjGenerico.js'
 
 class EjBloque1 extends EjGenerico{
     constructor (id_tema, texto, enunciado, puntuacion, id) {
@@ -11,4 +12,5 @@ class EjBloque1 extends EjGenerico{
     }
 }
 
+//export default EjBloque1
 module.exports = EjBloque1
