@@ -8,14 +8,15 @@ const Ej3_4 = require('./Clases_back/Bloque1/Ej3_4')
 
 
 const express = require('express')
-const morgan = require('morgan')
+const app = express()
+
+//const morgan = require('morgan')
 const cors = require('cors')
 
 //For Mongo DB
-//const Person = require('./models/exercises')
+const Exercise = require('./models/exercise')
 
  
-const app = express()
 
 app.use(cors())
 app.use(express.static('build'))
@@ -50,7 +51,7 @@ let exercises = [
 
 morgan.token('body', (req, res) => JSON.stringify(req.body))
 
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+//app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 app.use(express.json())
 
@@ -79,6 +80,28 @@ app.get('/api/exercises/:id', (request, response) => {
     }
 })
 
+app.put('/api/exercises/:id', (request, response) => {
+  const id = Number(request.params.id)
+  const body = request.body
+  const exercise = exercises.find(x => x.id === id)
+
+  if (!body.input) {
+    return response.status(400).json({ 
+      error: 'input missing'
+    })
+  }
+
+  if (exercise) {
+    exercise.resolver(body.input)
+    exercises = exercises.concat(exercise)
+  }
+  else {
+    response.statusMessage = "There is no exercise with that number" //esto cambia el "NOT FOUND"
+    response.status(404).end()
+  }
+})
+
+/*
 app.delete('/api/exercises/:id', (request, response) => {
     console.log('Entra en delete')
     const id = Number(request.params.id)
@@ -127,7 +150,7 @@ app.post('/api/exercises', (request, response) => {
 
     response.json(exercise)
 })
-
+*/
 
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
