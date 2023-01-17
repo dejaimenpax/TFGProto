@@ -2,10 +2,10 @@ const db = require("../models");
 const ROLES = db.ROLES;
 const User = db.user;
 
-checkDuplicateUsernameOrEmail = (req, res, next) => {
+checkDuplicateDniOrEmail = (req, res, next) => {
   // Username
   User.findOne({
-    username: req.body.username
+    dni: req.body.dni
   }).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
@@ -13,7 +13,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
     }
 
     if (user) {
-      res.status(400).send({ message: "Failed! Username is already in use!" });
+      res.status(400).send({ message: "Error. El NIF/NIE ya se está utilizando por otro usuario." });
       return;
     }
 
@@ -27,7 +27,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
       }
 
       if (user) {
-        res.status(400).send({ message: "Failed! Email is already in use!" });
+        res.status(400).send({ message: "Error. El correo electrónico ya se está utilizando por otro usuario." });
         return;
       }
 
@@ -41,7 +41,7 @@ checkRolesExisted = (req, res, next) => {
     for (let i = 0; i < req.body.roles.length; i++) {
       if (!ROLES.includes(req.body.roles[i])) {
         res.status(400).send({
-          message: `Failed! Role ${req.body.roles[i]} does not exist!`
+          message: `Error. El rol especificado (${req.body.roles[i]}) no existe.`
         });
         return;
       }
@@ -52,7 +52,7 @@ checkRolesExisted = (req, res, next) => {
 };
 
 const verifySignUp = {
-  checkDuplicateUsernameOrEmail,
+  checkDuplicateDniOrEmail,
   checkRolesExisted
 };
 

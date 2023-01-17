@@ -10,7 +10,7 @@ const required = (value) => {
   if (!value) {
     return (
       <div className="alert alert-danger" role="alert">
-        This field is required!
+        Es necesario rellenar este campo.
       </div>
     );
   }
@@ -22,14 +22,14 @@ const Login = () => {
   const form = useRef();
   const checkBtn = useRef();
 
-  const [username, setUsername] = useState("");
+  const [dni, setDni] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    setUsername(username);
+  const onChangeDni = (e) => {
+    const dni = e.target.value;
+    setDni(dni);
   };
 
   const onChangePassword = (e) => {
@@ -46,7 +46,7 @@ const Login = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(username, password).then(
+      AuthService.login(dni, password).then(
         () => {
           navigate("/profile");
           window.location.reload();
@@ -79,19 +79,19 @@ const Login = () => {
 
         <Form onSubmit={handleLogin} ref={form}>
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="dni">NIF/NIE</label>
             <Input
               type="text"
               className="form-control"
-              name="username"
-              value={username}
-              onChange={onChangeUsername}
+              name="dni"
+              value={dni}
+              onChange={onChangeDni}
               validations={[required]}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Contraseña</label>
             <Input
               type="password"
               className="form-control"
@@ -107,7 +107,7 @@ const Login = () => {
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
-              <span>Login</span>
+              <span>Iniciar sesión</span>
             </button>
           </div>
 

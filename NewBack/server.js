@@ -16,7 +16,7 @@ app.use(express.json())
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
 
-const db = require("./app/models")
+const db = require("./app/models") // cojo los modelos de mongoose
 const Role = db.role
 
 db.mongoose.set("strictQuery", false); //para evitar cambio en Mongoose 7
@@ -27,11 +27,11 @@ db.mongoose
     useUnifiedTopology: true
   })
   .then(() => {
-    console.log("Successfully connect to MongoDB.");
+    console.log("Se ha producido la conexión con MongoDB.");
     //initial();
   })
   .catch(err => {
-    console.error("Connection error", err);
+    console.error("Error en la conexión con la base de datos.", err);
     process.exit();
   });
 

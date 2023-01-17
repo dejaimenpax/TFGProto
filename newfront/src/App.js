@@ -49,19 +49,19 @@ const App = () => {
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
-          bezKoder
+          SmartMath
         </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to={"/home"} className="nav-link">
-              Home
+              Inicio
             </Link>
           </li>
 
           {showModeratorBoard && (
             <li className="nav-item">
               <Link to={"/mod"} className="nav-link">
-                Moderator Board
+                Panel de moderador
               </Link>
             </li>
           )}
@@ -69,7 +69,7 @@ const App = () => {
           {showAdminBoard && (
             <li className="nav-item">
               <Link to={"/admin"} className="nav-link">
-                Admin Board
+                Panel de administrador
               </Link>
             </li>
           )}
@@ -77,7 +77,7 @@ const App = () => {
           {currentUser && (
             <li className="nav-item">
               <Link to={"/user"} className="nav-link">
-                User
+                Mi perfil
               </Link>
             </li>
           )}
@@ -92,7 +92,7 @@ const App = () => {
             </li>
             <li className="nav-item">
               <a href="/login" className="nav-link" onClick={logOut}>
-                LogOut
+                Cerrar Sesión
               </a>
             </li>
           </div>
@@ -100,13 +100,13 @@ const App = () => {
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link to={"/login"} className="nav-link">
-                Login
+                Iniciar Sesión
               </Link>
             </li>
 
             <li className="nav-item">
               <Link to={"/register"} className="nav-link">
-                Sign Up
+                Registrarse
               </Link>
             </li>
           </div>

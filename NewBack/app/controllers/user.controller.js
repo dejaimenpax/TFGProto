@@ -1,15 +1,15 @@
 exports.allAccess = (req, res) => {
-  res.status(200).send("Public Content.");
+  res.status(200).send("Contenido para el que no hace falta iniciar sesión.");
 };
 
 exports.userBoard = (req, res) => {
-  res.status(200).send("User Content.");
+  res.status(200).send("Contenido disponible para usuarios.");
 };
 
 exports.adminBoard = (req, res) => {
-  res.status(200).send("Admin Content.");
+  res.status(200).send("Contenido disponible para administradores.");
 };
 
 exports.moderatorBoard = (req, res) => {
-  res.status(200).send("Moderator Content.");
+  res.status(200).send("Contenido disponible para moderadores.");
 };
