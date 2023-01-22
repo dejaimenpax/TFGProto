@@ -3,13 +3,17 @@ import React, { useState, useEffect } from "react";
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 
-const Home = () => {
+import AuthService from "../services/auth.service";
+
+const Resolver = () => {
   const [content, setContent] = useState("");
+  const [user, setUser] = useState(undefined)
 
   useEffect(() => {
     UserService.getPublicContent().then(
       (response) => {
         setContent(response.data);
+        setUser(AuthService.getCurrentUser)
       },
       (error) => {
         const _content =
@@ -31,15 +35,24 @@ const Home = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <p>{content}</p>
-        <div className="container">
-          <h2 className="display-3">Bienvenido a MatemAPIcas</h2>
-          <p>MatemAPIcas es una aplicación web para el correcto aprendizaje de ejercicios de matemáticas de nivel escolar &#40;tercer ciclo&#41;.</p>
-          <p><a className="btn btn-primary btn-lg" href="/resolver" role="button">Comenzar &raquo;</a></p>
-        </div>
+        {!user ? (
+          <>
+            <p>Esto aparece porque no te has registrado.</p>
+            <p>Para poder resolver ejercicios, debe iniciar sesión</p>
+            <p><a className="btn btn-primary btn-lg" href="/login" role="button">Iniciar Sesión</a></p>
+
+          </>
+          ) : (
+          <>
+            <p>Esto aparece porque estas registrado</p>
+            <h2>Aqui apareceran el boton y la generacion de ejercicios</h2>
+          </>
+          )
+        }
+        <p>Este texto aparece haya token o no.</p>
       </header>
     </div>
   );
 };
 
-export default Home;
+export default Resolver;

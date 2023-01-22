@@ -5,13 +5,15 @@ import "./App.css";
 
 import AuthService from "./services/auth.service";
 
+
 import Login from "./components/Login";
-import Register from "./components/Register";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
+import Register from "./components/Register"; 
+import Home from "./components/Home"; 
+import Profile from "./components/Profile"; 
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
-import BoardAdmin from "./components/BoardAdmin";
+import BoardAdmin from "./components/BoardAdmin"; 
+import Resolver from "./components/Resolver"
 
 import EventBus from "./common/EventBus";
 
@@ -36,7 +38,9 @@ const App = () => {
     return () => {
       EventBus.remove("logout");
     };
+    
   }, []);
+
 
   const logOut = () => {
     AuthService.logout();
@@ -49,14 +53,9 @@ const App = () => {
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
-          SmartMath
+          MatemAPIcas
         </Link>
         <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
-              Inicio
-            </Link>
-          </li>
 
           {showModeratorBoard && (
             <li className="nav-item">
@@ -77,7 +76,7 @@ const App = () => {
           {currentUser && (
             <li className="nav-item">
               <Link to={"/user"} className="nav-link">
-                Mi perfil
+                Panel de usuario
               </Link>
             </li>
           )}
@@ -86,14 +85,19 @@ const App = () => {
         {currentUser ? (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
-                {currentUser.username}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
-                Cerrar Sesión
-              </a>
+              <div className="dropdown">
+                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Área de {currentUser.dni}
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <Link to={"/profile"} className="dropdown-item">
+                    Mi perfil
+                  </Link>
+                  <a href="/login" className="dropdown-item" onClick={logOut}>
+                    Cerrar Sesión
+                  </a>
+                </div>
+              </div>
             </li>
           </div>
         ) : (
@@ -116,13 +120,13 @@ const App = () => {
       <div className="container mt-3">
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/home" element={<Home/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/user" element={<BoardUser/>} />
           <Route path="/mod" element={<BoardModerator/>} />
           <Route path="/admin" element={<BoardAdmin/>} />
+          <Route path="/resolver" element={<Resolver/>} />
         </Routes>
       </div>
 

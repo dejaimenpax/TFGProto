@@ -11,6 +11,7 @@ const getUserBoard = () => {
   return axios.get(API_URL + "user", { headers: authHeader() });
 };
 
+
 const getModeratorBoard = () => {
   return axios.get(API_URL + "mod", { headers: authHeader() });
 };
@@ -24,6 +25,6 @@ const UserService = {
   getUserBoard,
   getModeratorBoard,
   getAdminBoard,
-};
+}
 
 export default UserService;
