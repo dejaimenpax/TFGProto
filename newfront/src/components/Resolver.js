@@ -5,9 +5,12 @@ import EventBus from "../common/EventBus";
 
 import AuthService from "../services/auth.service";
 
+import SelectTopic from "./SelectTopic"
+
 const Resolver = () => {
   const [content, setContent] = useState("");
   const [user, setUser] = useState(undefined)
+
 
   useEffect(() => {
     UserService.getPublicContent().then(
@@ -38,14 +41,13 @@ const Resolver = () => {
         {!user ? (
           <>
             <p>Esto aparece porque no te has registrado.</p>
-            <p>Para poder resolver ejercicios, debe iniciar sesión</p>
-            <p><a className="btn btn-primary btn-lg" href="/login" role="button">Iniciar Sesión</a></p>
+            <p>Para poder resolver ejercicios, debe <a className="link-primary" href="/login">iniciar sesión</a></p>
 
           </>
           ) : (
           <>
             <p>Esto aparece porque estas registrado</p>
-            <h2>Aqui apareceran el boton y la generacion de ejercicios</h2>
+            <SelectTopic />
           </>
           )
         }

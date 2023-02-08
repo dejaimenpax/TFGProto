@@ -31,7 +31,7 @@ const SelectTopic = ({ handleSelect }) => {
     return(<>
                 <div className="dropdown">
                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown button
+                        Selecciona un bloque
                     </button>
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <button className="dropdown-item">Bloque I</button>
@@ -40,8 +40,6 @@ const SelectTopic = ({ handleSelect }) => {
                         <button className="dropdown-item">Bloque IV</button>
                     </div>
                 </div>
-
-
 
             </>
     )

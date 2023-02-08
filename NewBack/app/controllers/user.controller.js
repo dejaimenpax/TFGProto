@@ -3,7 +3,7 @@ exports.allAccess = (req, res) => {
 };
 
 exports.userBoard = (req, res) => {
-  res.status(200).send("Contenido dispoible tras login.");
+  res.status(200).send("Contenido dispoible tras login. Si lees esto, has hecho login");
 };
 
 exports.adminBoard = (req, res) => {
@@ -13,4 +13,5 @@ exports.adminBoard = (req, res) => {
 exports.moderatorBoard = (req, res) => {
   res.status(200).send("Contenido disponible para moderadores.");
 }; 
+
 

@@ -51,7 +51,7 @@ const App = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-light bg-info">
         <Link to={"/"} className="navbar-brand">
           MatemAPIcas
         </Link>
@@ -86,7 +86,7 @@ const App = () => {
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
               <div className="dropdown">
-                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button className="btn btn-info text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Área de {currentUser.dni}
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">

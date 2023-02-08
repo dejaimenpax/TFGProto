@@ -48,7 +48,8 @@ const Login = () => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(dni, password).then(
         () => {
-          navigate("/profile");
+          //navigate("/profile") si directamente quieres ir al perfil
+          navigate("/resolver");
           window.location.reload();
         },
         (error) => {
