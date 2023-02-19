@@ -1,5 +1,6 @@
 import React from "react";
 import AuthService from "../services/auth.service";
+import StatsPage from "./StatsPage";
 
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
@@ -10,7 +11,9 @@ const Profile = () => {
         <h3>
           Perfil del usuario {currentUser.dni}
         </h3>
+        
       </header>
+      <StatsPage/>
       <p>
         <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{" "}
         {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}

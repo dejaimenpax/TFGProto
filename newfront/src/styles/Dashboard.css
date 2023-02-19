@@ -1,0 +1,40 @@
+  .dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .group {
+    width: 30%;
+    margin-bottom: 20px;
+  }
+  
+  .widget {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .widget-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .number {
+    font-size: 40px;
+  }
+  
+  .normal {
+    color: #444;
+  }
+  
+  .high {
+    color: green;
+  }
+  
+  .low {
+    color: red;
+  }
