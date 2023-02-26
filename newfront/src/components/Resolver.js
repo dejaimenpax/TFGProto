@@ -7,10 +7,10 @@ import AuthService from "../services/auth.service";
 
 import SelectTopic from "./SelectTopic"
 
+
 const Resolver = () => {
   const [content, setContent] = useState("");
   const [user, setUser] = useState(undefined)
-
 
   useEffect(() => {
     UserService.getPublicContent().then(

@@ -2,8 +2,8 @@ const EjBloque1 = require('./EjBloque1.js')
 //import EjBloque1 from './EjBloque1'
 
 class Ej6 extends EjBloque1{
-    constructor (texto, enunciado, puntuacion, id) {
-        super(1.06, texto, enunciado, puntuacion, id) //1.06 dice bloque 1=> ej 6
+    constructor (texto, enunciado, puntuacion) {
+        super(1.06, texto, enunciado, puntuacion) //1.06 dice bloque 1=> ej 6
         //enunciado no es el mismo que el texto, son numeros
     }
 

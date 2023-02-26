@@ -9,7 +9,6 @@ class EjGenerico {
       this.explicacion=[] //array de la misma longitud que input
       this.puntuacion=puntuacion
       this.nota=0
-      this.id=id
     }
 
     //Aux
@@ -28,6 +27,14 @@ class EjGenerico {
 
     getNota(){
         return this.nota
+    }
+
+    getTema(){
+        return this.tema
+    }
+
+    getTexto(){
+        return this.texto
     }
 
     

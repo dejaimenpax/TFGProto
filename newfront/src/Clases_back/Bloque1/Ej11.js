@@ -3,8 +3,8 @@ const EjBloque1 = require('./EjBloque1.js')
 
 class Ej11 extends EjBloque1{
     //El número 7/3, si se divide, es más de dos. Usando ese razonamiento di entre que numeros consecutivos están los siguientes números
-    constructor (texto, enunciado, puntuacion, id) {
-        super(1.11, texto, enunciado, puntuacion, id) //1.11 dice bloque 1=> ej 11
+    constructor (texto, enunciado, puntuacion) {
+        super(1.11, texto, enunciado, puntuacion) //1.11 dice bloque 1=> ej 11
         //texto es siempre el mismo
         //enunciado no es el mismo que el texto, son una serie de números fraccionarios separados por espacios
     }

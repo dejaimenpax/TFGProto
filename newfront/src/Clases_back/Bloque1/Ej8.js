@@ -3,8 +3,8 @@ const EjBloque1 = require('./EjBloque1.js')
 
 class Ej8 extends EjBloque1{
     //Escribe, ordenados de menos a mayor, los divisores de los siguientes números. Recuerda que hay dos números que son divisores de todos los números.
-    constructor (texto, enunciado, puntuacion, id) {
-        super(1.08, texto, enunciado, puntuacion, id) //1.08 dice bloque 1=> ej 8
+    constructor (texto, enunciado, puntuacion) {
+        super(1.08, texto, enunciado, puntuacion) //1.08 dice bloque 1=> ej 8
         //texto es siempre el mismo
         //enunciado no es el mismo que el texto, son una serie de números separados por espacios
     }
@@ -14,9 +14,9 @@ class Ej8 extends EjBloque1{
         const end = Math.floor(Math.sqrt(num))
 
         for (let i=1; i<=end; i++) {
-            if (num%i==0) {
+            if (num%i===0) {
                 values.push(i)
-                if (i*i!=num) {
+                if (i*i!==num) {
                     values.push(num/i);
                 }
             }
@@ -25,12 +25,7 @@ class Ej8 extends EjBloque1{
     }
 
     divisible(num, candidato){
-        respuesta = ''
-        num%candidato==0 ?
-            respuesta = `${n} se puede dividir entre ${candidato}, dando como resultado ${Math.floor(n/candidato)}, por lo que ese cociente también es divisor.`
-            :
-            respuesta = `${n} no se puede dividir entre ${candidato}, ya que su última cifra es ${n.toString().slice(-1)}`
-        return respuesta
+
     }
 
     resolver(input){ //el input es de la forma 1 2 3 4 6 12_ 1 2 3 4 6 12 24

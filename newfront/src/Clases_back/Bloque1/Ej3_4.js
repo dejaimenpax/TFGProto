@@ -4,8 +4,8 @@ const EjBloque1 = require('./EjBloque1')
 class Ej3_4 extends EjBloque1{
 
     // "Escribe 2/4 números distintos comprendidos entre Y y Z"
-    constructor (texto, enunciado, puntuacion, id) {
-        super(1.03, texto, enunciado, puntuacion, id) //1.03 dice bloque 1 => ej3_4
+    constructor (texto, enunciado, puntuacion) {
+        super(1.03, texto, enunciado, puntuacion) //1.03 dice bloque 1 => ej3_4
         //enunciado es el mismo que el texto presentado en la pagina
     }
 

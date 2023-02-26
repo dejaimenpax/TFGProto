@@ -2,13 +2,12 @@ const EjGenerico = require('../EjGenerico.js')
 //import EjGenerico from '../EjGenerico.js'
 
 class EjBloque1 extends EjGenerico{
-    constructor (id_tema, texto, enunciado, puntuacion, id) {
+    constructor (id_tema, texto, enunciado, puntuacion) {
         super("Bloque 1 - Números y operaciones",
             id_tema,
             texto, 
             enunciado,
-            puntuacion, 
-            id)
+            puntuacion)
     }
 }
 

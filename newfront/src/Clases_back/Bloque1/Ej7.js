@@ -3,8 +3,8 @@ const EjBloque1 = require('./EjBloque1.js')
 
 class Ej7 extends EjBloque1{
     //Escribe los 6 primeros múltiplos de los siguientes números. Recuerda que existe un número que es múltiplo de todos.
-    constructor (texto, enunciado, puntuacion, id) {
-        super(1.07, texto, enunciado, puntuacion, id) //1.06 dice bloque 1=> ej 7
+    constructor (texto, enunciado, puntuacion) {
+        super(1.07, texto, enunciado, puntuacion) //1.06 dice bloque 1=> ej 7
         //texto es siempre el mismo
         //enunciado no es el mismo que el texto, son una serie de números separados por espacios
     }
