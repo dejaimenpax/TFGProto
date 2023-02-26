@@ -9,7 +9,7 @@ class Ej3_4 extends EjBloque1{
         //enunciado es el mismo que el texto presentado en la pagina
     }
 
-    resolver(input) {
+    resolver(input) { //el input es de la forma 23700 23800
         this.input=input
         const input_aux = this.input.split(" ").map(x=>Number(x))
 

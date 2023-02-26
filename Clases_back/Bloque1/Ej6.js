@@ -7,7 +7,7 @@ class Ej6 extends EjBloque1{
         //enunciado no es el mismo que el texto, son numeros
     }
 
-    resolver(input){
+    resolver(input){ //el input es de la forma 374580 374600 374000 270000_298770 298700 299000 300000
         this.input=input
         //this.puntuacion sera siempre divisible entre 4*cantidad de números
 
@@ -53,10 +53,10 @@ class Ej6 extends EjBloque1{
                         conclusion = "y como era mayor o igual que 5, sumamos 1 al número que habíamos fijado,"
                     }
 
-                    this.explicacion[fila][modo]=`No es correcto. Como estamos redondeando a las ${columna}, \
-tenemos que fijar el número en esa posición y observar el número inmediatamente a su derecha. \
-En este caso, ese número de la derecha es un ${derecha}, por lo que lo convertimos a él \
-y a todos los de su derecha en 0, ${conclusion} obteniendo ${propuesta}.`
+                    this.explicacion[fila][modo]=`No es correcto. Como estamos redondeando a las ${columna}, ` +
+                    `tenemos que fijar el número en esa posición y observar el número inmediatamente a su derecha. ` +
+                    `En este caso, ese número de la derecha es un ${derecha}, por lo que lo convertimos a él ` +
+                    `y a todos los de su derecha en 0, ${conclusion} obteniendo ${propuesta}.`
                 }
             }
         }
