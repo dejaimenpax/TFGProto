@@ -1,15 +1,15 @@
-//const EjBloque1 = require('./EjBloque1')
-import EjBloque1 from './EjBloque1'
+const EjBloque1 = require('./EjBloque1')
+//import EjBloque1 from './EjBloque1'
 
 class Ej3_4 extends EjBloque1{
 
     // "Escribe 2/4 números distintos comprendidos entre Y y Z"
-    constructor (texto, enunciado, puntuacion, id) {
-        super(1.03, texto, enunciado, puntuacion, id) //1.03 dice bloque 1 => ej3_4
+    constructor (texto, enunciado, puntuacion) {
+        super(1.03, texto, enunciado, puntuacion) //1.03 dice bloque 1 => ej3_4
         //enunciado es el mismo que el texto presentado en la pagina
     }
 
-    resolver(input) {
+    resolver(input) { //el input es de la forma 23700 23800
         this.input=input
         const input_aux = this.input.split(" ").map(x=>Number(x))
 
@@ -51,5 +51,5 @@ class Ej3_4 extends EjBloque1{
 }
 
 
-//module.exports = Ej3_4
-export default Ej3_4
+module.exports = Ej3_4
+//export default Ej3_4

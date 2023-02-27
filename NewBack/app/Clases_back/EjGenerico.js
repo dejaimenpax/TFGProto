@@ -1,5 +1,5 @@
 class EjGenerico {
-    constructor (tema, id_tema, texto, enunciado, puntuacion, id) {
+    constructor (tema, id_tema, texto, enunciado, puntuacion) {
       this.tema=tema
       this.id_tema=id_tema
       this.texto=texto
@@ -9,7 +9,6 @@ class EjGenerico {
       this.explicacion=[] //array de la misma longitud que input
       this.puntuacion=puntuacion
       this.nota=0
-      this.id=id
     }
 
     //Aux
@@ -30,8 +29,20 @@ class EjGenerico {
         return this.nota
     }
 
+    getTema(){
+        return this.tema
+    }
+
+    getTexto(){
+        return this.texto
+    }
+
+    getIdTema(){
+      return this.id_tema
+    }
+
     
 }
 
-export default EjGenerico
-//module.exports = EjGenerico
+//export default EjGenerico
+module.exports = EjGenerico

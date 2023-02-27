@@ -1,5 +1,5 @@
 class EjGenerico {
-    constructor (tema, id_tema, texto, enunciado, puntuacion) {
+    constructor (tema, id_tema, texto, enunciado, puntuacion, id) {
       this.tema=tema
       this.id_tema=id_tema
       this.texto=texto
@@ -35,10 +35,6 @@ class EjGenerico {
 
     getTexto(){
         return this.texto
-    }
-
-    getIdTema(){
-      return this.id_tema
     }
 
     
