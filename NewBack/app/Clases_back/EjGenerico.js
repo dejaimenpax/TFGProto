@@ -41,6 +41,9 @@ class EjGenerico {
       return this.id_tema
     }
 
+    setEnunciado(enunciado){
+      this.enunciado = enunciado
+    }
     
 }
 

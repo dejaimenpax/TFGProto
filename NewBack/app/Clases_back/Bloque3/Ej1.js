@@ -1,7 +1,6 @@
-const EjBloque3 = require('./EjBloque3')
-//import EjBloque3 from './EjBloque3'
+const EjGenerico = require('../EjGenerico.js')
 
-class Ej1 extends EjBloque3{
+class Ej1 extends EjGenerico{
 
     // "Dibuja un triángulo con los vértices en las coordenadas ... y responde a las preguntas"
     constructor (texto, enunciado, puntuacion) {

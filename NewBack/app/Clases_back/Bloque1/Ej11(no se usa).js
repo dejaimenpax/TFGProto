@@ -1,13 +1,16 @@
 const EjBloque1 = require('./EjBloque1.js')
 //import EjBloque1 from './EjBloque1'
 
-class Ej11 extends EjBloque1{
+class Ej11 extends EjGenerico{
     //El número 7/3, si se divide, es más de dos. Usando ese razonamiento di entre que numeros consecutivos están los siguientes números
     constructor (texto, enunciado, puntuacion) {
         super(1.11, texto, enunciado, puntuacion) //1.11 dice bloque 1=> ej 11
         //texto es siempre el mismo
         //enunciado no es el mismo que el texto, son una serie de números fraccionarios separados por espacios
     }
+
+
+    
 
     obtener_fronteras(fraccionario){
         const arry_aux = fraccionario.toString().split('/').map(x => Number(x)) //te coge el numero y te lo divide en un array de dos posiciones

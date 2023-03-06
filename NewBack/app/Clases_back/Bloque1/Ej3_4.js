@@ -1,29 +1,34 @@
-const EjBloque1 = require('./EjBloque1')
-//import EjBloque1 from './EjBloque1'
+const EjGenerico = require('../EjGenerico.js')
 
-class Ej3_4 extends EjBloque1{
+class Ej3_4 extends EjGenerico{
 
-    // "Escribe 2/4 números distintos comprendidos entre Y y Z"
-    constructor (texto, enunciado, puntuacion) {
-        super(1.03, texto, enunciado, puntuacion) //1.03 dice bloque 1 => ej3_4
-        //enunciado es el mismo que el texto presentado en la pagina
+    constructor () {
+
+        const min = Math.floor(Math.random() * (99999 - 0 + 1) + 0).toString()
+        const max = Math.floor(Math.random() * (99999 - min + 2) + min + 1).toString()
+
+        super(
+            'Bloque 1 - Números y operaciones',
+            1.03, //1.06 dice bloque 1=> ej 3
+            `Escribe 4 números distintos comprendidos entre ${min} y ${max}`, 
+            [min, max],
+            10
+        )
     }
 
-    resolver(input) { //el input es de la forma 23700 23800
+    resolver(input) { //el input es una array con dos numeros entre el 0 y el 99999, en strings
         this.input=input
-        const input_aux = this.input.split(" ").map(x=>Number(x))
 
-        const palabras = this.enunciado.split(" ")
-        const cantidad = Number(palabras[1])
-        const min = Number(palabras[6])
-        const max = Number(palabras[8])
+        const input_aux = this.input.map(x=>Number(x))
+        const min = Number(enunciado[0])
+        const max = Number(enunciado[1])
 
         const ejemplos = new Set() //conjunto para que no se repitan ejemplos aleatorios
         let lon_ej = ejemplos.size
 
         input_aux.forEach(num => {
             if (min<num && num<max) {
-                this.nota += this.puntuacion/cantidad //Asumimos que puntuacion nos pasan un numero
+                this.nota += this.puntuacion/4 //Asumimos que puntuacion nos pasan un numero
                 this.explicacion.push(`${num} es correcto.`)
                 this.resultado.push(num)
             }

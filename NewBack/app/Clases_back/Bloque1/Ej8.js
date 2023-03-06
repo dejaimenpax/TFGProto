@@ -1,67 +1,88 @@
-const EjBloque1 = require('./EjBloque1.js')
-//import EjBloque1 from './EjBloque1'
+const EjGenerico = require('../EjGenerico.js')
 
-class Ej8 extends EjBloque1{
-    //Escribe, ordenados de menos a mayor, los divisores de los siguientes números. Recuerda que hay dos números que son divisores de todos los números.
-    constructor (texto, enunciado, puntuacion) {
-        super(1.08, texto, enunciado, puntuacion) //1.08 dice bloque 1=> ej 8
-        //texto es siempre el mismo
-        //enunciado no es el mismo que el texto, son una serie de números separados por espacios
-    }
+class Ej8 extends EjGenerico{
 
-    obtener_divisores(num){ //te devuelve los divisores en un string separados por espacios
-        let values = []
-        const end = Math.floor(Math.sqrt(num))
+    constructor () {
 
-        for (let i=1; i<=end; i++) {
-            if (num%i===0) {
-                values.push(i)
-                if (i*i!==num) {
-                    values.push(num/i);
-                }
+        function contarDivisores(num) {
+            let count = 0;
+            for (let i = 1; i <= num; i++) {
+              if (num % i === 0) {
+                count++;
+              }
             }
+            return count;
         }
-        return values.sort((a,b)=>a-b).toString().replace(',', '/\s/g')
+        
+        let num = 0;
+        while (contarDivisores(num) < 4) {
+            num = Math.floor(Math.random() * 499999) + 2;
+        }
+    
+        super(
+            'Bloque 1 - Números y operaciones',
+            1.08, //1.08 dice bloque 1=> ej 8
+            'Escribe, ordenados de menor a mayor, los divisores del siguiente número', 
+            [num.toString()], //numero con cuatro divisores entre entre 2 y 500000
+            10
+        )
     }
 
-    divisible(num, candidato){
-
+    divisible(n,divisor){
+        return n % divisor === 0 ?
+            `${n} acaba en un múltiplo de ${divisor}, por lo que tenemos nuestro divisor.`
+            :
+            `${divisor} no es divisor.`  
     }
 
-    resolver(input){ //el input es de la forma 1 2 3 4 6 12_ 1 2 3 4 6 12 24
+    obtener_divisores(num) {
+        let values = new Set();
+        const end = Math.floor(Math.sqrt(num));
+        values.add(1);  // añadimos 1 ya que es divisor de cualquier número
+      
+        // iterar solo por los impares, excepto para 2
+        const increment = num % 2 === 0 ? 1 : 2;
+        for (let i = 2; i <= end; i += increment) {
+          if (num % i === 0) {
+            values.add(i);
+            values.add(num / i);
+          }
+        }
+      
+        if (end * end === num) {  // añadimos la raíz cuadrada si es un divisor entero
+          values.add(end);
+        }
+      
+        return Array.from(values).sort((a, b) => a - b);
+    }
+      
+
+    resolver(input){ //el input son los 4 candidatos a divisores en strings
         this.input=input
 
-        const enunciado_aux = this.enunciado.split(" ").map(x=>Number(x))
-        //array de numeros [10, 20, 16]
-        const input_strings = this.input.split("_")
+        const num = Number(this.enunciado[0])
 
-        enunciado_aux.forEach(num => {
-            this.resultado.push(this.obtener_divisores(num))
-        })
-        //hasta aqui tengo un array de divisores
+        this.resultado.push(this.obtener_divisores(num))
 
-        for (let fila=0; fila<this.input_strings.length; fila++){
-            if (input_strings(fila)===this.resultado(fila)){
+   
+        for (let i=0; i<4; i++){
+            if (this.input[i]===this.resultado[i]){
                 this.explicacion.push('¡Es correcto!')
             }
             else{
-                const n = this.enunciado_aux(fila)
-
+    
                 let divisible_3 = ''
-                n.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0) % 3 == 0 ?
-                    divisible_3 = `es múltiplo de 3, por lo que colocamos al 3 y al ${n/3} como divisores.`
+                this.enunciado[0].split('').reduce((a, b) => parseInt(a) + parseInt(b), 0) % 3 == 0 ?
+                    divisible_3 = `es múltiplo de 3, por lo que colocamos al 3 y al ${num/3} como divisores.`
                     :
                     divisible_3 = `no es múltiplo de 3.`
 
 
                 this.explicacion.push( //darle una vuelta a la explicacion porque no queda bien que todo este tocho de lecciones aparezca en cada línea
-                    `No es correcto. Hay varias formas de hacer este ejercicio, siendo una de las más eficientes aplicar criterios de divisibilidad. Algunos de los más conocidos son:\n`+
-                    `* Al encontrar un divisor obtenemos dos por el precio de uno, ya que el cociente de esa división también es divisor\n` +
-                    `* Un número es divisible por dos si su última cifra es múltiplo de 2 (en otras palabras, si es 0 o par). En este caso, ${divisible(n,2)}\n`+
-                    `* Un número es divisible por tres si la suma de sus cifras es múltiplo de 3. En este caso, la suma de las cifras de ${n} ${divisible_3}\n`+
-                    `* Un número es divisible por cinco si su última cifra es un 5 o un 0. En este caso, ${divisible(n,5)}\n` +
-                    `* Un número es divisible por diez si su última cifra es un 0. En este caso, ${divisible(n,10)}\n` +
-                    `Estos criterios no determinan todos los divisores. Puede que nuestro número no cumpla ninguno y aún así queden divisisores por descubrir. ¡Toca hacer cuentas!`
+                    `No es correcto. Convendría aplicar criterios de divisibilidad. Entre ellos, tenemos el del 2, que nos dice `+
+                    `que un número es divisible por dos si su última cifra es múltiplo de 2 (en otras palabras, si es 0 o par). En este caso, ${divisible(n,2)}\n`+
+                    `Por otro lado, un número es divisible por tres si la suma de sus cifras es múltiplo de 3. En este caso, la suma de las cifras de ${n} ${divisible_3}\n`+
+                    `Puede que nuestro número no cumpla ningún criterio y aún así queden divisisores por descubrir. ¡Toca hacer cuentas!`
                 )
             }
         }
