@@ -8,3 +8,9 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.input-error {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+}

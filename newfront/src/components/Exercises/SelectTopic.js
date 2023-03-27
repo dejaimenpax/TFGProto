@@ -15,6 +15,8 @@ const SelectTopic = () => {
   const [exercise, setExercise] = useState(null);
   const [exerciseSelected, setExerciseSelected] = useState(false);
   const [exerciseResolved, setExerciseResolved] = useState(false);
+  const [inputFilled, setInputFilled] = useState(false);
+
 
   const handleSelect = (id_tema) => {
     ExerciseService.createExercise(id_tema)
@@ -25,15 +27,29 @@ const SelectTopic = () => {
       .catch((error) => console.error("Error creating exercise:", error));
   };
 
-  const handleInput = (input) => {
-    ExerciseService.resolveExercise(exercise, input)
-      .then((response) => {
-        setExercise(response.data);
-        setExerciseInput(["", "", "", ""]);
-        setExerciseResolved(true);
-      })
-      .catch((error) => console.error("Error resolving exercise:", error));
+  const handleReset = (id_tema) => {
+    setExerciseResolved(false);
+    setInputFilled(false);
+    setExerciseInput(["", "", "", ""]); // establecer el estado de exerciseInput a un nuevo array vacío
+    handleSelect(Math.trunc(id_tema));
   };
+  
+
+  const handleInput = (input) => {
+    if (input.every((value) => value !== "")) {
+      ExerciseService.resolveExercise(exercise, input)
+        .then((response) => {
+          setExercise(response.data);
+          setExerciseInput(["", "", "", ""]);
+          setExerciseResolved(true);
+          setInputFilled(false);
+        })
+        .catch((error) => console.error("Error resolving exercise:", error));
+    } else {
+      setInputFilled(true);
+    }
+  };
+
 
   const handleInputChange = (value, index) => {
     const newExerciseInput = [...exerciseInput];
@@ -66,34 +82,46 @@ const SelectTopic = () => {
   return (
     <>
       <DropdownMenu handleSelect={handleSelect} />
-      
+  
       {exerciseSelected && (
         <>
-        <ExerciseCard exercise={exercise}/>
+          <ExerciseCard exercise={exercise} />
+  
+          <div className="d-flex flex-column">
+            {exerciseInput.map((value, index) => (
+              <div key={index} className="input-container d-flex flex-column">
 
-        <div className="d-flex flex-column">
-          {exerciseInput.map((value, index) => (
-            <div key={index} className="input-container d-flex flex-column" >
-              <InputBox
-                index={index}
-                value={value}
-                onChange={handleInputChange}
-              />
-              <div className="input-feedback">
-                {exercise && exercise.explicacion[index]}
+                <InputBox index={index} value={value} onChange={handleInputChange} />
+
+                {inputFilled && value === "" && (
+                  <div className="input-error alert alert-danger mt-1 mb-1">
+                    Introduce un valor
+                  </div>
+                )}
+                
+                {exerciseResolved && (
+                  <div className="input-feedback alert alert-primary">
+                    {exercise.explicacion[index]}
+                  </div>
+                )}
+                
               </div>
-            </div>
-          ))}
-          <button onClick={() => handleInput(exerciseInput)}>
-            Resolver ejercicio
-          </button>
-        </div>
-        {/*exerciseResolved && (<p>holaaaaa{exercise.resultado}</p>)*/}
-          
+            ))}
+            {exerciseResolved ? (
+              <button onClick={() => handleReset(exercise.id_tema)}>
+                Generar nuevo ejercicio del tema
+              </button>
+            ) : (
+              <button onClick={() => handleInput(exerciseInput)}>
+                Resolver ejercicio
+              </button>
+            )}
+          </div>
         </>
       )}
     </>
-  )
+  );
+
 }
 
 
