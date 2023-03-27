@@ -18,4 +18,15 @@
     line-height: 1.5;
     color: #666;
   }
+
+  .exercise-card-enunciado {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #666;
+    margin-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+  }
+  
+  
   

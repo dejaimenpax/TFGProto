@@ -1,70 +1,73 @@
 const EjGenerico = require('../EjGenerico.js')
 
+const divisible = (n, divisor) => {
+    return n % divisor === 0 ?
+        `${n} acaba en un múltiplo de ${divisor}, por lo que tenemos nuestro divisor.`
+        :
+        `${divisor} no es divisor.`  
+}
+
+const obtener_divisores = (num) => {
+    let values = new Set();
+    const end = Math.floor(Math.sqrt(num));
+    values.add(1);  // añadimos 1 ya que es divisor de cualquier número
+  
+    // iterar solo por los impares, excepto para 2
+    const increment = num % 2 === 0 ? 1 : 2;
+    for (let i = 2; i <= end; i += increment) {
+      if (num % i === 0) {
+        values.add(i);
+        values.add(num / i);
+      }
+    }
+  
+    if (end * end === num) {  // añadimos la raíz cuadrada si es un divisor entero
+      values.add(end);
+    }
+  
+    return Array.from(values).sort((a, b) => a - b);
+}
+
+
+const generateRandomNumber = () => {
+    let num;
+    let numDivisors;
+    
+    do {
+      num = Math.floor(Math.random() * (500000 - 8 + 1) + 8); //generamos un número aleatorio entre 8 y 500000
+      numDivisors = obtener_divisores(num).length; // obtenemos la cantidad de divisores del número generado
+    } while (numDivisors < 4); // repetimos el proceso mientras el número no tenga al menos 4 divisores
+    
+    return num;
+  }
+  
+  
+
+
 class Ej8 extends EjGenerico{
 
-    constructor () {
-
-        function contarDivisores(num) {
-            let count = 0;
-            for (let i = 1; i <= num; i++) {
-              if (num % i === 0) {
-                count++;
-              }
-            }
-            return count;
-        }
-        
-        let num = 0;
-        while (contarDivisores(num) < 4) {
-            num = Math.floor(Math.random() * 499999) + 2;
-        }
-    
+    constructor(
+        texto = 'Escribe, ordenados de menor a mayor, los cuatro primeros divisores del siguiente número:', 
+        enunciado = [generateRandomNumber()], 
+        puntuacion = 10
+        ) 
+    {
+        console.log("Ha entrado en constructor de Ej8");
         super(
             'Bloque 1 - Números y operaciones',
             1.08, //1.08 dice bloque 1=> ej 8
-            'Escribe, ordenados de menor a mayor, los divisores del siguiente número', 
-            [num.toString()], //numero con cuatro divisores entre entre 2 y 500000
-            10
+            texto,
+            enunciado,
+            puntuacion
         )
     }
 
-    divisible(n,divisor){
-        return n % divisor === 0 ?
-            `${n} acaba en un múltiplo de ${divisor}, por lo que tenemos nuestro divisor.`
-            :
-            `${divisor} no es divisor.`  
-    }
-
-    obtener_divisores(num) {
-        let values = new Set();
-        const end = Math.floor(Math.sqrt(num));
-        values.add(1);  // añadimos 1 ya que es divisor de cualquier número
-      
-        // iterar solo por los impares, excepto para 2
-        const increment = num % 2 === 0 ? 1 : 2;
-        for (let i = 2; i <= end; i += increment) {
-          if (num % i === 0) {
-            values.add(i);
-            values.add(num / i);
-          }
-        }
-      
-        if (end * end === num) {  // añadimos la raíz cuadrada si es un divisor entero
-          values.add(end);
-        }
-      
-        return Array.from(values).sort((a, b) => a - b);
-    }
-      
-
+    
     resolver(input){ //el input son los 4 candidatos a divisores en strings
         this.input=input
-
         const num = Number(this.enunciado[0])
+        this.resultado.push(obtener_divisores(num))
 
-        this.resultado.push(this.obtener_divisores(num))
-
-   
         for (let i=0; i<4; i++){
             if (this.input[i]===this.resultado[i]){
                 this.explicacion.push('¡Es correcto!')
@@ -90,4 +93,3 @@ class Ej8 extends EjGenerico{
 }
 
 module.exports = Ej8
-//export default Ej8

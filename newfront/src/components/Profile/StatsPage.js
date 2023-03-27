@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
-import '../../styles/StatsPage.css'
+import '../../styles/Profile/StatsPage.css'
 
 const data = {
   exercises: {

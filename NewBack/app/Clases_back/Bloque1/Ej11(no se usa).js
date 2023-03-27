@@ -9,6 +9,8 @@ class Ej11 extends EjGenerico{
         //enunciado no es el mismo que el texto, son una serie de números fraccionarios separados por espacios
     }
 
+    
+
 
     
 

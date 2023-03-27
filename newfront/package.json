@@ -19,6 +19,7 @@
     "react-validation": "^3.0.7",
     "recharts": "^2.4.2",
     "validator": "^13.7.0",
+    "victory": "^36.6.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

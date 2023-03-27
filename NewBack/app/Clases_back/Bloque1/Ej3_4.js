@@ -1,27 +1,42 @@
 const EjGenerico = require('../EjGenerico.js')
 
 class Ej3_4 extends EjGenerico{
+    constructor (texto, enunciado, puntuacion) {
+        if (!texto && !enunciado && !puntuacion) {
+            let min, max;
+            do {
+                min = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+                max = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+            } while (Math.abs(max - min) < 4);
 
-    constructor () {
+            if (min > max) {
+            [min, max] = [max, min]; // Swap values if min is greater than max
+            }
 
-        const min = Math.floor(Math.random() * (99999 - 0 + 1) + 0).toString()
-        const max = Math.floor(Math.random() * (99999 - min + 2) + min + 1).toString()
-
-        super(
-            'Bloque 1 - Números y operaciones',
-            1.03, //1.06 dice bloque 1=> ej 3
-            `Escribe 4 números distintos comprendidos entre ${min} y ${max}`, 
-            [min, max],
-            10
-        )
+            super(
+                'Bloque 1 - Números y operaciones',
+                1.03, //1.06 dice bloque 1=> ej 3
+                `Escribe 4 números distintos comprendidos entre ${min} y ${max}`, 
+                [min, max],
+                10
+            )
+        } else {
+            super(
+                'Bloque 1 - Números y operaciones',
+                1.03, //1.03 dice bloque 1=> ej 3
+                texto, 
+                enunciado,
+                puntuacion
+            )
+        }
     }
 
     resolver(input) { //el input es una array con dos numeros entre el 0 y el 99999, en strings
         this.input=input
 
         const input_aux = this.input.map(x=>Number(x))
-        const min = Number(enunciado[0])
-        const max = Number(enunciado[1])
+        const min = Number(this.enunciado[0])
+        const max = Number(this.enunciado[1])
 
         const ejemplos = new Set() //conjunto para que no se repitan ejemplos aleatorios
         let lon_ej = ejemplos.size
@@ -51,10 +66,8 @@ class Ej3_4 extends EjGenerico{
                 }
             }
         })
-        
+    console.log(this.explicacion)  
     }
 }
 
-
 module.exports = Ej3_4
-//export default Ej3_4
