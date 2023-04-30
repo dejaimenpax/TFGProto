@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const User = mongoose.model(
   "User",
   new mongoose.Schema({
-    dni: String,
     email: String,
     password: String,
     scores: [Number], //puntuacion, 4 posiciones, una por cada bloque

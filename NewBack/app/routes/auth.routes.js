@@ -13,7 +13,7 @@ module.exports = function(app) {
   app.post(
     "/api/auth/signup",
     [
-      verifySignUp.checkDuplicateDniOrEmail,
+      verifySignUp.checkDuplicateEmail,
       verifySignUp.checkRolesExisted
     ],
     controller.signup

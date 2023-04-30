@@ -1,6 +1,6 @@
 const EjGenerico = require('../EjGenerico.js')
 
-class Ej3_4 extends EjGenerico{
+class B1Ej3_4 extends EjGenerico{
     constructor (texto, enunciado, puntuacion) {
         if (!texto && !enunciado && !puntuacion) {
             let min, max;
@@ -70,4 +70,4 @@ class Ej3_4 extends EjGenerico{
     }
 }
 
-module.exports = Ej3_4
+module.exports = B1Ej3_4

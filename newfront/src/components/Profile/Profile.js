@@ -4,7 +4,6 @@ import StatsPage from "./StatsPage";
 import Email from "./Email";
 import Roles from "./Roles";
 import "../../styles/Profile/Profile.css";
-import Dni from "./Dni";
 
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
@@ -12,7 +11,6 @@ const Profile = () => {
   return (
     <div className="container">
       <div className="jumbotron">
-        <Dni dni={currentUser.dni} />
         <Email email={currentUser.email} />
         <Roles roles={currentUser.roles} />
       </div>

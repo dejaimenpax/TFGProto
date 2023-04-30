@@ -22,14 +22,14 @@ const Login = () => {
   const form = useRef();
   const checkBtn = useRef();
 
-  const [dni, setDni] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const onChangeDni = (e) => {
-    const dni = e.target.value;
-    setDni(dni);
+  const onChangeEmail = (e) => {
+    const email = e.target.value;
+    setEmail(email);
   };
 
   const onChangePassword = (e) => {
@@ -46,7 +46,7 @@ const Login = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(dni, password).then(
+      AuthService.login(email, password).then(
         () => {
           //navigate("/profile") si directamente quieres ir al perfil
           navigate("/resolver");
@@ -80,13 +80,13 @@ const Login = () => {
 
         <Form onSubmit={handleLogin} ref={form}>
           <div className="form-group">
-            <label htmlFor="dni">NIF/NIE</label>
+            <label htmlFor="email">Email</label>
             <Input
               type="text"
               className="form-control"
-              name="dni"
-              value={dni}
-              onChange={onChangeDni}
+              name="email"
+              value={email}
+              onChange={onChangeEmail}
               validations={[required]}
             />
           </div>

@@ -1,10 +1,9 @@
 //For environment variables
 //require('dotenv').config()
 
-const Ej6 = require('./Clases_back/Bloque1/Ej6')
-const Ej3_4 = require('./Clases_back/Bloque1/Ej3_4')
-//import Ej6 from './frontend/front/src/Clases/Bloque1/Ej6.mjs'
-//import Ej3_4 from './frontend/front/src/Clases/Bloque1/Ej3_4.mjs'
+const B1Ej6 = require('./Clases_back/Bloque1/B1Ej6')
+const B1Ej3_4 = require('./Clases_back/Bloque1/B1Ej3_4')
+
 
 
 const express = require('express')
@@ -23,17 +22,17 @@ app.use(express.static('build'))
 
 //aqui va la logica de crear los objetos
 
-let ejemplo1 = new Ej3_4(
+let ejemplo1 = new B1Ej3_4(
                   "Escribe 2 números distintos comprendidos entre 23756 y 23834",
                   "Escribe 2 números distintos comprendidos entre 23756 y 23834",
                   20,
                   1)
-let ejemplo2 = new Ej6(
+let ejemplo2 = new B1Ej6(
                   "Redondea a las decenas, centenas, unidades de millar y decenas de millar",
                   "374578 298765",
                   20,
                   2)
-let ejemplo3 = new Ej6(
+let ejemplo3 = new B1Ej6(
                   "Redondea a las decenas, centenas, unidades de millar y decenas de millar",
                   "2948574 384864",
                   40,

@@ -1,6 +1,6 @@
 const EjGenerico = require('../EjGenerico.js')
 
-class Ej6 extends EjGenerico {
+class B1Ej6 extends EjGenerico {
     constructor(texto = 'Redondea el siguiente número a las decenas, las centenas, las unidades de millar y las decenas de millar.', enunciado = [Math.floor(Math.random() * (999999 - 100000 + 1) + 100000).toString()], puntuacion = 10) {
         super(
             'Bloque 1 - Números y operaciones',
@@ -25,10 +25,10 @@ class Ej6 extends EjGenerico {
 
 
         this.resultado.push(
-            Math.round(enunciado[0] / 10) * 10,
-            Math.round(enunciado[0] / 100) * 100,
-            Math.round(enunciado[0] / 1000) * 1000,
-            Math.round(enunciado[0] / 10000) * 10000
+            Math.round(this.enunciado[0] / 10) * 10,
+            Math.round(this.enunciado[0] / 100) * 100,
+            Math.round(this.enunciado[0] / 1000) * 1000,
+            Math.round(this.enunciado[0] / 10000) * 10000
         )
 
         this.explicacion.push("", "", "", "")
@@ -38,7 +38,7 @@ class Ej6 extends EjGenerico {
                 this.explicacion[modo] = "¡Es correcto!"
                 this.nota += this.puntuacion / 4
             } else {
-                let aux = enunciado[0]
+                let aux = this.enunciado[0]
                 let derecha = Number(aux.charAt(aux.length - 1 - modo))
                 let conclusion = derecha < 5 ?
                     "y como era menor que 5, el número que habíamos fijado sigue igual,"
@@ -54,5 +54,5 @@ class Ej6 extends EjGenerico {
     }
 }
 
-module.exports = Ej6
+module.exports = B1Ej6
 //export default Ej6

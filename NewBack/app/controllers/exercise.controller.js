@@ -1,34 +1,51 @@
-const Ej6 = require("../Clases_back/Bloque1/Ej6");
-const Ej3_4 = require("../Clases_back/Bloque1/Ej3_4");
-const Ej7 = require("../Clases_back/Bloque1/Ej7");
-const Ej8 = require("../Clases_back/Bloque1/Ej8");
+const B1Ej6 = require("../Clases_back/Bloque1/B1Ej6");
+const B1Ej3_4 = require("../Clases_back/Bloque1/B1Ej3_4");
+const B1Ej7 = require("../Clases_back/Bloque1/B1Ej7");
+const B1Ej8 = require("../Clases_back/Bloque1/B1Ej8");
+
+const B2Ej7 = require("../Clases_back/Bloque2/B2Ej7");
 
 exports.create = (req, res) => {
   const { id_tema } = req.body;
   let exercise;
+  const randomNumber = Math.floor(Math.random() * 4);
 
   switch (id_tema) {
     case 1:
-      const randomNumber = 0//Math.floor(Math.random() * 4);
       switch (randomNumber) {
         case 0:
-          exercise = new Ej3_4();
+          exercise = new B1Ej3_4();
           break;
         case 1:
-          exercise = new Ej6();
+          exercise = new B1Ej6();
           break;
         case 2:
-          exercise = new Ej7();
+          exercise = new B1Ej7();
           break;
         case 3:
-          exercise = new Ej8();
+          exercise = new B1Ej8();
           break;
         default:
           // handle invalid randomNumber
       }
       break;
     case 2:
-      // handle case 2
+      switch (randomNumber) {
+        case 0:
+          exercise = new B2Ej7();
+          break;
+        case 1:
+          exercise = new B2Ej7();
+          break;
+        case 2:
+          exercise = new B2Ej7();
+          break;
+        case 3:
+          exercise = new B2Ej7();
+          break;
+        default:
+          // handle invalid randomNumber
+      }
       break;
     case 3:
       // handle case 3
@@ -64,26 +81,34 @@ exports.resolve = (req, res) => {
         switch (tema) {
           case 3:
           case 4:
-            exAux = new Ej3_4(exercise.texto, exercise.enunciado, exercise.puntuacion);
-            console.log('He creado un ejercicio 3')
+            exAux = new B1Ej3_4(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 3 del bloque 1')
             break;
           case 6:
-            exAux = new Ej6(exercise.texto, exercise.enunciado, exercise.puntuacion);
-            console.log('He creado un ejercicio 6')
+            exAux = new B1Ej6(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 6 del bloque 1')
             break;
           case 7:
-            exAux = new Ej7(exercise.texto, exercise.enunciado, exercise.puntuacion);
-            console.log('He creado un ejercicio 7')
+            exAux = new B1Ej7(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 7 del bloque 1')
+            break;
           case 8:
-            exAux = new Ej8(exercise.texto, exercise.enunciado, exercise.puntuacion);
-            console.log('He creado un ejercicio 8')
+            exAux = new B1Ej8(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 8 del bloque 1')
             break;
           default:
 
         }
         break;
       case 2:
-        // handle case 2
+        switch (tema) {
+          case 7:
+            exAux = new B2Ej7(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 7 del bloque 2')
+            break;
+          default:
+
+        }
         break;
       case 3:
         // handle case 3
@@ -98,6 +123,9 @@ exports.resolve = (req, res) => {
     exAux.resolver(input);
     res.json(exAux);
   };
+
+
+
 
 
 /*

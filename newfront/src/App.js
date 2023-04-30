@@ -87,7 +87,7 @@ const App = () => {
             <li className="nav-item">
               <div className="dropdown">
                 <button className="btn btn-info text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Área de {currentUser.dni}
+                  Área de {currentUser.email}
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <Link to={"/profile"} className="dropdown-item">
