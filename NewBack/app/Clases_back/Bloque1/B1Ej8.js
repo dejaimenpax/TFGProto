@@ -60,6 +60,8 @@ class B1Ej8 extends EjGenerico{
             enunciado,
             puntuacion
         )
+
+        this.long_input=4;
     }
 
     

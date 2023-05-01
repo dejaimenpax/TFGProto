@@ -3,7 +3,9 @@ const B1Ej3_4 = require("../Clases_back/Bloque1/B1Ej3_4");
 const B1Ej7 = require("../Clases_back/Bloque1/B1Ej7");
 const B1Ej8 = require("../Clases_back/Bloque1/B1Ej8");
 
+const B2Ej2 = require("../Clases_back/Bloque2/B2Ej2");
 const B2Ej7 = require("../Clases_back/Bloque2/B2Ej7");
+
 
 exports.create = (req, res) => {
   const { id_tema } = req.body;
@@ -32,13 +34,13 @@ exports.create = (req, res) => {
     case 2:
       switch (randomNumber) {
         case 0:
-          exercise = new B2Ej7();
+          exercise = new B2Ej2();
           break;
         case 1:
           exercise = new B2Ej7();
           break;
         case 2:
-          exercise = new B2Ej7();
+          exercise = new B2Ej2();
           break;
         case 3:
           exercise = new B2Ej7();
@@ -71,8 +73,7 @@ exports.resolve = (req, res) => {
 
     let exAux;
 
-    const bloque = Math.floor(exercise.id_tema)
-    const tema = exercise.id_tema*100 - bloque*100
+    let [bloque, tema] = exercise.id_tema.toString().split('.').map(Number)
 
     console.log(`El bloque del ejercicio es ${bloque} y el tema es ${tema}`)
 
@@ -106,6 +107,10 @@ exports.resolve = (req, res) => {
             exAux = new B2Ej7(exercise.texto, exercise.enunciado, exercise.puntuacion);
             console.log('He creado un ejercicio 7 del bloque 2')
             break;
+          case 2:
+            exAux = new B2Ej2(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 2 del bloque 2')
+            break; 
           default:
 
         }

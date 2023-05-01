@@ -1,7 +1,11 @@
 const EjGenerico = require('../EjGenerico.js')
 
 class B1Ej6 extends EjGenerico {
-    constructor(texto = 'Redondea el siguiente número a las decenas, las centenas, las unidades de millar y las decenas de millar.', enunciado = [Math.floor(Math.random() * (999999 - 100000 + 1) + 100000).toString()], puntuacion = 10) {
+    constructor(
+        texto = 'Redondea el siguiente número a las decenas, las centenas, las unidades de millar y las decenas de millar.',
+        enunciado = [Math.floor(Math.random() * (999999 - 100000 + 1) + 100000).toString()],
+        puntuacion = 10) 
+    {
         super(
             'Bloque 1 - Números y operaciones',
             1.06, //1.06 dice bloque 1=> ej 6
@@ -9,6 +13,7 @@ class B1Ej6 extends EjGenerico {
             enunciado,
             puntuacion
         )
+        this.long_input=4;
     }
 
     resolver(input) { //el input es de cuatro cajas de texto, cada una con un numero de mínimo de 6 dígitos

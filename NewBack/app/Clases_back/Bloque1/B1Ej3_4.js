@@ -29,6 +29,8 @@ class B1Ej3_4 extends EjGenerico{
                 puntuacion
             )
         }
+
+        this.long_input=4;
     }
 
     resolver(input) { //el input es una array con dos numeros entre el 0 y el 99999, en strings
@@ -44,7 +46,7 @@ class B1Ej3_4 extends EjGenerico{
         input_aux.forEach(num => {
             if (min<num && num<max) {
                 this.nota += this.puntuacion/4 //Asumimos que puntuacion nos pasan un numero
-                this.explicacion.push(`${num} es correcto.`)
+                this.explicacion.push(`¡${num} es correcto!`)
                 this.resultado.push(num)
             }
             else{

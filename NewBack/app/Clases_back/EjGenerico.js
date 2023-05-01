@@ -5,10 +5,11 @@ class EjGenerico {
       this.texto=texto
       this.enunciado=enunciado
       this.input=' ' //el input lo mete resolver
-      this.resultado=[] //array de la misma longitud que input
+      this.resultado=[] 
       this.explicacion=[] //array de la misma longitud que input
       this.puntuacion=puntuacion
       this.nota=0
+      this.long_input=0
     }
 
     //Aux

@@ -22,6 +22,7 @@ class B1Ej7 extends EjGenerico {
             enunciado,
             puntuacion
         )
+        this.long_input=4;
     }
 
     resolver(input) { //el input es un array de 4 strings
