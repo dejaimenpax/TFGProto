@@ -38,7 +38,7 @@ class B2Ej2 extends EjGenerico {
         const mensaje = `No es correcto. Para obtener ` +
         `el número de vasos necesarios, debes dividir la capacidad del bidón (${X} litros) entre la cantidad `+
         `de agua que cabe en un vaso (${Y} cl, es decir, ${litrosPorVaso} litros) y luego redondear hacia arriba, `+
-        `obteniendo ${this.resultado[0]}.`;
+        `obteniendo ${this.resultado[0]} vasos.`;
       this.explicacion.push(mensaje);
     }
   }

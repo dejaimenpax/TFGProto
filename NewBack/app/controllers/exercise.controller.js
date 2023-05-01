@@ -4,7 +4,13 @@ const B1Ej7 = require("../Clases_back/Bloque1/B1Ej7");
 const B1Ej8 = require("../Clases_back/Bloque1/B1Ej8");
 
 const B2Ej2 = require("../Clases_back/Bloque2/B2Ej2");
+const B2Ej5 = require("../Clases_back/Bloque2/B2Ej5");
+const B2Ej6 = require("../Clases_back/Bloque2/B2Ej6");
 const B2Ej7 = require("../Clases_back/Bloque2/B2Ej7");
+
+
+
+const B4Ej5_6 = require("../Clases_back/Bloque4/B4Ej5_6");
 
 
 exports.create = (req, res) => {
@@ -37,10 +43,10 @@ exports.create = (req, res) => {
           exercise = new B2Ej2();
           break;
         case 1:
-          exercise = new B2Ej7();
+          exercise = new B2Ej5();
           break;
         case 2:
-          exercise = new B2Ej2();
+          exercise = new B2Ej6();
           break;
         case 3:
           exercise = new B2Ej7();
@@ -50,7 +56,22 @@ exports.create = (req, res) => {
       }
       break;
     case 3:
-      // handle case 3
+      switch (randomNumber) {
+        case 0:
+          exercise = new B4Ej5_6();
+          break;
+        case 1:
+          exercise = new B4Ej5_6();
+          break;
+        case 2:
+          exercise = new B4Ej5_6();
+          break;
+        case 3:
+          exercise = new B4Ej5_6();
+          break;
+        default:
+          // handle invalid randomNumber
+      }
       break;
     case 4:
       // handle case 4
@@ -111,6 +132,14 @@ exports.resolve = (req, res) => {
             exAux = new B2Ej2(exercise.texto, exercise.enunciado, exercise.puntuacion);
             console.log('He creado un ejercicio 2 del bloque 2')
             break; 
+          case 5:
+            exAux = new B2Ej5(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 5 del bloque 2')
+            break;
+          case 6:
+            exAux = new B2Ej6(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 6 del bloque 2')
+            break;
           default:
 
         }
@@ -119,7 +148,14 @@ exports.resolve = (req, res) => {
         // handle case 3
         break;
       case 4:
-        // handle case 4
+        switch (tema) {
+          case 5:
+            exAux = new B4Ej5_6(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 5 del bloque 4')
+            break;
+          default:
+
+        }
         break;
       default:
         // handle invalid id_tema
