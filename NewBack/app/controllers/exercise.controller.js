@@ -9,9 +9,9 @@ const B2Ej6 = require("../Clases_back/Bloque2/B2Ej6");
 const B2Ej7 = require("../Clases_back/Bloque2/B2Ej7");
 
 
-
+const B4Ej4 = require("../Clases_back/Bloque4/B4Ej4");
 const B4Ej5_6 = require("../Clases_back/Bloque4/B4Ej5_6");
-
+const B4Ej8 = require("../Clases_back/Bloque4/B4Ej8");
 
 exports.create = (req, res) => {
   const { id_tema } = req.body;
@@ -56,6 +56,9 @@ exports.create = (req, res) => {
       }
       break;
     case 3:
+
+      break;
+    case 4:
       switch (randomNumber) {
         case 0:
           exercise = new B4Ej5_6();
@@ -64,17 +67,14 @@ exports.create = (req, res) => {
           exercise = new B4Ej5_6();
           break;
         case 2:
-          exercise = new B4Ej5_6();
+          exercise = new B4Ej4();
           break;
         case 3:
-          exercise = new B4Ej5_6();
+          exercise = new B4Ej8();
           break;
         default:
           // handle invalid randomNumber
       }
-      break;
-    case 4:
-      // handle case 4
       break;
     default:
       // handle invalid id_tema
@@ -149,9 +149,17 @@ exports.resolve = (req, res) => {
         break;
       case 4:
         switch (tema) {
+          case 4:
+            exAux = new B4Ej4(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 4 del bloque 4')
+            break;
           case 5:
             exAux = new B4Ej5_6(exercise.texto, exercise.enunciado, exercise.puntuacion);
             console.log('He creado un ejercicio 5 del bloque 4')
+            break;
+          case 8:
+            exAux = new B4Ej8(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 8 del bloque 4')
             break;
           default:
 
@@ -164,6 +172,8 @@ exports.resolve = (req, res) => {
     exAux.resolver(input);
     res.json(exAux);
   };
+
+  
 
 
 

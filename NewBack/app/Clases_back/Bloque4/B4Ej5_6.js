@@ -3,25 +3,18 @@ const EjGenerico = require('../EjGenerico.js');
 class B4Ej5_6 extends EjGenerico {
 
   constructor(
-    texto = "Calcula la media aritmética, la mediana y la moda del siguiente conjunto de números:",
-    enunciado = [
-      `${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1} ` +
-      `${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1} ` +
-      `${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1} ${Math.floor(Math.random() * 30) + 1}`
-    ],
+    texto = "Calcula la mediana y la moda del siguiente conjunto de números:",
+    enunciado = [Array.from({length: 15}, () => Math.floor(Math.random() * 30) + 1).join(' ')],
     puntuacion = 10
   ) {
-    console.log("Ha entrado en constructor de B4Ej5_6");
-
     super(
-      "Bloque 4 - Estadística",
+      "Bloque 4 - Organización de la información",
       4.05, // 4.05 dice bloque 4 => ej 5
       texto,
       enunciado,
       puntuacion
     );
-
-    this.long_input=3;
+    this.long_input=2;
   }
 
   resolver(input) {
@@ -29,28 +22,10 @@ class B4Ej5_6 extends EjGenerico {
   
     const numeros = this.enunciado[0].split(" ").map(num => parseInt(num));
   
-    // Calculamos la media
-    const suma = numeros.reduce((acum, num) => acum + num, 0);
-    const media = Math.round(suma / numeros.length);
-  
-    if (media.toString() === this.input[0]) {
-      this.explicacion.push(`¡La media es correcta!`);
-    } else {
-      this.explicacion.push(`No es correcto. La media es ${media}.`);
-    }
-  
     // Calculamos la mediana
-    numeros.sort((a, b) => a - b);
-    let mediana;
-    if (numeros.length % 2 === 0) {
-      const mediana1 = numeros[numeros.length / 2 - 1];
-      const mediana2 = numeros[numeros.length / 2];
-      mediana = Math.round((mediana1 + mediana2) / 2);
-    } else {
-      mediana = numeros[Math.floor(numeros.length / 2)];
-    }
-  
-    if (mediana.toString() === this.input[1]) {
+    const sortedNumeros = [...numeros].sort((a, b) => a - b);
+    const mediana = sortedNumeros[7]
+    if (mediana.toString() === this.input[0]) {
       this.explicacion.push(`¡La mediana es correcta!`);
     } else {
       this.explicacion.push(`No es correcto. La mediana es ${mediana}.`);
@@ -58,7 +33,6 @@ class B4Ej5_6 extends EjGenerico {
   
     // Calculamos la moda
     const frecuencias = {};
-    let moda = numeros[0];
     let maxFrecuencia = 0;
     numeros.forEach(num => {
       if (frecuencias[num]) {
@@ -66,16 +40,13 @@ class B4Ej5_6 extends EjGenerico {
       } else {
         frecuencias[num] = 1;
       }
-      if (frecuencias[num] > maxFrecuencia) {
-        moda = num;
-        maxFrecuencia = frecuencias[num];
-      }
+      maxFrecuencia = Math.max(maxFrecuencia, frecuencias[num]);
     });
-  
-    if (moda.toString() === this.input[2]) {
+    const modas = Object.keys(frecuencias).filter(num => frecuencias[num] === maxFrecuencia);
+    if (modas.includes(this.input[1])) {
       this.explicacion.push(`¡La moda es correcta!`);
     } else {
-      this.explicacion.push(`No es correcto. La moda es ${moda}.`);
+      this.explicacion.push(`No es correcto. La moda es ${modas.join(' o ')}.`);
     }
   }
   
