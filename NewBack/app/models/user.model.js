@@ -5,10 +5,12 @@ const User = mongoose.model(
   new mongoose.Schema({
     email: String,
     password: String,
-    scores: [Number], //puntuacion, 4 posiciones, una por cada bloque
-    counters: [Number], //cantidad de ejercicios resuletos (4 posiciones)
-    averages: [Number], //medias por cada bloque de ejercicios
-
+    submitted: [Number], //ejercicios donde se pulso resolver, estuviesen bien o mal (4 posiciones, una por bloque)
+    correct: [Number], //cantidad de ejercicios resueltos correctamente (4 posiciones, una por bloque)
+    incorrect: [Number], //cantidad de ejercicios resueltos incorrectamente (4 posiciones, una por bloque)
+    scores: [Number], //puntuaciones totales por bloque
+    averages: [Number], //puntuaciones medias por bloque
+    
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -14,7 +14,7 @@ const Profile = () => {
         <Email email={currentUser.email} />
         <Roles roles={currentUser.roles} />
       </div>
-      <StatsPage />
+      <StatsPage/>
     </div>
   );
 };

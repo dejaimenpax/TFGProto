@@ -10,9 +10,12 @@ exports.signup = (req, res) => {
   const user = new User({
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
-    scores: [0,0,0,0],
-    counters: [0,0,0,0],
-    averages: [0,0,0,0]
+
+    submitted: [0,0,0,0],
+    correct: [0,0,0,0], 
+    incorrect: [0,0,0,0], 
+    scores: [0,0,0,0], 
+    averages: [0,0,0,0] 
   });
 
   user.save((err, user) => {
@@ -111,9 +114,11 @@ exports.signin = (req, res) => {
       res.status(200).send({
         id: user._id,
         email: user.email,
-        scores: user.scores,
-        counters: user.counters,
-        averages: user.averages,
+        submitted: user.submitted,
+        correct: user.correct, 
+        incorrect: user.incorrect, 
+        scores: user.scores, 
+        averages: user.averages, 
         roles: authorities,
         accessToken: token
       });
