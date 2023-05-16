@@ -8,7 +8,7 @@ class B4EJ1 extends EjGenerico {
     enunciado = Array.from({length: 10}, () => Math.floor(Math.random() * 11)),
     puntuacion = 10
   ) {
-    super(
+    super( 
       "Bloque 4 - Organización de la información",
       4.01,
       texto,

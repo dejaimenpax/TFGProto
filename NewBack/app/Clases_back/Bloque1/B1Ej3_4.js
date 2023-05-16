@@ -56,7 +56,7 @@ class B1Ej3_4 extends EjGenerico{
                     rand = Math.floor( (Math.random() * (max-1 - min+1 + 1)) + min+1 )
                     ejemplos.add(rand)
                 }
-                lon_ej++
+                lon_ej++ 
 
                 this.resultado.push(rand)
                 
