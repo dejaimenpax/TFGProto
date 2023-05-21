@@ -6,8 +6,8 @@ const createExercise = (id_tema) => {
     return axios.post(API_URL + "create", { id_tema })
 }
 
-const resolveExercise = (exercise, input) => {
-    return axios.post(API_URL + "resolve", { exercise, input })
+const resolveExercise = (exercise, input, email) => {
+    return axios.post(API_URL + "resolve", { exercise, input, email })
 }
 
 const ExerciseService = {

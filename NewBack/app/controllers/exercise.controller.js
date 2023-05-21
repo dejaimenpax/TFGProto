@@ -18,6 +18,10 @@ const B4Ej4 = require("../Clases_back/Bloque4/B4Ej4");
 const B4Ej5_6 = require("../Clases_back/Bloque4/B4Ej5_6");
 const B4Ej8 = require("../Clases_back/Bloque4/B4Ej8");
 
+const config = require("../config/auth.config");
+const db = require("../models");
+const User = db.user;
+
 exports.create = (req, res) => {
   const { id_tema } = req.body;
   let exercise;
@@ -107,7 +111,7 @@ exports.create = (req, res) => {
 
 
 exports.resolve = (req, res) => {
-    const { exercise, input } = req.body;
+    const { exercise, input, email } = req.body;
 
     console.log(`El ejercicio es ${JSON.stringify(exercise)}`)
     console.log(`El ejercicio es del tema ${exercise.id_tema}`)
@@ -215,13 +219,17 @@ exports.resolve = (req, res) => {
 
 
     exAux.resolver(input);
-  
+
     // Actualizar las estadísticas del usuario
-    const userId = req.userId; // Obtener el ID del usuario desde la solicitud
-    User.findOne({email: req.body.email}, (err, user) => {
+    console.log(email);
+    User.findOne({email}, (err, user) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
+      }
+
+      if (!user) {
+        return res.status(404).send({ message: "Usuario no encontrado." });
       }
   
       // Actualizar las estadísticas según el ejercicio resuelto
