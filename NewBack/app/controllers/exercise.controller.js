@@ -8,8 +8,10 @@ const B2Ej5 = require("../Clases_back/Bloque2/B2Ej5");
 const B2Ej6 = require("../Clases_back/Bloque2/B2Ej6");
 const B2Ej7 = require("../Clases_back/Bloque2/B2Ej7");
 
+const B3Ej2 = require("../Clases_back/Bloque3/B3Ej2");
 const B3Ej5 = require("../Clases_back/Bloque3/B3Ej5");
 const B3Ej9 = require("../Clases_back/Bloque3/B3Ej9");
+const B3Ej15 = require("../Clases_back/Bloque3/B3Ej15");
 
 const B4Ej1 = require("../Clases_back/Bloque4/B4Ej1");
 const B4Ej4 = require("../Clases_back/Bloque4/B4Ej4");
@@ -61,16 +63,16 @@ exports.create = (req, res) => {
     case 3:
       switch (randomNumber) {
         case 0:
-          exercise = new B3Ej5();
+          exercise = new B3Ej2();
           break;
         case 1:
-          exercise = new B3Ej9();
+          exercise = new B3Ej5();
           break;
         case 2:
           exercise = new B3Ej9();
           break;
         case 3:
-          exercise = new B3Ej5();
+          exercise = new B3Ej15();
           break;
         default:
           // handle invalid randomNumber
@@ -166,6 +168,10 @@ exports.resolve = (req, res) => {
         break;
       case 3:
         switch (tema) {
+          case 2:
+            exAux = new B3Ej2(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 2 del bloque 3')
+            break;
           case 5:
             exAux = new B3Ej5(exercise.texto, exercise.enunciado, exercise.puntuacion);
             console.log('He creado un ejercicio 5 del bloque 3')
@@ -173,6 +179,10 @@ exports.resolve = (req, res) => {
           case 9:
             exAux = new B3Ej9(exercise.texto, exercise.enunciado, exercise.puntuacion);
             console.log('He creado un ejercicio 9 del bloque 3')
+            break;
+          case 15:
+            exAux = new B3Ej15(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 15 del bloque 3')
             break;
           default:
         }
@@ -211,23 +221,3 @@ exports.resolve = (req, res) => {
 
 
 
-
-
-/*
-
-const Ej6 = require("../Clases_back/Bloque1/Ej6");
-
-exports.create = (req, res) => {
-  const { id_tema } = req.body;
-  const ex6 = new Ej6("Texto", "374583 298769", 40);
-  res.json(ex6);
-};
-
-exports.resolve = (req, res) => {
-  const { exercise, input } = req.body;
-  const exAux = new Ej6(exercise.texto, exercise.enunciado, exercise.puntuacion);
-  exAux.resolver(input);
-  res.json(exAux);
-};
-
-*/

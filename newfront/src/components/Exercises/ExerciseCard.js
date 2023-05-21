@@ -2,13 +2,14 @@ import React from 'react';
 import '../../styles/Exercises/ExerciseCard.css';
 import { Bar } from 'react-chartjs-2';
 import TriangleExercise from './TriangleExercise';
-
 const ExerciseCard = ({ exercise }) => {
   let content;
   
   switch (exercise?.id_tema) {
+    case 3.02:
     case 3.05:
     case 3.09:
+    case 3.15:
       content = <TriangleExercise enunciado={exercise.enunciado} />
       break;
     case 4.01:
