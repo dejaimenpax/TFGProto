@@ -27,6 +27,7 @@ class B4Ej5_6 extends EjGenerico {
     const mediana = sortedNumeros[7]
     if (mediana.toString() === this.input[0]) {
       this.explicacion.push(`¡La mediana es correcta!`);
+      this.nota += this.puntuacion/2;
     } else {
       this.explicacion.push(`No es correcto. La mediana es ${mediana}.`);
     }
@@ -45,6 +46,7 @@ class B4Ej5_6 extends EjGenerico {
     const modas = Object.keys(frecuencias).filter(num => frecuencias[num] === maxFrecuencia);
     if (modas.includes(this.input[1])) {
       this.explicacion.push(`¡La moda es correcta!`);
+      this.nota += this.puntuacion/2;
     } else {
       this.explicacion.push(`No es correcto. La moda es ${modas.join(' o ')}.`);
     }

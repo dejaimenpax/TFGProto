@@ -103,7 +103,7 @@ exports.signin = (req, res) => {
       var authorities = [];
 
       res.cookie("token", token, {
-        maxAge: 86400000, // 24 hours
+        maxAge: 86400, // 24 hours
         httpOnly: true,
         secure: true // HTTPS sólo en producción
       });

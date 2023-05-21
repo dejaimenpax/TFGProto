@@ -41,7 +41,7 @@ class B1Ej6 extends EjGenerico {
         for (let modo = 0; modo < 4; modo++) {
             if (this.resultado[modo] === input_aux[modo]) {
                 this.explicacion[modo] = "¡Es correcto!"
-                this.nota += this.puntuacion / 4
+                this.nota += this.puntuacion / 4 //cada apartado es 2.5
             } else {
                 let aux = this.enunciado[0]
                 let derecha = Number(aux.charAt(aux.length - 1 - modo))

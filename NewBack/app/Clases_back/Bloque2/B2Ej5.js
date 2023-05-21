@@ -40,17 +40,24 @@ class B2Ej5 extends EjGenerico {
     const horasTermino = 9 + Math.floor(duracionTotal / 60);
     const minutosTermino = (duracionTotal % 60).toString().padStart(2, '0');
 
+    let contador = 0
+
     if (horasTermino.toString() === this.input[0]) {
       this.explicacion.push(`¡La hora es correcta!`);
+      contador++;
     } else {
       this.explicacion.push(`No es correcto para las horas. Las clases terminan a las ${horasTermino}:${minutosTermino}.`);
     }
 
     if (minutosTermino === this.input[1]) {
       this.explicacion.push(`¡El minuto es correcto!`);
+      contador++;
     } else {
       this.explicacion.push(`No es correcto para los minutos. Las clases terminan a las ${horasTermino}:${minutosTermino}.`);
     }
+
+    if (contador===2)
+      this.nota = this.puntuacion;
   }
 }
 

@@ -76,6 +76,7 @@ class B3Ej5 extends EjGenerico {
 
     if(obtusos === parseInt(this.input[0])) {
       this.explicacion.push(`¡Es correcto!`);
+      this.nota = this.puntuacion;
     } else {
       this.explicacion.push(`No es correcto. Hay ${obtusos} triángulos obtusángulos en total.`);
     }

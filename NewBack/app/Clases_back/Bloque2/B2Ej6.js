@@ -35,7 +35,8 @@ class B2Ej6 extends EjGenerico {
     const precioTotal = Math.ceil(metrosTotales * precio);
 
     if (this.input[0] === precioTotal.toString()) {
-      this.explicacion.push(`¡Correcto!`);
+      this.explicacion.push(`¡Es correcto!`);
+      this.nota = this.puntuacion;
     } else {
         const mensaje = `No es correcto. Para calcular las monedas de un euro necesarias, ` +
         `multiplica los metros totales necesarios (${metrosTotales} m) por el precio de la cinta por metro (${precio} euros) `+

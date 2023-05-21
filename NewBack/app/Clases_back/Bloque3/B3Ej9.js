@@ -42,6 +42,7 @@ class B3Ej9 extends EjGenerico {
 
     if(area === parseInt(this.input[0])) {
       this.explicacion.push(`¡Es correcto!`);
+      this.nota = this.puntuacion;
     } else {
       this.explicacion.push(`No es correcto. El área redondeada del triángulo es ${area}. Para calcular el área de un triángulo, se puede multiplicar la base por la altura y dividir el resultado entre dos.`);
     }

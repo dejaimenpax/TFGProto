@@ -70,10 +70,13 @@ class B1Ej8 extends EjGenerico{
         const num = Number(this.enunciado[0]);
         const divisores = obtener_divisores(num);
         this.resultado.push(divisores);
+
+        let contador = 0;
     
         for (let i = 0; i < 4; i++) {
             if (this.input[i] === divisores[i].toString()) {
                 this.explicacion.push('¡Es correcto!');
+                contador++;    
             } else {
                 let feedback = '';
                 switch (i) {
@@ -101,6 +104,9 @@ class B1Ej8 extends EjGenerico{
                 this.explicacion.push(feedback);
             }
         }
+
+        if (contador===4)
+            this.nota = this.puntuacion;
     }
 
 }

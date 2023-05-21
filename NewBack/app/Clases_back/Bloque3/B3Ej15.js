@@ -42,6 +42,7 @@ class Ej3B15 extends EjGenerico {
 
     if (perimetro === parseInt(this.input[0])) {
       this.explicacion.push(`¡Es correcto!`);
+      this.nota = this.puntuacion;
     } else {
       this.explicacion.push(`No es correcto. El perímetro del triángulo es ${perimetro}. Puedes ayudarte del Teorema de Pitágoras para calcular las distancias entre vértices`);
     }

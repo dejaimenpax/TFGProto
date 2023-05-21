@@ -5,6 +5,7 @@ import EventBus from "../../common/EventBus";
 import ExerciseCard from "./ExerciseCard";
 import InputBox from "./InputBox"
 import DropdownMenu from "./DropdownMenu"
+import AuthService from "../../services/auth.service";
 
 import '../../styles/Exercises/SelectTopic.css';
 
@@ -31,7 +32,8 @@ const SelectTopic = () => {
 
   const handleInput = (input) => {
     if (input.every((value) => value !== "")) {
-      ExerciseService.resolveExercise(exercise, input)
+      const currentUser = AuthService.getCurrentUser();
+      ExerciseService.resolveExercise(exercise, input, currentUser.email)
         .then((response) => {
           setExercise(response.data);
           setExerciseResolved(true);

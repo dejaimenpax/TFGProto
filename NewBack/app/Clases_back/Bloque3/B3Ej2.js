@@ -71,6 +71,7 @@ class Ej3B2 extends EjGenerico {
 
     if (acutangulos === parseInt(this.input[0])) {
       this.explicacion.push(`¡Es correcto!`);
+      this.nota = this.puntuacion;
     } else {
       this.explicacion.push(
         `No es correcto. Hay ${acutangulos} triángulos acutángulos en total.`

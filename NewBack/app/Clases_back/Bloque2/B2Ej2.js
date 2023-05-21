@@ -34,6 +34,7 @@ class B2Ej2 extends EjGenerico {
 
     if (this.input[0] === this.resultado[0]) {
       this.explicacion.push(`¡Correcto! El número de vasos necesarios es ${this.resultado}.`);
+      this.nota = this.puntuacion;
     } else {
         const mensaje = `No es correcto. Para obtener ` +
         `el número de vasos necesarios, debes dividir la capacidad del bidón (${X} litros) entre la cantidad `+

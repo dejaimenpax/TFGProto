@@ -29,10 +29,12 @@ class B1Ej7 extends EjGenerico {
         this.input = input;
         const num = Number(this.enunciado[0]);
         this.resultado = obtener_multiplos(num, 4); //porque quiero los 4 primeros numeros
+        let contador = 0;
 
         for (let i = 0; i < 4; i++) {
             if (this.input[i] === this.resultado[i]) {
                 this.explicacion.push('¡Es correcto!');
+                contador++;
             } else {
                 let mensaje = '';
                 if (i === 0) {
@@ -43,6 +45,9 @@ class B1Ej7 extends EjGenerico {
                 this.explicacion.push(mensaje);
             }
         }
+
+        if (contador===4)
+            this.nota = this.puntuacion;
     }
 }
 

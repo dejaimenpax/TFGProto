@@ -29,12 +29,14 @@ class B4EJ1 extends EjGenerico {
 
     if (this.input[0] == totalAlumnos) {
       this.explicacion.push(`¡El número total de alumnos es correcto!`);
+      this.nota += this.puntuacion/2;
     } else {
       this.explicacion.push(`No es correcto. El total debería ser ${totalAlumnos} alumnos.`);
     }
 
     if (this.input[1] == media) {
       this.explicacion.push(`¡La media de edad es correcta!`);
+      this.nota += this.puntuacion/2;
     } else {
       this.explicacion.push(`No es correcto. La media debería ser ${media} años.`);
     }

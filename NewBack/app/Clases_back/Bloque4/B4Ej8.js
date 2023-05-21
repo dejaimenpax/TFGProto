@@ -37,18 +37,21 @@ class B4Ej8 extends EjGenerico {
   
     if (respuestaMaximo === maximo) {
       this.explicacion.push(`¡Es correcto!`);
+      this.nota += this.puntuacion/4;
     } else {
       this.explicacion.push(`No es correcto. El máximo es ${maximo}. Para calcularlo se debe buscar el número más grande de la lista.`);
     }
   
     if (respuestaMedia === Math.round(media)) {
       this.explicacion.push(`¡Es correcto!`);
+      this.nota += this.puntuacion/2; //vale mas calcular la media que el resto
     } else {
       this.explicacion.push(`No es correcto. La media es ${Math.round(media)}. Para calcularla se debe sumar todos los números y dividir por la cantidad de números.`);
     }
   
     if (respuestaMinimo === minimo) {
       this.explicacion.push(`¡Es correcto!`);
+      this.nota += this.puntuacion/4;
     } else {
       this.explicacion.push(`No es correcto. El mínimo es ${minimo}. Para calcularlo se debe buscar el número más pequeño de la lista.`);
     }
