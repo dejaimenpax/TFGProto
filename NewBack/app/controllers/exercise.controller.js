@@ -240,14 +240,13 @@ exports.resolve = (req, res) => {
         user.incorrect[bloque - 1] += 1; // Incrementar el número de ejercicios resueltos incorrectamente en el bloque correspondiente
       }
       user.scores[bloque - 1] += exAux.nota; // Agregar la nota del ejercicio al puntaje total del bloque correspondiente
-      user.averages[bloque - 1] = user.scores[bloque - 1] / user.submitted[bloque - 1]; // Calcular el promedio del bloque correspondiente
+      user.averages[bloque - 1] = (user.scores[bloque - 1] / user.submitted[bloque - 1]).toFixed(2) // Calcular el promedio del bloque correspondiente
   
-      user.save((err) => {
+      user.save((err, updatedUser) => {
         if (err) {
           res.status(500).send({ message: err });
           return;
         }
-  
         // Envía la respuesta con el ejercicio resuelto
         res.json(exAux);
       });

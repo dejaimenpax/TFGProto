@@ -5,6 +5,7 @@ import AuthService from "../../services/auth.service";
 
 const user = AuthService.getCurrentUser();
 
+
 const data = user ? {
   exercises: {
     BloqueI: {
