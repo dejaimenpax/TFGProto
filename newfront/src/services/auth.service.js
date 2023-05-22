@@ -32,11 +32,26 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+const getCurrentUserFromDB = () => {
+  const user = getCurrentUser();
+  if (user && user.accessToken) {
+    console.log("Entra al getCurrentuserFromDB")
+    return axios.get(API_URL + "user", {
+      headers: { "x-access-token": user.accessToken },
+    });
+  } else {
+    return Promise.reject(new Error("User not found or token expired"));
+  }
+};
+
+
+
 const AuthService = {
   register,
   login,
   logout,
   getCurrentUser,
+  getCurrentUserFromDB,
 };
 
 export default AuthService;
