@@ -31,16 +31,16 @@ class B3Ej9 extends EjGenerico {
   resolver(input) {
     console.log("He entrado en resolver Ej3B9");
     this.input = input;
-
+  
     let a = this.enunciado[0][0];
+    console.log(a)
     let b = this.enunciado[0][1];
     let c = this.enunciado[0][2];
-
+  
     let area = Math.abs((a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1])) / 2);
     area = Math.round(area);
-
-
-    if(area === parseInt(this.input[0])) {
+  
+    if (area === parseInt(this.input[0])) {
       this.explicacion.push(`¡Es correcto!`);
       this.nota = this.puntuacion;
     } else {
@@ -50,5 +50,3 @@ class B3Ej9 extends EjGenerico {
 }
 
 module.exports = B3Ej9;
-
-//ESTE ESTA MAL

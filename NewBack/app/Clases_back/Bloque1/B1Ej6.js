@@ -2,7 +2,7 @@ const EjGenerico = require('../EjGenerico.js')
 
 class B1Ej6 extends EjGenerico {
     constructor(
-        texto = 'Redondea el siguiente número a las decenas, las centenas, las unidades de millar y las decenas de millar.',
+        texto = 'Aproxima el siguiente número a las decenas, las centenas, las unidades de millar y las decenas de millar.',
         enunciado = [Math.floor(Math.random() * (999999 - 100000 + 1) + 100000).toString()],
         puntuacion = 10) 
     {

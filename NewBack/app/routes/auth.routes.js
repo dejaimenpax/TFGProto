@@ -23,4 +23,7 @@ module.exports = function(app) {
 
   app.get("/api/auth/user", controller.getUser);
 
+  app.get("/api/auth/teachers", controller.getTeachers)
+
+
 };

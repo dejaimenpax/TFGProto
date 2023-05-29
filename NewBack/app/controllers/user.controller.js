@@ -3,15 +3,12 @@ exports.allAccess = (req, res) => {
 };
 
 exports.userBoard = (req, res) => {
-  res.status(200).send("Contenido dispoible tras login. Si lees esto, has hecho login");
+  res.status(200).send("Contenido disponible para alumnos logados.");
 };
 
-exports.adminBoard = (req, res) => {
-  res.status(200).send("Contenido disponible para administradores.");
+exports.teacherBoard = (req, res) => {
+  res.status(200).send("Contenido disponible para profesores.");
 };
 
-exports.moderatorBoard = (req, res) => {
-  res.status(200).send("Contenido disponible para moderadores.");
-}; 
 
 

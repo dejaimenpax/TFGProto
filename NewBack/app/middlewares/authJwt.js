@@ -20,7 +20,7 @@ verifyToken = (req, res, next) => {
   });
 };
 
-isAdmin = (req, res, next) => {
+isTeacher = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
@@ -38,53 +38,22 @@ isAdmin = (req, res, next) => {
         }
 
         for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "admin") {
+          if (roles[i].name === "teacher") {
             next();
             return;
           }
         }
 
-        res.status(403).send({ message: "Se requiere rol de administrador." });
+        res.status(403).send({ message: "Se requiere rol de profesor." });
         return;
       }
     );
   });
 };
 
-isModerator = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-
-    Role.find(
-      {
-        _id: { $in: user.roles }
-      },
-      (err, roles) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "moderator") {
-            next();
-            return;
-          }
-        }
-
-        res.status(403).send({ message: "Se requiere rol de moderador." });
-        return;
-      }
-    );
-  });
-};
 
 const authJwt = {
   verifyToken,
-  isAdmin,
-  isModerator
+  isTeacher
 };
 module.exports = authJwt;

@@ -19,7 +19,7 @@ const ExerciseCard = ({ exercise }) => {
             labels: exercise.enunciado.map((d, i) => i + 18),
             datasets: [
               {
-                label: 'Edad',
+                label: 'Alumnos',
                 data: exercise.enunciado,
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',

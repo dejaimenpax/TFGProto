@@ -1,7 +1,6 @@
 const EjGenerico = require('../EjGenerico.js');
 
 class B2Ej2 extends EjGenerico {
-
   constructor(
     texto = "Quieres llenar de agua un bidón de varios litros de capacidad con la ayuda de un vaso en el que caben unos pocos centilitros. ¿Cuántos vasos llenos de agua tendrás que echar en el bidón para que se llene?",
     enunciado = [
@@ -20,26 +19,24 @@ class B2Ej2 extends EjGenerico {
       puntuacion
     );
 
-    this.long_input=1;
+    this.long_input = 1;
   }
 
   resolver(input) {
     console.log("He entrado en resolver un ejercicio 2 del bloque 2");
     this.input = input;
 
-    const [X, Y] = this.enunciado.map(x => parseInt(x.replace(/[^0-9]/g, '')))
-    const cociente = X / Y;
-    const litrosPorVaso = Y / 1000;
-    this.resultado.push(Math.ceil(cociente / litrosPorVaso).toString())
+    const capacidadBidon = parseInt(this.enunciado[0].replace(/[^0-9]/g, ''));
+    const capacidadVaso = parseInt(this.enunciado[1].replace(/[^0-9]/g, ''));
+    const litrosPorVaso = capacidadVaso / 100;
 
-    if (this.input[0] === this.resultado[0]) {
-      this.explicacion.push(`¡Correcto! El número de vasos necesarios es ${this.resultado}.`);
+    const numVasos = Math.ceil(capacidadBidon / litrosPorVaso);
+
+    if (this.input[0] == numVasos) {
+      this.explicacion.push(`¡Correcto! El número de vasos necesarios es ${numVasos}.`);
       this.nota = this.puntuacion;
     } else {
-        const mensaje = `No es correcto. Para obtener ` +
-        `el número de vasos necesarios, debes dividir la capacidad del bidón (${X} litros) entre la cantidad `+
-        `de agua que cabe en un vaso (${Y} cl, es decir, ${litrosPorVaso} litros) y luego redondear hacia arriba, `+
-        `obteniendo ${this.resultado[0]} vasos.`;
+      const mensaje = `No es correcto. Para obtener el número de vasos necesarios, debes dividir la capacidad del bidón (${capacidadBidon} litros) entre la cantidad de agua que cabe en un vaso (${capacidadVaso} cl, es decir, ${litrosPorVaso} litros) y luego redondear hacia arriba, obteniendo ${numVasos} vasos.`;
       this.explicacion.push(mensaje);
     }
   }

@@ -10,7 +10,7 @@ const obtener_multiplos = (num, cantidad) => {
 
 class B1Ej7 extends EjGenerico {
     constructor(
-        texto = 'Escribe los 4 primeros múltiplos del siguiente números, sin contar al 0', 
+        texto = 'Escribe los 4 primeros múltiplos del siguiente número, sin contar al 0', 
         enunciado = [Math.floor(Math.random() * (24999 - 2 + 1) + 2).toString()], 
         puntuacion = 10
     ) {
@@ -32,7 +32,7 @@ class B1Ej7 extends EjGenerico {
         let contador = 0;
 
         for (let i = 0; i < 4; i++) {
-            if (this.input[i] === this.resultado[i]) {
+            if (Number(this.input[i]) === this.resultado[i]) {
                 this.explicacion.push('¡Es correcto!');
                 contador++;
             } else {

@@ -10,7 +10,7 @@ const User = mongoose.model(
     incorrect: [Number], //cantidad de ejercicios resueltos incorrectamente (4 posiciones, una por bloque)
     scores: [Number], //puntuaciones totales por bloque
     averages: [Number], //puntuaciones medias por bloque
-    
+    teacher: String, //email del profesor asociado. si es el mismo, coincide con su mail
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -13,7 +13,7 @@ checkDuplicateEmail = (req, res, next) => {
     }
 
     if (user) {
-      res.status(400).send({ message: "Error. El NIF/NIE ya se está utilizando por otro usuario." });
+      res.status(400).send({ message: "Error. El email ya se está utilizando por otro usuario." });
       return;
     }
 
@@ -23,15 +23,14 @@ checkDuplicateEmail = (req, res, next) => {
 };
 
 checkRolesExisted = (req, res, next) => {
-  if (req.body.roles) {
-    for (let i = 0; i < req.body.roles.length; i++) {
-      if (!ROLES.includes(req.body.roles[i])) {
-        res.status(400).send({
-          message: `Error. El rol especificado (${req.body.roles[i]}) no existe.`
-        });
-        return;
-      }
+  if (req.body.role) {
+    if (!ROLES.includes(req.body.role)) {
+      res.status(400).send({
+        message: `Error. El rol especificado (${req.body.roles[i]}) no existe.`
+      });
+      return;
     }
+    
   }
 
   next();

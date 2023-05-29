@@ -5,10 +5,10 @@ class B2Ej5 extends EjGenerico {
   constructor(
     texto = "Los maestros están teniendo problemas para cuadrar los horarios y las clases. " +
             "Se sabe que las clases empiezan a las 9 en punto de la mañana. " +
-            "Introduce la hora y el minuto a la que acaban las clases (en formato 24 horas) si...",
+            "Introduce la hora y el minuto a la que termina la jornada (en formato 24 horas) si...",
     enunciado = [
       `Cada clase dura ${Math.floor(Math.random() * (120 - 60)) + 60} minutos`,
-      `El recreo dura ${Math.floor(Math.random() * (30 - 10)) + 10} minutos`,
+      `Hay un solo recreo que dura ${Math.floor(Math.random() * (30 - 10)) + 10} minutos`,
       `Hay ${Math.floor(Math.random() * (5 - 2)) + 2} clases seguidas antes del recreo`,
       `Hay un total de ${Math.floor(Math.random() * (8 - 6)) + 6} clases`
     ],
@@ -31,12 +31,12 @@ class B2Ej5 extends EjGenerico {
     console.log("He entrado en resolver un ejercicio 5 del bloque 2");
     this.input = input;
 
-    const duracionClase = parseInt(this.enunciado[0].match(/\d+/)[0]);
-    const duracionRecreo = parseInt(this.enunciado[1].match(/\d+/)[0]);
-    const clasesAntesRecreo = parseInt(this.enunciado[2].match(/\d+/)[0]);
-    const totalClases = parseInt(this.enunciado[3].match(/\d+/)[0]);
+    const duracionClase = parseInt(this.enunciado[0].match(/(\d+)/)[0]);
+    const duracionRecreo = parseInt(this.enunciado[1].match(/(\d+)/)[0]);
+    const clasesAntesRecreo = parseInt(this.enunciado[2].match(/(\d+)/)[0]);
+    const totalClases = parseInt(this.enunciado[3].match(/(\d+)/)[0]);
 
-    const duracionTotal = duracionClase * totalClases + duracionRecreo * Math.floor((totalClases - 1) / clasesAntesRecreo);
+    const duracionTotal = (duracionClase * totalClases) + duracionRecreo;
     const horasTermino = 9 + Math.floor(duracionTotal / 60);
     const minutosTermino = (duracionTotal % 60).toString().padStart(2, '0');
 

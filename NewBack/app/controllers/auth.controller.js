@@ -6,6 +6,7 @@ const Role = db.role;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+
 exports.signup = (req, res) => {
   const user = new User({
     email: req.body.email,
@@ -15,7 +16,8 @@ exports.signup = (req, res) => {
     correct: [0,0,0,0], 
     incorrect: [0,0,0,0], 
     scores: [0,0,0,0], 
-    averages: [0,0,0,0] 
+    averages: [0,0,0,0],
+    teacher: req.body.teacher,
   });
 
   user.save((err, user) => {
@@ -24,50 +26,29 @@ exports.signup = (req, res) => {
       return;
     }
 
-    if (req.body.roles) { //si se especifica rol, se coge el especificado
-      Role.find(
-        {
-          name: { $in: req.body.roles }
-        },
-        (err, roles) => {
-          if (err) {
-            res.status(500).send({ message: err });
-            return;
-          }
 
-          user.roles = roles.map(role => role._id);
-          user.save(err => {
-            if (err) {
-              res.status(500).send({ message: err });
-              return;
-            }
+    Role.findOne({ name: "teacher" }, (err, role) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
 
-            res.send({ message: "El usuario se ha registrado correctamente." });
-          });
-        }
-      );
-    } else { //en caso contrario es user
-      Role.findOne({ name: "user" }, (err, role) => {
+      user.roles = [role._id];
+      user.save(err => {
         if (err) {
           res.status(500).send({ message: err });
           return;
         }
 
-        user.roles = [role._id];
-        user.save(err => {
-          if (err) {
-            res.status(500).send({ message: err });
-            return;
-          }
-
-          res.send({ message: "El usuario se ha registrado correctamente." });
-        });
+        res.send({ message: "El usuario se ha registrado correctamente." });
       });
-    }
-    console.log("Id del usuario", user.id)
-    console.log("Email del usuario", user.email)
+    });
+
   });
 };
+
+
+
 
 exports.signin = (req, res) => {
   User.findOne({
@@ -117,8 +98,8 @@ exports.signin = (req, res) => {
         submitted: user.submitted,
         correct: user.correct, 
         incorrect: user.incorrect, 
-        scores: user.scores, 
-        averages: user.averages, 
+        scores: user.scores,
+        teacher: user.teacher, 
         roles: authorities,
         accessToken: token
       });
@@ -137,6 +118,17 @@ exports.getUser = (req, res) => {
       }
 
       res.status(200).send(user);
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.getTeachers = (req, res) => {
+  User.find({ roles: { $elemMatch: { name: "teacher" } } }, "email")
+    .then(teachers => {
+      const teacherEmails = teachers.map(teacher => teacher.email);
+      res.status(200).send(teacherEmails);
     })
     .catch(err => {
       res.status(500).send({ message: err.message });

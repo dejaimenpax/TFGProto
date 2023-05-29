@@ -7,7 +7,6 @@ const StatsPage = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    
     const fetchUser = async () => {
       try {
         const response = await AuthService.getCurrentUserFromDB();
@@ -20,6 +19,24 @@ const StatsPage = () => {
 
     fetchUser();
   }, []);
+
+  const calculateAverages = () => {
+    let sum = 0;
+    let count = 0;
+
+    for (let i = 0; i < user.averages.length; i++) {
+      if (user.submitted[i] > 0) {
+        sum += user.averages[i];
+        count++;
+      }
+    }
+
+    if (count > 0) {
+      return (sum / count).toFixed(2);
+    } else {
+      return 0;
+    }
+  };
 
   const data = user ? {
     exercises: {
@@ -55,7 +72,7 @@ const StatsPage = () => {
     total: {
       submitted: user.submitted[0] + user.submitted[1] + user.submitted[2] + user.submitted[3],
       scores: user.scores[0] + user.scores[1] + user.scores[2] + user.scores[3],
-      averages: ((user.averages[0] + user.averages[1] + user.averages[2] + user.averages[3]) / 4).toFixed(2),
+      averages: calculateAverages(),
       correct: user.correct[0] + user.correct[1] + user.correct[2] + user.correct[3],
       incorrect: user.incorrect[0] + user.incorrect[1] + user.incorrect[2] + user.incorrect[3],
     },
@@ -154,6 +171,3 @@ const StatsPage = () => {
 }
 
 export default StatsPage;
-
-
-

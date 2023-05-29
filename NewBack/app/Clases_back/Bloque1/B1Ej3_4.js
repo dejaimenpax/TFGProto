@@ -30,46 +30,49 @@ class B1Ej3_4 extends EjGenerico{
             )
         }
 
-        this.long_input=4;
+        this.long_input = 4;
     }
 
-    resolver(input) { //el input es una array con dos numeros entre el 0 y el 99999, en strings
-        this.input=input
+    resolver(input) {
+        this.input = input;
+        const numerosIngresados = new Set(); // Conjunto para almacenar los números ingresados
 
-        const input_aux = this.input.map(x=>Number(x))
-        const min = Number(this.enunciado[0])
-        const max = Number(this.enunciado[1])
+        const input_aux = this.input.map(x => Number(x));
+        const min = Number(this.enunciado[0]);
+        const max = Number(this.enunciado[1]);
 
-        const ejemplos = new Set() //conjunto para que no se repitan ejemplos aleatorios
-        let lon_ej = ejemplos.size
+        const ejemplos = new Set(); // Conjunto para que no se repitan ejemplos aleatorios
+        let lon_ej = ejemplos.size;
 
         input_aux.forEach(num => {
-            if (min<num && num<max) {
-                this.nota += this.puntuacion/4 //cada apartado da 2.5
-                this.explicacion.push(`¡Es correcto!`)
-                this.resultado.push(num)
-            }
-            else{
-                //creamos ejemplo de numero
-                let rand=0
-                while (lon_ej===ejemplos.size){
-                    rand = Math.floor( (Math.random() * (max-1 - min+1 + 1)) + min+1 )
-                    ejemplos.add(rand)
+            if (min < num && num < max && !numerosIngresados.has(num)) {
+                this.nota += this.puntuacion / 4; // Cada apartado da 2.5
+                this.explicacion.push(`¡Es correcto!`);
+                this.resultado.push(num);
+                numerosIngresados.add(num); // Agregamos el número ingresado al conjunto
+            } else {
+                // Creamos ejemplo de número
+                let rand = 0;
+                while (lon_ej === ejemplos.size) {
+                    rand = Math.floor(Math.random() * (max - 1 - min + 1)) + min + 1;
+                    ejemplos.add(rand);
                 }
-                lon_ej++ 
+                lon_ej++;
 
-                this.resultado.push(rand)
-                
-                if (num<=min){
-                    this.explicacion.push(`${num} es menor o igual que ${min}. Un ejemplo válido sería ${rand}.`)
-                }
-                else if (num>=max){
-                    this.explicacion.push(`${num} es mayor o igual que ${min}. Un ejemplo válido sería ${rand}.`)
+                this.resultado.push(rand);
+
+                if (num <= min) {
+                    this.explicacion.push(`${num} es menor o igual que ${min}. Un ejemplo válido sería ${rand}.`);
+                } else if (num >= max) {
+                    this.explicacion.push(`${num} es mayor o igual que ${max}. Un ejemplo válido sería ${rand}.`);
+                } else if (numerosIngresados.has(num)) {
+                    this.explicacion.push(`El número ${num} ya ha sido ingresado. Un ejemplo válido sería ${rand}.`);
                 }
             }
-        })
-    console.log(this.explicacion)  
+        });
+
+        console.log(this.explicacion);
     }
 }
 
-module.exports = B1Ej3_4
+module.exports = B1Ej3_4;
