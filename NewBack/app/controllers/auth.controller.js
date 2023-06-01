@@ -8,6 +8,7 @@ var bcrypt = require("bcryptjs");
 
 
 exports.signup = (req, res) => {
+  console.log("Estoy en el auth.service y la req es", req.body)
   const user = new User({
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
@@ -27,7 +28,7 @@ exports.signup = (req, res) => {
     }
 
 
-    Role.findOne({ name: "teacher" }, (err, role) => {
+    Role.findOne({ name: req.body.role }, (err, role) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
@@ -125,12 +126,22 @@ exports.getUser = (req, res) => {
 };
 
 exports.getTeachers = (req, res) => {
-  User.find({ roles: { $elemMatch: { name: "teacher" } } }, "email")
-    .then(teachers => {
-      const teacherEmails = teachers.map(teacher => teacher.email);
-      res.status(200).send(teacherEmails);
+  User.find({})
+    .populate({
+      path: "roles",
+      match: { name: "teacher" },
+      select: "name"
     })
-    .catch(err => {
-      res.status(500).send({ message: err.message });
+    .exec((err, users) => {
+      if (err) {
+        res.status(500).send({ message: err.message });
+        return;
+      }
+
+      const teacherEmails = users
+        .filter(user => user.roles.length > 0)
+        .map(user => user.email);
+
+      res.status(200).send(teacherEmails);
     });
 };

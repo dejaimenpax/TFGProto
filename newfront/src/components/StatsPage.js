@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Pie } from 'react-chartjs-2';
-import '../../styles/Profile/StatsPage.css'
-import AuthService from "../../services/auth.service";
+import '../styles/Profile/StatsPage.css'
+import AuthService from "../services/auth.service";
 
 const StatsPage = () => {
   const [user, setUser] = useState(null);
@@ -12,7 +12,7 @@ const StatsPage = () => {
         const response = await AuthService.getCurrentUserFromDB();
         setUser(response.data);
       } catch (error) {
-        // Manejar el error de alguna manera
+        
         console.error(error);
       }
     };

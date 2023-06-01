@@ -4,16 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/App.css";
 
 import AuthService from "./services/auth.service";
-
-
 import Login from "./components/Login";
-import Register from "./components/Register"; 
-import Home from "./components/Home"; 
-import Profile from "./components/Profile/Profile"
+import Register from "./components/Register";
+import Home from "./components/Home";
+import Profile from "./components/Profile/Profile";
 import BoardUser from "./components/BoardUser";
-import BoardTeacher from "./components/BoardTeacher"; 
-import Resolver from "./components/Exercises/Resolver"
-
+import BoardTeacher from "./components/BoardTeacher";
+import Resolver from "./components/Exercises/Resolver";
 import EventBus from "./common/EventBus";
 
 const App = () => {
@@ -35,9 +32,7 @@ const App = () => {
     return () => {
       EventBus.remove("logout");
     };
-    
   }, []);
-
 
   const logOut = () => {
     AuthService.logout();
@@ -52,8 +47,6 @@ const App = () => {
           MatemAPIcas
         </Link>
         <div className="navbar-nav mr-auto">
-
-
           {showTeacherBoard && (
             <li className="nav-item">
               <Link to={"/teacher"} className="nav-link">
@@ -61,8 +54,7 @@ const App = () => {
               </Link>
             </li>
           )}
-
-          {currentUser && (
+          {!showTeacherBoard && currentUser && (
             <li className="nav-item">
               <Link to={"/user"} className="nav-link">
                 Panel de alumno
@@ -70,12 +62,18 @@ const App = () => {
             </li>
           )}
         </div>
-
         {currentUser ? (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
               <div className="dropdown">
-                <button className="btn btn-info text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button
+                  className="btn btn-info text-dark dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
                   Área de {currentUser.email}
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -96,7 +94,6 @@ const App = () => {
                 Iniciar Sesión
               </Link>
             </li>
-
             <li className="nav-item">
               <Link to={"/register"} className="nav-link">
                 Registrarse
@@ -105,19 +102,17 @@ const App = () => {
           </div>
         )}
       </nav>
-
       <div className="container mt-3">
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/user" element={<BoardUser/>} />
-          <Route path="/teacher" element={<BoardTeacher/>} />
-          <Route path="/resolver" element={<Resolver/>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/user" element={<BoardUser />} />
+          <Route path="/teacher" element={<BoardTeacher />} />
+          <Route path="/resolver" element={<Resolver />} />
         </Routes>
       </div>
-
     </div>
   );
 };
