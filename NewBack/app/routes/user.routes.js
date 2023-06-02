@@ -20,6 +20,4 @@ module.exports = function(app) {
     controller.teacherBoard
   );
 
-  app.get("/api/test/resolver/bloque1", [authJwt.verifyToken], controller.userBoard)
-
 };

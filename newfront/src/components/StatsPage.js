@@ -1,24 +1,7 @@
-import React, { useState, useEffect } from "react";
 import { Pie } from 'react-chartjs-2';
 import '../styles/Profile/StatsPage.css'
-import AuthService from "../services/auth.service";
 
-const StatsPage = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await AuthService.getCurrentUserFromDB();
-        setUser(response.data);
-      } catch (error) {
-        
-        console.error(error);
-      }
-    };
-
-    fetchUser();
-  }, []);
+const StatsPage = ({user}) => {
 
   const calculateAverages = () => {
     let sum = 0;
@@ -139,7 +122,7 @@ const StatsPage = () => {
   return (
     <div className="stats-page">
       <div className="total-stats-container">
-        <h2 className="text-center">Estadísticas globales</h2>
+        <h2 className="text-center">Estadísticas globales de {user.email}</h2>
         {user && <ExerciseStats data={data.total} />}
       </div>
 

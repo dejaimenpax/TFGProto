@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-import UserService from "../services/user.service";
+import AuthService from "../services/auth.service";
 import EventBus from "../common/EventBus";
 import StatsPage from "./StatsPage";
 
 const BoardUser = () => {
   const [content, setContent] = useState();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    UserService.getUserBoard().then(
-      (response) => {
-        setContent("Logged");
-      },
-      (error) => {
+    AuthService.getCurrentUserFromDB()
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
         const _content =
           (error.response &&
             error.response.data &&
@@ -25,14 +26,13 @@ const BoardUser = () => {
         if (error.response && error.response.status === 401) {
           EventBus.dispatch("logout");
         }
-      }
-    );
+      });
   }, []);
 
   return (
     <div className="container">
       <header className="jumbotron">
-        {content==="Logged" ? <StatsPage /> : <h3>{content}</h3>}
+        {user ? <StatsPage user={user} /> : <h3>{content}</h3>}
       </header>
     </div>
   );

@@ -46,9 +46,20 @@ const getCurrentUserFromDB = () => {
   }
 };
 
-  const getTeachers = () => {
-    return axios.get(API_URL + "teachers");
+const getTeachers = () => {
+  return axios.get(API_URL + "teachers");
+}
+
+const getMyStudents = () => {
+  const user = getCurrentUser();
+  if (user && user.accessToken) {
+    return axios.get(API_URL + "students", {
+      headers: { "x-access-token": user.accessToken },
+    });
+  } else {
+    return Promise.reject(new Error("User not found or token expired"));
   }
+}
 
 const AuthService = {
   register,
@@ -57,6 +68,7 @@ const AuthService = {
   getCurrentUser,
   getCurrentUserFromDB,
   getTeachers,
+  getMyStudents,
 };
 
 export default AuthService;
