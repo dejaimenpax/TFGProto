@@ -1,5 +1,6 @@
 import { Pie } from 'react-chartjs-2';
 import '../styles/Profile/StatsPage.css'
+import 'chart.js';
 
 const StatsPage = ({user}) => {
 
