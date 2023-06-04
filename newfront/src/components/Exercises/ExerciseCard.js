@@ -2,6 +2,13 @@ import React from 'react';
 import '../../styles/Exercises/ExerciseCard.css';
 import { Bar } from 'react-chartjs-2';
 import TriangleExercise from './TriangleExercise';
+import { CategoryScale, Chart, LinearScale, BarElement } from "chart.js";
+
+Chart.register(CategoryScale);
+Chart.register(LinearScale)
+Chart.register(BarElement)
+
+
 const ExerciseCard = ({ exercise }) => {
   let content;
   
@@ -24,6 +31,7 @@ const ExerciseCard = ({ exercise }) => {
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1,
+                scaleType: 'category',
               },
             ],
           }}

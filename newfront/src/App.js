@@ -80,9 +80,9 @@ const App = () => {
                   <Link to={"/profile"} className="dropdown-item">
                     Mi perfil
                   </Link>
-                  <a href="/login" className="dropdown-item" onClick={logOut}>
+                  <Link to={"/login"} className="dropdown-item" onClick={logOut}>
                     Cerrar Sesión
-                  </a>
+                  </Link>
                 </div>
               </div>
             </li>

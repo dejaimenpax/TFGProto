@@ -1,6 +1,8 @@
 import { Pie } from 'react-chartjs-2';
 import '../styles/Profile/StatsPage.css'
-import 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const StatsPage = ({user}) => {
 
@@ -78,10 +80,10 @@ const StatsPage = ({user}) => {
 
     return (
       <div className="exercise-stats">
-        <h3 className="text-center">Ejercicios entregados: {submitted}</h3>
-        <h3 className="text-center">Puntuación total: {scores}</h3>
-        <h3 className="text-center">Nota media: {averages}</h3>
-        <Pie data={chartData} width={500} heigh={500}/>
+        <h3 className="text-center"  style={{ whiteSpace: "nowrap" }}>Ejercicios entregados: {submitted}</h3>
+        <h3 className="text-center"  style={{ whiteSpace: "nowrap" }}>Puntuación total: {scores}</h3>
+        <h3 className="text-center" style={{ whiteSpace: "nowrap" }}>Nota media: {averages}</h3>
+        <Pie data={chartData} width={200} heigh={200}/>
       </div>
     );
   };
@@ -115,15 +117,17 @@ const StatsPage = ({user}) => {
         <h4>Ejercicios entregados: {submitted}</h4>
         <h4>Puntuación total: {scores}</h4>
         <h4>Nota media: {averages}</h4>
-        <Pie data={chartData} />
+        <div className="subpie">
+          <Pie data={chartData} />
+        </div>
       </div>
     );
   }
 
   return (
     <div className="stats-page">
-      <div className="total-stats-container">
-        <h2 className="text-center">Estadísticas globales de {user.email}</h2>
+      <div>
+        <h2 className="text-center" >Estadísticas globales de {user.email}</h2>
         {user && <ExerciseStats data={data.total} />}
       </div>
 

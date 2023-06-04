@@ -1,0 +1,2 @@
+RewriteCond %{HTTP:Permissions-Policy} interest-cohort=()
+RewriteRule .* - [F]

@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for tfgjaimefront on 2023-06-03T17:36:57+02:00
+# fly.toml app configuration file generated for tfgjaimefront on 2023-06-04T12:56:09+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -7,14 +7,14 @@ app = "tfgjaimefront"
 primary_region = "mad"
 
 [env]
-  PORT = "8081" # add this
+  PORT = "8080" # add this
 
 [experimental]
   auto_rollback = true
 
 [http_service]
-  internal_port = 8081
-  force_https = true
+  internal_port = 8080
+  force_https = false
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
