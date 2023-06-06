@@ -1,0 +1,15 @@
+.btn-custom {
+    background-color: #18a4bc;
+    border-color: #18a4bc;
+    color: white;
+  }
+
+.btn-custom:hover {
+    background-color: #11788a;
+    border-color: #18a4bc;
+    color: white;
+  }
+  
+.container.text-center img {
+    width: 50%;
+  }

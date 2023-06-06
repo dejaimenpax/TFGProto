@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import UserService from "../../services/user.service";
 import EventBus from "../../common/EventBus";
-
 import AuthService from "../../services/auth.service";
 
 import SelectTopic from "./SelectTopic"
+import { Link } from "react-router-dom";
 
 
 const Resolver = () => {
@@ -40,18 +40,21 @@ const Resolver = () => {
       <header className="jumbotron">
         {!user ? (
           <>
-            <p>Esto aparece porque no te has registrado.</p>
-            <p>Para poder resolver ejercicios, debe <a className="link-primary" href="/login">iniciar sesión</a></p>
+            <p className="text-center">Para poder resolver los ejercicios, debes acceder con tu cuenta</p>
+            <div className="text-center justify-content-between ">
+              <Link to="/login" className=" btn btn-custom btn-lg">Iniciar Sesión</Link>
+               &nbsp;&nbsp;&nbsp;
+              <Link to="/register" className="btn btn-custom btn-lg">Registrarse</Link>
+            </div>
 
           </>
           ) : (
           <>
-            <p>Esto aparece porque estas registrado</p>
-            <SelectTopic />
+            <p className="text-center">¡Entrena el tipo de ejercicios que quieras! Podrás elegir entre los distintos bloques del temario:</p>
+            <SelectTopic className="text-center" />
           </>
           )
         }
-        <p>Este texto aparece haya token o no.</p>
       </header>
     </div>
   );

@@ -29,7 +29,7 @@ db.mongoose
 
 /*
   app.get("/", (req, res) => {
-  res.json({ message: "Bienvenido a MatemAPIcas" });
+  res.json({ message: "Bienvenido a MatemAPI" });
 });
 */
 

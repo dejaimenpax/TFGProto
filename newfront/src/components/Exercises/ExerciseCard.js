@@ -17,7 +17,7 @@ const ExerciseCard = ({ exercise }) => {
     case 3.05:
     case 3.09:
     case 3.15:
-      content = <TriangleExercise enunciado={exercise.enunciado} />
+      content = <div className="triangle-exercise"><TriangleExercise enunciado={exercise.enunciado} /></div>
       break;
     case 4.01:
       content = (
@@ -45,7 +45,7 @@ const ExerciseCard = ({ exercise }) => {
   }
 
   return (
-    <div className="exercise-card">
+    <div className="exercise-card text-center">
       <div className="exercise-card-title">{exercise?.tema}</div>
       <div className="exercise-card-text">{exercise?.texto}</div>
       {exercise?.enunciado && exercise?.enunciado.length > 0 && (

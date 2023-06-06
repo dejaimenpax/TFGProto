@@ -1,5 +1,5 @@
 import { Pie } from 'react-chartjs-2';
-import '../styles/Profile/StatsPage.css'
+import '../../styles/UserBoards/StatsPage.css'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -125,7 +125,7 @@ const StatsPage = ({user}) => {
   }
 
   return (
-    <div className="stats-page">
+    <div /*className="stats-page"*/>
       <div>
         <h2 className="text-center" >Estadísticas globales de {user.email}</h2>
         {user && <ExerciseStats data={data.total} />}

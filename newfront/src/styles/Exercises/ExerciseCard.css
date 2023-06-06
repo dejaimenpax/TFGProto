@@ -1,4 +1,4 @@
-.exercise-card {
+ .exercise-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -26,6 +26,10 @@
     margin-top: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
+  }
+
+  .triangle-exercise {
+    overflow: auto;
   }
   
   

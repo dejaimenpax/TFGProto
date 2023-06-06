@@ -2,9 +2,9 @@ import React from "react";
 
 const DropdownMenu = ({ handleSelect }) => {
   return (
-    <div>
+    <div className="text-center">
       <button
-        className="btn btn-secondary dropdown-toggle"
+        className="text-center btn btn-custom dropdown-toggle btn-lg"
         type="button"
         id="dropdownMenuButton"
         data-toggle="dropdown"
@@ -21,7 +21,7 @@ const DropdownMenu = ({ handleSelect }) => {
           aria-label="Números y operaciones"
           tabIndex="0"
         >
-          Bloque I
+          Bloque I - Números y Operaciones
         </button>
         <button 
           className="dropdown-item" 
@@ -30,7 +30,7 @@ const DropdownMenu = ({ handleSelect }) => {
           aria-label="La Medida"
           tabIndex="0"
         >
-          Bloque II
+          Bloque II - La Medida
         </button>
         <button 
           className="dropdown-item" 
@@ -39,7 +39,7 @@ const DropdownMenu = ({ handleSelect }) => {
           aria-label="Formas Geométricas y orientación espacial"
           tabIndex="0"
         >
-          Bloque III
+          Bloque III - formas geométricas y Orientación Espacial
         </button>
         <button 
           className="dropdown-item" 
@@ -48,7 +48,7 @@ const DropdownMenu = ({ handleSelect }) => {
           aria-label="Organización de la información"
           tabIndex="0"
         >
-          Bloque IV
+          Bloque IV - Organización de la información
         </button>
       </div>
     </div>

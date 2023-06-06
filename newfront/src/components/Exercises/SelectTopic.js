@@ -76,7 +76,7 @@ const SelectTopic = () => {
   return (
     <>
       <DropdownMenu handleSelect={handleSelect} />
-  
+      <p></p>
       {exerciseSelected && (
         <>
           <ExerciseCard exercise={exercise} />
@@ -103,12 +103,13 @@ const SelectTopic = () => {
   
               </div>
             ))}
+            
             {exerciseResolved ? (
-              <button onClick={() => handleSelect(parseInt(exercise.id_tema.toString()[0]))}>
+              <button className="btn btn-custom" onClick={() => handleSelect(parseInt(exercise.id_tema.toString()[0]))}>
                 Generar nuevo ejercicio del bloque
               </button>
             ) : (
-              <button onClick={() => handleInput(exerciseInput)}>
+              <button className="btn btn-custom" onClick={() => handleInput(exerciseInput)}>
                 Resolver ejercicio
               </button>
             )}

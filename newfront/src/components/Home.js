@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import logo from "../matemapi_logo.png";
+import "../styles/Home.css";
 
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
-import { Link } from "react-router-dom";
 
 const Home = () => {
   const [content, setContent] = useState("");
@@ -32,11 +34,13 @@ const Home = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <p>{content}</p>
-        <div className="container">
-          <h2 className="display-3">Bienvenido a MatemAPIcas</h2>
-          <p>MatemAPIcas es una aplicación web para el correcto aprendizaje de ejercicios de matemáticas de nivel escolar &#40;tercer ciclo&#41;.</p>
-          <p><Link to={"/resolver"} className="btn btn-primary btn-lg" >Comenzar &raquo;</Link></p>
+        <div className="container text-center">
+          <img src={logo} alt="Logo" className="mb-4"/>
+          <h2 className="display-4">Bienvenido a MatemAPI</h2>
+          <p className="lead">MatemAPI es una app web para el correcto aprendizaje de ejercicios de matemáticas de nivel escolar (tercer ciclo).</p>
+          <p>
+            <Link to={"/resolver"} className="btn btn-custom btn-lg">Comenzar &raquo;</Link>
+          </p>
         </div>
       </header>
     </div>

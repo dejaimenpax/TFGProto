@@ -8,8 +8,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Profile from "./components/Profile/Profile";
-import BoardUser from "./components/BoardUser";
-import BoardTeacher from "./components/BoardTeacher";
+import BoardUser from "./components/UserBoards/BoardUser";
+import BoardTeacher from "./components/UserBoards/BoardTeacher";
 import Resolver from "./components/Exercises/Resolver";
 import EventBus from "./common/EventBus";
 
@@ -44,7 +44,7 @@ const App = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-info">
         <Link to={"/"} className="navbar-brand">
-          MatemAPIcas
+          MatemAPI
         </Link>
         <div className="navbar-nav mr-auto">
           {showTeacherBoard && (

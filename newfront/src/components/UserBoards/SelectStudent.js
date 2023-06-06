@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import AuthService from "../services/auth.service";
+import AuthService from "../../services/auth.service";
 import StatsPage from "./StatsPage";
-import '../styles/SelectStudent.css'
+import '../../styles/UserBoards/SelectStudent.css'
 
 const SearchStudents = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,7 +16,6 @@ const SearchStudents = () => {
     AuthService.getMyStudents()
       .then((response) => {
         setStudents(response.data);
-        console.log(response.data, "siuuuu");
       })
       .catch((error) => {
         console.log(error);
