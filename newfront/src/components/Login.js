@@ -72,6 +72,7 @@ const Login = () => {
   return (
     <div className="col-md-12">
       <div className="card card-container">
+      <h2 className= "text-center"><p>Iniciar Sesión</p></h2>
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"

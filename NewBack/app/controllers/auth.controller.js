@@ -169,3 +169,51 @@ exports.getMyStudents = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+
+exports.eraseStats = (req, res) => {
+  const token = req.headers["x-access-token"];
+  const decodedToken = jwt.verify(token, config.secret);
+  const userId = decodedToken.id;
+
+  User.findByIdAndUpdate(
+    userId,
+    {
+      submitted: [0, 0, 0, 0],
+      correct: [0, 0, 0, 0],
+      incorrect: [0, 0, 0, 0],
+      scores: [0, 0, 0, 0],
+      averages: [0, 0, 0, 0],
+    },
+    { new: true }
+  )
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({ message: "User not found." });
+      }
+
+      res.status(200).send({ message: "Stats erased successfully." });
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+
+exports.deleteAccount = (req, res) => {
+  const token = req.headers["x-access-token"];
+  const decodedToken = jwt.verify(token, config.secret);
+  const userId = decodedToken.id;
+
+  User.findByIdAndDelete(userId)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({ message: "User not found." });
+      }
+
+      res.status(200).send({ message: "Account deleted successfully." });
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+};

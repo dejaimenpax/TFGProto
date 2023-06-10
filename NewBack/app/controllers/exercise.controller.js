@@ -234,13 +234,16 @@ exports.resolve = (req, res) => {
   
       // Actualizar las estadísticas según el ejercicio resuelto
       user.submitted[bloque - 1] += 1; // Incrementar el número de ejercicios enviados en el bloque correspondiente
-      if (exAux.nota===10) {
-        user.correct[bloque - 1] += 1; // Incrementar el número de ejercicios resueltos correctamente en el bloque correspondiente
+      if (exAux.nota>=5) {
+        user.correct[bloque - 1] += 1; // Incrementar el número de ejercicios resueltos correctamente (aprobados) en el bloque correspondiente
       } else {
         user.incorrect[bloque - 1] += 1; // Incrementar el número de ejercicios resueltos incorrectamente en el bloque correspondiente
       }
       user.scores[bloque - 1] += exAux.nota; // Agregar la nota del ejercicio al puntaje total del bloque correspondiente
-      user.averages[bloque - 1] = (user.scores[bloque - 1] / user.submitted[bloque - 1]).toFixed(2) // Calcular el promedio del bloque correspondiente
+      user.averages[bloque - 1] = user.submitted[bloque - 1] !== 0 ? // Calcular el promedio del bloque correspondiente
+        (user.scores[bloque - 1] / user.submitted[bloque - 1]).toFixed(2)
+        :
+        0;
   
       user.save((err, updatedUser) => {
         if (err) {

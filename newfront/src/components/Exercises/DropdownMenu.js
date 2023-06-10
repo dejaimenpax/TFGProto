@@ -17,8 +17,8 @@ const DropdownMenu = ({ handleSelect }) => {
         <button 
           className="dropdown-item" 
           onClick={() => handleSelect(1)}
-          title="Números y operaciones"
-          aria-label="Números y operaciones"
+          title="Aproximaciones, ordenación, múltiplos y divisores"
+          aria-label="Aproximaciones, ordenación, múltiplos y divisores"
           tabIndex="0"
         >
           Bloque I - Números y Operaciones
@@ -26,8 +26,8 @@ const DropdownMenu = ({ handleSelect }) => {
         <button 
           className="dropdown-item" 
           onClick={() => handleSelect(2)}
-          title="La Medida"
-          aria-label="La Medida"
+          title="Ángulos, monedas, horarios y otras medidas"
+          aria-label="Ángulos, monedas, horarios y otras medidas"
           tabIndex="0"
         >
           Bloque II - La Medida
@@ -35,17 +35,17 @@ const DropdownMenu = ({ handleSelect }) => {
         <button 
           className="dropdown-item" 
           onClick={() => handleSelect(3)}
-          title="Formas Geométricas y orientación espacial"
-          aria-label="Formas Geométricas y orientación espacial"
+          title="Tipos de triángulos según sus ángulos, áreas y perímetros"
+          aria-label="Tipos de triángulos según sus ángulos, áreas y perímetros"
           tabIndex="0"
         >
-          Bloque III - formas geométricas y Orientación Espacial
+          Bloque III - Formas geométricas y Orientación Espacial
         </button>
         <button 
           className="dropdown-item" 
           onClick={() => handleSelect(4)}
-          title="Organización de la información"
-          aria-label="Organización de la información"
+          title="Medias, modas, medianas, máximos, mínimos y gráficas"
+          aria-label="Medias, modas, medianas, máximos, mínimos y gráficas"
           tabIndex="0"
         >
           Bloque IV - Organización de la información

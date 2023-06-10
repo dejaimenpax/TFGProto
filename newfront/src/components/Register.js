@@ -4,6 +4,7 @@ import Input from "react-validation/build/input";
 import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
+import { useNavigate, Link } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
 
@@ -40,6 +41,7 @@ const vpassword = (value) => {
 const Register = () => {
   const form = useRef();
   const checkBtn = useRef();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -102,6 +104,10 @@ const Register = () => {
           (response) => {
             setMessage(response.data.message);
             setSuccessful(true);
+            setTimeout(() => {
+              navigate("/login"); // Redirigir a "/login" después de 3 segundos
+              window.location.reload();
+            }, 3000);
           },
           (error) => {
             const resMessage =
@@ -147,6 +153,7 @@ const Register = () => {
   return (
     <div className="col-md-12">
       <div className="card card-container">
+      <h2 className= "text-center"><p>Registrarse</p></h2>
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
@@ -234,7 +241,7 @@ const Register = () => {
           {message && (
             <div className="form-group">
               <div
-                className={successful ? "alert alert-success" : "alert alert-danger"}
+                className={successful ? "text-center alert alert-success" : "text-center alert alert-danger"}
                 role="alert"
               >
                 {message}
@@ -243,6 +250,10 @@ const Register = () => {
           )}
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
+        {successful ?
+          <Link to="/login" className="btn btn-custom btn-lg">Iniciar Sesión</Link>
+          :
+          <></>}
       </div>
     </div>
   );

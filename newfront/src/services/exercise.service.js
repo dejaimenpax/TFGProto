@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://tfgjaimeback.fly.dev/api/exercise/";
+const API_URL = "/api/exercise/";
 
 const createExercise = (id_tema) => {
     return axios.post(API_URL + "create", { id_tema })

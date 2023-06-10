@@ -27,4 +27,8 @@ module.exports = function(app) {
 
   app.get("/api/auth/students", controller.getMyStudents)
 
+  app.post("/api/auth/erase-stats", controller.eraseStats);
+
+  app.delete("/api/auth/delete-account", controller.deleteAccount);
+
 };

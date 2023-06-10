@@ -6,23 +6,21 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const StatsPage = ({user}) => {
 
-  const calculateAverages = () => {
-    let sum = 0;
-    let count = 0;
-
-    for (let i = 0; i < user.averages.length; i++) {
-      if (user.submitted[i] > 0) {
-        sum += user.averages[i];
-        count++;
-      }
-    }
-
-    if (count > 0) {
-      return (sum / count).toFixed(2);
-    } else {
-      return 0;
-    }
-  };
+  const calculateTotalAverage = (us) => {
+    // Sumar todos los números en el vector "scores"
+    const scoresSum = us.scores.reduce((total, score) => total + score, 0);
+  
+    // Calcular la suma de todos los números en el vector "submitted"
+    const submittedSum = us.submitted.reduce((total, num) => total + num, 0);
+  
+    // Calcular el promedio total dividiendo la suma de scores entre la suma de submitted
+    const totalAverage = submittedSum !== 0 ?  
+      (scoresSum / submittedSum).toFixed(2)
+      :
+      0;
+  
+    return totalAverage;
+  }
 
   const data = user ? {
     exercises: {
@@ -58,7 +56,7 @@ const StatsPage = ({user}) => {
     total: {
       submitted: user.submitted[0] + user.submitted[1] + user.submitted[2] + user.submitted[3],
       scores: user.scores[0] + user.scores[1] + user.scores[2] + user.scores[3],
-      averages: calculateAverages(),
+      averages: calculateTotalAverage(user),
       correct: user.correct[0] + user.correct[1] + user.correct[2] + user.correct[3],
       incorrect: user.incorrect[0] + user.incorrect[1] + user.incorrect[2] + user.incorrect[3],
     },
