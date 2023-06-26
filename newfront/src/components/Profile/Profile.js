@@ -68,7 +68,7 @@ const Profile = ({logOut}) => {
   return (
     <div className="container">
       <section className="profile-section">
-        <h2>Datos del perfil</h2>
+        <h2 className="text-center">Datos del perfil</h2>
         <header className="jumbotron">
           {content === "Logged" ? (
             <>
@@ -82,7 +82,7 @@ const Profile = ({logOut}) => {
       </section>
 
       <section className="config-section">
-        <h2>Configuración</h2>
+        <h2 className="text-center">Configuración</h2>
         {content === "Logged" ? (
           <>
             <button

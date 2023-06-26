@@ -48,7 +48,7 @@ const DropdownMenu = ({ handleSelect }) => {
           aria-label="Medias, modas, medianas, máximos, mínimos y gráficas"
           tabIndex="0"
         >
-          Bloque IV - Organización de la información
+          Bloque IV - Organización de la Información
         </button>
       </div>
     </div>
