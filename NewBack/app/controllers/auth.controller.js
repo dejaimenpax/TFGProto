@@ -146,6 +146,26 @@ exports.getTeachers = (req, res) => {
     });
 };
 
+exports.getAllUsersExceptAdmins = (req, res) => {
+  User.find({})
+    .populate({
+      path: "roles",
+      match: { $in: ["teacher", "user"] },
+      select: "name"
+    })
+    .exec((err, users) => {
+      if (err) {
+        res.status(500).send({ message: err.message });
+        return;
+      }
+
+      const filteredUsers = users.filter(user => user.roles.length > 0);
+      const emails = filteredUsers.map(user => user.email);
+
+      res.status(200).send(emails);
+    });
+};
+
 exports.getMyStudents = (req, res) => {
   const token = req.headers["x-access-token"];
   const decodedToken = jwt.verify(token, config.secret);
