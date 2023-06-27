@@ -97,10 +97,10 @@ const eraseStats = () => {
 };
 
 
-const deleteAccount = () => {
+const deleteAccountById = () => {
   const user = getCurrentUser();
   if (user && user.accessToken) {
-    return axios.delete(API_URL + "delete-account", {
+    return axios.delete(API_URL + "delete-account-byid", {
       headers: { "x-access-token": user.accessToken },
     })
     .then(() => {
@@ -126,7 +126,7 @@ const AuthService = {
   getMyStudents,
   checkTokenExpiration,
   eraseStats,
-  deleteAccount,
+  deleteAccountById,
 };
 
 export default AuthService;

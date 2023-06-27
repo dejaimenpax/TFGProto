@@ -29,6 +29,8 @@ module.exports = function(app) {
 
   app.post("/api/auth/erase-stats", controller.eraseStats);
 
-  app.delete("/api/auth/delete-account", controller.deleteAccount);
+  app.delete("/api/auth/delete-account-byid", controller.deleteAccountById);
+
+  app.delete("/api/auth/delete-account-byemail", controller.deleteAccountByEmail);
 
 };

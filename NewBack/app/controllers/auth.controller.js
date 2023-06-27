@@ -220,7 +220,7 @@ exports.eraseStats = (req, res) => {
 };
 
 
-exports.deleteAccount = (req, res) => {
+exports.deleteAccountById = (req, res) => {
   const token = req.headers["x-access-token"];
   const decodedToken = jwt.verify(token, config.secret);
   const userId = decodedToken.id;
@@ -232,6 +232,22 @@ exports.deleteAccount = (req, res) => {
       }
 
       res.status(200).send({ message: "Account deleted successfully." });
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.deleteAccountByEmail = (req, res) => {
+  const { email } = req.body;
+
+  User.findOneAndDelete({ email })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({ message: "Usuario no encontrado." });
+      }
+
+      res.status(200).send({ message: "Usuario borrado con éxito." });
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });

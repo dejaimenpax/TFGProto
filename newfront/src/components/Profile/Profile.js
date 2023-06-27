@@ -53,10 +53,10 @@ const Profile = ({logOut}) => {
     }
   };
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccountById = () => {
     const confirmed = window.confirm("¿Estás seguro? Esta acción no se puede deshacer.");
     if (confirmed) {
-      AuthService.deleteAccount()
+      AuthService.deleteAccountById()
         .then(() => {
           logOut()
           navigate("/register")
@@ -98,7 +98,7 @@ const Profile = ({logOut}) => {
             )}
             <button
               className="btn btn-danger btn-block"
-              onClick={handleDeleteAccount}
+              onClick={handleDeleteAccountById}
             >
               Borrar Cuenta
             </button>
