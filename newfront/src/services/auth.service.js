@@ -1,4 +1,5 @@
 import axios from "axios";
+import authHeader from "./auth-header";
 
 const API_URL = "/api/auth/";
 
@@ -82,7 +83,7 @@ const eraseStats = () => {
   const user = getCurrentUser();
   if (user && user.accessToken) {
     return axios.post(API_URL + "erase-stats", null, {
-      headers: { "x-access-token": user.accessToken },
+      headers: authHeader(),
     })
     .then((response) => {
       if (response.data.accessToken) {
@@ -101,7 +102,7 @@ const deleteAccountById = () => {
   const user = getCurrentUser();
   if (user && user.accessToken) {
     return axios.delete(API_URL + "delete-account-byid", {
-      headers: { "x-access-token": user.accessToken },
+      headers: authHeader(),
     })
     .then(() => {
       logout(); // Cerrar sesión después de borrar la cuenta
@@ -115,6 +116,29 @@ const deleteAccountById = () => {
   }
 };
 
+const deleteAccountByEmail = (email) => {
+  const user = getCurrentUser();
+  if (user && user.accessToken) {
+    return axios
+      .delete(API_URL + "delete-account-byemail", {
+        headers: authHeader(),
+        data: { email },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        console.error("Error borrando la cuenta:", error);
+        throw error;
+      });
+  } else {
+    return Promise.reject(new Error("Usuario no encontrado o token expirado."));
+  }
+};
+
+const getAllUsersExceptAdmins = () => {
+  return axios.get(API_URL + "all-users", { headers: authHeader() });
+};
 
 const AuthService = {
   register,
@@ -127,6 +151,9 @@ const AuthService = {
   checkTokenExpiration,
   eraseStats,
   deleteAccountById,
+  getAllUsersExceptAdmins,
+  deleteAccountByEmail,
+
 };
 
 export default AuthService;

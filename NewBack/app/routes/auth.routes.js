@@ -1,4 +1,4 @@
-const { verifySignUp } = require("../middlewares");
+const { verifySignUp, authJwt } = require("../middlewares");
 const controller = require("../controllers/auth.controller");
 
 module.exports = function(app) {
@@ -27,10 +27,12 @@ module.exports = function(app) {
 
   app.get("/api/auth/students", controller.getMyStudents)
 
-  app.post("/api/auth/erase-stats", controller.eraseStats);
+  app.post("/api/auth/erase-stats", [authJwt.verifyToken], controller.eraseStats);
 
-  app.delete("/api/auth/delete-account-byid", controller.deleteAccountById);
+  app.delete("/api/auth/delete-account-byid", [authJwt.verifyToken], controller.deleteAccountById);
 
-  app.delete("/api/auth/delete-account-byemail", controller.deleteAccountByEmail);
+  app.delete("/api/auth/delete-account-byemail", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteAccountByEmail);
 
+  app.get("/api/auth/all-users", [authJwt.verifyToken, authJwt.isAdmin], controller.getAllUsersExceptAdmins);
+  
 };

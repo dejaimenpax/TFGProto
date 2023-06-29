@@ -8,7 +8,6 @@ var bcrypt = require("bcryptjs");
 
 
 exports.signup = (req, res) => {
-  console.log("Estoy en el auth.service y la req es", req.body)
   const user = new User({
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
@@ -150,7 +149,7 @@ exports.getAllUsersExceptAdmins = (req, res) => {
   User.find({})
     .populate({
       path: "roles",
-      match: { $in: ["teacher", "user"] },
+      match: { $or: [{ name: "teacher" }, { name: "user" }] },
       select: "name"
     })
     .exec((err, users) => {
@@ -160,9 +159,14 @@ exports.getAllUsersExceptAdmins = (req, res) => {
       }
 
       const filteredUsers = users.filter(user => user.roles.length > 0);
-      const emails = filteredUsers.map(user => user.email);
-
-      res.status(200).send(emails);
+      const userAndTeacherEmails = filteredUsers.map(user => ({
+        id: user._id,
+        email: user.email,
+        roles: user.roles
+      }));
+      
+      console.log("El backend los devuelve asi", userAndTeacherEmails)
+      res.status(200).send(userAndTeacherEmails);
     });
 };
 
@@ -241,15 +245,36 @@ exports.deleteAccountById = (req, res) => {
 exports.deleteAccountByEmail = (req, res) => {
   const { email } = req.body;
 
-  User.findOneAndDelete({ email })
+  User.findOne({ email }) // Buscar al usuario por su email
     .then((user) => {
       if (!user) {
         return res.status(404).send({ message: "Usuario no encontrado." });
       }
 
-      res.status(200).send({ message: "Usuario borrado con éxito." });
+      if (email===user.teacher) {
+        // Si el usuario es un profesor (tiene por email de profesor el suyo propio)
+        User.deleteMany({ teacher: user.email}) // Eliminar a todos que tengan por email de profesor ese
+          .then(() => {
+            res.status(200).send({ message: "Profesor y alumnos asociados borrados con éxito." });
+          })
+          .catch((err) => {
+            res.status(500).send({ message: err.message });
+          });
+
+      } else {
+        // Si el usuario no es un profesor, eliminar directamente
+        User.findOneAndDelete({ email })
+          .then(() => {
+            res.status(200).send({ message: "Usuario borrado con éxito." });
+          })
+          .catch((err) => {
+            res.status(500).send({ message: err.message });
+          });
+      }
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+

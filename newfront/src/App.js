@@ -10,11 +10,13 @@ import Home from "./components/Home";
 import Profile from "./components/Profile/Profile";
 import BoardUser from "./components/UserBoards/BoardUser";
 import BoardTeacher from "./components/UserBoards/BoardTeacher";
+import BoardAdmin from "./components/UserBoards/BoardAdmin";
 import Resolver from "./components/Exercises/Resolver";
 import EventBus from "./common/EventBus";
 
 const App = () => {
   const [showTeacherBoard, setShowTeacherBoard] = useState(false);
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
@@ -23,6 +25,7 @@ const App = () => {
     if (user) {
       setCurrentUser(user);
       setShowTeacherBoard(user.roles.includes("ROLE_TEACHER"));
+      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
 
     EventBus.on("logout", () => {
@@ -37,6 +40,7 @@ const App = () => {
   const logOut = () => {
     AuthService.logout();
     setShowTeacherBoard(false);
+    setShowAdminBoard(false);
     setCurrentUser(undefined);
   };
 
@@ -47,14 +51,21 @@ const App = () => {
           MatemAPI
         </Link>
         <div className="navbar-nav mr-auto">
-          {showTeacherBoard && (
+          {showAdminBoard && (
+            <li className="nav-item">
+              <Link to={"/admin"} className="nav-link">
+                Panel de administrador
+              </Link>
+            </li>
+          )}
+          {showTeacherBoard && !showAdminBoard && (
             <li className="nav-item">
               <Link to={"/teacher"} className="nav-link">
                 Panel de profesor
               </Link>
             </li>
           )}
-          {!showTeacherBoard && currentUser && (
+          {!showTeacherBoard && !showAdminBoard && currentUser && (
             <li className="nav-item">
               <Link to={"/user"} className="nav-link">
                 Panel de alumno
@@ -108,8 +119,13 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile logOut={logOut} />} />
-          <Route path="/user" element={<BoardUser />} />
-          <Route path="/teacher" element={<BoardTeacher />} />
+          {showAdminBoard && <Route path="/admin" element={<BoardAdmin />} />}
+          {showTeacherBoard && !showAdminBoard && (
+            <Route path="/teacher" element={<BoardTeacher />} />
+          )}
+          {!showTeacherBoard && !showAdminBoard && (
+            <Route path="/user" element={<BoardUser />} />
+          )}
           <Route path="/resolver" element={<Resolver />} />
         </Routes>
       </div>

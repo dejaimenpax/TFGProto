@@ -1,0 +1,36 @@
+.board-admin {
+    text-align: center;
+}
+.list-group-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.delete-button {
+    margin-left: 10px;
+}
+
+.user-role {
+    display: inline-block;
+    background-color: #e2e2e2;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #444;
+}
+  
+
+.user-email {
+    margin-right: 10px;
+}
