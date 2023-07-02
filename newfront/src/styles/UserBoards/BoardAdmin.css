@@ -34,3 +34,15 @@
 .user-email {
     margin-right: 10px;
 }
+
+.btn-custom {
+    background-color: #18a4bc;
+    border-color: #18a4bc;
+    color: white;
+  }
+
+.btn-custom:hover {
+    background-color: #11788a;
+    border-color: #18a4bc;
+    color: white;
+  }
