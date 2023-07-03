@@ -123,7 +123,7 @@ const StatsPage = ({user}) => {
   }
 
   return (
-    <div /*className="stats-page"*/>
+    <div className="stats-page">
       <div>
         <h2 className="text-center" >Estadísticas globales de {user.email}</h2>
         {user && <ExerciseStats data={data.total} />}

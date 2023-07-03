@@ -10,17 +10,16 @@ const BoardAdmin = () => {
   const [user, setUser] = useState(null);
   const [newUser, setNewUser] = useState({
     fullName: "",
-    domain:"",
-    email: "",
-    password: "",
+    username: "",
     teacher: "",
     role: "",
   });
 
   const [teachers, setTeachers] = useState([]);
-  const [showEmail, setShowEmail] = useState(false);
+  const [showUsername, setShowUsername] = useState(false);
   const [showTeacherSelector, setShowTeacherSelector] = useState(true)
-  const [emailErrorMessage, setEmailErrorMessage] = useState()
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState()
+  const [generalErrorMessage, setGeneralErrorMessage] = useState()
 
   useEffect(() => {
     AuthService.getCurrentUserFromDB()
@@ -50,10 +49,10 @@ const BoardAdmin = () => {
     AuthService.getAllUsersExceptAdmins()
       .then((response) => {
         setUsers(response.data);
-        console.log("El frontend ha recibido", response.data);
+
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -63,7 +62,7 @@ const BoardAdmin = () => {
         setTeachers(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -91,55 +90,31 @@ const BoardAdmin = () => {
 
   }
 
-  const handleShowEmail = () => {
-    if (newUser.fullName && newUser.domain && validateDomain(newUser.domain)) {
-      setShowEmail(true);
+  const handleShowUsername = () => {
+    if (newUser.fullName) {
+      setUsernameErrorMessage(null);
+      setNewUser({
+        ...newUser,
+        username: generateUsername(newUser.fullName)
+      });
+      setShowUsername(true);
     } else {
-      setEmailErrorMessage("Por favor, introduce el nombre y un dominio correcto antes de mostrar el email generado.");
+      setUsernameErrorMessage("Por favor, introduce nombre y apellidos para poder generar un nombre de usuario.");
+      setShowUsername(false)
     }
   };
-
-  const validateDomain = (domain) => {
-    const resultado = (domain.endsWith(".es") || domain.endsWith(".com"))
-    if (!resultado){
-      setEmailErrorMessage("El dominio debe acabar en .es o .com (como en gmail.es o en yahoo.com).")
-    }
-    else{
-      setEmailErrorMessage(null)
-    }
-    return resultado
-  };
-
-  const handleDomainChange = (e) => {
-    setNewUser({
-      ...newUser,
-      domain: e.target.value
-    });
-
-    validateDomain(e.target.value);
-  };
-
-  
 
   const generateUsername = (fullName) => {
     // Lógica para generar el nombre de usuario
     const names = fullName.split(" ");
     const firstName = names[0].toLowerCase();
     const lastName = names[names.length - 1].toLowerCase();
-    const username = firstName.substring(0, 3) + lastName.substring(0, 3) + (Math.floor(Math.random() * (90 - 10 + 1)) + 10).toString();
+    let username = firstName.substring(0, 3) + lastName.substring(0, 3) + (Math.floor(Math.random() * (90 - 10 + 1)) + 10).toString();
+    while (users.map(x => x.email).includes(username)) {
+      username = firstName.substring(0, 3) + lastName.substring(0, 3) + (Math.floor(Math.random() * (90 - 10 + 1)) + 10).toString();
+    }
     return username;
   };
-
-  const generateEmail = (username, domain) => {
-    if (domain.endsWith(".es") || domain.endsWith(".com")) {
-      return (username + '@' + domain);
-    } else {
-      // Mostrar un mensaje de error o manejarlo según tus necesidades
-      console.error("Dominio inválido");
-      return "";
-    }
-  };
-
 
   const generatePassword = () => {
     // Lógica para generar una contraseña aleatoria
@@ -152,11 +127,15 @@ const BoardAdmin = () => {
   };
   
   const createUser = () => {
-    const username = generateUsername(newUser.fullName);
-    const email = generateEmail(username, newUser.domain);
+    if (!newUser.username || !newUser.role || !newUser.teacher){
+      setGeneralErrorMessage("Recuerda generar un nombre de usuario y elegir rol correctamente.")
+      return;
+    } else {
+      setGeneralErrorMessage(null)
+    }
     const password = generatePassword();
   
-    AuthService.register(email, password, newUser.teacher, newUser.role)
+    AuthService.register(newUser.username, password, newUser.teacher, newUser.role)
       .then((response) => {
         // Mostrar la contraseña generada
         alert("Contraseña generada: " + password + ". Por favor, cópiela para mandársela al usuario.");
@@ -165,18 +144,21 @@ const BoardAdmin = () => {
         // Restablecer los campos del nuevo usuario
         setNewUser({
           fullName: "",
-          email: "",
-          password: "",
-          role: ""
+          username: "",
+          teacher: "",
+          role: "",
         });
+        setShowTeacherSelector(true);
+        setShowUsername(false)
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
+
   };
 
   const filterUsers = () => {
-    console.log("El frontal recibe así a los usuarios", users);
+    //console.log("El frontal recibe así a los usuarios", users);
     return users.filter((results) =>
       results.email.includes(searchTerm.toLowerCase())
     );
@@ -218,13 +200,13 @@ const BoardAdmin = () => {
             onChange={handleSearchTermChange}
           />
           <ul className="list-group">
-            {filterUsers().map((user) => (
-              <li key={user.id} className="list-group-item">
+            {filterUsers().map((us) => (
+              <li key={us.id} className="list-group-item">
                 <div className="user-details">
-                  <div className="user-email">{user.email}</div>
+                  <div className="user-email">{us.email}</div>
                   <div className="user-role">
                     {
-                      user.roles[0].name==="teacher" ?
+                      us.roles[0].name==="teacher" ?
                       "Profesor"
                       :
                       "Alumno"
@@ -235,7 +217,7 @@ const BoardAdmin = () => {
                   <button
                     type="button"
                     className="btn btn-danger"
-                    onClick={() => deleteUser(user)}
+                    onClick={() => deleteUser(us)}
                   >
                     Eliminar
                   </button>
@@ -244,7 +226,7 @@ const BoardAdmin = () => {
             ))}
           </ul>
           <div className="generate-credentials">
-            <h4>Generar credenciales</h4>
+            <h4>Crear nuevo usuario</h4>
             <div className="form-group">
               <label>Nombre y apellidos:</label>
               <input
@@ -255,37 +237,25 @@ const BoardAdmin = () => {
                 onChange={handleNewUserChange}
               />
             </div>
-            <div className="form-group">
-              <label>Dominio:</label>
-              <input
-                type="text"
-                className="form-control"
-                name="domain"
-                value={newUser.domain}
-                onChange={handleDomainChange}
-              />
-            </div>
-            <p className={emailErrorMessage ? "error-message" : "hide"}>
-              {emailErrorMessage}
+            <p className={usernameErrorMessage ? "alert alert-danger" : "hide"}>
+              {usernameErrorMessage}
             </p>
             <button
               type="button"
               className="btn btn-custom"
-              onClick={handleShowEmail}
+              onClick={handleShowUsername}
             >
-              Mostrar email generado
+              Generar nombre
             </button>
-            {showEmail && (
-              <div className="form-group">
-                <label>Email generado:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={generateEmail(generateUsername(newUser.fullName), newUser.domain)}
-                  readOnly
-                />
-              </div>
-            )}
+            {showUsername && (<div className={showUsername ? "form form-group" : "hide"}>
+              <label>Nombre de usuario generado:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={newUser.username}
+                readOnly
+              />
+            </div>)}
             <div className="form-group">
               <label>Rol:</label>
               <select
@@ -294,6 +264,9 @@ const BoardAdmin = () => {
                 value={newUser.role}
                 onChange={handleRoleChange}
               >
+                <option value="" disabled selected>
+                  Selecciona una opción...
+                </option>
                 <option value="user">Alumno</option>
                 <option value="teacher">Profesor</option>
               </select>
@@ -307,6 +280,9 @@ const BoardAdmin = () => {
                 value={newUser.teacher}
                 onChange={handleNewUserChange}
               >
+                  <option value="" disabled selected>
+                    Selecciona una opción...
+                  </option>
                 {teachers.map((teacher, index) => (
                   <option key={index} value={teacher}>
                     {teacher}
@@ -315,6 +291,9 @@ const BoardAdmin = () => {
               </select>
             </div>
             )}
+            <p className={generalErrorMessage ? "alert alert-danger" : "hide"}>
+              {generalErrorMessage}
+            </p>
             <button
               type="button"
               className="btn btn-custom"

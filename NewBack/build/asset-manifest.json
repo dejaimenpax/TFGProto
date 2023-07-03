@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.93b8da2c.css",
-    "main.js": "/static/js/main.95f1d151.js",
+    "main.css": "/static/css/main.5489ca41.css",
+    "main.js": "/static/js/main.b18b8512.js",
     "static/media/matemapi_logo.png": "/static/media/matemapi_logo.b845a20db7de36bd0af5.png",
     "index.html": "/index.html",
-    "main.93b8da2c.css.map": "/static/css/main.93b8da2c.css.map",
-    "main.95f1d151.js.map": "/static/js/main.95f1d151.js.map"
+    "main.5489ca41.css.map": "/static/css/main.5489ca41.css.map",
+    "main.b18b8512.js.map": "/static/js/main.b18b8512.js.map"
   },
   "entrypoints": [
-    "static/css/main.93b8da2c.css",
-    "static/js/main.95f1d151.js"
+    "static/css/main.5489ca41.css",
+    "static/js/main.b18b8512.js"
   ]
 }
