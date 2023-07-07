@@ -110,7 +110,7 @@ const BoardAdmin = () => {
     const firstName = names[0].toLowerCase();
     const lastName = names[names.length - 1].toLowerCase();
     let username = firstName.substring(0, 3) + lastName.substring(0, 3) + (Math.floor(Math.random() * (90 - 10 + 1)) + 10).toString();
-    while (users.map(x => x.email).includes(username)) {
+    while (users.map(x => x.username).includes(username)) {
       username = firstName.substring(0, 3) + lastName.substring(0, 3) + (Math.floor(Math.random() * (90 - 10 + 1)) + 10).toString();
     }
     return username;
@@ -127,7 +127,7 @@ const BoardAdmin = () => {
   };
   
   const createUser = () => {
-    if (!newUser.username || !newUser.role || !newUser.teacher){
+    if (!newUser.username || !newUser.role || (showTeacherSelector && !newUser.teacher)){
       setGeneralErrorMessage("Recuerda generar un nombre de usuario y elegir rol correctamente.")
       return;
     } else {
@@ -141,6 +141,8 @@ const BoardAdmin = () => {
         alert("Contraseña generada: " + password + ". Por favor, cópiela para mandársela al usuario.");
         // Actualizar la lista de usuarios después de crear uno
         getAllUsersExceptAdmins();
+        //Asi como la de profes
+        fetchTeachers();
         // Restablecer los campos del nuevo usuario
         setNewUser({
           fullName: "",
@@ -158,10 +160,7 @@ const BoardAdmin = () => {
   };
 
   const filterUsers = () => {
-    //console.log("El frontal recibe así a los usuarios", users);
-    return users.filter((results) =>
-      results.email.includes(searchTerm.toLowerCase())
-    );
+    return users.filter((results) => results.username.includes(searchTerm.toLowerCase())) 
   };
 
   const deleteUser = (user) => {
@@ -176,7 +175,7 @@ const BoardAdmin = () => {
     const confirmDelete = window.confirm(confirmMessage);
 
     if (confirmDelete) {
-      AuthService.deleteAccountByEmail(user.email)
+      AuthService.deleteAccountByUsername(user.username)
         .then(() => {
           // Actualizar la lista de usuarios después de borrar uno
           getAllUsersExceptAdmins();
@@ -203,7 +202,7 @@ const BoardAdmin = () => {
             {filterUsers().map((us) => (
               <li key={us.id} className="list-group-item">
                 <div className="user-details">
-                  <div className="user-email">{us.email}</div>
+                  <div className="user-username">{us.username}</div>
                   <div className="user-role">
                     {
                       us.roles[0].name==="teacher" ?

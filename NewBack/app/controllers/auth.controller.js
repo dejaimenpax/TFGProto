@@ -9,7 +9,7 @@ var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
   const user = new User({
-    email: req.body.email,
+    username: req.body.username,
     password: bcrypt.hashSync(req.body.password, 8),
 
     submitted: [0,0,0,0],
@@ -52,7 +52,7 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
   User.findOne({
-    email: req.body.email
+    username: req.body.username
   })
     .populate("roles", "-__v")
     .exec((err, user) => {
@@ -94,7 +94,7 @@ exports.signin = (req, res) => {
       }
       res.status(200).send({
         id: user._id,
-        email: user.email,
+        username: user.username,
         submitted: user.submitted,
         correct: user.correct, 
         incorrect: user.incorrect, 
@@ -137,11 +137,11 @@ exports.getTeachers = (req, res) => {
         return;
       }
 
-      const teacherEmails = users
+      const teacherusernames = users
         .filter(user => user.roles.length > 0)
-        .map(user => user.email);
+        .map(user => user.username);
 
-      res.status(200).send(teacherEmails);
+      res.status(200).send(teacherusernames);
     });
 };
 
@@ -159,14 +159,14 @@ exports.getAllUsersExceptAdmins = (req, res) => {
       }
 
       const filteredUsers = users.filter(user => user.roles.length > 0);
-      const userAndTeacherEmails = filteredUsers.map(user => ({
+      const userAndTeacherusernames = filteredUsers.map(user => ({
         id: user._id,
-        email: user.email,
+        username: user.username,
         roles: user.roles
       }));
       
-      console.log("El backend los devuelve asi", userAndTeacherEmails)
-      res.status(200).send(userAndTeacherEmails);
+      console.log("El backend los devuelve asi", userAndTeacherusernames)
+      res.status(200).send(userAndTeacherusernames);
     });
 };
 
@@ -181,7 +181,7 @@ exports.getMyStudents = (req, res) => {
         return res.status(404).send({ message: "User not found." });
       }
 
-      User.find({ teacher: user.email, email: { $ne: user.email } })
+      User.find({ teacher: user.username, username: { $ne: user.username } })
         .then(students => {
           res.status(200).send(students);
         })
@@ -242,18 +242,18 @@ exports.deleteAccountById = (req, res) => {
     });
 };
 
-exports.deleteAccountByEmail = (req, res) => {
-  const { email } = req.body;
+exports.deleteAccountByUsername = (req, res) => {
+  const { username } = req.body;
 
-  User.findOne({ email }) // Buscar al usuario por su email
+  User.findOne({ username }) // Buscar al usuario por su username
     .then((user) => {
       if (!user) {
         return res.status(404).send({ message: "Usuario no encontrado." });
       }
 
-      if (email===user.teacher) {
-        // Si el usuario es un profesor (tiene por email de profesor el suyo propio)
-        User.deleteMany({ teacher: user.email}) // Eliminar a todos que tengan por email de profesor ese
+      if (username===user.teacher) {
+        // Si el usuario es un profesor (tiene por username de profesor el suyo propio)
+        User.deleteMany({ teacher: user.username}) // Eliminar a todos que tengan por username de profesor ese
           .then(() => {
             res.status(200).send({ message: "Profesor y alumnos asociados borrados con éxito." });
           })
@@ -263,7 +263,7 @@ exports.deleteAccountByEmail = (req, res) => {
 
       } else {
         // Si el usuario no es un profesor, eliminar directamente
-        User.findOneAndDelete({ email })
+        User.findOneAndDelete({ username })
           .then(() => {
             res.status(200).send({ message: "Usuario borrado con éxito." });
           })

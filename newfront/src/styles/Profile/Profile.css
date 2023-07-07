@@ -1,26 +1,39 @@
 
-  .profile-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    justify-content: center;
-  }
-  
-  .profile-label {
-    font-weight: bold;
-    width: 80px;
-  }
-  
-  .role-tag {
-    display: inline-block;
-    background-color: #e2e2e2;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin-right: 10px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #444;
-  }
+.profile-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
+.profile-row {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Cambio: centrar horizontalmente */
+  margin-bottom: 10px;
+}
 
-  
+.profile-label {
+  white-space: nowrap;
+  font-weight: bold;
+  width: 120px;
+  text-align: center; /* Cambio: centrar texto */
+}
+
+.role-tag {
+  display: inline-block;
+  background-color: #e2e2e2;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #444;
+}
+
+.profile-section {
+  margin-bottom: 30px;
+}
+
+.config-section {
+  margin-bottom: 30px;
+}

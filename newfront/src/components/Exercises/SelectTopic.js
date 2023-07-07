@@ -33,7 +33,7 @@ const SelectTopic = () => {
   const handleInput = (input) => {
     if (input.every((value) => value !== "")) {
       const currentUser = AuthService.getCurrentUser();
-      ExerciseService.resolveExercise(exercise, input, currentUser.email)
+      ExerciseService.resolveExercise(exercise, input, currentUser.username)
         .then((response) => {
           setExercise(response.data);
           setExerciseResolved(true);

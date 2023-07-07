@@ -13,7 +13,7 @@ module.exports = function(app) {
   app.post(
     "/api/auth/signup",
     [
-      verifySignUp.checkDuplicateEmail,
+      verifySignUp.checkDuplicateUsername,
       verifySignUp.checkRolesExisted
     ],
     controller.signup
@@ -31,7 +31,7 @@ module.exports = function(app) {
 
   app.delete("/api/auth/delete-account-byid", [authJwt.verifyToken], controller.deleteAccountById);
 
-  app.delete("/api/auth/delete-account-byemail", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteAccountByEmail);
+  app.delete("/api/auth/delete-account-byUsername", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteAccountByUsername);
 
   app.get("/api/auth/all-users", [authJwt.verifyToken, authJwt.isAdmin], controller.getAllUsersExceptAdmins);
   

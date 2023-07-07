@@ -111,7 +111,7 @@ exports.create = (req, res) => {
 
 
 exports.resolve = (req, res) => {
-    const { exercise, input, email } = req.body;
+    const { exercise, input, username } = req.body;
 
     console.log(`El ejercicio es ${JSON.stringify(exercise)}`)
     console.log(`El ejercicio es del tema ${exercise.id_tema}`)
@@ -221,8 +221,8 @@ exports.resolve = (req, res) => {
     exAux.resolver(input);
 
     // Actualizar las estadísticas del usuario
-    console.log(email);
-    User.findOne({email}, (err, user) => {
+    console.log(username);
+    User.findOne({username}, (err, user) => {
       if (err) {
         res.status(500).send({ message: err });
         return;

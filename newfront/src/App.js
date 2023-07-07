@@ -85,7 +85,7 @@ const App = () => {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Área de {currentUser.email}
+                  Área de {currentUser.username}
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <Link to={"/profile"} className="dropdown-item">

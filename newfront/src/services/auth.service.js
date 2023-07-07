@@ -5,12 +5,12 @@ const API_URL = "/api/auth/";
 
 const checkTokenExpiration = () => {
   const loginTime = localStorage.getItem("loginTime");
-  const currentTime = Date.now();
+  const currentTime = parseInt(Date.now());
   const elapsedMilliseconds = currentTime - parseInt(loginTime);
 
-  const elapsedHours = elapsedMilliseconds / (1000 * 60 * 60);
+  const milisegundosEn24Horas = 24 * 60 * 60 * 1000;
 
-  if (elapsedHours >= 24) {
+  if (elapsedMilliseconds >= milisegundosEn24Horas) {
     // Ha pasado más de 24 horas, eliminar el usuario del local storage
     localStorage.removeItem("user");
     localStorage.removeItem("loginTime");
@@ -19,19 +19,19 @@ const checkTokenExpiration = () => {
 
 
 
-const register = (email, password, teacher, role) => {
+const register = (username, password, teacher, role) => {
   return axios.post(API_URL + "signup", {
-    email,
+    username,
     password,
     teacher,
     role,
   });
 };
 
-const login = (email, password) => {
+const login = (username, password) => {
   return axios
     .post(API_URL + "signin", {
-      email,
+      username,
       password,
     })
     .then((response) => {
@@ -116,13 +116,13 @@ const deleteAccountById = () => {
   }
 };
 
-const deleteAccountByEmail = (email) => {
+const deleteAccountByUsername = (username) => {
   const user = getCurrentUser();
   if (user && user.accessToken) {
     return axios
-      .delete(API_URL + "delete-account-byemail", {
+      .delete(API_URL + "delete-account-byUsername", {
         headers: authHeader(),
-        data: { email },
+        data: { username },
       })
       .then((response) => {
         return response.data;
@@ -152,7 +152,7 @@ const AuthService = {
   eraseStats,
   deleteAccountById,
   getAllUsersExceptAdmins,
-  deleteAccountByEmail,
+  deleteAccountByUsername,
 
 };
 

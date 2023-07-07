@@ -28,7 +28,7 @@ const SearchStudents = () => {
 
   const filterStudents = () => {
     return students.filter((student) =>
-      student.email.includes(searchTerm.toLowerCase())
+      student.username.includes(searchTerm.toLowerCase())
     );
   };
 
@@ -56,7 +56,7 @@ const SearchStudents = () => {
               className="btn btn-link"
               onClick={(e) => handleStudentSelect(e, student)}
             >
-              {student.email}
+              {student.username}
             </button>
           </li>
         ))}

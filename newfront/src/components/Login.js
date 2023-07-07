@@ -22,14 +22,14 @@ const Login = () => {
   const form = useRef();
   const checkBtn = useRef();
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const onChangeEmail = (e) => {
-    const email = e.target.value;
-    setEmail(email);
+  const onChangeUsername = (e) => {
+    const username = e.target.value;
+    setUsername(username);
   };
 
   const onChangePassword = (e) => {
@@ -46,7 +46,7 @@ const Login = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(email, password).then(
+      AuthService.login(username, password).then(
         () => {
           //navigate("/profile") si directamente quieres ir al perfil
           navigate("/resolver");
@@ -81,13 +81,13 @@ const Login = () => {
 
         <Form onSubmit={handleLogin} ref={form}>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="username">Nombre de usuario</label>
             <Input
               type="text"
               className="form-control"
-              name="email"
-              value={email}
-              onChange={onChangeEmail}
+              name="username"
+              value={username}
+              onChange={onChangeUsername}
               validations={[required]}
             />
           </div>

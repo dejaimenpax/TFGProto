@@ -3,7 +3,6 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
 import { useNavigate, Link } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
@@ -18,11 +17,11 @@ const required = (value) => {
   }
 };
 
-const validEmail = (value) => {
-  if (!isEmail(value)) {
+const validUsername = (value) => {
+  if (value.length < 6 || value.length > 10) {
     return (
       <div className="alert alert-danger" role="alert">
-        El email introducido no es válido.
+        El nombre de usuario debe tener entre 6 y 10 caracteres.
       </div>
     );
   }
@@ -43,7 +42,7 @@ const Register = () => {
   const checkBtn = useRef();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
@@ -68,9 +67,9 @@ const Register = () => {
     fetchTeachers();
   }, []);
 
-  const onChangeEmail = (e) => {
-    const email = e.target.value;
-    setEmail(email);
+  const onChangeUsername = (e) => {
+    const username = e.target.value;
+    setUsername(username);
   };
 
   const onChangePassword = (e) => {
@@ -100,7 +99,7 @@ const Register = () => {
 
     if (checkBtn.current.context._errors.length === 0) {
       if (userType === "profesor") {
-        AuthService.register(email, password, email, "teacher").then(
+        AuthService.register(username, password, username, "teacher").then(
           (response) => {
             setMessage(response.data.message);
             setSuccessful(true);
@@ -122,7 +121,7 @@ const Register = () => {
           }
         );
       } else if (userType === "alumno" && selectedTeacher) {
-        AuthService.register(email, password, selectedTeacher, "user").then(
+        AuthService.register(username, password, selectedTeacher, "user").then(
           (response) => {
             setMessage(response.data.message);
             setSuccessful(true);
@@ -164,14 +163,14 @@ const Register = () => {
           {!successful && (
             <div>
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="username">Nombre de usuario</label>
                 <Input
                   type="text"
                   className="form-control"
-                  name="email"
-                  value={email}
-                  onChange={onChangeEmail}
-                  validations={[required, validEmail]}
+                  name="username"
+                  value={username}
+                  onChange={onChangeUsername}
+                  validations={[required, validUsername]}
                 />
               </div>
 
