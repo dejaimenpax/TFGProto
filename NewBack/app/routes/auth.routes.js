@@ -30,9 +30,5 @@ module.exports = function(app) {
   app.post("/api/auth/erase-stats", [authJwt.verifyToken], controller.eraseStats);
 
   app.delete("/api/auth/delete-account-byid", [authJwt.verifyToken], controller.deleteAccountById);
-
-  app.delete("/api/auth/delete-account-byUsername", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteAccountByUsername);
-
-  app.get("/api/auth/all-users", [authJwt.verifyToken, authJwt.isAdmin], controller.getAllUsersExceptAdmins);
   
 };

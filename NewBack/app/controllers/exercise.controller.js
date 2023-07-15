@@ -21,13 +21,14 @@ const B4Ej8 = require("../Clases_back/Bloque4/B4Ej8");
 const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
+const Exercise = db.exercise;
 
 exports.create = (req, res) => {
-  const { id_tema } = req.body;
+  const { id_bloque } = req.body;
   let exercise;
   const randomNumber = Math.floor(Math.random() * 4);
 
-  switch (id_tema) {
+  switch (id_bloque) {
     case 1:
       switch (randomNumber) {
         case 0:
@@ -107,6 +108,7 @@ exports.create = (req, res) => {
   }
   res.json(exercise);
 };
+
 
 
 
@@ -251,7 +253,7 @@ exports.resolve = (req, res) => {
           return;
         }
         // Envía la respuesta con el ejercicio resuelto
-        res.json(exAux);
+        res.status(200).json(exAux);
       });
     });
   };
