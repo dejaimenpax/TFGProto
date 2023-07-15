@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AuthService from "../../services/auth.service";
 import StatsPage from "./StatsPage";
-import '../../styles/UserBoards/SearchStudents.css'
+import "../../styles/UserBoards/SearchStudents.css";
 
 const SearchStudents = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [students, setStudents] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const statsPageRef = useRef(null); // Referencia al elemento StatsPage
 
   useEffect(() => {
     fetchStudents();
@@ -38,6 +39,13 @@ const SearchStudents = () => {
     console.log(selectedStudent);
   };
 
+  useEffect(() => {
+    // Hacer scroll hacia el elemento StatsPage cuando se actualiza el selectedStudent
+    if (statsPageRef.current) {
+      statsPageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [selectedStudent]);
+
   return (
     <div className="search-students">
       <h3 className="text-center mt-4">Estadísticas de alumnos</h3>
@@ -61,7 +69,7 @@ const SearchStudents = () => {
           </li>
         ))}
       </ul>
-      {selectedStudent && <StatsPage user={selectedStudent} />}
+      {selectedStudent && <div ref={statsPageRef}><StatsPage user={selectedStudent} /></div>}
     </div>
   );
 };
