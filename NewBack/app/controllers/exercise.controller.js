@@ -36,7 +36,7 @@ exports.create = (req, res) => {
 
     desactivados = exercises
       .filter(ex => ex.flag_active)
-      .map(ex => ex.id_tema.toString().substring(1, 3));
+      .map(ex => ex.id_tema.toString().substring(2, 4));
 
     if (desactivados.length === 0) {
       res.status(200).send("Se han desactivado todos los ejercicios del bloque seleccionado");
@@ -286,9 +286,3 @@ exports.resolve = (req, res) => {
       });
     });
   };
-
-
-  
-
-
-
