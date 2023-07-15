@@ -18,7 +18,6 @@ const B4Ej4 = require("../Clases_back/Bloque4/B4Ej4");
 const B4Ej5_6 = require("../Clases_back/Bloque4/B4Ej5_6");
 const B4Ej8 = require("../Clases_back/Bloque4/B4Ej8");
 
-const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
 const Exercise = db.exercise;
@@ -26,88 +25,118 @@ const Exercise = db.exercise;
 exports.create = (req, res) => {
   const { id_bloque } = req.body;
   let exercise;
-  const randomNumber = Math.floor(Math.random() * 4);
+  let desactivados = [];
+  let randomEx;
 
-  switch (id_bloque) {
-    case 1:
-      switch (randomNumber) {
-        case 0:
-          exercise = new B1Ej3_4();
-          break;
-        case 1:
-          exercise = new B1Ej6();
-          break;
-        case 2:
-          exercise = new B1Ej7();
-          break;
-        case 3:
-          exercise = new B1Ej8();
-          break;
-        default:
-          // handle invalid randomNumber
-      }
-      break;
-    case 2:
-      switch (randomNumber) {
-        case 0:
-          exercise = new B2Ej2();
-          break;
-        case 1:
-          exercise = new B2Ej5();
-          break;
-        case 2:
-          exercise = new B2Ej6();
-          break;
-        case 3:
-          exercise = new B2Ej7();
-          break;
-        default:
-          // handle invalid randomNumber
-      }
-      break;
-    case 3:
-      switch (randomNumber) {
-        case 0:
-          exercise = new B3Ej2();
-          break;
-        case 1:
-          exercise = new B3Ej5();
-          break;
-        case 2:
-          exercise = new B3Ej9();
-          break;
-        case 3:
-          exercise = new B3Ej15();
-          break;
-        default:
-          // handle invalid randomNumber
-      }
-      break;
+  Exercise.find({}).exec((err, exercises) => {
+    if (err) {
+      res.status(500).send({ message: err.message });
+      return;
+    }
 
-      break;
-    case 4:
-      switch (randomNumber) {
-        case 0:
-          exercise = new B4Ej1();
-          break;
+    desactivados = exercises
+      .filter(ex => ex.flag_active)
+      .map(ex => ex.id_tema.toString().substring(1, 3));
+
+    if (desactivados.length === 0) {
+      res.status(200).send("Se han desactivado todos los ejercicios del bloque seleccionado");
+      return;
+    } else {
+      // Coje un id de tema aleatorio de entre los que tienen el flag activo
+      randomEx = desactivados[Math.floor(Math.random() * desactivados.length)];
+
+      switch (id_bloque) {
         case 1:
-          exercise = new B4Ej5_6();
+          switch (randomEx) {
+            case "03":
+              exercise = new B1Ej3_4();
+              break;
+            case "06":
+              exercise = new B1Ej6();
+              break;
+            case "07":
+              exercise = new B1Ej7();
+              break;
+            case "08":
+              exercise = new B1Ej8();
+              break;
+            default:
+              // Manejar randomEx no válido
+              res.status(400).send("Ejercicio no encontrado");
+              return;
+          }
           break;
         case 2:
-          exercise = new B4Ej4();
+          switch (randomEx) {
+            case "02":
+              exercise = new B2Ej2();
+              break;
+            case "05":
+              exercise = new B2Ej5();
+              break;
+            case "06":
+              exercise = new B2Ej6();
+              break;
+            case "07":
+              exercise = new B2Ej7();
+              break;
+            default:
+              // Manejar randomEx no válido
+              res.status(400).send("Ejercicio no encontrado");
+              return;
+          }
           break;
         case 3:
-          exercise = new B4Ej8();
+          switch (randomEx) {
+            case "02":
+              exercise = new B3Ej2();
+              break;
+            case "05":
+              exercise = new B3Ej5();
+              break;
+            case "09":
+              exercise = new B3Ej9();
+              break;
+            case "15":
+              exercise = new B3Ej15();
+              break;
+            default:
+              // Manejar randomEx no válido
+              res.status(400).send("Ejercicio no encontrado");
+              return;
+          }
+          break;
+        case 4:
+          switch (randomEx) {
+            case "01":
+              exercise = new B4Ej1();
+              break;
+            case "06":
+              exercise = new B4Ej5_6();
+              break;
+            case "04":
+              exercise = new B4Ej4();
+              break;
+            case "08":
+              exercise = new B4Ej8();
+              break;
+            default:
+              // Manejar randomEx no válido
+              res.status(400).send("Ejercicio no encontrado");
+              return;
+          }
           break;
         default:
-          // handle invalid randomNumber
+          // Manejar id_bloque no válido
+          res.status(400).send("Bloque no encontrado");
+          return;
       }
-      break;
-    default:
-      // handle invalid id_tema
-  }
-  res.json(exercise);
+
+      res.json(exercise);
+    }
+  });
 };
+
 
 
 
