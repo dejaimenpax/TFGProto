@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AuthService from "../../services/auth.service";
+import AdminService from "../../services/admin.service";
 import "../../styles/UserBoards/BoardAdmin.css";
 import EventBus from "../../common/EventBus";
 
@@ -46,7 +47,7 @@ const BoardAdmin = () => {
   }, []);
 
   const getAllUsersExceptAdmins = () => {
-    AuthService.getAllUsersExceptAdmins()
+    AdminService.getAllUsersExceptAdmins()
       .then((response) => {
         setUsers(response.data);
 
@@ -175,7 +176,7 @@ const BoardAdmin = () => {
     const confirmDelete = window.confirm(confirmMessage);
 
     if (confirmDelete) {
-      AuthService.deleteAccountByUsername(user.username)
+      AdminService.deleteAccountByUsername(user.username)
         .then(() => {
           // Actualizar la lista de usuarios después de borrar uno
           getAllUsersExceptAdmins();

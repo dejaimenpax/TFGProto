@@ -1,9 +1,11 @@
 import axios from "axios";
 
+
 const API_URL = "/api/exercise/";
 
-const createExercise = (id_tema) => {
-    return axios.post(API_URL + "create", { id_tema })
+const createExercise = (id_bloque) => {
+    console.log("Entra al createExercis")
+    return axios.post(API_URL + "create", { id_bloque })
 }
 
 const resolveExercise = (exercise, input, username) => {

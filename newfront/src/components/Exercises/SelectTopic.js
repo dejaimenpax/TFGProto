@@ -4,7 +4,7 @@ import ExerciseService from "../../services/exercise.service";
 import EventBus from "../../common/EventBus";
 import ExerciseCard from "./ExerciseCard";
 import InputBox from "./InputBox"
-import DropdownMenu from "./DropdownMenu"
+import BlockButtons from "./BlockButtons"
 import AuthService from "../../services/auth.service";
 
 import '../../styles/Exercises/SelectTopic.css';
@@ -17,10 +17,11 @@ const SelectTopic = () => {
   const [exerciseResolved, setExerciseResolved] = useState(false);
   const [inputFilled, setInputFilled] = useState(false);
 
-  const handleSelect = (id_tema) => {
-    console.log("Entró en handleSelect")
-    ExerciseService.createExercise(id_tema)
+  const handleSelect = (id_bloque) => {
+    console.log("Entró en handleSelect con el id_bloque", id_bloque)
+    ExerciseService.createExercise(id_bloque)
       .then((response) => {
+        console.log("Lo que recibe como ejercicio es", exercise)
         setExercise(response.data);
         setExerciseSelected(true);
         setExerciseInput(Array.from({ length: response.data.long_input }, () => ""));
@@ -75,7 +76,7 @@ const SelectTopic = () => {
 
   return (
     <>
-      <DropdownMenu handleSelect={handleSelect} />
+      <BlockButtons handleSelect={handleSelect} />
       <p></p>
       {exerciseSelected && (
         <>

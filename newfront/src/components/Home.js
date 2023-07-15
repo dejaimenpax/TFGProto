@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from "../matemapi_logo.png";
+import logo from "../assets/matemapi_logo.png";
 import "../styles/Home.css";
 
 import UserService from "../services/user.service";
