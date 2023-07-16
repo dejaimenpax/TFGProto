@@ -35,11 +35,12 @@ exports.create = (req, res) => {
     }
 
     desactivados = exercises
+      .filter(ex => ex.id_tema.toString()[0]===id_bloque.toString()[0])
       .filter(ex => ex.flag_active)
       .map(ex => ex.id_tema.toString().substring(2, 4));
 
     if (desactivados.length === 0) {
-      res.status(200).send("Se han desactivado todos los ejercicios del bloque seleccionado");
+      res.json({ mensaje: `Los ejercicios del bloque ${id_bloque} están descativados. Seleccione otro bloque.`});
       return;
     } else {
       // Coje un id de tema aleatorio de entre los que tienen el flag activo
@@ -111,7 +112,7 @@ exports.create = (req, res) => {
             case "01":
               exercise = new B4Ej1();
               break;
-            case "06":
+            case "05":
               exercise = new B4Ej5_6();
               break;
             case "04":
@@ -136,8 +137,6 @@ exports.create = (req, res) => {
     }
   });
 };
-
-
 
 
 
