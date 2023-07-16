@@ -38,7 +38,7 @@ db.mongoose
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/exercise.routes")(app);
-require("./app/routes/admin.routes")(app);
+require("./app/routes/gestion.routes")(app);
 
 // Configurar ruta para devolver la página principal en todas las rutas no reconocidas
 app.use(express.static(path.join(__dirname, "./build")));

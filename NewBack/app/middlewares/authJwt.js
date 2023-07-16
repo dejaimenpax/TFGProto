@@ -82,10 +82,40 @@ isAdmin = (req, res, next) => {
   });
 };
 
+isAdminOrTeacher = (req, res, next) => {
+  User.findById(req.userId).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    Role.find(
+      {
+        _id: { $in: user.roles }
+      },
+      (err, roles) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+
+        // Check if the user has the role of "admin" or "teacher"
+        const isAdminOrTeacher = roles.some(role => ["admin", "teacher"].includes(role.name));
+
+        if (isAdminOrTeacher) {
+          next();
+        } else {
+          res.status(403).send({ message: "Se requiere rol de administrador o profesor." });
+        }
+      }
+    );
+  });
+};
 
 const authJwt = {
   verifyToken,
   isTeacher,
-  isAdmin
+  isAdmin,
+  isAdminOrTeacher
 };
 module.exports = authJwt;

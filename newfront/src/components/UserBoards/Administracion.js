@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import AuthService from "../../services/auth.service";
-import AdminService from "../../services/admin.service";
-import "../../styles/UserBoards/BoardAdmin.css";
+import GestionService from "../../services/gestion.service";
+import "../../styles/UserBoards/Administracion.css";
 import EventBus from "../../common/EventBus";
 
-const BoardAdmin = () => {
+const Administracion = () => {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [content, setContent] = useState();
@@ -47,7 +47,7 @@ const BoardAdmin = () => {
   }, []);
 
   const getAllUsersExceptAdmins = () => {
-    AdminService.getAllUsersExceptAdmins()
+    GestionService.getAllUsersExceptAdmins()
       .then((response) => {
         setUsers(response.data);
 
@@ -176,7 +176,7 @@ const BoardAdmin = () => {
     const confirmDelete = window.confirm(confirmMessage);
 
     if (confirmDelete) {
-      AdminService.deleteAccountByUsername(user.username)
+      GestionService.deleteAccountByUsername(user.username)
         .then(() => {
           // Actualizar la lista de usuarios después de borrar uno
           getAllUsersExceptAdmins();
@@ -190,8 +190,8 @@ const BoardAdmin = () => {
   return (
     <>
       {user ? (
-        <div className="board-admin">
-          <h3 className="text-center mt-4">Panel de administración</h3>
+        <div className="board-gestion">
+          <h3 className="text-center mt-4">Gestión de usuarios</h3>
           <input
             type="text"
             className="form-control mb-3"
@@ -310,5 +310,5 @@ const BoardAdmin = () => {
   );
 };
 
-export default BoardAdmin;
+export default Administracion;
 

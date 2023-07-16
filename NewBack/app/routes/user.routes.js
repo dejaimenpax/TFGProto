@@ -21,9 +21,9 @@ module.exports = function(app) {
   );
 
   app.get(
-    "/api/test/admin",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.adminBoard
+    "/api/test/gestion",
+    [authJwt.verifyToken, authJwt.isAdminOrTeacher],
+    controller.gestionBoard
   );
 
 };

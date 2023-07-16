@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "/api/admin/";
+const API_URL = "/api/gestion/";
 
 const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
@@ -34,9 +34,15 @@ const getAllUsersExceptAdmins = () => {
   return axios.get(API_URL + "all-users", { headers: authHeader() });
 };
 
-const AdminService = {
-  getAllUsersExceptAdmins,
-  deleteAccountByUsername,
+const getStudentsForGestion = () => {
+  console.log("Entra al getStudentsForGestion")
+  return axios.get(API_URL + "students-for-gestion", { headers: authHeader() });
 };
 
-export default AdminService;
+const GestionService = {
+  getAllUsersExceptAdmins,
+  deleteAccountByUsername,
+  getStudentsForGestion,
+};
+
+export default GestionService;

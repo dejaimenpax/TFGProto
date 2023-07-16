@@ -61,4 +61,35 @@ exports.getAllUsersExceptAdmins = (req, res) => {
         console.log("El backend los devuelve asi", userAndTeacherusernames)
         res.status(200).send(userAndTeacherusernames);
       });
-  };
+};
+
+exports.getStudentsForGestion = (req, res) => {
+  const token = req.headers["x-access-token"];
+  const decodedToken = jwt.verify(token, config.secret);
+  const userId = decodedToken.id;
+
+  User.findById(userId)
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "User not found." });
+      }
+
+      User.find({ teacher: user.username, username: { $ne: user.username } })
+        .then(students => {
+          const filteredStudents = students.filter(user => user.roles.length > 0);
+          const usernames = filteredStudents.map(user => ({
+            id: user._id,
+            username: user.username,
+            roles: user.roles
+          }));
+
+          res.status(200).send(usernames);
+        })
+        .catch(err => {
+          res.status(500).send({ message: err.message });
+        });
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};

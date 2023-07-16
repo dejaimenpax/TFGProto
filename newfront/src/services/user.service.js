@@ -15,15 +15,15 @@ const getTeacherBoard = () => {
   return axios.get(API_URL + "teacher", { headers: authHeader() });
 };
 
-const getAdminBoard = () => {
-  return axios.get(API_URL + "admin", { headers: authHeader() });
+const getGestionBoard = () => {
+  return axios.get(API_URL + "gestion", { headers: authHeader() });
 };
 
 const UserService = {
   getPublicContent,
   getUserBoard,
   getTeacherBoard,
-  getAdminBoard,
+  getGestionBoard,
 }
 
 export default UserService;

@@ -10,13 +10,13 @@ import Home from "./components/Home";
 import Profile from "./components/Profile/Profile";
 import BoardUser from "./components/UserBoards/BoardUser";
 import BoardTeacher from "./components/UserBoards/BoardTeacher";
-import BoardAdmin from "./components/UserBoards/BoardAdmin";
+import BoardGestion from "./components/UserBoards/BoardGestion";
 import Resolver from "./components/Exercises/Resolver";
 import EventBus from "./common/EventBus";
 
 const App = () => {
   const [showTeacherBoard, setShowTeacherBoard] = useState(false);
-  const [showAdminBoard, setShowAdminBoard] = useState(false);
+  const [showGestionBoard, setShowGestionBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const App = () => {
     if (user) {
       setCurrentUser(user);
       setShowTeacherBoard(user.roles.includes("ROLE_TEACHER"));
-      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+      setShowGestionBoard(user.roles.includes("ROLE_ADMIN") || user.roles.includes("ROLE_TEACHER"));
     }
 
     EventBus.on("logout", () => {
@@ -40,7 +40,7 @@ const App = () => {
   const logOut = () => {
     AuthService.logout();
     setShowTeacherBoard(false);
-    setShowAdminBoard(false);
+    setShowGestionBoard(false);
     setCurrentUser(undefined);
   };
 
@@ -51,24 +51,24 @@ const App = () => {
           MatemAPI
         </Link>
         <div className="navbar-nav mr-auto">
-          {showAdminBoard && (
+          {showGestionBoard && (
             <li className="nav-item">
-              <Link to={"/admin"} className="nav-link">
-                Panel de administrador
+              <Link to={"/gestion"} className="nav-link">
+                Gestión de usuarios
               </Link>
             </li>
           )}
-          {showTeacherBoard && !showAdminBoard && (
+          {showTeacherBoard && (
             <li className="nav-item">
               <Link to={"/teacher"} className="nav-link">
-                Panel de profesor
+                Estadísticas de alumnos
               </Link>
             </li>
           )}
-          {!showTeacherBoard && !showAdminBoard && currentUser && (
+          {!showTeacherBoard && !showGestionBoard && currentUser && (
             <li className="nav-item">
               <Link to={"/user"} className="nav-link">
-                Panel de alumno
+                Mis estadísticas
               </Link>
             </li>
           )}
@@ -119,11 +119,11 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile logOut={logOut} />} />
-          {showAdminBoard && <Route path="/admin" element={<BoardAdmin />} />}
-          {showTeacherBoard && !showAdminBoard && (
+          {showGestionBoard && <Route path="/gestion" element={<BoardGestion />} />}
+          {showTeacherBoard && (
             <Route path="/teacher" element={<BoardTeacher />} />
           )}
-          {!showTeacherBoard && !showAdminBoard && (
+          {!showTeacherBoard && !showGestionBoard && (
             <Route path="/user" element={<BoardUser />} />
           )}
           <Route path="/resolver" element={<Resolver />} />

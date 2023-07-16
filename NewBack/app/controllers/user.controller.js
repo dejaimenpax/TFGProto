@@ -10,8 +10,8 @@ exports.teacherBoard = (req, res) => {
   res.status(200).send("Contenido disponible para profesores.");
 };
 
-exports.adminBoard = (req, res) => {
-  res.status(200).send("Contenido disponible para administradores.");
+exports.gestionBoard = (req, res) => {
+  res.status(200).send("Contenido disponible para administradores o profesores.");
 };
 
 
