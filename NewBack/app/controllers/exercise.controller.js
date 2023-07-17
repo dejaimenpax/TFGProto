@@ -284,4 +284,36 @@ exports.resolve = (req, res) => {
         res.status(200).json(exAux);
       });
     });
-  };
+};
+
+
+exports.getAllExercises = (req, res) => {
+  Exercise.find({})
+    .then((exercises) => {
+      res.status(200).send(exercises);
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+
+exports.updateExercisesVisibility = (req, res) => {
+  const exercises = req.body;
+  // Iterate through the exercises and update the visibility flag in the database
+  Promise.all(
+    exercises.map((exercise) =>
+      Exercise.findOneAndUpdate(
+        { _id: exercise._id },
+        { flag_active: exercise.flag_active },
+        { new: true }
+      )
+    )
+  )
+    .then((updatedExercises) => {
+      res.status(200).send(updatedExercises);
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+};

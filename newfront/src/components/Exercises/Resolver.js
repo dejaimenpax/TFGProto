@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import UserService from "../../services/user.service";
 import EventBus from "../../common/EventBus";
 import AuthService from "../../services/auth.service";
+import ConfigureExercises from "./ConfigureExercises"
 
 import SelectTopic from "./SelectTopic";
 import { Link } from "react-router-dom";
@@ -44,8 +45,12 @@ const Resolver = () => {
         ) : (
           <>
             {user.roles.includes("ROLE_TEACHER") ? ( //Si es profesor
+            <div>
               <p className="text-center">Como profesor, aquí podrás ver el tipo de 
               ejercicios a los que se enfrentarán los alumnos.</p>
+              <ConfigureExercises className="text-center" />
+            </div>
+    
             ) : ( //Si no lo es
               <p className="text-center">
                 ¡Entrena el tipo de ejercicios que quieras! Podrás elegir entre
@@ -53,6 +58,7 @@ const Resolver = () => {
               </p>
             )}
             <SelectTopic className="text-center" />
+
           </>
         )}
       </header>

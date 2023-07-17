@@ -1,12 +1,13 @@
-const { authJwt } = require("../middlewares");
+const { verifySignUp, authJwt } = require("../middlewares");
 const controller = require("../controllers/exercise.controller");
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
-    res.header(
-      "Access-Control-Allow-Headers", "Access-Control-Allow-Origin", "Access-Control-Allow-Methods",
-      "x-access-token, Origin, Content-Type, Accept"
-    );
+    res.header({
+      "Access-Control-Allow-Headers": "x-access-token, Origin, Content-Type, Accept",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Origin": "*"
+    });
     next();
   });
 
@@ -19,4 +20,9 @@ module.exports = function(app) {
     "/api/exercise/resolve",
     controller.resolve
   );
+
+  app.get("/api/exercise/get-all", controller.getAllExercises);
+
+  app.post("/api/exercise/update-visibility", controller.updateExercisesVisibility);
+
 };
