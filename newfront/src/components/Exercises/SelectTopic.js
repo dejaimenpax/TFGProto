@@ -84,6 +84,8 @@ const SelectTopic = () => {
 
   return (
     <>
+    <p></p>
+      <h3 className="text-center">Resolver ejercicios</h3>
       <BlockButtons handleSelect={handleSelect} />
       <p></p>
       {exerciseSelected && (

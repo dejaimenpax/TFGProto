@@ -45,19 +45,12 @@ const Resolver = () => {
         ) : (
           <>
             {user.roles.includes("ROLE_TEACHER") ? ( //Si es profesor
-            <div>
-              <p className="text-center">Como profesor, aquí podrás ver el tipo de 
-              ejercicios a los que se enfrentarán los alumnos.</p>
               <ConfigureExercises className="text-center" />
-            </div>
-    
-            ) : ( //Si no lo es
-              <p className="text-center">
-                ¡Entrena el tipo de ejercicios que quieras! Podrás elegir entre
-                los distintos bloques del temario:
-              </p>
+            ) : ( //Si no lo es, nada
+              <></>
             )}
-            <SelectTopic className="text-center" />
+              <p></p>
+              <SelectTopic className="text-center" />
 
           </>
         )}

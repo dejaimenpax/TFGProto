@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.d47d37e8.css",
-    "main.js": "/static/js/main.e2562e2e.js",
+    "main.css": "/static/css/main.ec8fdf0e.css",
+    "main.js": "/static/js/main.fe4fdcbe.js",
     "static/media/block2.png": "/static/media/block2.458a4519720238782d91.png",
     "static/media/block1.png": "/static/media/block1.d8f2ee94fdd39c9071be.png",
     "static/media/block4.png": "/static/media/block4.240c77db717faa9349dc.png",
     "static/media/block3.png": "/static/media/block3.cd64f4e683f46bc698ad.png",
     "static/media/matemapi_logo.png": "/static/media/matemapi_logo.b845a20db7de36bd0af5.png",
     "index.html": "/index.html",
-    "main.d47d37e8.css.map": "/static/css/main.d47d37e8.css.map",
-    "main.e2562e2e.js.map": "/static/js/main.e2562e2e.js.map"
+    "main.ec8fdf0e.css.map": "/static/css/main.ec8fdf0e.css.map",
+    "main.fe4fdcbe.js.map": "/static/js/main.fe4fdcbe.js.map"
   },
   "entrypoints": [
-    "static/css/main.d47d37e8.css",
-    "static/js/main.e2562e2e.js"
+    "static/css/main.ec8fdf0e.css",
+    "static/js/main.fe4fdcbe.js"
   ]
 }

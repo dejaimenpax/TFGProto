@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ExerciseService from "../../services/exercise.service";
+import '../../styles/Exercises/ConfigureExercises.css';
 
 const ConfigureExercises = () => {
   const [exercises, setExercises] = useState([]);
@@ -42,27 +43,28 @@ const ConfigureExercises = () => {
   }, {});
 
   return (
-    <div>
-      <h1>Configurar Visibilidad de Ejercicios</h1>
-      {Object.entries(groupedExercises).map(([block, blockExercises]) => (
-        <div key={block}>
-          <h3>Bloque {block}</h3>
-          <div className="form-check">
+    <div className="text-center"> {/* Centrar el contenido horizontalmente */}
+      <h3>Configurar visibilidad de ejercicios</h3>
+      <div className="container-columna">
+        {Object.entries(groupedExercises).map(([block, blockExercises]) => (
+          <div key={block} className="block-container"> {/* Agrega la clase 'block-container' para cada bloque */}
+            <h3 className="text-center">Bloque {block}</h3> {/* Centrar el título horizontalmente */}
             {blockExercises.map((exercise) => (
-              <div key={exercise._id} className="form-check">
+              <div key={exercise._id} className="form-check mb-3"> {/* Añade la clase 'mb-3' para el margen inferior */}
                 <input
                   className="form-check-input"
                   type="checkbox"
                   checked={exercise.flag_active}
                   onChange={(e) => handleExerciseVisibilityChange(exercise._id, e.target.checked)}
                 />
-                <label className="form-check-label">{exercise.name}</label>
+                <label className="form-check-label" htmlFor={`exercise-${exercise._id}`}>{exercise.name}</label> {/* Usa 'htmlFor' para asociar el 'label' con el 'input' */}
               </div>
             ))}
           </div>
-        </div>
-      ))}
-      <button onClick={handleSaveChanges} className="btn btn-primary">Guardar cambios</button>
+        ))}
+      </div>
+      <p></p>
+      <button onClick={handleSaveChanges} className="btn btn-custom btn-block">Guardar cambios</button> {/* Añade la clase 'btn-block' para que ocupe toda la anchura */}
     </div>
   );
 };
