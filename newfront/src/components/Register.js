@@ -18,10 +18,10 @@ const required = (value) => {
 };
 
 const validUsername = (value) => {
-  if (value.length < 6 || value.length > 10) {
+  if (value.length < 6 || value.length > 15) {
     return (
       <div className="alert alert-danger" role="alert">
-        El nombre de usuario debe tener entre 6 y 10 caracteres.
+        El nombre de usuario debe tener entre 6 y 15 caracteres.
       </div>
     );
   }
