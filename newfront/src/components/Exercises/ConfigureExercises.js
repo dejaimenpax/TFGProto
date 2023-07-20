@@ -49,37 +49,43 @@ const ConfigureExercises = () => {
   }, {});
 
   return (
-    <div className="text-center">
-      <h3>Configurar visibilidad de ejercicios</h3>
-      <div className="container-columna">
+    <div className="container mb-4">
+      <h3 className="text-center">Configurar visibilidad de ejercicios</h3>
+      <div className="row row-cols-md-2 row-cols-1">
         {Object.entries(groupedExercises).map(([block, blockExercises]) => (
-          <div key={block} className="block-container">
-            <h3 className="text-center">Bloque {block}</h3>
-            {blockExercises.map((exercise) => (
-              <div key={exercise._id} className="form-check mb-3">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  checked={exercise.flag_active}
-                  onChange={(e) => handleExerciseVisibilityChange(exercise._id, e.target.checked)}
-                />
-                <label className="form-check-label" htmlFor={`exercise-${exercise._id}`}>
-                  {exercise.name}
-                </label>
+          <div key={block} className="col">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title text-center">Bloque {block}</h5>
+                {blockExercises.map((exercise) => (
+                  <div key={exercise._id} className="form-check form-switch">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      checked={exercise.flag_active}
+                      onChange={(e) =>
+                        handleExerciseVisibilityChange(exercise._id, e.target.checked)
+                      }
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor={`exercise-${exercise._id}`}
+                    >
+                      {exercise.name}
+                    </label>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         ))}
       </div>
-      <p></p>
       <button onClick={handleSaveChanges} className="btn btn-custom btn-block">
         Guardar cambios
       </button>
       {showSuccessMessage && (
-        <div className="form-group">
-          <div className="text-center alert alert-success" role="alert">
-            Se ha guardado la configuración de visibilidad de los ejercicios.
-          </div>
+        <div className="alert alert-success text-center" role="alert">
+          Se ha guardado la configuración de visibilidad de los ejercicios.
         </div>
       )}
     </div>
