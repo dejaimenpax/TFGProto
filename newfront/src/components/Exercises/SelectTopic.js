@@ -83,9 +83,9 @@ const SelectTopic = () => {
   }, []);
 
   return (
-    <>
-    <p></p>
-      <h3 className="text-center">Resolver ejercicios</h3>
+    <div className= "container mb-4">
+      <h3 className="text-center mb-2">Resolver ejercicios</h3>
+      <p> </p>
       <BlockButtons handleSelect={handleSelect} />
       <p></p>
       {exerciseSelected && (
@@ -122,11 +122,11 @@ const SelectTopic = () => {
                 ))}
 
                 {exerciseResolved ? (
-                  <button className="btn btn-custom" onClick={() => handleSelect(parseInt(exercise.id_tema.toString()[0]))}>
+                  <button className="btn btn-custom mt-2" onClick={() => handleSelect(parseInt(exercise.id_tema.toString()[0]))}>
                     Generar nuevo ejercicio del bloque
                   </button>
                 ) : (
-                  <button className="btn btn-custom" onClick={() => handleInput(exerciseInput)}>
+                  <button className="btn btn-custom mt-2" onClick={() => handleInput(exerciseInput)}>
                     Resolver ejercicio
                   </button>
                 )}
@@ -135,7 +135,7 @@ const SelectTopic = () => {
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
 

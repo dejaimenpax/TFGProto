@@ -49,7 +49,7 @@ const ConfigureExercises = () => {
   }, {});
 
   return (
-    <div className="container mb-4">
+    <div className="container">
       <h3 className="text-center">Configurar visibilidad de ejercicios</h3>
       <div className="row row-cols-md-2 row-cols-1">
         {Object.entries(groupedExercises).map(([block, blockExercises]) => (
@@ -58,7 +58,7 @@ const ConfigureExercises = () => {
               <div className="card-body">
                 <h5 className="card-title text-center">Bloque {block}</h5>
                 {blockExercises.map((exercise) => (
-                  <div key={exercise._id} className="form-check form-switch">
+                  <div key={exercise._id} className="form-check">
                     <input
                       className="form-check-input"
                       type="checkbox"
@@ -88,6 +88,7 @@ const ConfigureExercises = () => {
           Se ha guardado la configuración de visibilidad de los ejercicios.
         </div>
       )}
+      <p> </p>
     </div>
   );
 };
