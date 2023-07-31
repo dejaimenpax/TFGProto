@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import AuthService from "../../services/auth.service";
-import EventBus from "../../common/EventBus";
-import StatsPage from "./StatsPage";
+import AuthService from "../../../services/auth.service";
+import EventBus from "../../../common/EventBus";
+import StatsPage from "../StatsPage";
 
 const BoardUser = () => {
   const [content, setContent] = useState();

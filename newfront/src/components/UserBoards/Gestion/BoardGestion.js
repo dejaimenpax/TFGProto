@@ -3,6 +3,7 @@ import AuthService from "../../../services/auth.service";
 import GestionService from "../../../services/gestion.service";
 import "../../../styles/UserBoards/BoardGestion.css";
 import EventBus from "../../../common/EventBus";
+import ListaUsuarios from "./ListaUsuarios";
 
 const BoardGestion = () => {
   const [users, setUsers] = useState([]);
@@ -21,6 +22,7 @@ const BoardGestion = () => {
   const [showTeacherSelector, setShowTeacherSelector] = useState(true)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState()
   const [generalErrorMessage, setGeneralErrorMessage] = useState()
+  
 
   useEffect(() => {
     AuthService.getCurrentUserFromDB()
@@ -191,40 +193,14 @@ const BoardGestion = () => {
     <>
       {user ? (
         <div className="board-gestion">
-          <h3 className="text-center mt-4">Gestión de usuarios</h3>
-          <input
-            type="text"
-            className="form-control mb-3"
-            placeholder="Buscar usuarios..."
-            value={searchTerm}
-            onChange={handleSearchTermChange}
+
+          <ListaUsuarios
+            searchTerm={searchTerm}
+            handleSearchTermChange={handleSearchTermChange}
+            deleteUser={deleteUser}
+            filterUsers={filterUsers}
           />
-          <ul className="list-group">
-            {filterUsers().map((us) => (
-              <li key={us.id} className="list-group-item">
-                <div className="user-details">
-                  <div className="user-username">{us.username}</div>
-                  <div className="user-role">
-                    {
-                      us.roles[0].name==="teacher" ?
-                      "Profesor"
-                      :
-                      "Alumno"
-                    }
-                  </div>
-                </div>
-                <div className="delete-button">
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={() => deleteUser(us)}
-                  >
-                    Eliminar
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
+
           <div className="generate-credentials">
             <h4>Crear nuevo usuario</h4>
             <div className="form-group">

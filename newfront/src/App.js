@@ -8,9 +8,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Profile from "./components/Profile/Profile";
-import BoardUser from "./components/UserBoards/BoardUser";
-import BoardTeacher from "./components/UserBoards/BoardTeacher";
-import BoardGestion from "./components/UserBoards/BoardGestion";
+import BoardUser from "./components/UserBoards/User/BoardUser";
+import BoardTeacher from "./components/UserBoards/Teacher/BoardTeacher";
+import BoardGestion from "./components/UserBoards/Gestion/BoardGestion";
 import Resolver from "./components/Exercises/Resolver";
 import EventBus from "./common/EventBus";
 
