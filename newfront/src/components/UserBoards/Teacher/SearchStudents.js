@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import AuthService from "../../services/auth.service";
-import StatsPage from "./StatsPage";
-import "../../styles/UserBoards/SearchStudents.css";
+import AuthService from "../../../services/auth.service";
+import StatsPage from "../StatsPage";
+import "../../../styles/UserBoards/SearchStudents.css";
 
 const SearchStudents = () => {
   const [searchTerm, setSearchTerm] = useState("");

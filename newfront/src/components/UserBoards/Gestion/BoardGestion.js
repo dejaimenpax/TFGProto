@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import AuthService from "../../services/auth.service";
-import GestionService from "../../services/gestion.service";
-import "../../styles/UserBoards/Administracion.css";
-import EventBus from "../../common/EventBus";
+import AuthService from "../../../services/auth.service";
+import GestionService from "../../../services/gestion.service";
+import "../../../styles/UserBoards/BoardGestion.css";
+import EventBus from "../../../common/EventBus";
 
-const Administracion = () => {
+const BoardGestion = () => {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [content, setContent] = useState();
@@ -40,7 +40,7 @@ const Administracion = () => {
         if (error.response && error.response.status === 401) {
           EventBus.dispatch("logout");
         }
-      });
+    });
 
     getAllUsersExceptAdmins();
     fetchTeachers();
@@ -310,5 +310,5 @@ const Administracion = () => {
   );
 };
 
-export default Administracion;
+export default BoardGestion;
 

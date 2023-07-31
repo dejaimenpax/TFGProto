@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import AuthService from "../../services/auth.service";
-import EventBus from "../../common/EventBus";
+import AuthService from "../../../services/auth.service";
+import EventBus from "../../../common/EventBus";
 import SearchStudents from "./SearchStudents";
 
 const BoardTeacher = () => {
