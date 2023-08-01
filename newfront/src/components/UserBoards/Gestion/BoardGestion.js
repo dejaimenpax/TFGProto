@@ -129,6 +129,10 @@ const BoardGestion = () => {
     }
     return password;
   };
+
+  const verStats = (user) => {
+
+  }
   
   const createUser = () => {
     if (!newUser.username || !newUser.role || (showTeacherSelector && !newUser.teacher)){

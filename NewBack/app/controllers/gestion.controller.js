@@ -93,3 +93,20 @@ exports.getStudentsForGestion = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+exports.getListElement = (req, res) => {
+  const { username } = req.query; // Access the username from req.query
+
+  User.findOne({ username })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({ message: "Usuario no encontrado." });
+      }
+
+      res.status(200).send(user);
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
