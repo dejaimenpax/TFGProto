@@ -4,6 +4,7 @@ import GestionService from "../../../services/gestion.service";
 import "../../../styles/UserBoards/BoardGestion.css";
 import EventBus from "../../../common/EventBus";
 import ListaUsuarios from "./ListaUsuarios";
+import CrearUsuario from "./CrearUsuario";
 
 const BoardGestion = () => {
   const [users, setUsers] = useState([]);
@@ -201,83 +202,19 @@ const BoardGestion = () => {
             filterUsers={filterUsers}
           />
 
-          <div className="generate-credentials">
-            <h4>Crear nuevo usuario</h4>
-            <div className="form-group">
-              <label>Nombre y apellidos:</label>
-              <input
-                type="text"
-                className="form-control"
-                name="fullName"
-                value={newUser.fullName}
-                onChange={handleNewUserChange}
-              />
-            </div>
-            <p className={usernameErrorMessage ? "alert alert-danger" : "hide"}>
-              {usernameErrorMessage}
-            </p>
-            <button
-              type="button"
-              className="btn btn-custom"
-              onClick={handleShowUsername}
-            >
-              Generar nombre
-            </button>
-            {showUsername && (<div className={showUsername ? "form form-group" : "hide"}>
-              <label>Nombre de usuario generado:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={newUser.username}
-                readOnly
-              />
-            </div>)}
-            <div className="form-group">
-              <label>Rol:</label>
-              <select
-                className="form-control"
-                name="role"
-                value={newUser.role}
-                onChange={handleRoleChange}
-              >
-                <option value="" disabled selected>
-                  Selecciona una opción...
-                </option>
-                <option value="user">Alumno</option>
-                <option value="teacher">Profesor</option>
-              </select>
-            </div>
-            {showTeacherSelector && (
-            <div className="form-group">
-              <label>Profesor asociado:</label>
-              <select
-                className="form-control"
-                name="teacher"
-                value={newUser.teacher}
-                onChange={handleNewUserChange}
-              >
-                  <option value="" disabled selected>
-                    Selecciona una opción...
-                  </option>
-                {teachers.map((teacher, index) => (
-                  <option key={index} value={teacher}>
-                    {teacher}
-                  </option>
-                ))}
-              </select>
-            </div>
-            )}
-            <p className={generalErrorMessage ? "alert alert-danger" : "hide"}>
-              {generalErrorMessage}
-            </p>
-            <button
-              type="button"
-              className="btn btn-custom"
-              onClick={createUser}
-            >
-              Crear usuario
-            </button>
-          </div>
+          <CrearUsuario
+            newUser={newUser}
+            handleNewUserChange={handleNewUserChange}
+            usernameErrorMessage={usernameErrorMessage}
+            handleShowUsername={handleShowUsername}
+            showUsername={showUsername}
+            handleRoleChange={handleRoleChange}
+            teachers={teachers}
+            generalErrorMessage={generalErrorMessage}
+            createUser={createUser}
+            showTeacherSelector={showTeacherSelector}
+          />
+
         </div>
       ) : (
         <h3>{content}</h3>
