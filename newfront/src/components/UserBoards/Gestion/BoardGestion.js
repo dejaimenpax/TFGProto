@@ -130,9 +130,6 @@ const BoardGestion = () => {
     return password;
   };
 
-  const verStats = (user) => {
-
-  }
   
   const createUser = () => {
     if (!newUser.username || !newUser.role || (showTeacherSelector && !newUser.teacher)){
@@ -168,8 +165,27 @@ const BoardGestion = () => {
   };
 
   const filterUsers = () => {
-    return users.filter((results) => results.username.includes(searchTerm.toLowerCase())) 
+    // Primero, filtramos por término de búsqueda
+    const filteredUsers = users.filter((user) =>
+      user.username.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  
+    // Luego, ordenamos la lista por rol (Profesor primero, luego Alumno) y luego alfabéticamente por username
+    const sortedUsers = filteredUsers.sort((a, b) => {
+      // Ordenamos por rol (Profesor primero, luego Alumno)
+      if (a.roles[0].name === "teacher" && b.roles[0].name !== "teacher") {
+        return -1;
+      } else if (a.roles[0].name !== "teacher" && b.roles[0].name === "teacher") {
+        return 1;
+      } else {
+        // Si tienen el mismo rol, ordenamos alfabéticamente por username
+        return a.username.localeCompare(b.username);
+      }
+    });
+  
+    return sortedUsers;
   };
+  
 
   const deleteUser = (user) => {
     let confirmMessage =

@@ -40,18 +40,24 @@ const getStudentsForGestion = () => {
 };
 
 const getListElement = (username) => {
-  console.log("Entra al getListElement Service");
   return axios.get(API_URL + "getListElement", {
     headers: authHeader(),
     params: { username }, // Send the username as a query parameter
   });
 };
 
+const eraseUserStats = (username) => {
+  return axios.post(API_URL + "eraseUserStats", {username} , {
+    headers: authHeader()
+  })
+}
+
 const GestionService = {
   getAllUsersExceptAdmins,
   deleteAccountByUsername,
   getStudentsForGestion,
   getListElement,
+  eraseUserStats,
 };
 
 export default GestionService;

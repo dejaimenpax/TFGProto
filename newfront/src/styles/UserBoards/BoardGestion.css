@@ -1,25 +1,32 @@
 .board-gestion {
     text-align: center;
-}
-.list-group-item {
+  }
+  
+  .list-group-item {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-}
-
-.user-details {
+  }
+  
+  .user-details {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
     justify-content: center;
-}
-
-.stats-button {
+  }
+  
+  .stats-button {
     margin-left: 10px;
-}
-
-.user-role {
+  }
+  
+  .button-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Mueve los botones al margen derecho */
+  }
+  
+  .user-role {
     display: inline-block;
     background-color: #e2e2e2;
     border-radius: 5px;
@@ -28,25 +35,25 @@
     font-size: 0.9rem;
     font-weight: bold;
     color: #444;
-}
+  }
   
-
-.user-username {
+  .user-username {
     margin-right: 10px;
-}
-
-.btn-custom {
+  }
+  
+  .btn-custom {
     background-color: #18a4bc;
     border-color: #18a4bc;
     color: white;
   }
-
-.btn-custom:hover {
+  
+  .btn-custom:hover {
     background-color: #11788a;
     border-color: #18a4bc;
     color: white;
   }
-
-.generate-credentials {
+  
+  .generate-credentials {
     margin-top: 1rem;
-}
+  }
+  
