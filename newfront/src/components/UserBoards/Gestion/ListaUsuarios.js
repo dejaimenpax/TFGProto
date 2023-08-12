@@ -66,45 +66,39 @@ const ListaUsuarios = ({ searchTerm, handleSearchTermChange, deleteUser, filterU
             onChange={handleSearchTermChange}
           />
           <ul className="list-group">
-            {filterUsers().map((us) => (
-              <li key={us.id} className="list-group-item">
-                <div>
-                  <div className="user-details">
-                    <div className="user-username">{us.username}</div>
-                    <div className="user-role">{us.roles[0].name === "teacher" ? "Profesor" : "Alumno"}</div>
-                  </div>
-                  <div className="button-container">
-                    { us !== null && us===selectedUser && showMessage ?
-                      (
-                        <div className="alert alert-success text-center">
-                          ¡Las estadísticas han sido borradas!
-                        </div>
-                      )
-                      :
-                      (
-                        <>
-                          <div className="stats-button">
-                            <button type="button" className="btn btn-custom" onClick={() => verStats(us)}>
-                              Ver estadísticas
-                            </button>
-                          </div>
-                          <div className="stats-button">
-                            <button type="button" className="btn btn-secondary" onClick={() => eraseStats(us)}>
-                              Resetear estadísticas
-                            </button>
-                          </div>
-                          <div className="stats-button">
-                            <button type="button" className="btn btn-danger" onClick={() => deleteUser(us)}>
-                              Eliminar usuario
-                            </button>
-                          </div>
-                        </>
-                      )
-                    }
-                  </div>
+          {filterUsers().map((user) => (
+            <li key={user.id} className="list-group-item">
+              <div className="user-details">
+                <div className="user-username">{user.username}</div>
+                <div className="user-role">
+                  {user.roles[0].name === "teacher" ? "Profesor" : "Alumno"}
                 </div>
-              </li>
-            ))}
+              </div>
+              <div className="button-container">
+                <button
+                  type="button"
+                  className="btn btn-custom"
+                  onClick={() => verStats(user)}
+                >
+                  Ver estadísticas
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => eraseStats(user)}
+                >
+                  Resetear estadísticas
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => deleteUser(user)}
+                >
+                  Eliminar usuario
+                </button>
+              </div>
+            </li>
+          ))}
           </ul>
         </>
       )}

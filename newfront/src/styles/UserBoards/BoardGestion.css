@@ -4,7 +4,6 @@
   
   .list-group-item {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
@@ -12,8 +11,6 @@
   .user-details {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    justify-content: center;
   }
   
   .stats-button {
@@ -39,6 +36,16 @@
   
   .user-username {
     margin-right: 10px;
+  }
+  
+  .button-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .button-container button {
+    margin-right: 10px; /* Agrega espacio entre los botones */
   }
   
   .btn-custom {
