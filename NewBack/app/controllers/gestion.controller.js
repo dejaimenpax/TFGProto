@@ -93,3 +93,47 @@ exports.getStudentsForGestion = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+exports.getListElement = (req, res) => {
+  const { username } = req.query; // Access the username from req.query
+
+  User.findOne({ username })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({ message: "Usuario no encontrado." });
+      }
+
+      res.status(200).send(user);
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.eraseUserStats = (req, res) => {
+  const { username } = req.body;
+
+  User.findOneAndUpdate(
+    { username: username },
+    {
+      submitted: [0, 0, 0, 0],
+      correct: [0, 0, 0, 0],
+      incorrect: [0, 0, 0, 0],
+      scores: [0, 0, 0, 0],
+      averages: [0, 0, 0, 0],
+    },
+    { new: true }
+  )
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({ message: "Usuario no encontrado." });
+      }
+
+      res.status(200).send({ message: "Estadísticas borradas con éxito." });
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+  
+}
+

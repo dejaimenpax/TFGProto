@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import AuthService from "../../services/auth.service";
-import EventBus from "../../common/EventBus";
-import StatsPage from "./StatsPage";
+import AuthService from "../../../services/auth.service";
+import EventBus from "../../../common/EventBus";
+import SearchStudents from "./SearchStudents";
 
-const BoardUser = () => {
+const BoardTeacher = () => {
   const [content, setContent] = useState();
   const [user, setUser] = useState(null);
 
@@ -32,10 +32,10 @@ const BoardUser = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        {user ? <StatsPage user={user} /> : <h3>{content}</h3>}
+        {user ? <SearchStudents user={user} /> : <h3>{content}</h3>}
       </header>
     </div>
   );
 };
 
-export default BoardUser;
+export default BoardTeacher;

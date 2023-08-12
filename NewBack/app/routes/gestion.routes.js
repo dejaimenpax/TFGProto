@@ -15,6 +15,10 @@ module.exports = function(app) {
 
   app.get("/api/gestion/all-users", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.getAllUsersExceptAdmins);
 
-  app.get("api/gestion/students-for-gestion", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.getStudentsForGestion);
+  app.get("/api/gestion/students-for-gestion", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.getStudentsForGestion);
   
+  app.get("/api/gestion/getListElement", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.getListElement)
+
+  app.post("/api/gestion/eraseUserStats", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.eraseUserStats)
+
 };

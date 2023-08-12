@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import AuthService from "../../services/auth.service";
-import GestionService from "../../services/gestion.service";
-import "../../styles/UserBoards/Administracion.css";
-import EventBus from "../../common/EventBus";
+import AuthService from "../../../services/auth.service";
+import GestionService from "../../../services/gestion.service";
+import "../../../styles/UserBoards/BoardGestion.css";
+import EventBus from "../../../common/EventBus";
+import ListaUsuarios from "./ListaUsuarios";
+import CrearUsuario from "./CrearUsuario";
 
-const Administracion = () => {
+const BoardGestion = () => {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [content, setContent] = useState();
@@ -21,6 +23,7 @@ const Administracion = () => {
   const [showTeacherSelector, setShowTeacherSelector] = useState(true)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState()
   const [generalErrorMessage, setGeneralErrorMessage] = useState()
+  
 
   useEffect(() => {
     AuthService.getCurrentUserFromDB()
@@ -40,7 +43,7 @@ const Administracion = () => {
         if (error.response && error.response.status === 401) {
           EventBus.dispatch("logout");
         }
-      });
+    });
 
     getAllUsersExceptAdmins();
     fetchTeachers();
@@ -126,6 +129,7 @@ const Administracion = () => {
     }
     return password;
   };
+
   
   const createUser = () => {
     if (!newUser.username || !newUser.role || (showTeacherSelector && !newUser.teacher)){
@@ -161,8 +165,27 @@ const Administracion = () => {
   };
 
   const filterUsers = () => {
-    return users.filter((results) => results.username.includes(searchTerm.toLowerCase())) 
+    // Primero, filtramos por término de búsqueda
+    const filteredUsers = users.filter((user) =>
+      user.username.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  
+    // Luego, ordenamos la lista por rol (Profesor primero, luego Alumno) y luego alfabéticamente por username
+    const sortedUsers = filteredUsers.sort((a, b) => {
+      // Ordenamos por rol (Profesor primero, luego Alumno)
+      if (a.roles[0].name === "teacher" && b.roles[0].name !== "teacher") {
+        return -1;
+      } else if (a.roles[0].name !== "teacher" && b.roles[0].name === "teacher") {
+        return 1;
+      } else {
+        // Si tienen el mismo rol, ordenamos alfabéticamente por username
+        return a.username.localeCompare(b.username);
+      }
+    });
+  
+    return sortedUsers;
   };
+  
 
   const deleteUser = (user) => {
     let confirmMessage =
@@ -191,117 +214,27 @@ const Administracion = () => {
     <>
       {user ? (
         <div className="board-gestion">
-          <h3 className="text-center mt-4">Gestión de usuarios</h3>
-          <input
-            type="text"
-            className="form-control mb-3"
-            placeholder="Buscar usuarios..."
-            value={searchTerm}
-            onChange={handleSearchTermChange}
+
+          <ListaUsuarios
+            searchTerm={searchTerm}
+            handleSearchTermChange={handleSearchTermChange}
+            deleteUser={deleteUser}
+            filterUsers={filterUsers}
           />
-          <ul className="list-group">
-            {filterUsers().map((us) => (
-              <li key={us.id} className="list-group-item">
-                <div className="user-details">
-                  <div className="user-username">{us.username}</div>
-                  <div className="user-role">
-                    {
-                      us.roles[0].name==="teacher" ?
-                      "Profesor"
-                      :
-                      "Alumno"
-                    }
-                  </div>
-                </div>
-                <div className="delete-button">
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={() => deleteUser(us)}
-                  >
-                    Eliminar
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className="generate-credentials">
-            <h4>Crear nuevo usuario</h4>
-            <div className="form-group">
-              <label>Nombre y apellidos:</label>
-              <input
-                type="text"
-                className="form-control"
-                name="fullName"
-                value={newUser.fullName}
-                onChange={handleNewUserChange}
-              />
-            </div>
-            <p className={usernameErrorMessage ? "alert alert-danger" : "hide"}>
-              {usernameErrorMessage}
-            </p>
-            <button
-              type="button"
-              className="btn btn-custom"
-              onClick={handleShowUsername}
-            >
-              Generar nombre
-            </button>
-            {showUsername && (<div className={showUsername ? "form form-group" : "hide"}>
-              <label>Nombre de usuario generado:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={newUser.username}
-                readOnly
-              />
-            </div>)}
-            <div className="form-group">
-              <label>Rol:</label>
-              <select
-                className="form-control"
-                name="role"
-                value={newUser.role}
-                onChange={handleRoleChange}
-              >
-                <option value="" disabled selected>
-                  Selecciona una opción...
-                </option>
-                <option value="user">Alumno</option>
-                <option value="teacher">Profesor</option>
-              </select>
-            </div>
-            {showTeacherSelector && (
-            <div className="form-group">
-              <label>Profesor asociado:</label>
-              <select
-                className="form-control"
-                name="teacher"
-                value={newUser.teacher}
-                onChange={handleNewUserChange}
-              >
-                  <option value="" disabled selected>
-                    Selecciona una opción...
-                  </option>
-                {teachers.map((teacher, index) => (
-                  <option key={index} value={teacher}>
-                    {teacher}
-                  </option>
-                ))}
-              </select>
-            </div>
-            )}
-            <p className={generalErrorMessage ? "alert alert-danger" : "hide"}>
-              {generalErrorMessage}
-            </p>
-            <button
-              type="button"
-              className="btn btn-custom"
-              onClick={createUser}
-            >
-              Crear usuario
-            </button>
-          </div>
+
+          <CrearUsuario
+            newUser={newUser}
+            handleNewUserChange={handleNewUserChange}
+            usernameErrorMessage={usernameErrorMessage}
+            handleShowUsername={handleShowUsername}
+            showUsername={showUsername}
+            handleRoleChange={handleRoleChange}
+            teachers={teachers}
+            generalErrorMessage={generalErrorMessage}
+            createUser={createUser}
+            showTeacherSelector={showTeacherSelector}
+          />
+
         </div>
       ) : (
         <h3>{content}</h3>
@@ -310,5 +243,5 @@ const Administracion = () => {
   );
 };
 
-export default Administracion;
+export default BoardGestion;
 
