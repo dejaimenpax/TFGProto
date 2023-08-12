@@ -13,9 +13,7 @@ module.exports = function(app) {
 
   app.delete("/api/gestion/delete-account-byUsername", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.deleteAccountByUsername);
 
-  app.get("/api/gestion/all-users", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.getAllUsersExceptAdmins);
-
-  app.get("/api/gestion/students-for-gestion", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.getStudentsForGestion);
+  app.get("/api/gestion/getUsersExceptAdmins", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.getUsersExceptAdmins);
   
   app.get("/api/gestion/getListElement", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.getListElement)
 

@@ -136,9 +136,6 @@ const deleteAccountByUsername = (username) => {
   }
 };
 
-const getAllUsersExceptAdmins = () => {
-  return axios.get(API_URL + "all-users", { headers: authHeader() });
-};
 
 const AuthService = {
   register,
@@ -151,7 +148,6 @@ const AuthService = {
   checkTokenExpiration,
   eraseStats,
   deleteAccountById,
-  getAllUsersExceptAdmins,
   deleteAccountByUsername,
 
 };

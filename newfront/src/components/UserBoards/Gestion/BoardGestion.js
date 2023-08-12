@@ -29,6 +29,8 @@ const BoardGestion = () => {
     AuthService.getCurrentUserFromDB()
       .then((response) => {
         setUser(response.data);
+        getUsersExceptAdmins(response.data.username);
+        fetchTeachers();
       })
       .catch((error) => {
         const _content =
@@ -44,16 +46,12 @@ const BoardGestion = () => {
           EventBus.dispatch("logout");
         }
     });
-
-    getAllUsersExceptAdmins();
-    fetchTeachers();
   }, []);
 
-  const getAllUsersExceptAdmins = () => {
-    GestionService.getAllUsersExceptAdmins()
+  const getUsersExceptAdmins = (username) => {
+    GestionService.getUsersExceptAdmins(username)
       .then((response) => {
         setUsers(response.data);
-
       })
       .catch((error) => {
         console.error(error);
@@ -145,7 +143,7 @@ const BoardGestion = () => {
         // Mostrar la contraseña generada
         alert("Contraseña generada: " + password + ". Por favor, cópiela para mandársela al usuario.");
         // Actualizar la lista de usuarios después de crear uno
-        getAllUsersExceptAdmins();
+        getUsersExceptAdmins();
         //Asi como la de profes
         fetchTeachers();
         // Restablecer los campos del nuevo usuario
@@ -202,7 +200,7 @@ const BoardGestion = () => {
       GestionService.deleteAccountByUsername(user.username)
         .then(() => {
           // Actualizar la lista de usuarios después de borrar uno
-          getAllUsersExceptAdmins();
+          getUsersExceptAdmins();
         })
         .catch((error) => {
           console.log(error);

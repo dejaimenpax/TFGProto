@@ -29,15 +29,14 @@ const deleteAccountByUsername = (username) => {
   }
 };
 
-const getAllUsersExceptAdmins = () => {
-  console.log("Entra al getAllUsersExceptAdmins")
-  return axios.get(API_URL + "all-users", { headers: authHeader() });
+const getUsersExceptAdmins = (username) => {
+  console.log("Entra al getUsersExceptAdmins")
+  return axios.get(API_URL + "getUsersExceptAdmins", { 
+    headers: authHeader(),
+    params: { username }, // Send the username as a query parameter 
+  });
 };
 
-const getStudentsForGestion = () => {
-  console.log("Entra al getStudentsForGestion")
-  return axios.get(API_URL + "students-for-gestion", { headers: authHeader() });
-};
 
 const getListElement = (username) => {
   return axios.get(API_URL + "getListElement", {
@@ -53,9 +52,8 @@ const eraseUserStats = (username) => {
 }
 
 const GestionService = {
-  getAllUsersExceptAdmins,
+  getUsersExceptAdmins,
   deleteAccountByUsername,
-  getStudentsForGestion,
   getListElement,
   eraseUserStats,
 };
