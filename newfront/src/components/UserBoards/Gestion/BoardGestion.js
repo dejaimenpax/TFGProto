@@ -221,6 +221,7 @@ const BoardGestion = () => {
           />
 
           <CrearUsuario
+            user={user}
             newUser={newUser}
             handleNewUserChange={handleNewUserChange}
             usernameErrorMessage={usernameErrorMessage}

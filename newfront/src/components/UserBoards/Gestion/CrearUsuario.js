@@ -35,6 +35,7 @@ const CrearUsuario = (props) => {
                 readOnly
               />
             </div>)}
+
             <div className="form-group">
               <label>Rol:</label>
               <select
@@ -42,14 +43,23 @@ const CrearUsuario = (props) => {
                 name="role"
                 value={props.newUser.role}
                 onChange={props.handleRoleChange}
+                disabled={props.user.username === props.user.teacher} // Deshabilita todo el selector si lo invoca un profesor
               >
-                <option value="" disabled selected>
-                  Selecciona una opción...
-                </option>
-                <option value="user">Alumno</option>
-                <option value="teacher">Profesor</option>
+                {props.user.username === props.user.teacher ? ( // Si es profesor, solo puede crear alumnos
+                  <option value="user">Alumno</option>
+                ) : (
+                  // Si A no es igual a B, mostrar todas las opciones
+                  <>
+                    <option value="" disabled>
+                      Selecciona una opción...
+                    </option>
+                    <option value="user">Alumno</option>
+                    <option value="teacher">Profesor</option>
+                  </>
+                )}
               </select>
             </div>
+
             {props.showTeacherSelector && (
             <div className="form-group">
               <label>Profesor asociado:</label>
