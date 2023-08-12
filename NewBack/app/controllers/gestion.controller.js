@@ -38,61 +38,73 @@ exports.deleteAccountByUsername = (req, res) => {
       });
 };
 
-exports.getAllUsersExceptAdmins = (req, res) => {
-    User.find({})
-      .populate({
-        path: "roles",
-        match: { $or: [{ name: "teacher" }, { name: "user" }] },
-        select: "name"
-      })
-      .exec((err, users) => {
-        if (err) {
-          res.status(500).send({ message: err.message });
-          return;
-        }
-  
-        const filteredUsers = users.filter(user => user.roles.length > 0);
-        const userAndTeacherusernames = filteredUsers.map(user => ({
-          id: user._id,
-          username: user.username,
-          roles: user.roles
-        }));
-        
-        console.log("El backend los devuelve asi", userAndTeacherusernames)
-        res.status(200).send(userAndTeacherusernames);
-      });
-};
+exports.getUsersExceptAdmins = (req, res) => {
 
-exports.getStudentsForGestion = (req, res) => {
-  const token = req.headers["x-access-token"];
-  const decodedToken = jwt.verify(token, config.secret);
-  const userId = decodedToken.id;
+  const { username } = req.query; // Access the username from req.query
 
-  User.findById(userId)
-    .then(user => {
+  User.findOne({ username })
+    .then((user) => {
       if (!user) {
-        return res.status(404).send({ message: "User not found." });
+        return res.status(404).send({ message: "Usuario no encontrado." });
       }
 
-      User.find({ teacher: user.username, username: { $ne: user.username } })
-        .then(students => {
-          const filteredStudents = students.filter(user => user.roles.length > 0);
-          const usernames = filteredStudents.map(user => ({
-            id: user._id,
-            username: user.username,
-            roles: user.roles
-          }));
+      if (user.username===user.teacher){
+        // Si el usuario es un profesor (tiene por username de profesor el suyo propio)
+        User.find({ teacher: user.username, username: { $ne: user.username } })
+          .populate({
+            path: "roles",
+            match: { $or: [{ name: "teacher" }, { name: "user" }] },
+            select: "name"
+          })
+          .exec((err, students) => {
+            if (err) {
+              res.status(500).send({ message: err.message });
+              return;
+            }
 
-          res.status(200).send(usernames);
-        })
-        .catch(err => {
-          res.status(500).send({ message: err.message });
+            const studentUsernames = students.map(student => ({
+              id: student._id,
+              username: student.username,
+              roles: student.roles
+            }));
+            res.status(200).send(studentUsernames);
         });
+      }
+
+      else{
+
+        User.find({})
+          .populate({
+            path: "roles",
+            match: { $or: [{ name: "teacher" }, { name: "user" }] },
+            select: "name"
+          })
+          .exec((err, users) => {
+            if (err) {
+              res.status(500).send({ message: err.message });
+              return;
+            }
+
+            const filteredUsers = users.filter(user => user.roles.length > 0);
+            const userAndTeacherusernames = filteredUsers.map(user => ({
+              id: user._id,
+              username: user.username,
+              roles: user.roles
+            }));
+            
+            res.status(200).send(userAndTeacherusernames);
+        });
+
+      }
+
+
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({ message: err.message });
-    });
+  });
+ 
 };
+
 
 exports.getListElement = (req, res) => {
   const { username } = req.query; // Access the username from req.query
@@ -107,7 +119,7 @@ exports.getListElement = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
-    });
+  });
 };
 
 exports.eraseUserStats = (req, res) => {
