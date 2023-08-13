@@ -17,6 +17,8 @@ module.exports = function(app) {
   
   app.get("/api/gestion/getListElement", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.getListElement)
 
+  app.get("/api/gestion/getTeachers", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.getTeachers)
+
   app.post("/api/gestion/eraseUserStats", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.eraseUserStats)
 
 };
