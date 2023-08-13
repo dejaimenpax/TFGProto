@@ -66,11 +66,18 @@ const App = () => {
             </li>
           )}
           {!showTeacherBoard && !showGestionBoard && currentUser && (
-            <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                Mis estadísticas
-              </Link>
-            </li>
+            <>
+              <li className="nav-item">
+                <Link to={"/resolver"} className="nav-link">
+                  Resolver ejercicios
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/user"} className="nav-link">
+                  Mis estadísticas
+                </Link>
+              </li>
+            </>
           )}
         </div>
         {currentUser ? (
