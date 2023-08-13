@@ -82,6 +82,8 @@ const Profile = ({ logOut }) => {
           )}
         </div>
       </section>
+      
+      {/* Borrado en la feature/eliminarAutoborrado
 
       <section className="config-section text-center">
         <h2>Configuración</h2>
@@ -109,6 +111,10 @@ const Profile = ({ logOut }) => {
           <>{content}</>
         )}
       </section>
+
+
+      
+      */}
     </div>
   );
 };
