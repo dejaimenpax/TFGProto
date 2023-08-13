@@ -87,7 +87,14 @@ const CrearUsuario = (props) => {
               className="btn btn-custom"
               onClick={props.createUser}
             >
-              Crear nuevo usuario
+              Crear usuario
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger special-margin"
+              onClick={props.handleCreateUserModalClose}
+            >
+              Volver a gestión
             </button>
           </div>
 

@@ -52,6 +52,10 @@
     margin-top: 10px;
     margin-bottom: 20px;
   }
+
+  .special-margin {
+    margin-left: 10px; /* Agrega espacio entre los botones */
+  }
   
   .btn-custom {
     background-color: #18a4bc;
