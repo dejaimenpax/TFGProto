@@ -122,6 +122,46 @@ exports.getListElement = (req, res) => {
   });
 };
 
+exports.getTeachers = (req, res) => {
+
+  const { username } = req.query; // Access the username from req.query
+
+  User.findOne({ username })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({ message: "Usuario no encontrado." });
+      }
+
+      User.find({})
+      .populate({
+        path: "roles",
+        match: { name: "teacher" },
+        select: "name"
+      })
+      .exec((err, users) => {
+        if (err) {
+          res.status(500).send({ message: err.message });
+          return;
+        }
+  
+        let teacherusernames = users
+          .filter(us => us.roles.length > 0)
+          .map(us => us.username);
+        
+        if (user.username===user.teacher){
+          teacherusernames = teacherusernames.filter(x => x===user.username)
+        }
+        res.status(200).send(teacherusernames);
+      });
+
+
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+  });
+ 
+};
+
 exports.eraseUserStats = (req, res) => {
   const { username } = req.body;
 

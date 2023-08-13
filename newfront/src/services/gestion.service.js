@@ -45,6 +45,13 @@ const getListElement = (username) => {
   });
 };
 
+const getTeachers = (username) => {
+  return axios.get(API_URL + "getTeachers", {
+    headers: authHeader(),
+    params: { username }, // Send the username as a query parameter
+  });
+}
+
 const eraseUserStats = (username) => {
   return axios.post(API_URL + "eraseUserStats", {username} , {
     headers: authHeader()
@@ -56,6 +63,7 @@ const GestionService = {
   deleteAccountByUsername,
   getListElement,
   eraseUserStats,
+  getTeachers,
 };
 
 export default GestionService;
