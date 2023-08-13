@@ -236,16 +236,8 @@ const BoardGestion = () => {
               generalErrorMessage={generalErrorMessage}
               createUser={createUser}
               showTeacherSelector={showTeacherSelector}
+              handleCreateUserModalClose={handleCreateUserModalClose}
             />
-            <div className="button-special">
-              <button
-                type="button"
-                className="btn btn-danger btn-block"
-                onClick={handleCreateUserModalClose}
-              >
-                Volver a gestión
-              </button>
-            </div>
           </div> )
           :
           (<div className="board-gestion">
