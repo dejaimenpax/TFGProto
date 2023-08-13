@@ -47,6 +47,11 @@
   .button-container button {
     margin-right: 10px; /* Agrega espacio entre los botones */
   }
+
+  .button-special {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
   
   .btn-custom {
     background-color: #18a4bc;
@@ -62,5 +67,28 @@
   
   .generate-credentials {
     margin-top: 1rem;
+  }
+
+  /* Modal Estilos */
+  .modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Asegura que el modal esté por encima de otros elementos */
+  }
+
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    width: 70%; /* Ajusta el ancho del modal según sea necesario */
+    max-width: 600px; /* Establece un ancho máximo */
   }
   

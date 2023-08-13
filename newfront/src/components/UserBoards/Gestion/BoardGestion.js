@@ -23,6 +23,8 @@ const BoardGestion = () => {
   const [showTeacherSelector, setShowTeacherSelector] = useState(true)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState()
   const [generalErrorMessage, setGeneralErrorMessage] = useState()
+
+  const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   
 
   useEffect(() => {
@@ -208,38 +210,69 @@ const BoardGestion = () => {
     }
   };
 
+  const handleCreateUserModalOpen = () => {
+    setShowCreateUserModal(true);
+  };
+
+  const handleCreateUserModalClose = () => {
+    setShowCreateUserModal(false);
+  };
+
   return (
     <>
       {user ? (
-        <div className="board-gestion">
-
-          <ListaUsuarios
-            searchTerm={searchTerm}
-            handleSearchTermChange={handleSearchTermChange}
-            deleteUser={deleteUser}
-            filterUsers={filterUsers}
-          />
-
-          <CrearUsuario
-            user={user}
-            newUser={newUser}
-            handleNewUserChange={handleNewUserChange}
-            usernameErrorMessage={usernameErrorMessage}
-            handleShowUsername={handleShowUsername}
-            showUsername={showUsername}
-            handleRoleChange={handleRoleChange}
-            teachers={teachers}
-            generalErrorMessage={generalErrorMessage}
-            createUser={createUser}
-            showTeacherSelector={showTeacherSelector}
-          />
-
+        <>
+        {showCreateUserModal ? (
+          <div className="board-gestion">
+            <CrearUsuario
+              user={user}
+              newUser={newUser}
+              handleNewUserChange={handleNewUserChange}
+              usernameErrorMessage={usernameErrorMessage}
+              handleShowUsername={handleShowUsername}
+              showUsername={showUsername}
+              handleRoleChange={handleRoleChange}
+              teachers={teachers}
+              generalErrorMessage={generalErrorMessage}
+              createUser={createUser}
+              showTeacherSelector={showTeacherSelector}
+            />
+            <div className="button-special">
+              <button
+                type="button"
+                className="btn btn-danger btn-block"
+                onClick={handleCreateUserModalClose}
+              >
+                Volver a gestión
+              </button>
+            </div>
+          </div> )
+          :
+          (<div className="board-gestion">
+            <ListaUsuarios
+              searchTerm={searchTerm}
+              handleSearchTermChange={handleSearchTermChange}
+              deleteUser={deleteUser}
+              filterUsers={filterUsers}
+            />
+            <div className="button-special">
+              <button
+                type="button"
+                className="btn btn-success btn-block"
+                onClick={handleCreateUserModalOpen}
+              >
+                Crear nuevo usuario
+              </button>
+            </div>
         </div>
+        )}
+        </>
       ) : (
         <h3>{content}</h3>
       )}
     </>
   );
+  
 };
 
 export default BoardGestion;

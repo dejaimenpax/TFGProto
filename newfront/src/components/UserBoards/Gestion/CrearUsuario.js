@@ -2,7 +2,6 @@ import React from "react";
 
 const CrearUsuario = (props) => {
 
-
     return (
         <div className="generate-credentials">
             <h4>Crear nuevo usuario</h4>
@@ -88,7 +87,7 @@ const CrearUsuario = (props) => {
               className="btn btn-custom"
               onClick={props.createUser}
             >
-              Crear usuario
+              Crear nuevo usuario
             </button>
           </div>
 
