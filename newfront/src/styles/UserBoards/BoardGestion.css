@@ -95,4 +95,8 @@
     width: 70%; /* Ajusta el ancho del modal según sea necesario */
     max-width: 600px; /* Establece un ancho máximo */
   }
+
+  .form-group div {
+    margin-top: 20px;
+  }
   
