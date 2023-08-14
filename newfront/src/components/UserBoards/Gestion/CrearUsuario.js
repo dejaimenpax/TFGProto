@@ -2,38 +2,40 @@ import React from "react";
 
 const CrearUsuario = (props) => {
 
+
+
     return (
         <div className="generate-credentials">
             <h4>Crear nuevo usuario</h4>
             <div className="form-group">
-              <label>Nombre y apellidos:</label>
+              <label>Nombre de usuario:</label>
               <input
                 type="text"
                 className="form-control"
-                name="fullName"
-                value={props.newUser.fullName}
+                name="username"
+                value={props.newUser.username}
                 onChange={props.handleNewUserChange}
               />
             </div>
+
             <p className={props.usernameErrorMessage ? "alert alert-danger" : "hide"}>
               {props.usernameErrorMessage}
             </p>
-            <button
-              type="button"
-              className="btn btn-custom"
-              onClick={props.handleShowUsername}
-            >
-              Generar nombre
-            </button>
-            {props.showUsername && (<div className={props.showUsername ? "form form-group" : "hide"}>
-              <label>Nombre de usuario generado:</label>
+
+            <div className="form-group">
+              <label>Contraseña:</label>
               <input
-                type="text"
+                type="password"
                 className="form-control"
-                value={props.newUser.username}
-                readOnly
+                name="password"
+                value={props.newUser.password}
+                onChange={props.handleNewUserChange}
               />
-            </div>)}
+            </div>
+
+            <p className={props.passwordErrorMessage ? "alert alert-danger" : "hide"}>
+              {props.passwordErrorMessage}
+            </p>
 
             <div className="form-group">
               <label>Rol:</label>
@@ -96,7 +98,18 @@ const CrearUsuario = (props) => {
             >
               Volver a gestión
             </button>
-          </div>
+
+            {props.registerMessage!=="" && (
+            <div className="form-group">
+              <div
+                className={props.successfulRegister ? "text-center alert alert-success" : "text-center alert alert-danger"}
+                role="alert"
+              >
+                {props.registerMessage}
+              </div>
+            </div>
+            )}
+        </div>
 
     );
 };

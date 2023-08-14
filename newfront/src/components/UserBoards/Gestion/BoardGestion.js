@@ -12,19 +12,24 @@ const BoardGestion = () => {
   const [content, setContent] = useState();
   const [user, setUser] = useState(null);
   const [newUser, setNewUser] = useState({
-    fullName: "",
     username: "",
+    password: "",
     teacher: "",
     role: "",
   });
 
   const [teachers, setTeachers] = useState([]);
-  const [showUsername, setShowUsername] = useState(false);
   const [showTeacherSelector, setShowTeacherSelector] = useState(true)
-  const [usernameErrorMessage, setUsernameErrorMessage] = useState()
   const [generalErrorMessage, setGeneralErrorMessage] = useState()
 
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+
+
+
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
+  const [registerMessage, setRegisterMessage] = useState("");
+  const [successfulRegister, setSuccessfulRegister] = useState(false);
   
 
   useEffect(() => {
@@ -74,13 +79,34 @@ const BoardGestion = () => {
     setSearchTerm(e.target.value);
   };
 
+
   const handleNewUserChange = (e) => {
+    const { name, value } = e.target;
+  
+    // Perform validation checks and set error messages
+    if (name === 'username') {
+      if (value.length < 6 || value.length > 40) {
+        setUsernameErrorMessage('El nombre de usuario debe tener entre 6 y 40 caracteres.');
+      } else {
+        setUsernameErrorMessage('');
+      }
+    }
+  
+    if (name === 'password') {
+      if (value.length < 6 || value.length > 40) {
+        setPasswordErrorMessage('La contraseña debe tener entre 6 y 40 caracteres.');
+      } else {
+        setPasswordErrorMessage('');
+      }
+    }
+  
     setNewUser({
       ...newUser,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
-
+  
+  
   const handleRoleChange = (e) => {
     e.target.value==="teacher" ?
       setShowTeacherSelector(false)
@@ -94,73 +120,58 @@ const BoardGestion = () => {
 
   }
 
-  const handleShowUsername = () => {
-    if (newUser.fullName) {
-      setUsernameErrorMessage(null);
-      setNewUser({
-        ...newUser,
-        username: generateUsername(newUser.fullName)
-      });
-      setShowUsername(true);
-    } else {
-      setUsernameErrorMessage("Por favor, introduce nombre y apellidos para poder generar un nombre de usuario.");
-      setShowUsername(false)
-    }
-  };
-
-  const generateUsername = (fullName) => {
-    // Lógica para generar el nombre de usuario
-    const names = fullName.split(" ");
-    const firstName = names[0].toLowerCase();
-    const lastName = names[names.length - 1].toLowerCase();
-    let username = firstName.substring(0, 3) + lastName.substring(0, 3) + (Math.floor(Math.random() * (90 - 10 + 1)) + 10).toString();
-    while (users.map(x => x.username).includes(username)) {
-      username = firstName.substring(0, 3) + lastName.substring(0, 3) + (Math.floor(Math.random() * (90 - 10 + 1)) + 10).toString();
-    }
-    return username;
-  };
-
-  const generatePassword = () => {
-    // Lógica para generar una contraseña aleatoria
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let password = "";
-    for (let i = 0; i < 8; i++) {
-      password += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return password;
-  };
-
-  
   const createUser = () => {
-    if (!newUser.username || !newUser.role || (showTeacherSelector && !newUser.teacher)){
-      setGeneralErrorMessage("Recuerda generar un nombre de usuario y elegir rol correctamente.")
+
+    setRegisterMessage("");
+    setSuccessfulRegister(false);
+
+    if (!newUser.username || !newUser.role || !newUser.password || (showTeacherSelector && !newUser.teacher)){
+      setGeneralErrorMessage("Recuerda elegir nombre de usuario, contraseña y rol.")
       return;
     } else {
       setGeneralErrorMessage(null)
     }
-    const password = generatePassword();
   
-    AuthService.register(newUser.username, password, newUser.teacher, newUser.role)
-      .then((response) => {
-        // Mostrar la contraseña generada
-        alert("Contraseña generada: " + password + ". Por favor, cópiela para mandársela al usuario.");
-        // Actualizar la lista de usuarios después de crear uno
-        getUsersExceptAdmins(user.username);
-        //Asi como la de profes
-        fetchTeachers(user.username);
-        // Restablecer los campos del nuevo usuario
-        setNewUser({
-          fullName: "",
-          username: "",
-          teacher: "",
-          role: "",
-        });
-        setShowTeacherSelector(true);
-        setShowUsername(false)
-      })
+    AuthService.register(newUser.username, newUser.password, newUser.teacher, newUser.role)
+      .then(
+        (response) => {
+          setRegisterMessage(response.data.message);
+          setSuccessfulRegister(true);
+
+          // Mostrar la contraseña generada
+          alert("Creado usuario " + newUser.username + " con contraseña " + newUser.password + ". Cópiala para mandársela al usuario.");
+          // Actualizar la lista de usuarios después de crear uno
+          getUsersExceptAdmins(user.username);
+          //Asi como la de profes
+          fetchTeachers(user.username);
+          // Restablecer los campos del nuevo usuario
+          setNewUser({
+            username: "",
+            password: "",
+            teacher: "",
+            role: "",
+          });
+          setShowTeacherSelector(true);
+
+        },
+        (error) => {
+          const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+          setRegisterMessage(resMessage);
+          setSuccessfulRegister(false);
+        })
       .catch((error) => {
         console.error(error);
       });
+
+      setTimeout(() => {
+        setRegisterMessage("")
+      }, 6000);
 
   };
 
@@ -187,11 +198,11 @@ const BoardGestion = () => {
   };
   
 
-  const deleteUser = (user) => {
+  const deleteUser = (us) => {
     let confirmMessage =
       "¿Estás seguro de borrar al usuario? Esta acción no se puede deshacer.";
 
-    if (user.roles[0].name.includes("teacher")) {
+    if (us.roles[0].name.includes("teacher")) {
       confirmMessage +=
         " Esta acción también eliminará a sus alumnos asociados.";
     }
@@ -199,7 +210,7 @@ const BoardGestion = () => {
     const confirmDelete = window.confirm(confirmMessage);
 
     if (confirmDelete) {
-      GestionService.deleteAccountByUsername(user.username)
+      GestionService.deleteAccountByUsername(us.username)
         .then(() => {
           // Actualizar la lista de usuarios después de borrar uno
           getUsersExceptAdmins(user.username);
@@ -228,15 +239,16 @@ const BoardGestion = () => {
               user={user}
               newUser={newUser}
               handleNewUserChange={handleNewUserChange}
-              usernameErrorMessage={usernameErrorMessage}
-              handleShowUsername={handleShowUsername}
-              showUsername={showUsername}
               handleRoleChange={handleRoleChange}
               teachers={teachers}
               generalErrorMessage={generalErrorMessage}
               createUser={createUser}
               showTeacherSelector={showTeacherSelector}
               handleCreateUserModalClose={handleCreateUserModalClose}
+              successfulRegister={successfulRegister}
+              registerMessage={registerMessage}
+              usernameErrorMessage={usernameErrorMessage}
+              passwordErrorMessage={passwordErrorMessage}
             />
           </div> )
           :
