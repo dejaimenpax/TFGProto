@@ -16,6 +16,7 @@ const SelectTopic = () => {
   const [exerciseSelected, setExerciseSelected] = useState(false);
   const [exerciseResolved, setExerciseResolved] = useState(false);
   const [inputFilled, setInputFilled] = useState(false);
+  const [showForbiddenInput, setShowForbiddenInput] = useState(false);
 
   const handleSelect = (id_bloque) => {
     console.log("Entró en handleSelect con el id_bloque", id_bloque);
@@ -58,6 +59,10 @@ const SelectTopic = () => {
     const newExerciseInput = [...exerciseInput];
     newExerciseInput[index] = value;
     setExerciseInput(newExerciseInput);
+
+    // Comprueba si algo del exerciseInput tiene caracteres que no sean cifras (incluye al value)
+    let hasForbiddenCharacters = newExerciseInput.some(item => !/^\d+$/.test(item));
+    setShowForbiddenInput(hasForbiddenCharacters);
   };
 
   useEffect(() => {
@@ -108,7 +113,7 @@ const SelectTopic = () => {
                         Introduce un valor
                       </div>
                     )}
-
+                    
                     {exerciseResolved && (exercise.explicacion[index].includes("!") 
                       ? <div className="input-feedback alert alert-success text-center">
                           {exercise.explicacion[index]}
@@ -121,12 +126,22 @@ const SelectTopic = () => {
                   </div>
                 ))}
 
+                {showForbiddenInput && (
+                  <div className="input-error alert alert-danger mt-1 mb-1">
+                    Por favor, introduce solo números.
+                  </div>
+                )}
+
                 {exerciseResolved ? (
                   <button className="btn btn-custom mt-2" onClick={() => handleSelect(parseInt(exercise.id_tema.toString()[0]))}>
                     Generar nuevo ejercicio del bloque
                   </button>
                 ) : (
-                  <button className="btn btn-custom mt-2" onClick={() => handleInput(exerciseInput)}>
+                  <button 
+                    className="btn btn-custom mt-2" 
+                    onClick={() => handleInput(exerciseInput)}
+                    disabled={showForbiddenInput}
+                  >
                     Resolver ejercicio
                   </button>
                 )}

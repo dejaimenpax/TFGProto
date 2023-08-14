@@ -14,3 +14,10 @@
   justify-content: center;
   align-items: center;
 }
+
+.input-box {
+  padding: 1em; /* Add padding for text */
+  font-size: 1.05em; /* Adjust the font size as desired */
+  justify-content: center;
+  align-items: center;
+}
