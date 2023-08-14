@@ -18,6 +18,10 @@ const CrearUsuario = (props) => {
               />
             </div>
 
+            <p className={props.usernameErrorMessage ? "alert alert-danger" : "hide"}>
+              {props.usernameErrorMessage}
+            </p>
+
             <div className="form-group">
               <label>Contraseña:</label>
               <input
@@ -28,6 +32,10 @@ const CrearUsuario = (props) => {
                 onChange={props.handleNewUserChange}
               />
             </div>
+
+            <p className={props.passwordErrorMessage ? "alert alert-danger" : "hide"}>
+              {props.passwordErrorMessage}
+            </p>
 
             <div className="form-group">
               <label>Rol:</label>

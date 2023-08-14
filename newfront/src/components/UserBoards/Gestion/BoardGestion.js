@@ -22,6 +22,11 @@ const BoardGestion = () => {
   const [showTeacherSelector, setShowTeacherSelector] = useState(true)
   const [generalErrorMessage, setGeneralErrorMessage] = useState()
 
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+
+
+
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const [registerMessage, setRegisterMessage] = useState("");
   const [successfulRegister, setSuccessfulRegister] = useState(false);
@@ -74,13 +79,34 @@ const BoardGestion = () => {
     setSearchTerm(e.target.value);
   };
 
+
   const handleNewUserChange = (e) => {
+    const { name, value } = e.target;
+  
+    // Perform validation checks and set error messages
+    if (name === 'username') {
+      if (value.length < 6 || value.length > 40) {
+        setUsernameErrorMessage('El nombre de usuario debe tener entre 6 y 40 caracteres.');
+      } else {
+        setUsernameErrorMessage('');
+      }
+    }
+  
+    if (name === 'password') {
+      if (value.length < 6 || value.length > 40) {
+        setPasswordErrorMessage('La contraseña debe tener entre 6 y 40 caracteres.');
+      } else {
+        setPasswordErrorMessage('');
+      }
+    }
+  
     setNewUser({
       ...newUser,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
-
+  
+  
   const handleRoleChange = (e) => {
     e.target.value==="teacher" ?
       setShowTeacherSelector(false)
@@ -221,6 +247,8 @@ const BoardGestion = () => {
               handleCreateUserModalClose={handleCreateUserModalClose}
               successfulRegister={successfulRegister}
               registerMessage={registerMessage}
+              usernameErrorMessage={usernameErrorMessage}
+              passwordErrorMessage={passwordErrorMessage}
             />
           </div> )
           :
