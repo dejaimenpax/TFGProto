@@ -15,6 +15,7 @@ class B4Ej5_6 extends EjGenerico {
       puntuacion
     );
     this.long_input=2;
+    this.etiquetas= ["Mediana:", "Moda:"]
   }
 
   resolver(input) {

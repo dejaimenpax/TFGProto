@@ -20,6 +20,7 @@ class B2Ej2 extends EjGenerico {
     );
 
     this.long_input = 1;
+    this.etiquetas=["Número de vasos:"]
   }
 
   resolver(input) {

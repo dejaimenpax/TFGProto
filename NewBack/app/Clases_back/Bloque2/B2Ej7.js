@@ -20,6 +20,7 @@ class B2Ej7 extends EjGenerico {
         );
 
         this.long_input=3;
+        this.etiquetas= ["Grados:", "Minutos:", "Segundos:"]
     }
 
     sumarAngulos(angulo1, angulo2) {

@@ -106,6 +106,11 @@ const SelectTopic = () => {
               <div className="d-flex flex-column">
                 {exerciseInput.map((value, index) => (
                   <div key={index} className="input-container d-flex flex-column">
+
+                    <label className="input-label">
+                      {exercise.etiquetas[index]}
+                    </label>
+
                     <InputBox index={index} value={value} onChange={handleInputChange} />
 
                     {inputFilled && value === "" && (

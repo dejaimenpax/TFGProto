@@ -9,11 +9,12 @@ class EjGenerico {
       this.explicacion=[] //array de la misma longitud que input
       this.puntuacion=puntuacion
       this.nota=0
-      this.long_input=0
+      this.long_input=0 //longitud del input
+      this.etiquetas=[] //array de la longitud del input
     }
 
     //Aux
-    split_num(str){ //divide un string en un array de palabras que trasnforma a numeros
+    split_num(str){ //divide un string en un array de palabras que transforma a numeros
       return str.split(" ").map(x=>Number(x))
     }
 

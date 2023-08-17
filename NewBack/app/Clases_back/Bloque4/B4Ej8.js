@@ -20,6 +20,7 @@ class B4Ej8 extends EjGenerico {
     );
 
     this.long_input = 3;
+    this.etiquetas= ["Máximo:", "Media aritmética (redondeada a la unidad):", "Mínimo:"]
   }
 
   resolver(input) {

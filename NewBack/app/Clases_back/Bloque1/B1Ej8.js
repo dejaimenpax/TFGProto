@@ -62,6 +62,7 @@ class B1Ej8 extends EjGenerico{
         )
 
         this.long_input=4;
+        this.etiquetas= ["Primer divisor:", "Segundo divisor:", "Tercer divisor:", "Cuarto divisor:"]
     }
 
     

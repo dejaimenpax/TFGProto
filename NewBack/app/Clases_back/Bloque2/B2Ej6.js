@@ -24,6 +24,7 @@ class B2Ej6 extends EjGenerico {
     );
 
     this.long_input=1;
+    this.etiquetas= ["Número de monedas de un euro:"]
   }
 
   resolver(input) {

@@ -23,6 +23,7 @@ class Ej3B15 extends EjGenerico {
     );
 
     this.long_input = 1;
+    this.etiquetas= ["Perímetro (redondeado a la unidad):"]
   }
 
   resolver(input) {
