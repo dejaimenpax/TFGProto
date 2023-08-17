@@ -34,12 +34,13 @@ class B2Ej6 extends EjGenerico {
     const [precio, confetis, mmPorConfeti] = this.enunciado.map(x => parseInt(x.replace(/[^0-9]/g, '')))
     const metrosTotales = (confetis * mmPorConfeti) / 1000;
     const precioTotal = Math.ceil(metrosTotales * precio);
+    const producto_aux = (metrosTotales * precio).toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
     if (this.input[0] === precioTotal.toString()) {
-      this.explicacion.push(`¡Es correcto! Los pasos realizados han sido los siguientes: <ol>\n <li>Multiplicar los confetis que se quieren tirar por la medida de cada confeti en milímetros, obteniendo ${confetis * mmPorConfeti} mm.</li>\n <li>Pasar de milímetros a metros dividiendo entre 1000, obteniendo ${metrosTotales}</li>\n <li>Multiplicar estos metros por el precio por metro, obteniendo ${metrosTotales * precio}</li>\n <li>Redondear al entero mayor, obteniendo ${precioTotal}</li>\n </ol>`);
+      this.explicacion.push(`¡Es correcto! Los pasos realizados han sido los siguientes: <ol>\n <li>Multiplicar los confetis que se quieren tirar por la medida de cada confeti en milímetros, obteniendo ${producto_aux} mm.</li>\n <li>Pasar de milímetros a metros dividiendo entre 1000, obteniendo ${metrosTotales}.</li>\n <li>Multiplicar estos metros por el precio por metro, obteniendo ${metrosTotales * precio}.</li>\n <li>Redondear al entero mayor, obteniendo ${precioTotal}.</li>\n </ol>`);
       this.nota = this.puntuacion;
     } else {
-        const mensaje = `No es correcto. Los pasos a seguir son los siguientes: <ol>\n <li>Multiplicar los confetis que se quieren tirar por la medida de cada confeti en milímetros, obteniendo ${confetis * mmPorConfeti} mm.</li>\n <li>Pasar de milímetros a metros dividiendo entre 1000, obteniendo ${metrosTotales}</li>\n <li>Multiplicar estos metros por el precio por metro, obteniendo ${metrosTotales * precio}</li>\n <li>Redondear al entero mayor, obteniendo ${precioTotal}</li>\n </ol>`
+        const mensaje = `No es correcto. Los pasos a seguir son los siguientes: <ol>\n <li>Multiplicar los confetis que se quieren tirar por la medida de cada confeti en milímetros, obteniendo ${producto_aux} mm.</li>\n <li>Pasar de milímetros a metros dividiendo entre 1000, obteniendo ${metrosTotales}.</li>\n <li>Multiplicar estos metros por el precio por metro, obteniendo ${metrosTotales * precio}.</li>\n <li>Redondear al entero mayor, obteniendo ${precioTotal}.</li>\n </ol>`
       this.explicacion.push(mensaje);
     }
   }

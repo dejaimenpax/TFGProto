@@ -122,7 +122,7 @@ const SelectTopic = () => {
                     {exerciseResolved && ( 
                       exercise.explicacion[index].includes("<ol>") ? (
                         <div
-                          className={`input-feedback alert ${exercise.explicacion[index].includes("!") ? "alert-success" : "alert-danger"} text-center`}
+                          className={`input-feedback alert ${exercise.explicacion[index].includes("!") ? "alert-success" : "alert-danger"}`}
                           dangerouslySetInnerHTML={{ __html: exercise.explicacion[index] }}
                         />
                       ) : (

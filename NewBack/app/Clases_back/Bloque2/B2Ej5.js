@@ -33,8 +33,8 @@ class B2Ej5 extends EjGenerico {
 
     const duracionClase = parseInt(this.enunciado[0].match(/(\d+)/)[0]);
     const duracionRecreo = parseInt(this.enunciado[1].match(/(\d+)/)[0]);
-    const clasesAntesRecreo = parseInt(this.enunciado[2].match(/(\d+)/)[0]);
-    const totalClases = parseInt(this.enunciado[3].match(/(\d+)/)[0]);
+    //const clasesAntesRecreo = parseInt(this.enunciado[2].match(/(\d+)/)[0]);
+    const totalClases = parseInt(this.enunciado[2].match(/(\d+)/)[0]);
 
     const duracionTotal = (duracionClase * totalClases) + duracionRecreo;
     const horasTermino = 9 + Math.floor(duracionTotal / 60);
