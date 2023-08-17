@@ -34,10 +34,10 @@ class B2Ej2 extends EjGenerico {
     const numVasos = Math.ceil(capacidadBidon / litrosPorVaso);
 
     if (this.input[0] == numVasos) {
-      this.explicacion.push(`¡Correcto! El número de vasos necesarios es ${numVasos}.`);
+      this.explicacion.push(`¡Es correcto! Los pasos seguidos son los siguientes: <ol>\n  <li>Pasamos de centilitros a litros la capacidad del vaso dividiento entre 100 y obteniendo ${capacidadVaso} litros</li>\n  <li>Calculamos el número de vasos necesarios dividiendo la capacidad del bidón en litros entre la capacidad de cada vaso en litros, obteniendo ${capacidadBidon / litrosPorVaso}</li>\n <li>Aproximamos al entero más cercano por arriba, ya que si tenemos decimales necesitaremos un vaso extra aunque no esté lleno del todo, obteniendo ${numVasos}</li>\n</ol>`);
       this.nota = this.puntuacion;
     } else {
-      const mensaje = `No es correcto. Para obtener el número de vasos necesarios, debes dividir la capacidad del bidón (${capacidadBidon} litros) entre la cantidad de agua que cabe en un vaso (${capacidadVaso} cl, es decir, ${litrosPorVaso} litros) y luego redondear hacia arriba, obteniendo ${numVasos} vasos.`;
+      const mensaje = `No es correcto. Los pasos a seguir son los siguientes: <ol>\n  <li>Pasamos de centilitros a litros la capacidad del vaso dividiento entre 100 y obteniendo ${capacidadVaso} litros</li>\n  <li>Calculamos el número de vasos necesarios dividiendo la capacidad del bidón en litros entre la capacidad de cada vaso en litros, obteniendo ${capacidadBidon / litrosPorVaso}</li>\n <li>Aproximamos al entero más cercano por arriba, ya que si tenemos decimales necesitaremos un vaso extra aunque no esté lleno del todo, obteniendo ${numVasos}</li>\n</ol>`;
       this.explicacion.push(mensaje);
     }
   }
