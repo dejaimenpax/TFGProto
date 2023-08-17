@@ -26,6 +26,7 @@ class B4Ej4 extends EjGenerico {
     );
 
     this.long_input = 1;
+    this.etiquetas= ["% de alumnos:"]
   }
 
   resolver(input) {

@@ -23,6 +23,7 @@ class B1Ej7 extends EjGenerico {
             puntuacion
         )
         this.long_input=4;
+        this.etiquetas= ["Primer múltiplo:", "Segundo múltiplo:", "Tercer múltiplo:", "Cuarto múltiplo:"]
     }
 
     resolver(input) { //el input es un array de 4 strings

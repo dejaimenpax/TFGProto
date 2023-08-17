@@ -36,6 +36,7 @@ class Ej3B2 extends EjGenerico {
       puntuacion
     );
     this.long_input = 1;
+    this.etiquetas= ["Número de triángulos acutángulos:"]
   }
 
   resolver(input) {

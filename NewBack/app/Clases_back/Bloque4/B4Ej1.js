@@ -17,6 +17,7 @@ class B4EJ1 extends EjGenerico {
     );
 
     this.long_input = 2;
+    this.etiquetas= ["Alumnos totales:", "Promedio de edad (número entero):"]
   }
 
   resolver(input) {

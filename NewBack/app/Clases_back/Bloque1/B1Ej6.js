@@ -14,6 +14,7 @@ class B1Ej6 extends EjGenerico {
             puntuacion
         )
         this.long_input=4;
+        this.etiquetas= ["A las decenas:", "A las centenas:", "A los millares:", "A las decenas de millar:"]
     }
 
     resolver(input) { //el input es de cuatro cajas de texto, cada una con un numero de mínimo de 6 dígitos

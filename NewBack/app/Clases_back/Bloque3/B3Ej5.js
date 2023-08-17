@@ -41,6 +41,7 @@ class B3Ej5 extends EjGenerico {
     );
 
     this.long_input=1;
+    this.etiquetas= ["Número de triángulos obtusángulos:"]
   }
 
   resolver(input) {

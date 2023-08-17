@@ -31,6 +31,7 @@ class B1Ej3_4 extends EjGenerico{
         }
 
         this.long_input = 4;
+        this.etiquetas= ["Primer número:", "Segundo número:", "Tercer número:", "Cuarto número:"]
     }
 
     resolver(input) {
@@ -70,8 +71,6 @@ class B1Ej3_4 extends EjGenerico{
                 }
             }
         });
-
-        console.log(this.explicacion);
     }
 }
 

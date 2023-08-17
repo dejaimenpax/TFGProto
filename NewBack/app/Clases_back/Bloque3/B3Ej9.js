@@ -26,6 +26,7 @@ class B3Ej9 extends EjGenerico {
     );
 
     this.long_input=1;
+    this.etiquetas= ["Área (redondeada a unidades de área):"]
   }
 
   resolver(input) {

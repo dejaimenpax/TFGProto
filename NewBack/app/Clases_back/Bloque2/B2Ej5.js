@@ -25,6 +25,7 @@ class B2Ej5 extends EjGenerico {
     );
 
     this.long_input=2;
+    this.etiquetas=["Hora:", "Minuto:"]
   }
 
   resolver(input) {
