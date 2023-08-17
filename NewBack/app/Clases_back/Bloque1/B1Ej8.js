@@ -73,11 +73,16 @@ class B1Ej8 extends EjGenerico{
         this.resultado.push(divisores);
 
         let contador = 0;
+        let ordinal = '';
     
         for (let i = 0; i < 4; i++) {
             if (this.input[i] === divisores[i].toString()) {
-                this.explicacion.push('¡Es correcto!');
-                contador++;    
+
+                const ordinales = ['primer', 'segundo', 'tercer', 'cuarto'];
+                ordinal = ordinales[i];
+
+                this.explicacion.push(`¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}.`); 
+            
             } else {
                 let feedback = '';
                 switch (i) {
