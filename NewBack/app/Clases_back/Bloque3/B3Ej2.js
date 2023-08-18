@@ -43,8 +43,19 @@ class Ej3B2 extends EjGenerico {
     console.log("He entrado en resolver Ej3B2");
     this.input = input;
 
+    const mapa = new Map()
+    mapa.set(0, " el rojo")
+    mapa.set(1, " el azul")
+    mapa.set(2, " el verde")
+    mapa.set(3, " el amarillo")
+    
+    //guarda los colores de los que son acutangulos
+    let acuteNames = new Set();
     let acutangulos = 0;
+
     for (let i = 0; i < this.enunciado.length; i++) {
+      let acu_original = acutangulos
+
       let a = this.enunciado[i][0];
       let b = this.enunciado[i][1];
       let c = this.enunciado[i][2];
@@ -68,11 +79,20 @@ class Ej3B2 extends EjGenerico {
           acutangulos++;
         }
       }
+
+      //si se ha añadido un acutangulo, añade el color
+      if (acu_original!==acutangulos){
+        acuteNames.add(mapa.get(i));
+      }
     }
+
+    /*
 
     // Excluir triángulos rectángulos
     let rectangulos = 0;
     for (let i = 0; i < this.enunciado.length; i++) {
+      let rect_original = rectangulos;
+
       let a = this.enunciado[i][0];
       let b = this.enunciado[i][1];
       let c = this.enunciado[i][2];
@@ -96,17 +116,61 @@ class Ej3B2 extends EjGenerico {
           rectangulos++;
         }
       }
+
+      //si se ha añadido un rectangulo, quita ese color
+      if (rect_original!==rectangulos){
+        acuteNames.delete(mapa.get(i))
+      }
     }
+    
 
     // Restar los triángulos rectángulos para obtener los acutángulos
     acutangulos -= rectangulos;
 
+    */
+
+    let formattedColors=[...acuteNames]
+
+    //esto añade un "y" al ultimo
+    formattedColors.map((x,i)=> {
+      if (i===formattedColors.length-1)
+        return " y " + x.slice(1)
+      })
+    
     if (acutangulos === parseInt(this.input[0])) {
-      this.explicacion.push(`¡Es correcto!`);
+      switch(acutangulos){
+        case 0:
+          this.explicacion.push(
+            `¡Es correcto! Hay ${acutangulos} triángulos acutángulos en total.`
+          );
+          break;
+        case 1:
+          this.explicacion.push(
+            `¡Es correcto! Hay ${acutangulos} triángulo acutángulo en total. El triángulo acutángulo es${formattedColors}.`
+          );
+          break;
+        default:
+          this.explicacion.push(
+            `¡Es correcto! Hay ${acutangulos} triángulos acutángulos en total. Los triángulos acutángulos son${formattedColors}.`
+          );
+      }
     } else {
-      this.explicacion.push(
-        `No es correcto. Hay ${acutangulos} triángulos acutángulos en total.`
-      );
+      switch(acutangulos){
+        case 0:
+          this.explicacion.push(
+            `No es correcto. Hay ${acutangulos} triángulos acutángulos en total.`
+          );
+          break;
+        case 1:
+          this.explicacion.push(
+            `No es correcto. Hay ${acutangulos} triángulo acutángulo en total. El triángulo acutángulo es ${formattedColors}.`
+          );
+          break;
+        default:
+          this.explicacion.push(
+            `No es correcto. Hay ${acutangulos} triángulos acutángulos en total. Los triángulos acutángulos son ${formattedColors}.`
+          );
+      }
     }
   }
 }
