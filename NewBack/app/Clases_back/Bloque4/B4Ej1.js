@@ -1,6 +1,6 @@
 const EjGenerico = require('../EjGenerico.js');
 
-class B4EJ1 extends EjGenerico {
+class B4Ej1 extends EjGenerico {
   constructor(
     texto = "El siguiente diagrama de barras representa las edades de los alumnos de una clase de la Universidad. " +
     "Responde, en las dos cajas de texto, cúantos alumnos tiene la clase en total " +
@@ -45,4 +45,4 @@ class B4EJ1 extends EjGenerico {
 
 }
 
-module.exports = B4EJ1;
+module.exports = B4Ej1;

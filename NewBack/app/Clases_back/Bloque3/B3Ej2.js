@@ -1,6 +1,6 @@
 const EjGenerico = require('../EjGenerico.js');
 
-class Ej3B2 extends EjGenerico {
+class B2Ej2 extends EjGenerico {
   constructor(
     texto = "¿Cuántos de los siguientes triángulos son acutángulos?",
     enunciado = [
@@ -175,4 +175,4 @@ class Ej3B2 extends EjGenerico {
   }
 }
 
-module.exports = Ej3B2;
+module.exports = B2Ej2;
