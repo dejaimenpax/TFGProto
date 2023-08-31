@@ -119,14 +119,21 @@ const SelectTopic = () => {
                       </div>
                     )}
                     
-                    {exerciseResolved && (exercise.explicacion[index].includes("!") 
-                      ? <div className="input-feedback alert alert-success text-center">
+                    {exerciseResolved && ( 
+                      exercise.explicacion[index].includes("<ol>") ? (
+                        <div
+                          className={`input-feedback alert ${exercise.explicacion[index].includes("!") ? "alert-success" : "alert-danger"}`}
+                          dangerouslySetInnerHTML={{ __html: exercise.explicacion[index] }}
+                        />
+                      ) : (
+                        <div
+                          className={`input-feedback alert ${exercise.explicacion[index].includes("!") ? "alert-success" : "alert-danger"} text-center`}
+                        >
                           {exercise.explicacion[index]}
                         </div>
-                      : <div className="input-feedback alert alert-danger text-center">
-                          {exercise.explicacion[index]}
-                        </div>
+                      )
                     )}
+
 
                   </div>
                 ))}

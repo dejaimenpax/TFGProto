@@ -1,6 +1,6 @@
 const EjGenerico = require('../EjGenerico.js');
 
-class Ej3B15 extends EjGenerico {
+class B3Ej15 extends EjGenerico {
   constructor(
     texto = "Calcula el perímetro del siguiente triángulo (puede ayudarte usar el Teorema de Pitágoras) y redondea el resultado al entero más cercano.",
     enunciado = [
@@ -50,4 +50,4 @@ class Ej3B15 extends EjGenerico {
   }
 }
 
-module.exports = Ej3B15;
+module.exports = B3Ej15;

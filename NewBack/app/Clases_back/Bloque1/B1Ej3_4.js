@@ -48,7 +48,7 @@ class B1Ej3_4 extends EjGenerico{
         input_aux.forEach(num => {
             if (min < num && num < max && !numerosIngresados.has(num)) {
                 this.nota += this.puntuacion / 4; // Cada apartado da 2.5
-                this.explicacion.push(`¡Es correcto!`);
+                this.explicacion.push(`¡Es correcto! ${num} es mayor que ${min} y menor que ${max}`);
                 this.resultado.push(num);
                 numerosIngresados.add(num); // Agregamos el número ingresado al conjunto
             } else {
