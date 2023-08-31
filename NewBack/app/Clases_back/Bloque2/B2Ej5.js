@@ -25,6 +25,7 @@ class B2Ej5 extends EjGenerico {
 
     this.long_input=2;
     this.etiquetas=["Hora:", "Minuto:"]
+    this.puntos_explicados = "La hora y el minuto deben ser correctas para que el ejercicio cuente 10 puntos."
   }
 
   resolver(input) {

@@ -28,6 +28,11 @@
     text-align: center;
   }
 
+  .puntos-explicados{
+    margin-top: 20px;
+    text-align: center;
+  }
+
   .triangle-exercise {
     overflow: auto;
   }

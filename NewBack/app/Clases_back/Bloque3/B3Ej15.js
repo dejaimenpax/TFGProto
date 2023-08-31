@@ -24,6 +24,8 @@ class B3Ej15 extends EjGenerico {
 
     this.long_input = 1;
     this.etiquetas= ["Perímetro (redondeado a la unidad):"]
+    this.puntos_explicados = "La respuesta correcta supone un 10 en el ejercicio."
+
   }
 
   resolver(input) {
@@ -42,7 +44,7 @@ class B3Ej15 extends EjGenerico {
     perimetro = Math.round(perimetro);
 
     if (perimetro === parseInt(this.input[0])) {
-      this.explicacion.push(`¡Es correcto!`);
+      this.explicacion.push(`¡Es correcto! El perímetro se ha hallado sumando todos los lados, los cuales se pueden calcular fácilmente usando triángulos auxiliares junto con el teorema de pitágoras`);
       this.nota = this.puntuacion;
     } else {
       this.explicacion.push(`No es correcto. El perímetro del triángulo es ${perimetro}. Puedes ayudarte del Teorema de Pitágoras para calcular las distancias entre vértices`);

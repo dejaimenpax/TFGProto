@@ -18,6 +18,8 @@ class B4Ej1 extends EjGenerico {
 
     this.long_input = 2;
     this.etiquetas= ["Alumnos totales:", "Promedio de edad (número entero):"]
+    this.puntos_explicados = "Cada respuesta vale 5 puntos, valiendo el ejercicio 10 puntos."
+
   }
 
   resolver(input) {

@@ -11,6 +11,7 @@ class EjGenerico {
       this.nota=0
       this.long_input=0 //longitud del input
       this.etiquetas=[] //array de la longitud del input
+      this.puntos_explicados //string que habla de la puntuación, de como va
     }
 
     //Aux

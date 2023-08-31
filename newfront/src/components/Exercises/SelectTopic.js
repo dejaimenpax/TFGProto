@@ -143,6 +143,7 @@ const SelectTopic = () => {
                     Por favor, introduce solo números.
                   </div>
                 )}
+                
 
                 {exerciseResolved ? (
                   <button className="btn btn-custom mt-2" onClick={() => handleSelect(parseInt(exercise.id_tema.toString()[0]))}>
