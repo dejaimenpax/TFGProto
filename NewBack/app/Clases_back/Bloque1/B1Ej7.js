@@ -24,6 +24,7 @@ class B1Ej7 extends EjGenerico {
         )
         this.long_input=4;
         this.etiquetas= ["Primer múltiplo:", "Segundo múltiplo:", "Tercer múltiplo:", "Cuarto múltiplo:"]
+        this.puntos_explicados = "Para obtener los 10 puntos del ejercicio, todas las respuestas deben ser correctas."
     }
 
     resolver(input) { //el input es un array de 4 strings

@@ -63,6 +63,7 @@ class B1Ej8 extends EjGenerico{
 
         this.long_input=4;
         this.etiquetas= ["Primer divisor:", "Segundo divisor:", "Tercer divisor:", "Cuarto divisor:"]
+        this.puntos_explicados = "Para obtener los 10 puntos del ejercicio, todas las respuestas deben ser correctas."
     }
 
     

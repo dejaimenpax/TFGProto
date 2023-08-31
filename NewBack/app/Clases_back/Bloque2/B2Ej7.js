@@ -21,6 +21,7 @@ class B2Ej7 extends EjGenerico {
 
         this.long_input=3;
         this.etiquetas= ["Grados:", "Minutos:", "Segundos:"]
+        this.puntos_explicados = "Los grados, minutos y segundos deben ser los tres correctos para que el ejercicio puntúe con 10 puntos."
     }
 
     sumarAngulos(angulo1, angulo2) {

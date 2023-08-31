@@ -49,7 +49,12 @@ const ExerciseCard = ({ exercise }) => {
       <div className="exercise-card-title">{exercise?.tema}</div>
       <div className="exercise-card-text">{exercise?.texto}</div>
       {exercise?.enunciado && exercise?.enunciado.length > 0 && (
-        <div className="exercise-card-enunciado">{content}</div>
+        <>
+          <div className="exercise-card-enunciado">
+            {content}
+          </div>
+          <p className="puntos-explicados">{exercise.puntos_explicados}</p>
+        </>
       )}
     </div>
   );

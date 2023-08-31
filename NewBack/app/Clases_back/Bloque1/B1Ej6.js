@@ -15,6 +15,7 @@ class B1Ej6 extends EjGenerico {
         )
         this.long_input=4;
         this.etiquetas= ["A las decenas:", "A las centenas:", "A los millares:", "A las decenas de millar:"]
+        this.puntos_explicados = "Cada respuesta vale 2.5, valiendo el ejercicio 10 puntos."
     }
 
     resolver(input) { //el input es de cuatro cajas de texto, cada una con un numero de mínimo de 6 dígitos
