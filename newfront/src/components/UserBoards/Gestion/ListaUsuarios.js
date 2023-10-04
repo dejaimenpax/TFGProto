@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import StatsPage from "../StatsPage";
 import GestionService from "../../../services/gestion.service";
 
-const ListaUsuarios = ({ searchTerm, handleSearchTermChange, deleteUser, filterUsers }) => {
+const ListaUsuarios = ({ searchTerm, handleSearchTermChange, deleteUser, filterUsers, handleCreateUserModalOpen }) => {
   const [showStats, setShowStats] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
@@ -50,7 +50,7 @@ const ListaUsuarios = ({ searchTerm, handleSearchTermChange, deleteUser, filterU
         <>
           <div className="stats-button">
             <button type="button" className="btn btn-custom" onClick={() => verStats(selectedUser)}>
-              Ocultar estadísticas
+              Volver
             </button>
           </div>
           <StatsPage user={selectedUser} />
@@ -102,6 +102,18 @@ const ListaUsuarios = ({ searchTerm, handleSearchTermChange, deleteUser, filterU
           </ul>
         </>
       )}
+      
+      {!showStats && !selectedUser ? (
+        <div className="button-special">
+          <button
+            type="button"
+            className="btn btn-success btn-block"
+            onClick={handleCreateUserModalOpen}
+          >
+            Crear nuevo usuario
+          </button>
+        </div>
+      ) : (<></>)}
     </div>
   );
 };

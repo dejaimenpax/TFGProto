@@ -258,16 +258,8 @@ const BoardGestion = () => {
               handleSearchTermChange={handleSearchTermChange}
               deleteUser={deleteUser}
               filterUsers={filterUsers}
+              handleCreateUserModalOpen={handleCreateUserModalOpen}
             />
-            <div className="button-special">
-              <button
-                type="button"
-                className="btn btn-success btn-block"
-                onClick={handleCreateUserModalOpen}
-              >
-                Crear nuevo usuario
-              </button>
-            </div>
         </div>
         )}
         </>
