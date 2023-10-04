@@ -58,12 +58,19 @@ const eraseUserStats = (username) => {
   })
 }
 
+const restorePassword = (username, password) => {
+  return axios.post(API_URL + "restorePassword", {username, password} , {
+    headers: authHeader()
+  })
+}
+
 const GestionService = {
   getUsersExceptAdmins,
   deleteAccountByUsername,
   getListElement,
   eraseUserStats,
   getTeachers,
+  restorePassword,
 };
 
 export default GestionService;

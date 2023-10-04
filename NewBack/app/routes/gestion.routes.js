@@ -21,4 +21,6 @@ module.exports = function(app) {
 
   app.post("/api/gestion/eraseUserStats", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.eraseUserStats)
 
+  app.post("/api/gestion/restorePassword", [authJwt.verifyToken, authJwt.isAdminOrTeacher], controller.restorePassword)
+  
 };

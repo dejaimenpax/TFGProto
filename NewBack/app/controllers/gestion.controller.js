@@ -189,3 +189,26 @@ exports.eraseUserStats = (req, res) => {
   
 }
 
+exports.restorePassword = (req, res) => {
+
+  User.findOneAndUpdate(
+    { username: req.body.username },
+    {
+      password: bcrypt.hashSync(req.body.password, 8),
+    },
+    { new: true }
+  )
+  .then((user) => {
+    if (!user) {
+      return res.status(404).send({ message: "Usuario no encontrado." });
+    }
+
+    res.status(200).send({ message: "Contraseña restablecida con éxito." });
+  })
+  .catch((err) => {
+    res.status(500).send({ message: err.message });
+  });
+
+
+}
+

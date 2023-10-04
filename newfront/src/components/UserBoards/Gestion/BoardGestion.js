@@ -272,4 +272,3 @@ const BoardGestion = () => {
 };
 
 export default BoardGestion;
-
