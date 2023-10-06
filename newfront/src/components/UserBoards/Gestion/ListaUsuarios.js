@@ -2,7 +2,17 @@ import React, { useState } from "react";
 import StatsPage from "../StatsPage";
 import GestionService from "../../../services/gestion.service";
 
-const ListaUsuarios = ({ searchTerm, handleSearchTermChange, deleteUser, filterUsers, handleCreateUserModalOpen }) => {
+const ListaUsuarios = ({
+    searchTerm, 
+    handleSearchTermChange, 
+    deleteUser, 
+    filterUsers, 
+    handleCreateUserModalOpen, 
+    handleResetPasswordModalOpen,
+    handleResetPasswordModalClose,
+    showResetPasswordModal,
+    handlePasswordChange
+  }) => {
   const [showStats, setShowStats] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
@@ -44,6 +54,24 @@ const ListaUsuarios = ({ searchTerm, handleSearchTermChange, deleteUser, filterU
     }
   };
 
+  const cambiarPassword = (user) => {
+    if (!showResetPasswordModal) {
+      GestionService.getListElement(user.username)
+        .then((response) => {
+          setSelectedUser(response.data);
+          handleResetPasswordModalOpen();
+          handlePasswordChange(user.username)
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      handleResetPasswordModalClose();
+      setSelectedUser(null);
+      handlePasswordChange("")
+    }
+  }
+
   return (
     <div className="lista-usuarios">
       {showStats && selectedUser ? (
@@ -81,6 +109,13 @@ const ListaUsuarios = ({ searchTerm, handleSearchTermChange, deleteUser, filterU
                   onClick={() => verStats(user)}
                 >
                   Ver estadísticas
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-warning"
+                  onClick={() => cambiarPassword(user)}
+                >
+                  Restablecer contraseña
                 </button>
                 <button
                   type="button"

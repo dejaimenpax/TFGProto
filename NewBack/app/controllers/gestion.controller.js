@@ -2,6 +2,8 @@ const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
 
+var bcrypt = require("bcryptjs");
+
 
 exports.deleteAccountByUsername = (req, res) => {
     const { username } = req.body;

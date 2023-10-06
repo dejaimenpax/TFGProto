@@ -5,6 +5,7 @@ import "../../../styles/UserBoards/BoardGestion.css";
 import EventBus from "../../../common/EventBus";
 import ListaUsuarios from "./ListaUsuarios";
 import CrearUsuario from "./CrearUsuario";
+import ModificarUsuario from "./ModificarUsuario";
 
 const BoardGestion = () => {
   const [users, setUsers] = useState([]);
@@ -30,6 +31,11 @@ const BoardGestion = () => {
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const [registerMessage, setRegisterMessage] = useState("");
   const [successfulRegister, setSuccessfulRegister] = useState(false);
+
+  const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
+  const [resetMessage, setResetMessage] = useState("");
+  const [successfulReset, setSuccessfulReset] = useState(false);
+
   
 
   useEffect(() => {
@@ -229,46 +235,127 @@ const BoardGestion = () => {
     setShowCreateUserModal(false);
   };
 
+  const handlePasswordChange = (usname) => {
+    setNewUser({
+      username: usname,
+      password: "",
+      teacher: "",
+      role: "",
+    })
+  }
+
+  const handleResetPasswordModalOpen = () => {
+    setShowResetPasswordModal(true);
+  };
+
+  const handleResetPasswordModalClose = () => {
+    setShowResetPasswordModal(false);
+  };
+
+  const resetPassword = () => {
+
+    setResetMessage("");
+    setSuccessfulReset(false);
+
+    if (!newUser.password){
+      setGeneralErrorMessage("Recuerda escribir una contraseña.")
+      return;
+    } else {
+      setGeneralErrorMessage(null)
+    }
+  
+    GestionService.restorePassword(newUser.username, newUser.password)
+      .then(
+        (response) => {
+          setResetMessage(response.data.message);
+          setSuccessfulReset(true);
+          // Mostrar la contraseña generada
+          alert("Modificada la contraseña de " + newUser.username + ". La nueva contraseña es " + newUser.password + ". Cópiala para mandársela al usuario.");
+
+          // Restablecer los campos del nuevo usuario
+          setNewUser({
+            ...newUser,
+            password: "",
+          });
+
+        },
+        (error) => {
+          const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+          setResetMessage(resMessage);
+          setSuccessfulReset(false);
+        })
+      .catch((error) => {
+        console.error(error);
+      });
+
+      setTimeout(() => {
+        setResetMessage("")
+      }, 6000);
+
+  }
+
   return (
     <>
       {user ? (
         <>
-        {showCreateUserModal ? (
-          <div className="board-gestion">
-            <CrearUsuario
-              user={user}
-              newUser={newUser}
-              handleNewUserChange={handleNewUserChange}
-              handleRoleChange={handleRoleChange}
-              teachers={teachers}
-              generalErrorMessage={generalErrorMessage}
-              createUser={createUser}
-              showTeacherSelector={showTeacherSelector}
-              handleCreateUserModalClose={handleCreateUserModalClose}
-              successfulRegister={successfulRegister}
-              registerMessage={registerMessage}
-              usernameErrorMessage={usernameErrorMessage}
-              passwordErrorMessage={passwordErrorMessage}
-            />
-          </div> )
-          :
-          (<div className="board-gestion">
-            <ListaUsuarios
-              searchTerm={searchTerm}
-              handleSearchTermChange={handleSearchTermChange}
-              deleteUser={deleteUser}
-              filterUsers={filterUsers}
-              handleCreateUserModalOpen={handleCreateUserModalOpen}
-            />
-        </div>
-        )}
+          {showCreateUserModal ? (
+            <div className="board-gestion">
+              <CrearUsuario
+                user={user}
+                newUser={newUser}
+                handleNewUserChange={handleNewUserChange}
+                handleRoleChange={handleRoleChange}
+                teachers={teachers}
+                generalErrorMessage={generalErrorMessage}
+                createUser={createUser}
+                showTeacherSelector={showTeacherSelector}
+                handleCreateUserModalClose={handleCreateUserModalClose}
+                successfulRegister={successfulRegister}
+                registerMessage={registerMessage}
+                usernameErrorMessage={usernameErrorMessage}
+                passwordErrorMessage={passwordErrorMessage}
+              />
+            </div>
+          ) : showResetPasswordModal ? (
+            <div className="board-gestion">
+              <ModificarUsuario 
+                newUser={newUser}
+                handleNewUserChange={handleNewUserChange}
+                passwordErrorMessage={passwordErrorMessage}
+                handleResetPasswordModalClose={handleResetPasswordModalClose}
+                resetPassword={resetPassword}
+                successfulReset={successfulReset}
+                resetMessage={resetMessage}
+              />
+            </div>
+          ) : (
+            <div className="board-gestion">
+              <ListaUsuarios
+                searchTerm={searchTerm}
+                handleSearchTermChange={handleSearchTermChange}
+                deleteUser={deleteUser}
+                filterUsers={filterUsers}
+                handleCreateUserModalOpen={handleCreateUserModalOpen}     
+                handleResetPasswordModalOpen={handleResetPasswordModalOpen}
+                handleResetPasswordModalClose={handleResetPasswordModalClose}
+                showResetPasswordModal={showResetPasswordModal}
+                handlePasswordChange={handlePasswordChange}
+              />
+            </div>
+          )}
         </>
       ) : (
         <h3>{content}</h3>
       )}
     </>
   );
-  
-};
+
+}
 
 export default BoardGestion;
