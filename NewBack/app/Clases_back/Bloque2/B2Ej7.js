@@ -20,7 +20,7 @@ class B2Ej7 extends EjGenerico {
         );
 
         this.long_input=3;
-        this.etiquetas= ["Grados:", "Minutos:", "Segundos:"]
+        this.etiquetas= ["Segundos:", "Minutos:", "Grados:"]
         this.puntos_explicados = "Los grados, minutos y segundos deben ser los tres correctos para que el ejercicio puntúe con 10 puntos."
     }
 
@@ -65,15 +65,15 @@ class B2Ej7 extends EjGenerico {
         this.explicacion = [];
         let contador = 0;
     
-        // Feedback para los grados
-        if (this.input[0] === this.resultado[0]) {
-            this.explicacion.push('¡Los grados son correctos!');
+        // Feedback para los segundos
+        if (this.input[0] === this.resultado[2]) {
+            this.explicacion.push('¡Los segundos son correctos!');
             contador++;
         } else {
-            const mensaje = `Los grados no son correctos. La suma es ${this.resultado[0]}º ${this.resultado[1]}' ${this.resultado[2]}", por lo que deberías haber escrito ${this.resultado[0]}`;
+            const mensaje = `Los segundos no son correctos. La suma es ${this.resultado[0]}º ${this.resultado[1]}' ${this.resultado[2]}", por lo que deberías haber escrito ${this.resultado[2]}`;
             this.explicacion.push(mensaje);
         }
-    
+
         // Feedback para los minutos
         if (this.input[1] === this.resultado[1]) {
             this.explicacion.push('¡Los minutos son correctos!');
@@ -82,21 +82,20 @@ class B2Ej7 extends EjGenerico {
             const mensaje = `Los minutos no son correctos. La suma es ${this.resultado[0]}º ${this.resultado[1]}' ${this.resultado[2]}", por lo que deberías haber escrito ${this.resultado[1]}`;
             this.explicacion.push(mensaje);
         }
-    
-        // Feedback para los segundos
-        if (this.input[2] === this.resultado[2]) {
-            this.explicacion.push('¡Los segundos son correctos!');
+
+        // Feedback para los grados
+        if (this.input[2] === this.resultado[0]) {
+            this.explicacion.push('¡Los grados son correctos!');
             contador++;
         } else {
-            const mensaje = `Los segundos no son correctos. La suma es ${this.resultado[0]}º ${this.resultado[1]}' ${this.resultado[2]}", por lo que deberías haber escrito ${this.resultado[2]}`;
+            const mensaje = `Los grados no son correctos. La suma es ${this.resultado[0]}º ${this.resultado[1]}' ${this.resultado[2]}", por lo que deberías haber escrito ${this.resultado[0]}`;
             this.explicacion.push(mensaje);
         }
-
+    
         if (contador===3)
             this.nota = this.puntuacion;
     }
     
-
 }
 
 module.exports = B2Ej7;
