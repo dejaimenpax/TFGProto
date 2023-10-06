@@ -44,7 +44,7 @@ const Resolver = () => {
           </>
         ) : (
           <>
-            {user.roles.includes("ROLE_TEACHER") ? ( //Si es profesor
+            {user.roles.includes("ROLE_ADMIN") ? ( //Si es admin
               <ConfigureExercises className="text-center" />
             ) : ( //Si no lo es, nada
               <></>
