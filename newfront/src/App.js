@@ -20,6 +20,8 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
+    AuthService.checkTokenExpiration();
+
     const user = AuthService.getCurrentUser();
 
     if (user) {

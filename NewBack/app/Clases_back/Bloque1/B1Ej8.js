@@ -75,14 +75,13 @@ class B1Ej8 extends EjGenerico{
 
         let contador = 0;
         let ordinal = '';
+        const ordinales = ['primer', 'segundo', 'tercer', 'cuarto'];
     
         for (let i = 0; i < 4; i++) {
             if (this.input[i] === divisores[i].toString()) {
-
-                const ordinales = ['primer', 'segundo', 'tercer', 'cuarto'];
                 ordinal = ordinales[i];
 
-                this.explicacion.push(`¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}.`); 
+                this.explicacion.push(`¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}, ya que es el ${ordinales[i]} número que, si hacemos con él la división entera de ${num}, da resto 0.`); 
             
             } else {
                 let feedback = '';
@@ -92,20 +91,20 @@ class B1Ej8 extends EjGenerico{
                         break;
                     case 1:
                         if (num % 2 === 0) {
-                            feedback = 'Un número es divisible por 2 si su última cifra es múltiplo de 2. Como la última cifra de ' + num + ' es ' + num % 10 + ', es divisible por 2 si el segundo número de la respuesta es ' + (divisores[1] / 2) + '.';
+                            feedback = `No es correcto. Sabemos que su última cifra es un número par, por lo que el segundo divisor es 2, y no ${this.input[i]}.`;
                         } else {
-                            feedback = 'El número ' + divisores[1] + ' no es divisible por 2.';
+                            feedback = 'El número ' + this.input[i] + ` no es el segundo divisor de ${num}. La respuesta correcta es ${this.resultado[i]}, lo que se puede comprobar yendo en orden desde el anterior divisor y probando a dividir hasta que nos encontremos con una división con resto 0. `;
                         }
                         break;
                     case 2:
                         if (divisores.reduce((a, b) => a + b, 0) % 3 === 0) {
-                            feedback = 'Un número es divisible por 3 si la suma de sus cifras es múltiplo de 3. Como la suma de las cifras de ' + num + ' es ' + num.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0) + ', el tercer número de la respuesta debe ser 3.';
+                            feedback = 'No es correcto. Sabemos que la suma de sus cifras es múltiplo de tres (en concreto es ' + num.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0) + `, por lo que el tercer divisor es 3 y no ${this.input[i]}.`;
                         } else {
-                            feedback = 'El número ' + divisores[2] + ' no es divisible por 3.';
+                            feedback = 'El número ' + this.input[i] + ` no es el tercer divisor de ${num}. La respuesta correcta es ${this.resultado[i]}, lo que se puede comprobar yendo en orden desde el anterior divisor y probando a dividir hasta que nos encontremos con una división con resto 0. `;
                         }
                         break;
                     case 3:
-                        feedback = 'El cuarto divisor se puede obtener dividiendo el número ' + num + ' entre el tercer divisor.';
+                        feedback = `No es correcto. La manera más sencilla de obtener el cuarto divisor es dividir nuestro número, ${num}, entre el tercer divisor (${this.divisores(2)} en este caso), obteniendo ${this.divisores(i)} .`;
                         break;
                 }
                 this.explicacion.push(feedback);
