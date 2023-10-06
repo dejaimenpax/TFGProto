@@ -250,6 +250,12 @@ const BoardGestion = () => {
 
   const handleResetPasswordModalClose = () => {
     setShowResetPasswordModal(false);
+    setNewUser({
+      username: "",
+      password: "",
+      teacher: "",
+      role: "",
+    })
   };
 
   const resetPassword = () => {
