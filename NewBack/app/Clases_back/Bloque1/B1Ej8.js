@@ -34,7 +34,7 @@ const generateRandomNumber = () => {
     let numDivisors;
     
     do {
-      num = Math.floor(Math.random() * (500000 - 8 + 1) + 8); //generamos un número aleatorio entre 8 y 500000
+      num = Math.floor(Math.random() * (10000 - 8 + 1) + 8); //generamos un número aleatorio entre 8 y 500000
       numDivisors = obtener_divisores(num).length; // obtenemos la cantidad de divisores del número generado
     } while (numDivisors < 4); // repetimos el proceso mientras el número no tenga al menos 4 divisores
     
