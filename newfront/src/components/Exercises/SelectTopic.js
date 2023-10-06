@@ -16,6 +16,7 @@ const SelectTopic = () => {
   const [exerciseSelected, setExerciseSelected] = useState(false);
   const [exerciseResolved, setExerciseResolved] = useState(false);
   const [inputFilled, setInputFilled] = useState(false);
+  const [disableInput, setDisableInput] = useState(false);
   const [showForbiddenInput, setShowForbiddenInput] = useState(false);
 
   const handleSelect = (id_bloque) => {
@@ -41,17 +42,24 @@ const SelectTopic = () => {
   };
 
   const handleInput = (input) => {
-    if (input.every((value) => value !== "")) {
-      const currentUser = AuthService.getCurrentUser();
-      ExerciseService.resolveExercise(exercise, input, currentUser.username)
-        .then((response) => {
-          setExercise(response.data);
-          setExerciseResolved(true);
-          setInputFilled(false);
-        })
-        .catch((error) => console.error("Error resolving exercise:", error));
+    if (!disableInput){
+      if (input.every((value) => value !== "")) {
+        const currentUser = AuthService.getCurrentUser();
+        ExerciseService.resolveExercise(exercise, input, currentUser.username)
+          .then((response) => {
+            setExercise(response.data);
+            setExerciseResolved(true);
+            setInputFilled(false);
+          })
+          .catch((error) => console.error("Error resolving exercise:", error));
+      } else {
+        setInputFilled(true);
+      }
     } else {
-      setInputFilled(true);
+      setShowForbiddenInput(true);
+      setTimeout(() => {
+        setShowForbiddenInput(false); // Mantén el flag activo
+      }, 3000);
     }
   };
 
@@ -62,7 +70,11 @@ const SelectTopic = () => {
 
     // Comprueba si algo del exerciseInput tiene caracteres que no sean cifras (incluye al value)
     let hasForbiddenCharacters = newExerciseInput.some(item => !/^\d+$/.test(item));
+    setDisableInput(hasForbiddenCharacters);
     setShowForbiddenInput(hasForbiddenCharacters);
+    setTimeout(() => {
+      setShowForbiddenInput(false); // Mantén el flag activo
+    }, 3000);
   };
 
   useEffect(() => {
@@ -153,7 +165,6 @@ const SelectTopic = () => {
                   <button 
                     className="btn btn-custom mt-2" 
                     onClick={() => handleInput(exerciseInput)}
-                    disabled={showForbiddenInput}
                   >
                     Resolver ejercicio
                   </button>
