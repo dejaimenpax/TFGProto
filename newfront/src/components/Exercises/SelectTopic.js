@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef} from "react";
 import UserService from "../../services/user.service";
 import ExerciseService from "../../services/exercise.service";
 import EventBus from "../../common/EventBus";
@@ -18,6 +18,8 @@ const SelectTopic = () => {
   const [inputFilled, setInputFilled] = useState(false);
   const [disableInput, setDisableInput] = useState(false);
   const [showForbiddenInput, setShowForbiddenInput] = useState(false);
+
+  const exerciseCardRef = useRef(null);
 
   const handleSelect = (id_bloque) => {
     console.log("Entró en handleSelect con el id_bloque", id_bloque);
@@ -39,6 +41,8 @@ const SelectTopic = () => {
         }
       })
       .catch((error) => console.error("Error creating exercise:", error));
+
+      exerciseCardRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleInput = (input) => {
@@ -113,7 +117,7 @@ const SelectTopic = () => {
             </p>
           ) : (
             <>
-              <ExerciseCard exercise={exercise} />
+              <div ref={exerciseCardRef}></div><ExerciseCard exercise={exercise}/>
 
               <div className="d-flex flex-column">
                 {exerciseInput.map((value, index) => (
