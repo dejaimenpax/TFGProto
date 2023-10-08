@@ -26,6 +26,7 @@ const ModificarUsuario = (props) => {
               type="button"
               className="btn btn-custom"
               onClick={props.resetPassword}
+              disabled={props.passwordErrorMessage!==''}
             >
               Cambiar contraseña
             </button>
