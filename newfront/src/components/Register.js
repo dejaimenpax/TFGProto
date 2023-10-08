@@ -4,6 +4,8 @@ import Input from "react-validation/build/input";
 import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
 import { useNavigate, Link } from "react-router-dom";
+import { decrypt } from "../common/Encryption";
+import { encryptionKey } from "../common/Config";
 
 import AuthService from "../services/auth.service";
 
@@ -48,9 +50,11 @@ const Register = () => {
   const [message, setMessage] = useState("");
   const [userType, setUserType] = useState("");
   const [teacherOptions, setTeacherOptions] = useState([]);
-  const [selectedTeacher, setSelectedTeacher] = useState("");
   const [userTypeError, setUserTypeError] = useState(false);
-  const [selectedTeacherError, setSelectedTeacherError] = useState(false);
+
+  const [teacherName, setTeacherName] = useState("");
+  const [teacherNotFoundError, setTeacherNotFoundError] = useState(false); 
+  const [teacherCode, setTeacherCode] = useState("")
 
   useEffect(() => {
     const fetchTeachers = () => {
@@ -59,9 +63,6 @@ const Register = () => {
           setTeacherOptions(response.data);
           console.log(response.data)
         })
-        .catch((error) => {
-          // Manejar el error
-        });
     };
 
     fetchTeachers();
@@ -83,10 +84,13 @@ const Register = () => {
     setUserTypeError(false);
   };
 
-  const onChangeSelectedTeacher = (e) => {
-    const teacher = e.target.value;
-    setSelectedTeacher(teacher);
-    setSelectedTeacherError(false);
+  const onChangeTeacherCode = (e) => {
+    const code = e.target.value; //coge el codigo introducido
+    console.log("El texto es", code)
+    setTeacherCode(code)
+    setTeacherName(decrypt(code, encryptionKey)) //desencripta ese codigo y obtiene el teachername
+    console.log("El desencriptado es", teacherName)
+    setTeacherNotFoundError(!teacherOptions.includes(teacherName))
   };
 
   const handleRegister = (e) => {
@@ -120,8 +124,8 @@ const Register = () => {
             setSuccessful(false);
           }
         );
-      } else if (userType === "alumno" && selectedTeacher) {
-        AuthService.register(username, password, selectedTeacher, "user").then(
+      } else if (userType === "alumno" && !teacherNotFoundError) {
+        AuthService.register(username, password, teacherName, "user").then(
           (response) => {
             setMessage(response.data.message);
             setSuccessful(true);
@@ -141,9 +145,6 @@ const Register = () => {
       } else {
         if (!userType) {
           setUserTypeError(true);
-        }
-        if (!selectedTeacher) {
-          setSelectedTeacherError(true);
         }
       }
     }
@@ -208,31 +209,24 @@ const Register = () => {
 
               {userType === "alumno" && (
                 <div className="form-group">
-                  <label htmlFor="selectedTeacher">Profesor asociado</label>
-                  <Select
-                    className={`form-control ${selectedTeacherError ? 'is-invalid' : ''}`}
-                    name="selectedTeacher"
-                    value={selectedTeacher}
-                    onChange={onChangeSelectedTeacher}
-                    validations={[required]}
-                  >
-                    <option value="">Seleccione un profesor</option>
-                    {teacherOptions.map((teacher, index) => (
-                      <option key={index} value={teacher}>
-                        {teacher}
-                      </option>
-                    ))}
-                  </Select>
-                  {selectedTeacherError && (
-                    <div className="invalid-feedback">
-                      Debe seleccionar un profesor.
-                    </div>
-                  )}
+                  <label htmlFor="teacherCode">Código del profesor asociado</label>
+                  <Input
+                    type="text"
+                    className={`form-control ${teacherNotFoundError ? 'is-invalid' : ''}`}
+                    name="teacherCode"
+                    value={teacherCode}
+                    onChange={onChangeTeacherCode}
+                  />
                 </div>
               )}
 
               <div className="form-group">
-                <button className="btn btn-custom btn-block">Registrarse</button>
+                <button 
+                  className="btn btn-custom btn-block"
+                  disabled={teacherNotFoundError && userType === "alumno"}
+                >
+                  Registrarse
+                </button>
               </div>
             </div>
           )}
