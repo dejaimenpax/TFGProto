@@ -7,7 +7,7 @@ import ListaUsuarios from "./ListaUsuarios";
 import CrearUsuario from "./CrearUsuario";
 import ModificarUsuario from "./ModificarUsuario";
 
-import { decrypt } from "../../../common/Encryption";
+import { decrypt, encrypt } from "../../../common/Encryption";
 import { encryptionKey } from "../../../common/Config";
 
 const BoardGestion = () => {
@@ -23,7 +23,7 @@ const BoardGestion = () => {
   });
 
   const [teachers, setTeachers] = useState([]);
-  const [showTeacherInput, setShowTeacherInput] = useState(true)
+  const [showTeacherInput, setShowTeacherInput] = useState(false)
   const [generalErrorMessage, setGeneralErrorMessage] = useState()
 
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
@@ -48,6 +48,16 @@ const BoardGestion = () => {
         setUser(response.data);
         getUsersExceptAdmins(response.data.username);
         fetchTeachers(response.data.username);
+
+        if (response.data.username===response.data.teacher){
+          setNewUser({
+            username: "",
+            password: "",
+            teacher: response.data.teacher,
+            role: "user",
+          })
+        }
+
       })
       .catch((error) => {
         const _content =
@@ -135,7 +145,7 @@ const BoardGestion = () => {
     setRegisterMessage("");
     setSuccessfulRegister(false);
 
-    if (!newUser.username || !newUser.role || !newUser.password || (!newUser.teacher && newUser.role==="user")){
+    if (!newUser.username || (!newUser.role && user.teacher!==user.username) || !newUser.password || (!newUser.teacher && newUser.role==="user")){
       setGeneralErrorMessage("Recuerda rellenar todos los campos.")
       setTimeout(() => {
         setGeneralErrorMessage(null)
@@ -148,8 +158,16 @@ const BoardGestion = () => {
     if (usernameErrorMessage!=="" || passwordErrorMessage!=="")
       return;
 
-    if (!teachers.includes(decrypt(teacherCode, encryptionKey)))
+    if (user.teacher===user.username){
+      setNewUser({
+        ...newUser,
+        teacher: user.teacher,
+        role: "user"
+      })
+      console.log("Ha detectado que es un profesor registrando y va a registrar a esto: ", newUser)
+    } else if (!teachers.includes(decrypt(teacherCode, encryptionKey)) && newUser.role!=="teacher"){
       return;
+    }
   
     AuthService.register(newUser.username, newUser.password, newUser.teacher, newUser.role)
       .then(
