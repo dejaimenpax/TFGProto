@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import StatsPage from "../StatsPage";
 import GestionService from "../../../services/gestion.service";
 
+import { encrypt } from "../../../common/Encryption";
+import { encryptionKey } from "../../../common/Config";
+
 const ListaUsuarios = ({
     searchTerm, 
     handleSearchTermChange, 
@@ -15,7 +18,6 @@ const ListaUsuarios = ({
   }) => {
   const [showStats, setShowStats] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [showMessage, setShowMessage] = useState(false);
 
   const verStats = (user) => {
     if (!showStats) {
@@ -33,6 +35,10 @@ const ListaUsuarios = ({
     }
   };
 
+  const handleEncryption = (us) => {
+    alert(`El código único del profesor ${us.username} es "${encrypt(us.username, encryptionKey)}". Cópialo para usarlo en el registro de nuevos alumnos.`)
+  }
+
   const eraseStats = (user) => {
     console.log("Segun pulsas, el user es", user)
     const confirmed = window.confirm(
@@ -41,10 +47,8 @@ const ListaUsuarios = ({
     if (confirmed) {
       GestionService.eraseUserStats(user.username)
         .then((response) => {
-          setShowMessage(true);
           setSelectedUser(user)
           setTimeout(() => {
-            setShowMessage(false);
             setSelectedUser(null)
           }, 3000);
         })
@@ -99,10 +103,24 @@ const ListaUsuarios = ({
               <div className="user-details">
                 <div className="user-username">{user.username}</div>
                 <div className="user-role">
-                  {user.roles[0].name === "teacher" ? "Profesor" : "Alumno"}
+                  {user.roles[0].name === "teacher" ? 
+                    "Profesor" : 
+                    "Alumno"
+                  }
                 </div>
               </div>
               <div className="button-container">
+                {user.roles[0].name === "teacher" ? (
+                  <button
+                    type="button"
+                    className="btn btn-dark"
+                    onClick={() => handleEncryption(user)}
+                  >
+                    Ver código
+                  </button>
+                ) :
+                  null
+                }
                 <button
                   type="button"
                   className="btn btn-custom"

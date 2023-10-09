@@ -61,24 +61,18 @@ const CrearUsuario = (props) => {
               </select>
             </div>
 
-            {props.showTeacherSelector && (
+            {props.showTeacherInput && (
             <div className="form-group">
-              <label>Profesor asociado:</label>
-              <select
-                className="form-control"
-                name="teacher"
-                value={props.newUser.teacher}
-                onChange={props.handleNewUserChange}
-              >
-                  <option value="" disabled selected>
-                    Selecciona una opción...
-                  </option>
-                {props.teachers.map((teacher, index) => (
-                  <option key={index} value={teacher}>
-                    {teacher}
-                  </option>
-                ))}
-              </select>
+              <label>Código del profesor asociado:</label>
+              <input
+                type="text"
+                className={`form-control ${props.teacherNotFoundError ? 'is-invalid' : ''}`}
+                name="teacherCode"
+                value={props.teacherCode}
+                onChange={props.onChangeTeacherCode}
+                //onBlur={props.onChangeTeacherCode}
+                disabled={props.user.username === props.user.teacher}
+              />
             </div>
             )}
             <p className={props.generalErrorMessage ? "alert alert-danger" : "hide"}>
