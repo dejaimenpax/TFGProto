@@ -7,6 +7,9 @@ import ListaUsuarios from "./ListaUsuarios";
 import CrearUsuario from "./CrearUsuario";
 import ModificarUsuario from "./ModificarUsuario";
 
+import { decrypt } from "../../../common/Encryption";
+import { encryptionKey } from "../../../common/Config";
+
 const BoardGestion = () => {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,13 +23,14 @@ const BoardGestion = () => {
   });
 
   const [teachers, setTeachers] = useState([]);
-  const [showTeacherSelector, setShowTeacherSelector] = useState(true)
+  const [showTeacherInput, setShowTeacherInput] = useState(true)
   const [generalErrorMessage, setGeneralErrorMessage] = useState()
 
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
 
-
+  const [teacherCode, setTeacherCode] = useState("")
+  const [teacherNotFoundError, setTeacherNotFoundError] = useState(false);
 
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const [registerMessage, setRegisterMessage] = useState("");
@@ -115,9 +119,9 @@ const BoardGestion = () => {
   
   const handleRoleChange = (e) => {
     e.target.value==="teacher" ?
-      setShowTeacherSelector(false)
+      setShowTeacherInput(false)
       :
-      setShowTeacherSelector(true)
+      setShowTeacherInput(true)
 
     setNewUser({
       ...newUser,
@@ -131,12 +135,21 @@ const BoardGestion = () => {
     setRegisterMessage("");
     setSuccessfulRegister(false);
 
-    if (!newUser.username || !newUser.role || !newUser.password || (showTeacherSelector && !newUser.teacher)){
-      setGeneralErrorMessage("Recuerda elegir nombre de usuario, contraseña y rol.")
+    if (!newUser.username || !newUser.role || !newUser.password || (!newUser.teacher && newUser.role==="user")){
+      setGeneralErrorMessage("Recuerda rellenar todos los campos.")
+      setTimeout(() => {
+        setGeneralErrorMessage(null)
+      }, 3000);
       return;
     } else {
       setGeneralErrorMessage(null)
     }
+
+    if (usernameErrorMessage!=="" || passwordErrorMessage!=="")
+      return;
+
+    if (!teachers.includes(decrypt(teacherCode, encryptionKey)))
+      return;
   
     AuthService.register(newUser.username, newUser.password, newUser.teacher, newUser.role)
       .then(
@@ -157,7 +170,8 @@ const BoardGestion = () => {
             teacher: "",
             role: "",
           });
-          setShowTeacherSelector(true);
+          setTeacherCode("")
+          setShowTeacherInput(true);
 
         },
         (error) => {
@@ -244,6 +258,16 @@ const BoardGestion = () => {
     })
   }
 
+  const onChangeTeacherCode = (e) => {
+    const code = e.target.value; //coge el codigo introducido
+    setTeacherCode(code)
+    setNewUser({
+      ...newUser,
+      teacher: decrypt(code, encryptionKey), //desencripta ese codigo y obtiene el teachername
+    })
+    setTeacherNotFoundError(!teachers.includes(newUser.teacher))
+  };
+
   const handleResetPasswordModalOpen = () => {
     setShowResetPasswordModal(true);
   };
@@ -320,12 +344,15 @@ const BoardGestion = () => {
                 teachers={teachers}
                 generalErrorMessage={generalErrorMessage}
                 createUser={createUser}
-                showTeacherSelector={showTeacherSelector}
+                showTeacherInput={showTeacherInput}
                 handleCreateUserModalClose={handleCreateUserModalClose}
                 successfulRegister={successfulRegister}
                 registerMessage={registerMessage}
                 usernameErrorMessage={usernameErrorMessage}
                 passwordErrorMessage={passwordErrorMessage}
+                teacherCode={teacherCode}
+                onChangeTeacherCode={onChangeTeacherCode}
+                teacherNotFoundError={teacherNotFoundError}
               />
             </div>
           ) : showResetPasswordModal ? (

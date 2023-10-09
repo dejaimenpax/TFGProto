@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import UserService from "../../services/user.service";
 import EventBus from "../../common/EventBus";
 import Username from "./Username";
@@ -7,11 +6,12 @@ import Roles from "./Roles";
 import "../../styles/Profile/Profile.css";
 import AuthService from "../../services/auth.service";
 
+import { encrypt } from "../../common/Encryption";
+import { encryptionKey } from "../../common/Config";
+
 const Profile = ({ logOut }) => {
   const [content, setContent] = useState();
-  const [showMessage, setShowMessage] = useState(false);
   const currentUser = AuthService.getCurrentUser();
-  const navigate = useNavigate();
 
   useEffect(() => {
     UserService.getUserBoard().then(
@@ -35,38 +35,6 @@ const Profile = ({ logOut }) => {
     );
   }, []);
 
-  const handleEraseStats = () => {
-    const confirmed = window.confirm(
-      "¿Estás seguro? Se borrarán los ejercicios resueltos, puntuaciones, etc."
-    );
-    if (confirmed) {
-      AuthService.eraseStats()
-        .then(() => {
-          setShowMessage(true);
-          setTimeout(() => {
-            setShowMessage(false);
-          }, 3000);
-        })
-        .catch((error) =>
-          console.error("Error borrando las estadísticas:", error)
-        );
-    }
-  };
-
-  const handleDeleteAccountById = () => {
-    const confirmed = window.confirm(
-      "¿Estás seguro? Esta acción no se puede deshacer."
-    );
-    if (confirmed) {
-      AuthService.deleteAccountById()
-        .then(() => {
-          logOut();
-          navigate("/register");
-        })
-        .catch((error) => console.error("Error borrando la cuenta:", error));
-    }
-  };
-
   return (
     <div className="container">
       <section className="profile-section text-center">
@@ -76,6 +44,11 @@ const Profile = ({ logOut }) => {
             <>
               <Username username={currentUser.username} />
               <Roles roles={currentUser.roles} />
+              {currentUser.roles.includes("ROLE_TEACHER") &&
+                <div className="profile-row">
+                  <div className="text-center"><b>Código único de profesor: </b>{encrypt(currentUser.username, encryptionKey)}</div>
+                </div>
+              }
             </>
           ) : (
             <>{content}</>

@@ -3,8 +3,7 @@ import React from "react";
 const Roles = ({ roles }) => {
   return (
     <div className="profile-row">
-      <div className="profile-label text-center">Rol:</div>
-      <div className="profile-value text-center">
+      <div className="text-center"><b>Rol:   </b></div>
         {roles &&
           roles.map((role, index) => (
             <span key={index} className="role-tag">
@@ -18,7 +17,6 @@ const Roles = ({ roles }) => {
             </span>
           ))}
       </div>
-    </div>
   );
 };
 
