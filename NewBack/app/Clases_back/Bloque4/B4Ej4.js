@@ -41,10 +41,10 @@ class B4Ej4 extends EjGenerico {
     const porcentajeFutbol = Math.round((futbol / total) * 100);
 
     if (porcentajeFutbol === parseInt(this.input[0])) {
-      this.explicacion.push(`¡Es correcto!`);
+      this.explicacion.push(`¡Es correcto! Se ha dividido el número de alumnos que han dicho que el fútbol es su deporte favorito (${futbol}) entre el número total de alumnos (${total}) y multiplicado por 100, obteniendo ${porcentajeFutbol}%.`);
       this.nota = this.puntuacion;
     } else {
-      this.explicacion.push(`No es correcto. Para calcular el porcentaje correcto, divide el número de alumnos que han dicho que el fútbol es su deporte favorito entre el número total de alumnos y multiplica por 100, obteniendo ${porcentajeFutbol}%.`);
+      this.explicacion.push(`No es correcto. Para calcular el porcentaje correcto, divide el número de alumnos que han dicho que el fútbol es su deporte favorito (${futbol}) entre el número total de alumnos (${total}) y multiplica por 100, obteniendo ${porcentajeFutbol}%.`);
     }
   }
 }
