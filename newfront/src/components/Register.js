@@ -19,6 +19,7 @@ const required = (value) => {
   }
 };
 
+
 const validUsername = (value) => {
   if (value.length < 6 || value.length > 40) {
     return (
@@ -86,10 +87,8 @@ const Register = () => {
 
   const onChangeTeacherCode = (e) => {
     const code = e.target.value; //coge el codigo introducido
-    console.log("El texto es", code)
     setTeacherCode(code)
     setTeacherName(decrypt(code, encryptionKey)) //desencripta ese codigo y obtiene el teachername
-    console.log("El desencriptado es", teacherName)
     setTeacherNotFoundError(!teacherOptions.includes(teacherName))
   };
 
@@ -210,12 +209,13 @@ const Register = () => {
               {userType === "alumno" && (
                 <div className="form-group">
                   <label htmlFor="teacherCode">Código del profesor asociado</label>
-                  <Input
+                  <input
                     type="text"
                     className={`form-control ${teacherNotFoundError ? 'is-invalid' : ''}`}
                     name="teacherCode"
                     value={teacherCode}
                     onChange={onChangeTeacherCode}
+                    onBlur={onChangeTeacherCode}
                   />
                 </div>
               )}
