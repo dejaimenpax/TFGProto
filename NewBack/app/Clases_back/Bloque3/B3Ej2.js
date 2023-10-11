@@ -5,24 +5,24 @@ class B2Ej2 extends EjGenerico {
     texto = "¿Cuántos de los siguientes triángulos son acutángulos?",
     enunciado = [
         [
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]],
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]],
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]]
+          [[-9,-8,-7][Math.floor(Math.random() * 3)], [-9,-8,-7][Math.floor(Math.random() * 3)]],
+          [[-5,-4,-3,-2][Math.floor(Math.random() * 3)], [-9,-8,-7][Math.floor(Math.random() * 3)]],
+          [[-9,-8,-7,-6,-5,-4,-3,-2][Math.floor(Math.random() * 8)], [-5,-4,-3,-2][Math.floor(Math.random() * 4)]]
         ],
         [
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]],
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]],
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]]
+          [[-9,-8,-7][Math.floor(Math.random() * 3)], [9,8,7][Math.floor(Math.random() * 3)]],
+          [[-5,-4,-3,-2][Math.floor(Math.random() * 3)], [9,8,7][Math.floor(Math.random() * 3)]],
+          [[-9,-8,-7,-6,-5,-4,-3,-2][Math.floor(Math.random() * 8)], [5,4,3,2][Math.floor(Math.random() * 4)]]
         ],
         [
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]],
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]],
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]]
+          [[9,8,7][Math.floor(Math.random() * 3)], [9,8,7][Math.floor(Math.random() * 3)]],
+          [[5,4,3,2][Math.floor(Math.random() * 3)], [9,8,7][Math.floor(Math.random() * 3)]],
+          [[9,8,7,6,5,4,3,2][Math.floor(Math.random() * 8)], [5,4,3,2][Math.floor(Math.random() * 4)]]
         ],
         [
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]],
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]],
-          [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)]]
+          [[9,8,7][Math.floor(Math.random() * 3)], [-9,-8,-7][Math.floor(Math.random() * 3)]],
+          [[5,4,3,2][Math.floor(Math.random() * 3)], [-9,-8,-7][Math.floor(Math.random() * 3)]],
+          [[9,8,7,6,5,4,3,2][Math.floor(Math.random() * 8)], [-5,-4,-3,-2][Math.floor(Math.random() * 4)]]
         ]
     ],
     puntuacion = 10
@@ -39,107 +39,58 @@ class B2Ej2 extends EjGenerico {
     this.etiquetas= ["Número de triángulos acutángulos:"]
     this.puntos_explicados = "La respuesta correcta supone un 10 en el ejercicio."
   }
-
   resolver(input) {
     console.log("He entrado en resolver Ej3B2");
     this.input = input;
 
-    const mapa = new Map()
-    mapa.set(0, " el rojo")
-    mapa.set(1, " el azul")
-    mapa.set(2, " el verde")
-    mapa.set(3, " el amarillo")
-    
-    //guarda los colores de los que son acutangulos
+    const mapa = new Map();
+    mapa.set(0, " el rojo");
+    mapa.set(1, " el azul");
+    mapa.set(2, " el verde");
+    mapa.set(3, " el amarillo");
+
+    // Guarda los colores de los que son acutangulos
     let acuteNames = new Set();
     let acutangulos = 0;
 
     for (let i = 0; i < this.enunciado.length; i++) {
-      let acu_original = acutangulos
+      let acu_original = acutangulos;
 
       let a = this.enunciado[i][0];
       let b = this.enunciado[i][1];
       let c = this.enunciado[i][2];
 
-      let ladoA = Math.sqrt(Math.pow(b[0] - a[0], 2) + Math.pow(b[1] - a[1], 2));
-      let ladoB = Math.sqrt(Math.pow(c[0] - b[0], 2) + Math.pow(c[1] - b[1], 2));
-      let ladoC = Math.sqrt(Math.pow(a[0] - c[0], 2) + Math.pow(a[1] - c[1], 2));
+      // Calculate the squared lengths of the sides
+      let sqLengthA = Math.pow(b[0] - a[0], 2) + Math.pow(b[1] - a[1], 2);
+      let sqLengthB = Math.pow(c[0] - b[0], 2) + Math.pow(c[1] - b[1], 2);
+      let sqLengthC = Math.pow(a[0] - c[0], 2) + Math.pow(a[1] - c[1], 2);
 
-      let maxLado = Math.max(ladoA, ladoB, ladoC);
+      // Calculate the cosine of each angle
+      let cosA = (sqLengthB + sqLengthC - sqLengthA) / (2 * Math.sqrt(sqLengthB * sqLengthC));
+      let cosB = (sqLengthC + sqLengthA - sqLengthB) / (2 * Math.sqrt(sqLengthC * sqLengthA));
+      let cosC = (sqLengthA + sqLengthB - sqLengthC) / (2 * Math.sqrt(sqLengthA * sqLengthB));
 
-      if (maxLado === ladoA) {
-        if (Math.pow(ladoA, 2) < Math.pow(ladoB, 2) + Math.pow(ladoC, 2)) {
-          acutangulos++;
-        }
-      } else if (maxLado === ladoB) {
-        if (Math.pow(ladoB, 2) < Math.pow(ladoA, 2) + Math.pow(ladoC, 2)) {
-          acutangulos++;
-        }
-      } else {
-        if (Math.pow(ladoC, 2) < Math.pow(ladoA, 2) + Math.pow(ladoB, 2)) {
-          acutangulos++;
-        }
+      // Check if all three angles are less than 90 degrees
+      if (cosA > 0 && cosB > 0 && cosC > 0) {
+        acutangulos++;
       }
 
-      //si se ha añadido un acutangulo, añade el color
-      if (acu_original!==acutangulos){
+      // If a new acute triangle is found, add its color to the set
+      if (acu_original !== acutangulos) {
         acuteNames.add(mapa.get(i));
       }
     }
 
-    /*
+    let formattedColors = [...acuteNames];
 
-    // Excluir triángulos rectángulos
-    let rectangulos = 0;
-    for (let i = 0; i < this.enunciado.length; i++) {
-      let rect_original = rectangulos;
+    // This code adds a "y" to the last color
+    formattedColors.map((x, i) => {
+      if (i === formattedColors.length - 1)
+        return " y " + x.slice(1);
+    });
 
-      let a = this.enunciado[i][0];
-      let b = this.enunciado[i][1];
-      let c = this.enunciado[i][2];
-
-      let ladoA = Math.sqrt(Math.pow(b[0] - a[0], 2) + Math.pow(b[1] - a[1], 2));
-      let ladoB = Math.sqrt(Math.pow(c[0] - b[0], 2) + Math.pow(c[1] - b[1], 2));
-      let ladoC = Math.sqrt(Math.pow(a[0] - c[0], 2) + Math.pow(a[1] - c[1], 2));
-
-      let maxLado = Math.max(ladoA, ladoB, ladoC);
-
-      if (maxLado === ladoA) {
-        if (Math.pow(ladoA, 2) === Math.pow(ladoB, 2) + Math.pow(ladoC, 2)) {
-          rectangulos++;
-        }
-      } else if (maxLado === ladoB) {
-        if (Math.pow(ladoB, 2) === Math.pow(ladoA, 2) + Math.pow(ladoC, 2)) {
-          rectangulos++;
-        }
-      } else {
-        if (Math.pow(ladoC, 2) === Math.pow(ladoA, 2) + Math.pow(ladoB, 2)) {
-          rectangulos++;
-        }
-      }
-
-      //si se ha añadido un rectangulo, quita ese color
-      if (rect_original!==rectangulos){
-        acuteNames.delete(mapa.get(i))
-      }
-    }
-    
-
-    // Restar los triángulos rectángulos para obtener los acutángulos
-    acutangulos -= rectangulos;
-
-    */
-
-    let formattedColors=[...acuteNames]
-
-    //esto añade un "y" al ultimo
-    formattedColors.map((x,i)=> {
-      if (i===formattedColors.length-1)
-        return " y " + x.slice(1)
-      })
-    
     if (acutangulos === parseInt(this.input[0])) {
-      switch(acutangulos){
+      switch (acutangulos) {
         case 0:
           this.explicacion.push(
             `¡Es correcto! Hay ${acutangulos} triángulos acutángulos en total.`
@@ -156,7 +107,7 @@ class B2Ej2 extends EjGenerico {
           );
       }
     } else {
-      switch(acutangulos){
+      switch (acutangulos) {
         case 0:
           this.explicacion.push(
             `No es correcto. Hay ${acutangulos} triángulos acutángulos en total.`

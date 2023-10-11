@@ -3,12 +3,12 @@ const EjGenerico = require('../EjGenerico.js');
 class B3Ej9 extends EjGenerico {
 
   constructor(
-    texto = "Calcula el área del siguiente triángulo (puede ayudarte usar el Teorema de Pitágoras), y redondea el resultado al entero más cercano.",
+    texto = "Calcula el área del siguiente triángulo, y redondea el resultado al entero más cercano.",
     enunciado = [
         [
-            [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], -2],
-            [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], -2],
-            [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9].filter(n => n !== -1 && n !== 0 && n !== 1)[Math.floor(Math.random() * 13)], [2, 3, 4, 5, 6, 7, 8, 9][Math.floor(Math.random() * 8)]]
+            [[-9,-8,-7,-6,-5,-4,-3,-2][Math.floor(Math.random() * 8)], -7],
+            [[2,3,4,5,6,7,8,9][Math.floor(Math.random() * 7)], -7],
+            [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9][Math.floor(Math.random() * 16)], [2, 3, 4, 5, 6, 7, 8, 9][Math.floor(Math.random() * 8)]]
         ]
     ],
 
@@ -44,10 +44,10 @@ class B3Ej9 extends EjGenerico {
     area = Math.round(area);
 
     if (area === parseInt(this.input[0])) {
-      this.explicacion.push(`¡Es correcto! El área redondeada del triángulo, ${area}, se ha hallado multiplicando base por altura y dividiendo entre dos. La base se obtiene fácilmente con la distancia entre los puntos (${a[0]},${a[1]}) y (${b[0]}, ${b[1]}), mientras que para la altura basta con medir la distancia entre el tercer vértice (${c[0]}, ${c[1]}) y la base, obteniendo ${Math.abs(c[1]-a[1])} unidades.`);
+      this.explicacion.push(`¡Es correcto! El área redondeada del triángulo, ${area}, se ha hallado multiplicando base por altura y dividiendo entre dos. La base se obtiene fácilmente con la distancia entre los puntos (${a[0]},${a[1]}) y (${b[0]}, ${b[1]}), mientras que para la altura basta con medir la distancia entre el tercer vértice (${c[0]}, ${c[1]}) y la base, obteniendo ${Math.abs(c[1]-a[1])} unidades. El producto de ambos da ${Math.abs(a[1]-b[1])*Math.abs(c[1]-a[1])} unidades cuadradas, y se obtiene el área al dividir entre dos y redondear.`);
       this.nota = this.puntuacion;
     } else {
-      this.explicacion.push(`No es correcto. El área redondeada del triángulo es ${area}. Para calcular el área de un triángulo, se puede hallar multiplicando base por altura y dividiendo entre dos. La base se obtiene fácilmente con la distancia entre los puntos (${a[0]},${a[1]}) y (${b[0]}, ${b[1]}), mientras que para la altura basta con medir la distancia entre el tercer vértice (${c[0]}, ${c[1]}) y la base, obteniendo ${Math.abs(c[1]-a[1])} unidades.`);
+      this.explicacion.push(`No es correcto. El área redondeada del triángulo es ${area}. Para calcular el área de un triángulo, se puede hallar multiplicando base por altura y dividiendo entre dos. La base se obtiene fácilmente con la distancia entre los puntos (${a[0]},${a[1]}) y (${b[0]}, ${b[1]}), mientras que para la altura basta con medir la distancia entre el tercer vértice (${c[0]}, ${c[1]}) y la base, obteniendo ${Math.abs(c[1]-a[1])} unidades. El producto de ambos da ${Math.abs(a[1]-b[1])*Math.abs(c[1]-a[1])} unidades cuadradas, y se obtiene el área al dividir entre dos y redondear.`);
     }
   }
 }
