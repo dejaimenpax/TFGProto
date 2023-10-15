@@ -12,11 +12,13 @@ import BoardUser from "./components/UserBoards/User/BoardUser";
 import BoardTeacher from "./components/UserBoards/Teacher/BoardTeacher";
 import BoardGestion from "./components/UserBoards/Gestion/BoardGestion";
 import Resolver from "./components/Exercises/Resolver";
+import Ranking from "./components/UserBoards/Ranking";
 import EventBus from "./common/EventBus";
 
 const App = () => {
   const [showTeacherBoard, setShowTeacherBoard] = useState(false);
   const [showGestionBoard, setShowGestionBoard] = useState(false);
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
@@ -28,6 +30,7 @@ const App = () => {
       setCurrentUser(user);
       setShowTeacherBoard(user.roles.includes("ROLE_TEACHER"));
       setShowGestionBoard(user.roles.includes("ROLE_ADMIN") || user.roles.includes("ROLE_TEACHER"));
+      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
 
     EventBus.on("logout", () => {
@@ -43,6 +46,7 @@ const App = () => {
     AuthService.logout();
     setShowTeacherBoard(false);
     setShowGestionBoard(false);
+    setShowAdminBoard(false)
     setCurrentUser(undefined);
   };
 
@@ -80,6 +84,13 @@ const App = () => {
                 </Link>
               </li>
             </>
+          )}
+          {!showAdminBoard && (
+            <li className="nav-item">
+              <Link to={"/ranking"} className="nav-link">
+                Ranking
+              </Link>
+            </li>
           )}
         </div>
         {currentUser ? (
@@ -134,6 +145,9 @@ const App = () => {
           )}
           {!showTeacherBoard && !showGestionBoard && (
             <Route path="/user" element={<BoardUser />} />
+          )}
+          {!showAdminBoard && (
+            <Route path="/ranking" element={<Ranking />} />
           )}
           <Route path="/resolver" element={<Resolver />} />
         </Routes>

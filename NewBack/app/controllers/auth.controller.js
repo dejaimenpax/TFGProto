@@ -153,7 +153,7 @@ exports.getMyStudents = (req, res) => {
   User.findById(userId)
     .then(user => {
       if (!user) {
-        return res.status(404).send({ message: "User not found." });
+        return res.status(404).send({ message: "Usuario no encontrado." });
       }
 
       User.find({ teacher: user.username, username: { $ne: user.username } })
@@ -168,6 +168,49 @@ exports.getMyStudents = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+exports.getStudentsWithSameTeacher = (req, res) => {
+  const token = req.headers["x-access-token"];
+  const decodedToken = jwt.verify(token, config.secret);
+  const userId = decodedToken.id;
+
+  // Buscar al usuario por el id
+  User.findById(userId)
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "Usuario no encontrado." });
+      }
+
+      // Obtener el valor de 'teacher' del usuario encontrado
+      const teacher = user.teacher;
+
+      // Buscar a los estudiantes con el mismo profesor (teacher)
+      User.find({ teacher, username: { $ne: teacher } }, (err, students) => {
+        if (err) {
+          return res.status(500).send({ message: err.message });
+        }
+
+        // Ordenar la lista de estudiantes por puntuación total de mayor a menor
+        students.sort((a, b) => {
+          const totalScoreA = a.scores.reduce((acc, score) => acc + score, 0);
+          const totalScoreB = b.scores.reduce((acc, score) => acc + score, 0);
+
+          if (totalScoreB !== totalScoreA) {
+            return totalScoreB - totalScoreA;
+          }
+          //en caso de igualdad de puntuación
+          return a.username.localeCompare(b.username);
+        });
+
+        res.status(200).send(students);
+      });
+
+  })
+  .catch(err => {
+    res.status(500).send({ message: err.message });
+  });
+};
+
 
 
 exports.eraseStats = (req, res) => {

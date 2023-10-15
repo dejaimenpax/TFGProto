@@ -1,0 +1,25 @@
+/* Ranking.css */
+
+table {
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.gold {
+    background: linear-gradient(135deg, #FFD700 0%, #FFB800 100%); /* Fondo degradado para filas doradas */
+    border-radius: 10px; /* Agrega bordes redondeados a todas las filas */
+}
+
+.silver {
+    background: linear-gradient(135deg, #C0C0C0 0%, #B0B0B0 100%); /* Fondo degradado para filas plateadas */
+    border-radius: 10px; /* Agrega bordes redondeados a todas las filas */
+}
+
+.bronze {
+    background: linear-gradient(135deg, #CD7F32 0%, #BC6F25 100%); /* Fondo degradado para filas de bronce */
+    border-radius: 10px; /* Agrega bordes redondeados a todas las filas */
+}
+
+.large-text {
+    font-size: 1rem;
+}

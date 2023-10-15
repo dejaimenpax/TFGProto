@@ -55,12 +55,11 @@ const getCurrentUser = () => {
 const getCurrentUserFromDB = () => {
   const user = getCurrentUser();
   if (user && user.accessToken) {
-    console.log("Entra al getCurrentuserFromDB")
     return axios.get(API_URL + "user", {
       headers: { "x-access-token": user.accessToken },
     });
   } else {
-    return Promise.reject(new Error("User not found or token expired"));
+    return Promise.reject(new Error("Usuario no encontrado o token expirado."));
   }
 };
 
@@ -75,9 +74,21 @@ const getMyStudents = () => {
       headers: { "x-access-token": user.accessToken },
     });
   } else {
-    return Promise.reject(new Error("User not found or token expired"));
+    return Promise.reject(new Error("Usuario no encontrado o token expirado."));
   }
 }
+
+const getStudentsWithSameTeacher = () => {
+  const user = getCurrentUser();
+  if (user && user.accessToken) {
+    return axios.get(API_URL + "students-with-same-teacher", {
+      headers: { "x-access-token": user.accessToken },
+    });
+  } else {
+    return Promise.reject(new Error("Usuario no encontrado o token expirado."));
+  }
+}
+
 
 const eraseStats = () => {
   const user = getCurrentUser();
@@ -93,7 +104,7 @@ const eraseStats = () => {
       return response.data;
     });
   } else {
-    return Promise.reject(new Error("User not found or token expired"));
+    return Promise.reject(new Error("Usuario no encontrado o token expirado."));
   }
 };
 
@@ -112,7 +123,7 @@ const deleteAccountById = () => {
       throw error;
     });
   } else {
-    return Promise.reject(new Error("User not found or token expired"));
+    return Promise.reject(new Error("Usuario no encontrado o token expirado."));
   }
 };
 
@@ -149,7 +160,7 @@ const AuthService = {
   eraseStats,
   deleteAccountById,
   deleteAccountByUsername,
-
+  getStudentsWithSameTeacher,
 };
 
 export default AuthService;

@@ -31,5 +31,7 @@ module.exports = function(app) {
   app.post("/api/auth/erase-stats", [authJwt.verifyToken], controller.eraseStats);
 
   app.delete("/api/auth/delete-account-byid", [authJwt.verifyToken], controller.deleteAccountById);
+
+  app.get("/api/auth/students-with-same-teacher", controller.getStudentsWithSameTeacher)
   
 };
