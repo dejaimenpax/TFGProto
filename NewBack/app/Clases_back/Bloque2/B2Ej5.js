@@ -44,17 +44,17 @@ class B2Ej5 extends EjGenerico {
     let contador = 0
 
     if (horasTermino.toString() === this.input[0]) {
-      this.explicacion.push(`¡La hora es correcta!`);
+      this.explicacion.push(`¡La hora es correcta!. Para hallarla, hemos multiplicado la duración de cada clase (${duracionClase} minutos) por el total de clases (${totalClases} clases) y sumado los ${duracionRecreo} minutos de recreo, para finalmente dividir entre 60 y obtener ${Math.floor(duracionTotal / 60)} horas. Sabiendo que las clases empiezan a las 9:00, obtenemos la hora adecuada sumando: las ${horasTermino} horas.`);
       contador++;
     } else {
-      this.explicacion.push(`No es correcto para las horas. Las clases terminan a las ${horasTermino}:${minutosTermino}.`);
+      this.explicacion.push(`No es correcto para las horas. Para hallarla, hay que multiplicar la duración de cada clase (${duracionClase} minutos) por el total de clases (${totalClases} clases) y sumar los ${duracionRecreo} minutos de recreo, para finalmente dividir entre 60 y obtener ${Math.floor(duracionTotal / 60)} horas. Sabiendo que las clases empiezan a las 9:00, obtenemos la hora adecuada sumando: las ${horasTermino} horas.`);
     }
 
     if (minutosTermino === this.input[1]) {
-      this.explicacion.push(`¡El minuto es correcto!`);
+      this.explicacion.push(`¡El minuto es correcto! Para hallarlo, hemos multiplicado la duración de cada clase (${duracionClase} minutos) por el total de clases (${totalClases} clases) y sumado los ${duracionRecreo} minutos de recreo, para finalmente dividir entre 60 y quedarnos con el resto: ${minutosTermino} minutos.`);
       contador++;
     } else {
-      this.explicacion.push(`No es correcto para los minutos. Las clases terminan a las ${horasTermino}:${minutosTermino}.`);
+      this.explicacion.push(`No es correcto para los minutos. Para hallarlos, hay que multiplicar la duración de cada clase (${duracionClase} minutos) por el total de clases (${totalClases} clases) y sumar los ${duracionRecreo} minutos de recreo, para finalmente dividir entre 60 y quedarnos con el resto: ${minutosTermino} minutos.`);
     }
 
     if (contador===2)

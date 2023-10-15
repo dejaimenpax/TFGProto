@@ -10,7 +10,7 @@ const obtener_multiplos = (num, cantidad) => {
 
 class B1Ej7 extends EjGenerico {
     constructor(
-        texto = 'Escribe los 4 primeros múltiplos del siguiente número, sin contar al 0', 
+        texto = 'Escribe los 4 primeros múltiplos del siguiente número, sin contar al 0:', 
         enunciado = [Math.floor(Math.random() * (100 - 2 + 1) + 2).toString()], 
         puntuacion = 10
     ) {
@@ -41,7 +41,7 @@ class B1Ej7 extends EjGenerico {
                 ordinal = ordinales[i];
 
 
-                this.explicacion.push(`¡Es correcto! El ${ordinal} múltiplo de ${num} es ${Number(this.input[i])}.`);
+                this.explicacion.push(`¡Es correcto! El ${ordinal} múltiplo de ${num} es ${Number(this.input[i])}, ya que ${num} por ${i+1} es ${num*(i+1)}.`);
                 contador++;
             } else {
                 let mensaje = '';
