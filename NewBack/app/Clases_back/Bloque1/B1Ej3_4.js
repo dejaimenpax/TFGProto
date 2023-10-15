@@ -16,7 +16,7 @@ class B1Ej3_4 extends EjGenerico{
             super(
                 'Bloque 1 - Números y operaciones',
                 1.03, //1.06 dice bloque 1=> ej 3
-                `Escribe 4 números distintos comprendidos entre ${min} y ${max} (no incluidos)`, 
+                `Escribe 4 números distintos comprendidos entre ${min} y ${max} (no incluidos).`, 
                 [min, max],
                 10
             )

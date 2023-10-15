@@ -34,7 +34,7 @@ const generateRandomNumber = () => {
     let numDivisors;
     
     do {
-      num = Math.floor(Math.random() * (10000 - 8 + 1) + 8); //generamos un número aleatorio entre 8 y 500000
+      num = Math.floor(Math.random() * (10000 - 8 + 1) + 8); //generamos un número aleatorio entre 8 y 10000
       numDivisors = obtener_divisores(num).length; // obtenemos la cantidad de divisores del número generado
     } while (numDivisors < 4); // repetimos el proceso mientras el número no tenga al menos 4 divisores
     
@@ -81,32 +81,36 @@ class B1Ej8 extends EjGenerico{
             if (this.input[i] === divisores[i].toString()) {
                 ordinal = ordinales[i];
 
-                this.explicacion.push(`¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}, ya que es el ${ordinales[i]} número que, si hacemos con él la división entera de ${num}, da resto 0.`); 
+                this.explicacion.push(`¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}, ya que es el ${ordinal} número que, si hacemos con él la división entera de ${num}, da resto 0.`); 
             
             } else {
                 let feedback = '';
+                
                 switch (i) {
                     case 0:
-                        feedback = 'El número 1 divide a todo número, por lo que siempre es divisor.';
+                        feedback = 'No es correcto, debería ser el 1. El número 1 divide a todo número, por lo que siempre es el primer divisor.';
                         break;
                     case 1:
                         if (num % 2 === 0) {
                             feedback = `No es correcto. Sabemos que su última cifra es un número par, por lo que el segundo divisor es 2, y no ${this.input[i]}.`;
                         } else {
-                            feedback = 'El número ' + this.input[i] + ` no es el segundo divisor de ${num}. La respuesta correcta es ${this.resultado[i]}, lo que se puede comprobar yendo en orden desde el anterior divisor y probando a dividir hasta que nos encontremos con una división con resto 0. `;
+                            feedback = `El número ${this.input[i]} no es el segundo divisor de ${num}. La respuesta correcta es ${this.resultado[i]}, lo que se puede comprobar yendo en orden desde el anterior divisor y probando a dividir hasta que nos encontremos con una división con resto 0.`;
                         }
                         break;
                     case 2:
                         if (divisores.reduce((a, b) => a + b, 0) % 3 === 0) {
-                            feedback = 'No es correcto. Sabemos que la suma de sus cifras es múltiplo de tres (en concreto es ' + num.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0) + `, por lo que el tercer divisor es 3 y no ${this.input[i]}.`;
+                            feedback = `No es correcto. Sabemos que la suma de sus cifras es múltiplo de tres (en concreto es ${num.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0)}, por lo que el tercer divisor es 3 y no ${this.input[i]}.`;
                         } else {
-                            feedback = 'El número ' + this.input[i] + ` no es el tercer divisor de ${num}. La respuesta correcta es ${this.resultado[i]}, lo que se puede comprobar yendo en orden desde el anterior divisor y probando a dividir hasta que nos encontremos con una división con resto 0. `;
+                            feedback = `El número ${this.input[i]} no es el tercer divisor de ${num}. La respuesta correcta es ${this.resultado[i]}, lo que se puede comprobar yendo en orden desde el anterior divisor y probando a dividir hasta que nos encontremos con una división con resto 0.`;
                         }
                         break;
-                    case 3:
-                        feedback = `No es correcto. La manera más sencilla de obtener el cuarto divisor es dividir nuestro número, ${num}, entre el tercer divisor (${this.divisores(2)} en este caso), obteniendo ${this.divisores(i)} .`;
+                    case 3: //este es el que da problemas
+                        feedback = `No es correcto. La manera más sencilla de obtener el cuarto divisor es dividir nuestro número, ${num}, entre el tercer divisor (${divisores[2]} en este caso), obteniendo ${divisores[i]} .`;
+                        break;
+                    default:
                         break;
                 }
+                
                 this.explicacion.push(feedback);
             }
         }
