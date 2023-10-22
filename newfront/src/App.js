@@ -85,7 +85,7 @@ const App = () => {
               </li>
             </>
           )}
-          {!showAdminBoard && (
+          {!showAdminBoard && currentUser && (
             <li className="nav-item">
               <Link to={"/ranking"} className="nav-link">
                 Ranking
