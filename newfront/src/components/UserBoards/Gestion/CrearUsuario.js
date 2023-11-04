@@ -37,6 +37,7 @@ const CrearUsuario = (props) => {
               {props.passwordErrorMessage}
             </p>
 
+            {(props.user.username !== props.user.teacher) && (
             <div className="form-group">
               <label>Rol:</label>
               <select
@@ -60,6 +61,7 @@ const CrearUsuario = (props) => {
                 )}
               </select>
             </div>
+            )}
 
             {props.showTeacherInput && (
             <div className="form-group">
