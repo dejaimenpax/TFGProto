@@ -168,13 +168,12 @@ const BoardGestion = () => {
     } else if (!teachers.includes(decrypt(teacherCode, encryptionKey)) && newUser.role!=="teacher"){
       return;
     }
-  
-    AuthService.register(newUser.username, newUser.password, newUser.teacher, newUser.role)
+
+    AuthService.register(newUser.username, newUser.password, newUser.teacher === "" ? newUser.username : newUser.teacher, newUser.role)
       .then(
         (response) => {
           setRegisterMessage(response.data.message);
           setSuccessfulRegister(true);
-
           // Mostrar la contraseña generada
           alert("Creado usuario " + newUser.username + " con contraseña " + newUser.password + ". Cópiala para mandársela al usuario.");
           // Actualizar la lista de usuarios después de crear uno
@@ -189,7 +188,6 @@ const BoardGestion = () => {
             role: "",
           });
           setTeacherCode("")
-          setShowTeacherInput(true);
 
         },
         (error) => {

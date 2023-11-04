@@ -54,7 +54,7 @@ const Register = () => {
   const [userTypeError, setUserTypeError] = useState(false);
 
   const [teacherName, setTeacherName] = useState("");
-  const [teacherNotFoundError, setTeacherNotFoundError] = useState(false); 
+  const [teacherNotFoundError, setTeacherNotFoundError] = useState(true); 
   const [teacherCode, setTeacherCode] = useState("")
 
   useEffect(() => {
