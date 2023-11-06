@@ -67,6 +67,7 @@ exports.getUsersExceptAdmins = (req, res) => {
             const studentUsernames = students.map(student => ({
               id: student._id,
               username: student.username,
+              teacher: student.teacher,
               roles: student.roles
             }));
             res.status(200).send(studentUsernames);
@@ -91,6 +92,7 @@ exports.getUsersExceptAdmins = (req, res) => {
             const userAndTeacherusernames = filteredUsers.map(user => ({
               id: user._id,
               username: user.username,
+              teacher: user.teacher,
               roles: user.roles
             }));
             
