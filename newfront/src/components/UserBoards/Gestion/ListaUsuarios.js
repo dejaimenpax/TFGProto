@@ -80,12 +80,12 @@ const ListaUsuarios = ({
     <div className="lista-usuarios">
       {showStats && selectedUser ? (
         <>
+          <StatsPage user={selectedUser} />
           <div className="stats-button">
             <button type="button" className="btn btn-custom" onClick={() => verStats(selectedUser)}>
               Volver
             </button>
           </div>
-          <StatsPage user={selectedUser} />
         </>
       ) : (
         <>

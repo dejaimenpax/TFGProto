@@ -217,23 +217,30 @@ const BoardGestion = () => {
       user.username.toLowerCase().includes(searchTerm.toLowerCase())
     );
   
-    // Luego, ordenamos la lista por rol (Profesor primero, luego Alumno) y luego alfabéticamente por username
-    const sortedUsers = filteredUsers.sort((a, b) => {
-      // Ordenamos por rol (Profesor primero, luego Alumno)
-      if (a.roles[0].name === "teacher" && b.roles[0].name !== "teacher") {
-        return -1;
-      } else if (a.roles[0].name !== "teacher" && b.roles[0].name === "teacher") {
-        return 1;
-      } else {
-        // Si tienen el mismo rol, ordenamos alfabéticamente por username
-        return a.username.localeCompare(b.username);
-      }
-    });
+    // Divide la lista en profesores y alumnos
+    const teachersAux = filteredUsers.filter((user) => user.roles[0].name === "teacher");
+    const studentsAux = filteredUsers.filter((user) => user.roles[0].name !== "teacher");
+  
+    // Ordena alfabéticamente por username
+    teachersAux.sort((a, b) => a.username.localeCompare(b.username));
+    studentsAux.sort((a, b) => a.username.localeCompare(b.username));
+  
+    // Inicializa un array para la lista ordenada
+    const sortedUsers = [];
+  
+    // Itera por cada profesor y sus alumnos
+
+    let professorStudents = []
+    for (const element of teachersAux) {
+      sortedUsers.push(element);
+      professorStudents = studentsAux.filter((student) => student.teacher === element.username);
+      professorStudents.sort((a, b) => a.username.localeCompare(b.username));
+      sortedUsers.push(...professorStudents);
+    }
   
     return sortedUsers;
   };
   
-
   const deleteUser = (us) => {
     let confirmMessage =
       "¿Estás seguro de borrar al usuario? Esta acción no se puede deshacer.";
