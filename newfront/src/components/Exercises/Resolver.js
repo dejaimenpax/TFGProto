@@ -44,8 +44,8 @@ const Resolver = () => {
           </>
         ) : (
           <>
-            {user.roles.includes("ROLE_ADMIN") ? ( //Si es admin
-              <ConfigureExercises className="text-center" />
+            {user.roles.includes("ROLE_ADMIN") || user.roles.includes("ROLE_TEACHER") ? ( //Si es admin o teacher
+              <ConfigureExercises className="text-center" user={user}/>
             ) : ( //Si no lo es, nada
               <></>
             )}

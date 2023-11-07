@@ -21,14 +21,8 @@ const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
-
-
-
-
   useEffect(() => {
     AuthService.checkTokenExpiration();
-    window.addEventListener('beforeunload', logOut); //borrar esta linea si se quiere que se guarde 24h
-
     const user = AuthService.getCurrentUser();
 
     if (user) {
@@ -44,7 +38,6 @@ const App = () => {
 
     return () => {
       EventBus.remove("logout");
-      window.removeEventListener('beforeunload', logOut); //borrar esta linea si se quiere que se guarde 24h
     };
   }, []);
 

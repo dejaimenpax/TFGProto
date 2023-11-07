@@ -2,8 +2,6 @@ import React from "react";
 
 const CrearUsuario = (props) => {
 
-
-
     return (
         <div className="generate-credentials">
             <h4>Crear nuevo usuario</h4>
