@@ -40,7 +40,7 @@ exports.create = (req, res) => {
       .map(ex => ex.id_tema.toString().substring(2, 4));
 
     if (desactivados.length === 0) {
-      res.json({ mensaje: `Los ejercicios del bloque ${id_bloque} están descativados. Seleccione otro bloque.`});
+      res.json({ mensaje: `Los ejercicios del bloque ${id_bloque} están desactivados. Seleccione otro bloque.`});
       return;
     } else {
       // Coje un id de tema aleatorio de entre los que tienen el flag activo

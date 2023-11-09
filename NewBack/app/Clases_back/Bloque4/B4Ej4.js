@@ -27,7 +27,7 @@ class B4Ej4 extends EjGenerico {
 
     this.long_input = 1;
     this.etiquetas= ["% de alumnos:"]
-    this.puntos_explicados = "La respuesta correcta supone un 10 en el ejercicio."
+    this.puntos_explicados = "La respuesta correcta proporciona 10 puntos."
 
   }
 

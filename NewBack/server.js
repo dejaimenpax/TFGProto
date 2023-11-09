@@ -210,7 +210,7 @@ function initial() {
       
 
       new Exercise({
-        name: 'Triangulos obtusángulos.',
+        name: 'Triángulos obtusángulos.',
         id_tema: 3.05,
         flag_active: true,
         flag_examen: false

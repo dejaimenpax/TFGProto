@@ -27,7 +27,7 @@ class B3Ej9 extends EjGenerico {
 
     this.long_input=1;
     this.etiquetas= ["Área (redondeada a unidades de área):"]
-    this.puntos_explicados = "La respuesta correcta supone un 10 en el ejercicio."
+    this.puntos_explicados = "La respuesta correcta proporciona 10 puntos."
   }
 
   resolver(input) {

@@ -10,7 +10,7 @@ const obtener_multiplos = (num, cantidad) => {
 
 class B1Ej7 extends EjGenerico {
     constructor(
-        texto = 'Escribe los 4 primeros múltiplos del siguiente número, sin contar al 0:', 
+        texto = 'Escribe los 4 primeros múltiplos del siguiente número, sin contar el 0:', 
         enunciado = [Math.floor(Math.random() * (100 - 2 + 1) + 2).toString()], 
         puntuacion = 10
     ) {
@@ -35,21 +35,16 @@ class B1Ej7 extends EjGenerico {
         let ordinal = '';
 
         for (let i = 0; i < 4; i++) {
+            const ordinales = ['primer', 'segundo', 'tercer', 'cuarto'];
+
             if (Number(this.input[i]) === this.resultado[i]) {
 
-                const ordinales = ['primer', 'segundo', 'tercer', 'cuarto'];
                 ordinal = ordinales[i];
-
 
                 this.explicacion.push(`¡Es correcto! El ${ordinal} múltiplo de ${num} es ${Number(this.input[i])}, ya que ${num} por ${i+1} es ${num*(i+1)}.`);
                 contador++;
             } else {
-                let mensaje = '';
-                if (i === 0) {
-                    mensaje = `Recuerda que todo número multiplicado por él mismo es él mismo, por tanto ${num} por ${i+1} es ${num}.`;
-                } else {
-                    mensaje = `No es correcto. Has introducido ${this.input[i]}, cuando ${num} por ${i+1} es ${num*(i+1)}.`;
-                }
+                const mensaje = `No es correcto. Has introducido ${this.input[i]}. Para calcular el ${ordinales[i]} múltiplo hay que multiplicar ${num} por ${i+1}, obteniendo como resultado ${num*(i+1)}.`;
                 this.explicacion.push(mensaje);
             }
         }

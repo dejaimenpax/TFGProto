@@ -105,7 +105,7 @@ const SelectTopic = () => {
 
   return (
     <div className= "container mb-4">
-      <h3 className="text-center mb-2">Resolver ejercicios</h3>
+      <h3 className="text-center mb-4">Resolver ejercicios</h3>
       <p> </p>
       <BlockButtons handleSelect={handleSelect} />
       <p></p>

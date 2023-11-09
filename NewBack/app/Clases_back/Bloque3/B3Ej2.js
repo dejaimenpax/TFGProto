@@ -37,7 +37,7 @@ class B2Ej2 extends EjGenerico {
     );
     this.long_input = 1;
     this.etiquetas= ["Número de triángulos acutángulos:"]
-    this.puntos_explicados = "La respuesta correcta supone un 10 en el ejercicio."
+    this.puntos_explicados = "La respuesta correcta proporciona 10 puntos."
   }
   resolver(input) {
     console.log("He entrado en resolver Ej3B2");
