@@ -63,10 +63,14 @@ class B1Ej3_4 extends EjGenerico{
 
                 this.resultado.push(rand);
 
-                if (num <= min) {
-                    this.explicacion.push(`${num} es menor o igual que ${min}. Un ejemplo válido sería ${rand}.`);
-                } else if (num >= max) {
-                    this.explicacion.push(`${num} es mayor o igual que ${max}. Un ejemplo válido sería ${rand}.`);
+                if (num < min) {
+                    this.explicacion.push(`${num} es menor que ${min}. Un ejemplo válido sería ${rand}.`);
+                } else if (num===min) {
+                    this.explicacion.push(`${num} es el mínimo, por lo que no nos sirve. Un ejemplo válido sería ${rand}.`);
+                } else if (num > max) {
+                    this.explicacion.push(`${num} es mayor que ${max}. Un ejemplo válido sería ${rand}.`);
+                } else if (num===max) {
+                    this.explicacion.push(`${num} es el máximo, por lo que no nos sirve. Un ejemplo válido sería ${rand}.`);
                 } else if (numerosIngresados.has(num)) {
                     this.explicacion.push(`El número ${num} ya ha sido ingresado. Un ejemplo válido sería ${rand}.`);
                 }
