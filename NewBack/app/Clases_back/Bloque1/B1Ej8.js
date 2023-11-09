@@ -63,7 +63,7 @@ class B1Ej8 extends EjGenerico{
 
         this.long_input=4;
         this.etiquetas= ["Primer divisor:", "Segundo divisor:", "Tercer divisor:", "Cuarto divisor:"]
-        this.puntos_explicados = "Para obtener los 10 puntos del ejercicio, todas las respuestas deben ser correctas."
+        this.puntos_explicados = "Cada respuesta vale 2.5, valiendo el ejercicio 10 puntos."
     }
 
     
@@ -115,8 +115,7 @@ class B1Ej8 extends EjGenerico{
             }
         }
 
-        if (contador===4)
-            this.nota = this.puntuacion;
+        this.nota = (this.puntuacion/4)*contador;
     }
 
 }
