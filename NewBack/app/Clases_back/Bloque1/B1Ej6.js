@@ -41,13 +41,13 @@ class B1Ej6 extends EjGenerico {
         this.explicacion.push("", "", "", "")
         for (let modo = 0; modo < 4; modo++) {
 
-            let derecha = Number(aux.charAt(this.enunciado[0].length - 1 - modo))
+            let derecha = Number(this.enunciado[0].charAt(this.enunciado[0].length - 1 - modo))
 
             if (this.resultado[modo] === input_aux[modo]) {
-                this.explicacion[modo] = `¡Es correcto! Los pasos seguidos son los siguientes: <ol>\n  <li>Observa la cifra justo a la derecha de las ${mapa.get(modo)}. En este caso, esta cifra es un ${derecha}.</li>\n  <li>Si esa cifra es 5 o mayor aumenta en 1 las ${mapa.get(modo)} y pon ceros en todas las cifras a la derecha de las ${mapa.get(modo)}.</li>\n <li>Si la cantidad que tienes que aumentar en 1 es un 9, pon un cero y aumenta en 1 la cifra de su izquierda.</li>\n <li>Si esa cifra es 4 o más pequeña, deja las ${derecha} como están y pon ceros en todas las cifras de la derecha de las ${derecha}.</li></ol>`;
+                this.explicacion[modo] = `¡Es correcto! Los pasos seguidos son los siguientes: <ol>\n  <li>Observa la cifra justo a la derecha de las ${mapa.get(modo)}. En este caso, esta cifra es un ${derecha}.</li>\n  <li>Si esa cifra es 5 o mayor aumenta en 1 las ${mapa.get(modo)} y pon ceros en todas las cifras a la derecha de las ${mapa.get(modo)}.</li>\n <li>Si la cantidad que tienes que aumentar en 1 es un 9, pon un cero y aumenta en 1 la cifra de su izquierda.</li>\n <li>Si esa cifra es 4 o más pequeña, deja las ${derecha} como están y pon ceros en todas las cifras de la derecha de las ${derecha}.</li>\n </ol>`;
                 this.nota += this.puntuacion / 4 //cada apartado es 2.5
             } else {
-                this.explicacion[modo] = `No es correcto. La respuesta correcta es ${this.resultado[modo]}. Los pasos seguidos son los siguientes: <ol>\n  <li>Observa la cifra justo a la derecha de las ${mapa.get(modo)}. En este caso, esta cifra es un ${derecha}.</li>\n  <li>Si esa cifra es 5 o mayor aumenta en 1 las ${mapa.get(modo)} y pon ceros en todas las cifras a la derecha de las ${mapa.get(modo)}.</li>\n <li>Si la cantidad que tienes que aumentar en 1 es un 9, pon un cero y aumenta en 1 la cifra de su izquierda.</li>\n <li>Si esa cifra es 4 o más pequeña, deja las ${derecha} como están y pon ceros en todas las cifras de la derecha de las ${derecha}.</li></ol>`;
+                this.explicacion[modo] = `No es correcto. La respuesta correcta es ${this.resultado[modo]}. Los pasos seguidos son los siguientes: <ol>\n  <li>Observa la cifra justo a la derecha de las ${mapa.get(modo)}. En este caso, esta cifra es un ${derecha}.</li>\n  <li>Si esa cifra es 5 o mayor aumenta en 1 las ${mapa.get(modo)} y pon ceros en todas las cifras a la derecha de las ${mapa.get(modo)}.</li>\n <li>Si la cantidad que tienes que aumentar en 1 es un 9, pon un cero y aumenta en 1 la cifra de su izquierda.</li>\n <li>Si esa cifra es 4 o más pequeña, deja las ${derecha} como están y pon ceros en todas las cifras de la derecha de las ${derecha}.</li>\n </ol>`;
             }
         }
     }
