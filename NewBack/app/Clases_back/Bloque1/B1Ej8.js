@@ -63,7 +63,7 @@ class B1Ej8 extends EjGenerico{
 
         this.long_input=4;
         this.etiquetas= ["Primer divisor:", "Segundo divisor:", "Tercer divisor:", "Cuarto divisor:"]
-        this.puntos_explicados = "Para obtener los 10 puntos del ejercicio, todas las respuestas deben ser correctas."
+        this.puntos_explicados = "Cada respuesta vale 2.5, valiendo el ejercicio 10 puntos."
     }
 
     
@@ -81,8 +81,27 @@ class B1Ej8 extends EjGenerico{
             if (this.input[i] === divisores[i].toString()) {
                 ordinal = ordinales[i];
 
-                this.explicacion.push(`¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}, ya que es el ${ordinal} número que, si hacemos con él la división entera de ${num}, da resto 0.`); 
-            
+                let feedback = '';
+                
+                switch (i) {
+                    case 0:
+                        feedback = '¡Es correcto! El número 1 divide a todo número, por lo que siempre es el primer divisor.';
+                        break;
+                    case 1:
+                        if (num % 2 === 0) {
+                            feedback = `¡Es correcto! Sabemos que su última cifra es un número par, por lo que el segundo divisor es 2.`;
+                        } else {
+                            feedback = `¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}, ya que es el ${ordinal} número que, si hacemos con él la división entera de ${num} entre ${this.input[i]}, da resto 0.`;
+                        }
+                        break;
+                    default:
+                        feedback = `¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}, ya que es el ${ordinal} número que, si hacemos con él la división entera de ${num} entre ${this.input[i]}, da resto 0.`
+                        break;
+                }
+
+                this.explicacion.push(feedback); 
+                contador++;
+
             } else {
                 let feedback = '';
                 
@@ -94,18 +113,18 @@ class B1Ej8 extends EjGenerico{
                         if (num % 2 === 0) {
                             feedback = `No es correcto. Sabemos que su última cifra es un número par, por lo que el segundo divisor es 2, y no ${this.input[i]}.`;
                         } else {
-                            feedback = `El número ${this.input[i]} no es el segundo divisor de ${num}. La respuesta correcta es ${this.resultado[i]}, lo que se puede comprobar yendo en orden desde el anterior divisor y probando a dividir hasta que nos encontremos con una división con resto 0.`;
+                            feedback = `El número ${this.input[i]} no es el segundo divisor de ${num}. La respuesta correcta es ${this.resultado[i]}, La respuesta correcta es ${divisores[i]}, lo que se puede comprobar probando en orden desde el anterior divisor hasta que la división dé resto 0.`;
                         }
                         break;
                     case 2:
                         if (divisores.reduce((a, b) => a + b, 0) % 3 === 0) {
-                            feedback = `No es correcto. Sabemos que la suma de sus cifras es múltiplo de tres (en concreto es ${num.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0)}, por lo que el tercer divisor es 3 y no ${this.input[i]}.`;
+                            feedback = `No es correcto. Sabemos que la suma de sus cifras es múltiplo de tres (en concreto es ${num.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0)}), por lo que el tercer divisor es 3 y no ${this.input[i]}.`;
                         } else {
-                            feedback = `El número ${this.input[i]} no es el tercer divisor de ${num}. La respuesta correcta es ${this.resultado[i]}, lo que se puede comprobar yendo en orden desde el anterior divisor y probando a dividir hasta que nos encontremos con una división con resto 0.`;
+                            feedback = `El número ${this.input[i]} no es el tercer divisor de ${num}. La respuesta correcta es ${divisores[i]}, lo que se puede comprobar probando en orden desde el anterior divisor hasta que la división dé resto 0.`;
                         }
                         break;
-                    case 3: //este es el que da problemas
-                        feedback = `No es correcto. La manera más sencilla de obtener el cuarto divisor es dividir nuestro número, ${num}, entre el tercer divisor (${divisores[2]} en este caso), obteniendo ${divisores[i]} .`;
+                    case 3: 
+                        feedback = `El número ${this.input[i]} no es el cuarto divisor de ${num}. La respuesta correcta es ${divisores[i]}, lo que se puede comprobar probando en orden desde el anterior divisor hasta que la división dé resto 0.`;
                         break;
                     default:
                         break;
@@ -115,8 +134,7 @@ class B1Ej8 extends EjGenerico{
             }
         }
 
-        if (contador===4)
-            this.nota = this.puntuacion;
+        this.nota = (this.puntuacion/4)*contador;
     }
 
 }

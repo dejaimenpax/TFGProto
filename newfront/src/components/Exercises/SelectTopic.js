@@ -49,6 +49,7 @@ const SelectTopic = () => {
     if (!disableInput){
       if (input.every((value) => value !== "")) {
         const currentUser = AuthService.getCurrentUser();
+        console.log("Lo que envia como ejercicio es", exercise);
         ExerciseService.resolveExercise(exercise, input, currentUser.username)
           .then((response) => {
             setExercise(response.data);
@@ -160,6 +161,9 @@ const SelectTopic = () => {
                   </div>
                 )}
                 
+                {exerciseResolved ? (
+                  <p className="text-center">Con este ejercicio has obtenido {exercise.nota} puntos.</p>
+                ):<></>}
 
                 {exerciseResolved ? (
                   <button className="btn btn-custom mt-2" onClick={() => handleSelect(parseInt(exercise.id_tema.toString()[0]))}>
