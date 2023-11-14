@@ -98,12 +98,12 @@ class B2Ej2 extends EjGenerico {
           break;
         case 1:
           this.explicacion.push(
-            `¡Es correcto! Hay ${acutangulos} triángulo acutángulo en total. El triángulo acutángulo es${formattedColors}.`
+            `¡Es correcto! Hay ${acutangulos} triángulo acutángulo en total. El triángulo cuyos ángulos son todos menores de 90º es${formattedColors}.`
           );
           break;
         default:
           this.explicacion.push(
-            `¡Es correcto! Hay ${acutangulos} triángulos acutángulos en total. Los triángulos acutángulos son${formattedColors}.`
+            `¡Es correcto! Hay ${acutangulos} triángulos acutángulos en total. Los triángulos cuyos ángulos son todos menores de 90º son${formattedColors}.`
           );
       }
     } else {
@@ -115,12 +115,12 @@ class B2Ej2 extends EjGenerico {
           break;
         case 1:
           this.explicacion.push(
-            `No es correcto. Hay ${acutangulos} triángulo acutángulo en total. El triángulo acutángulo es ${formattedColors}.`
+            `No es correcto. Hay ${acutangulos} triángulo acutángulo en total. El triángulo cuyos ángulos son todos menores de 90º es${formattedColors}.`
           );
           break;
         default:
           this.explicacion.push(
-            `No es correcto. Hay ${acutangulos} triángulos acutángulos en total. Los triángulos acutángulos son ${formattedColors}.`
+            `No es correcto. Hay ${acutangulos} triángulos acutángulos en total. Los triángulos cuyos ángulos son todos menores de 90º son${formattedColors}.`
           );
       }
     }
