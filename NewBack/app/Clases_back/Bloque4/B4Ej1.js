@@ -3,7 +3,7 @@ const EjGenerico = require('../EjGenerico.js');
 class B4Ej1 extends EjGenerico {
   constructor(
     texto = "El siguiente diagrama de barras representa las edades de los alumnos de una clase de la Universidad. " +
-    "Responde, en las dos cajas de texto, cúantos alumnos tiene la clase en total " +
+    "Responde, en las dos cajas de texto, cuántos alumnos tiene la clase en total " +
     "y cual es la edad media de la clase (redondea la media a un entero).",
     enunciado = Array.from({length: 10}, () => Math.floor(Math.random() * 11)),
     puntuacion = 10

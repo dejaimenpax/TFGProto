@@ -29,10 +29,10 @@ class B4Ej5_6 extends EjGenerico {
     const sortedNumeros = [...numeros].sort((a, b) => a - b);
     const mediana = sortedNumeros[7]
     if (mediana.toString() === this.input[0]) {
-      this.explicacion.push(`¡La mediana es correcta! Para calcularla, se han ordenado los números de menor a mayor y se ha escogido el de la mitad (la octava posición).`);
+      this.explicacion.push(`¡La mediana es correcta! Para calcularla, se deben ordenar los números de menor a mayor escoger el de la mitad (la octava posición).`);
       this.nota += this.puntuacion/2;
     } else {
-      this.explicacion.push(`No es correcto. La mediana se puede hallar ordenando de menor a mayor y seleccionando el número que queda en el medio (la octava posición), obteniendo ${mediana}.`);
+      this.explicacion.push(`No es correcto. La mediana se puede hallar ordenando la lista de números de menor a mayor y seleccionando el número que queda en el medio (la octava posición), obteniendo el ${mediana}.`);
     }
   
     // Calculamos la moda
