@@ -162,7 +162,7 @@ const SelectTopic = () => {
                 )}
                 
                 {exerciseResolved ? (
-                  <p className="text-center">Con este ejercicio has obtenido {exercise.nota} puntos.</p>
+                  <p className="text-center">Con este ejercicio has obtenido {exercise.nota.toString().replace('.',',')} puntos.</p>
                 ):<></>}
 
                 {exerciseResolved ? (

@@ -4,7 +4,7 @@ class B4Ej5_6 extends EjGenerico {
 
   constructor(
     texto = "Calcula la mediana y la moda del siguiente conjunto de números:",
-    enunciado = [Array.from({length: 15}, () => Math.floor(Math.random() * 25) + 10).join(' ')],
+    enunciado = [Array.from({length: 15}, () => Math.floor(Math.random() * 11) + 10).join(' ')],
     puntuacion = 10
   ) {
     super(

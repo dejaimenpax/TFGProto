@@ -226,8 +226,12 @@ const BoardGestion = () => {
     studentsAux.sort((a, b) => a.username.localeCompare(b.username));
   
     // Inicializa un array para la lista ordenada
-    const sortedUsers = [];
-  
+    const sortedUsers = []
+
+    if (teachersAux.length===0){ //si no hay profesores
+      return studentsAux;
+    }
+
     // Itera por cada profesor y sus alumnos
 
     let professorStudents = []

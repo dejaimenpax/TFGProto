@@ -11,6 +11,23 @@ Chart.register(BarElement)
 
 const ExerciseCard = ({ exercise }) => {
   let content;
+
+  const options = {
+    scales: {
+      x: {
+          title: {
+            display: true,
+            text: "Edades de los alumnos",
+          } 
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Numero de alumnos",
+        } 
+    }
+    }
+  };
   
   switch (exercise?.id_tema) {
     case 3.02:
@@ -35,6 +52,8 @@ const ExerciseCard = ({ exercise }) => {
               },
             ],
           }}
+          
+          options={options}
         />
       );
       break;
