@@ -24,7 +24,7 @@ class B1Ej7 extends EjGenerico {
         )
         this.long_input=4;
         this.etiquetas= ["Primer múltiplo:", "Segundo múltiplo:", "Tercer múltiplo:", "Cuarto múltiplo:"]
-        this.puntos_explicados = "Cada respuesta vale 2.5, valiendo el ejercicio 10 puntos."
+        this.puntos_explicados = "Cada respuesta vale 2,5 puntos, valiendo el ejercicio 10 puntos."
     }
 
     resolver(input) { //el input es un array de 4 strings

@@ -32,7 +32,7 @@ class B1Ej3_4 extends EjGenerico{
 
         this.long_input = 4;
         this.etiquetas= ["Primer número:", "Segundo número:", "Tercer número:", "Cuarto número:"]
-        this.puntos_explicados = "Cada respuesta vale 2.5, valiendo el ejercicio 10 puntos."
+        this.puntos_explicados = "Cada respuesta vale 2,5 puntos, valiendo el ejercicio 10 puntos."
     }
 
     resolver(input) {
