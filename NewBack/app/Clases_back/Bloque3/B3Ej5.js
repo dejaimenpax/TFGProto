@@ -99,14 +99,17 @@ class B2Ej5 extends EjGenerico {
           break;
         case 1:
           this.explicacion.push(
-            `¡Es correcto! Hay ${obtusangulos} triángulo obtusángulo en total. El triángulo obtusángulo es${formattedColors}.`
+            `¡Es correcto! Hay ${obtusangulos} triángulo obtusángulo en total. El triángulo que tiene un ángulo que mide más de 90º es${formattedColors}.`
           );
           break;
         default:
           this.explicacion.push(
-            `¡Es correcto! Hay ${obtusangulos} triángulos obtusángulos en total. Los triángulos obtusángulos son${formattedColors}.`
+            `¡Es correcto! Hay ${obtusangulos} triángulos obtusángulos en total. Los triángulos que tienen un ángulo que mide más de 90º son${formattedColors}.`
           );
       }
+
+      this.nota = this.puntuacion;
+
     } else {
       switch (obtusangulos) {
         case 0:
@@ -116,12 +119,12 @@ class B2Ej5 extends EjGenerico {
           break;
         case 1:
           this.explicacion.push(
-            `No es correcto. Hay ${obtusangulos} triángulo obtusángulo en total. El triángulo obtusángulo es ${formattedColors}.`
+            `No es correcto. Hay ${obtusangulos} triángulo obtusángulo en total. El triángulo que tiene un ángulo que mide más de 90º es${formattedColors}.`
           );
           break;
         default:
           this.explicacion.push(
-            `No es correcto. Hay ${obtusangulos} triángulos obtusángulos en total. Los triángulos obtusángulos son ${formattedColors}.`
+            `No es correcto. Hay ${obtusangulos} triángulos obtusángulos en total. Los triángulos que tienen un ángulo que mide más de 90º son${formattedColors}.`
           );
       }
     }

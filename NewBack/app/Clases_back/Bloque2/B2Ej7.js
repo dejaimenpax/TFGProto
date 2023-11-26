@@ -21,7 +21,7 @@ class B2Ej7 extends EjGenerico {
 
         this.long_input=3;
         this.etiquetas= ["Segundos:", "Minutos:", "Grados:"]
-        this.puntos_explicados = "Los grados, minutos y segundos deben ser los tres correctos para que el ejercicio puntúe con 10 puntos."
+        this.puntos_explicados = "Responder correctamente los segundos proporciona 2 puntos. Responder correctamente segundos y minutos proporciona 6 puntos. Responder todo correctamente proporciona 10 puntos."
     }
 
     sumarAngulos(angulo1, angulo2) {
@@ -63,20 +63,20 @@ class B2Ej7 extends EjGenerico {
         console.log(this.resultado) 
     
         this.explicacion = [];
-        let contador = 0;
+        let contador = [false, false, false]
         let mensaje = ""
     
         // Feedback para los segundos
         if (this.input[0] === this.resultado[2]) {
             (angulo1[2]+angulo2[2]) > 60 ?
-                mensaje = `¡Los segundos son correctos! La suma de segundos es ${angulo1[2]+angulo2[2]} y sobrepasa los 60, por lo que nos quedamos con el resto de la division de ${angulo1[2]+angulo2[2]} entre 60, obteniendo ${this.resultado[2]}". El cociente debemos sumarlo a los minutos.`
+                mensaje = `¡Los segundos son correctos! La suma de segundos es ${angulo1[2]+angulo2[2]} y sobrepasa los 60, por lo que nos quedamos con el resto de la división de ${angulo1[2]+angulo2[2]} entre 60, obteniendo ${this.resultado[2]} minutos. Y nos llevamos una, que deberemos sumar a los minutos.`
                 :
                 mensaje = `¡Los segundos son correctos! La suma de segundos es ${this.resultado[2]}".`
             this.explicacion.push(mensaje);
-            contador++;
+            contador[0] = true;
         } else {
             (angulo1[2]+angulo2[2]) > 60 ?
-                mensaje = `Los segundos no son correctos. La suma de segundos es ${angulo1[2]+angulo2[2]} y sobrepasa los 60, por lo que nos quedamos con el resto de la division de ${angulo1[2]+angulo2[2]} entre 60, obteniendo ${this.resultado[2]}". El cociente debemos sumarlo a los minutos.`
+                mensaje = `Los segundos no son correctos. La suma de segundos es ${angulo1[2]+angulo2[2]} y sobrepasa los 60, por lo que nos quedamos con el resto de la división de ${angulo1[2]+angulo2[2]} entre 60, obteniendo ${this.resultado[2]} minutos. Y nos llevamos una, que deberemos sumar a los minutos.`
                 :
                 mensaje = `Los segundos no son correctos. La suma de segundos es ${this.resultado[2]}".`
             this.explicacion.push(mensaje);
@@ -84,38 +84,61 @@ class B2Ej7 extends EjGenerico {
 
         // Feedback para los minutos
         if (this.input[1] === this.resultado[1]) {
-            this.resultado[1]!==(angulo1[1]+angulo2[1]) ? //si el resultado es distinto a la suma, nos hemos llevado una unidad desde los segundos
-                mensaje = `¡Los minutos son correctos! La suma de minutos es ${angulo1[1]+angulo2[1]} y, en este caso, le sumamos un minuto extra que viene de la suma de segundos. Teniendo en cuenta lo mismo que en los segundos, obtenemos finalmente un total de ${this.resultado[1]} minutos."`
-                :
-                mensaje = `¡Los minutos son correctos! La suma de minutos es ${angulo1[1]+angulo2[1]}. Teniendo en cuenta lo mismo que en los segundos, obtenemos finalmente un total de ${this.resultado[1]} minutos."`
+            if ( angulo1[2]+angulo2[2] > 60 ) {// por aqui entra si nos llevabamos una
+                if ((angulo1[1]+angulo2[1]+1) > 60)
+                    mensaje = `¡Los minutos son correctos! La suma de minutos es ${angulo1[1]+angulo2[1]}, más el que nos llevamos, ${angulo1[1]+angulo2[1]+1}. Supera los 60, por lo que dividimos ${angulo1[1]+angulo2[1]+1} entre 60. El resto de la división es el resultado, ${this.resultado[1]} minutos. Y nos llevamos una, que deberemos sumar a los grados. `
+                else   
+                    mensaje = `¡Los minutos son correctos! La suma de minutos es ${angulo1[1]+angulo2[1]}, más el que nos llevamos, ${angulo1[1]+angulo2[1]+1}. Como no supera los 60, obtenemos los minutos.`
+            }
+            else { //aqui no nos hemos llevado 1
+                if (angulo1[1]+angulo2[1] > 60) 
+                    mensaje = `¡Los minutos son correctos! La suma de minutos es ${angulo1[1]+angulo2[1]}. Supera los 60, por lo que dividimos ${angulo1[1]+angulo2[1]} entre 60. El resto de la división es el resultado, ${this.resultado[1]} minutos. Y nos llevamos una, que deberemos sumar a los grados. `
+                else   
+                    mensaje = `¡Los minutos son correctos! La suma de minutos es ${angulo1[1]+angulo2[1]}. Como no supera los 60, obtenemos los minutos.`
+            }
+            
             this.explicacion.push(mensaje);
-            contador++;
+            contador[1] = true
         } else {
-            this.resultado[1]!==(angulo1[1]+angulo2[1]) ? //si el resultado es distinto a la suma, nos hemos llevado una unidad desde los segundos
-                mensaje = `Los minutos no son correctos. La suma de minutos es ${angulo1[1]+angulo2[1]} y, en este caso, le sumamos un minuto extra que viene de la suma de segundos. Teniendo en cuenta lo mismo que en los segundos, obtenemos finalmente un total de ${this.resultado[1]} minutos."`
-                :
-                mensaje = `Los minutos no son correctos. La suma de minutos es ${angulo1[1]+angulo2[1]}. Teniendo en cuenta lo mismo que en los segundos, obtenemos finalmente un total de ${this.resultado[1]} minutos."`
+            if ( angulo1[2]+angulo2[2] > 60 ) { // por aqui entra si nos llevabamos una
+                if ((angulo1[1]+angulo2[1]+1) > 60)
+                    mensaje = `No es correcto. La suma de minutos es ${angulo1[1]+angulo2[1]}, más el que nos llevamos, ${angulo1[1]+angulo2[1]+1}. Supera los 60, por lo que dividimos ${angulo1[1]+angulo2[1]+1} entre 60. El resto de la división es el resultado, ${this.resultado[1]} minutos. Y nos llevamos una, que deberemos sumar a los grados. `
+                else   
+                    mensaje = `No es correcto. La suma de minutos es ${angulo1[1]+angulo2[1]}, más el que nos llevamos, ${angulo1[1]+angulo2[1]+1}. Como no supera los 60, obtenemos los minutos.`
+            }
+            else { //aqui no nos hemos llevado 1
+                if (angulo1[1]+angulo2[1] > 60) 
+                    mensaje = `No es correcto. La suma de minutos es ${angulo1[1]+angulo2[1]}. Supera los 60, por lo que dividimos ${angulo1[1]+angulo2[1]} entre 60. El resto de la división es el resultado, ${this.resultado[1]} minutos. Y nos llevamos una, que deberemos sumar a los grados. `
+                else   
+                    mensaje = `No es correcto. La suma de minutos es ${angulo1[1]+angulo2[1]}. Como no supera los 60, obtenemos los minutos.`
+            }
             this.explicacion.push(mensaje);
         }
 
         // Feedback para los grados
         if (this.input[2] === this.resultado[0]) {
-            this.resultado[0]!==(angulo1[0]+angulo2[0]) ? //si el resultado es distinto a la suma, nos hemos llevado una unidad desde los minutos
-                mensaje = `¡Los grados son correctos! La suma de los grados es ${angulo1[2]+angulo2[2]} y, en este caso, le sumamos un grado extra que viene de los minutos, obteniendo ${this.resultado[0]} grados.`
+            ( angulo1[1]+angulo2[1] > 60  ) ? // por aqui entra si nos llevabamos una
+                mensaje = `¡Los grados son correctos! La suma de los grados es ${angulo1[0]+angulo2[0]}, más el que nos llevábamos, ${this.resultado[0]} grados.`
                 :
-                mensaje = `¡Los grados son correctos! La suma da como resultado ${angulo1[2]+angulo2[2]} grados.`
+                mensaje = `¡Los grados son correctos! La suma da como resultado ${angulo1[0]+angulo2[0]} grados.`
             this.explicacion.push(mensaje);
-            contador++;
-        } else {
-            this.resultado[0]!==(angulo1[0]+angulo2[0]) ? //si el resultado es distinto a la suma, nos hemos llevado una unidad desde los minutos
-                mensaje = `Los grados no son correctos. La suma de grados es ${angulo1[2]+angulo2[2]} y, en este caso, le sumamos un grado extra que viene de los minutos, obteniendo ${this.resultado[0]} grados.`
+            contador[2] = true
+        } else { //aqui no nos hemos llevado 1
+            (  angulo1[1]+angulo2[1] > 60  ) ? 
+                mensaje = `Los grados no son correctos. La suma de los grados es ${angulo1[0]+angulo2[0]}, más el que nos llevábamos, ${this.resultado[0]} grados.`
                 :
-                mensaje = `Los grados no son correctos. La suma da como resultado ${angulo1[2]+angulo2[2]} grados.`
+                mensaje = `Los grados no son correctos. La suma da como resultado ${angulo1[0]+angulo2[0]} grados.`
             this.explicacion.push(mensaje);
         }
     
-        if (contador===3)
-            this.nota = this.puntuacion;
+        if (contador[0]&&contador[1]&&contador[2])
+            this.nota=10
+        else if (contador[0]&&contador[1])
+            this.nota=6
+        else if (contador[0])
+            this.nota=2
+        else
+            this.nota=0
     }
     
 }

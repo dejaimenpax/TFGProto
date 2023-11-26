@@ -78,6 +78,17 @@ const getMyStudents = () => {
   }
 }
 
+const getMyTeacher= () => {
+  const user = getCurrentUser();
+  if (user && user.accessToken) {
+    return axios.get(API_URL + "my-teacher", {
+      headers: { "x-access-token": user.accessToken },
+    });
+  } else {
+    return Promise.reject(new Error("Usuario no encontrado o token expirado."));
+  }
+}
+
 const getStudentsWithSameTeacher = () => {
   const user = getCurrentUser();
   if (user && user.accessToken) {
@@ -156,6 +167,7 @@ const AuthService = {
   getCurrentUserFromDB,
   getTeachers,
   getMyStudents,
+  getMyTeacher,
   checkTokenExpiration,
   eraseStats,
   deleteAccountById,

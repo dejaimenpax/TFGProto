@@ -8,17 +8,33 @@ var bcrypt = require("bcryptjs");
 
 
 exports.signup = (req, res) => {
-  const user = new User({
-    username: req.body.username,
-    password: bcrypt.hashSync(req.body.password, 8),
 
-    submitted: [0,0,0,0],
-    correct: [0,0,0,0], 
-    incorrect: [0,0,0,0], 
-    scores: [0,0,0,0], 
-    averages: [0,0,0,0],
-    teacher: req.body.teacher,
-  });
+  if (req.body.username===req.body.teacher) {
+    const user = new User({
+      username: req.body.username,
+      password: bcrypt.hashSync(req.body.password, 8),
+
+      submitted: [0,0,0,0],
+      correct: [0,0,0,0], 
+      incorrect: [0,0,0,0], 
+      scores: [0,0,0,0], 
+      averages: [0,0,0,0],
+      teacher: req.body.teacher,
+      flag_visibility: true,
+    })
+  } else {
+    const user = new User({
+      username: req.body.username,
+      password: bcrypt.hashSync(req.body.password, 8),
+
+      submitted: [0,0,0,0],
+      correct: [0,0,0,0], 
+      incorrect: [0,0,0,0], 
+      scores: [0,0,0,0], 
+      averages: [0,0,0,0],
+      teacher: req.body.teacher,
+    })
+  }
 
   user.save((err, user) => {
     if (err) {
@@ -118,6 +134,30 @@ exports.getUser = (req, res) => {
       }
 
       res.status(200).send(user);
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.getMyTeacher = (req, res) => {
+  const token = req.headers["x-access-token"];
+  const decodedToken = jwt.verify(token, config.secret);
+  const userId = decodedToken.id;
+
+  User.findById(userId)
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "Usuario no encontrado." });
+      }
+
+      User.findOne({ username: user.teacher, teacher: user.teacher})
+        .then(teach => {
+          res.json(teach)
+        })
+        .catch(err => {
+          res.status(500).send({ message: err.message });
+        });
     })
     .catch(err => {
       res.status(500).send({ message: err.message });

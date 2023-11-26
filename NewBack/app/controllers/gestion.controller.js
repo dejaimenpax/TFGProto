@@ -212,7 +212,25 @@ exports.restorePassword = (req, res) => {
   .catch((err) => {
     res.status(500).send({ message: err.message });
   });
+}
 
+exports.updateRankingVisibility = (req, res) => {
 
+  User.findOneAndUpdate(
+    { username: req.body.teacher.username },
+    { flag_ranking: req.body.flag},
+    { new: true }
+  )
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({ message: "Usuario no encontrado." });
+      }
+
+      res.status(200).send(user);
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err.message });
+    });
+  
 }
 

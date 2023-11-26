@@ -3,7 +3,7 @@ const EjGenerico = require('../EjGenerico.js');
 class B4Ej1 extends EjGenerico {
   constructor(
     texto = "El siguiente diagrama de barras representa las edades de los alumnos de una clase de la Universidad. " +
-    "Responde, en las dos cajas de texto, cúantos alumnos tiene la clase en total " +
+    "Responde, en las dos cajas de texto, cuántos alumnos tiene la clase en total " +
     "y cual es la edad media de la clase (redondea la media a un entero).",
     enunciado = Array.from({length: 10}, () => Math.floor(Math.random() * 11)),
     puntuacion = 10
@@ -38,10 +38,10 @@ class B4Ej1 extends EjGenerico {
     }
 
     if (this.input[1] == media) {
-      this.explicacion.push(`¡La media de edad es correcta! Para hallar la media, hay que sumar todas las edades de los ${totalAlumnos} alumnos y dividir entre el número de alumnos, obteniendo ${media}.`);
+      this.explicacion.push(`¡La media de edad es correcta! Para calcularla, hay que multiplicar cada edad por el número de alumnos que tienen esa edad: 18 x ${this.enunciado[0]}, 19 x ${this.enunciado[1]}, 20 x ${this.enunciado[2]}... Después, hay que sumar todos esos valores, obteniendo ${sumaEdades}. Por último, hay que dividir el resultado de la suma entre el número total de alumnos y redondear el cociente obtenido.`);
       this.nota += this.puntuacion/2;
     } else {
-      this.explicacion.push(`No es correcto. La media debería ser ${media} años. Para hallar la media, hay que sumar todas las edades de los ${totalAlumnos} alumnos y dividir entre el número de alumnos.`);
+      this.explicacion.push(`No es correcto. La media redondeada debería ser ${media} años. Para calcularla, hay que multiplicar cada edad por el número de alumnos que tienen esa edad: 18 x ${this.enunciado[0]}, 19 x ${this.enunciado[1]}, 20 x ${this.enunciado[2]}... Después, hay que sumar todos esos valores, obteniendo ${sumaEdades}. Por último, hay que dividir el resultado de la suma entre el número total de alumnos y redondear el cociente obtenido.`);
     }
   }
 

@@ -5,11 +5,11 @@ class B3Ej9 extends EjGenerico {
   constructor(
     texto = "Calcula el área del siguiente triángulo, y redondea el resultado al entero más cercano.",
     enunciado = [
-        [
-            [[-9,-8,-7,-6,-5,-4,-3,-2][Math.floor(Math.random() * 8)], -7],
-            [[2,3,4,5,6,7,8,9][Math.floor(Math.random() * 7)], -7],
-            [[-9,-8,-7,-6,-5,-4,-3,-2,2,3,4,5,6,7,8,9][Math.floor(Math.random() * 16)], [2, 3, 4, 5, 6, 7, 8, 9][Math.floor(Math.random() * 8)]]
-        ]
+      [
+        [[-6,-5,-4,-3,-2][Math.floor(Math.random() * 5)], -7],
+        [[2,3,4,5,6][Math.floor(Math.random() * 5)], -7],
+        [[-9,-8,-7,7,8,9][Math.floor(Math.random() * 6)], [2, 3, 4, 5, 6, 7, 8, 9][Math.floor(Math.random() * 8)]]
+      ]
     ],
 
     puntuacion = 10
@@ -43,12 +43,40 @@ class B3Ej9 extends EjGenerico {
     );
     area = Math.round(area);
 
+    let izquierda = a[0]<=b[0] ? a[0] : b[0]
+    let derecha = a[0]>=b[0] ? a[0] : b[0]
+    let mensaje = ''
+
     if (area === parseInt(this.input[0])) {
-      this.explicacion.push(`¡Es correcto! El área redondeada del triángulo, ${area}, se ha hallado multiplicando base por altura y dividiendo entre dos. La base se obtiene fácilmente con la distancia entre los puntos (${a[0]},${a[1]}) y (${b[0]}, ${b[1]}), mientras que para la altura basta con medir la distancia entre el tercer vértice (${c[0]}, ${c[1]}) y la base, obteniendo ${Math.abs(c[1]-a[1])} unidades. El producto de ambos da ${Math.abs(a[1]-b[1])*Math.abs(c[1]-a[1])} unidades cuadradas, y se obtiene el área al dividir entre dos y redondear.`);
+      
+      mensaje = `¡Es correcto! El área del triángulo se ha calculado aplicando la fórmula del área de un triángulo =  (base por altura) / 2. 
+      <ol>\n 
+        <li>La base se obtiene fácilmente con la distancia entre los puntos (${a[0]},${a[1]}) y (${b[0]},${b[1]}). Están en la misma horizontal, por lo que basta con restar la coordenada X del punto más a la derecha (${derecha})
+        menos la coordenada X del punto más a la izquierda (${izquierda}) para calcular la distancia: ${derecha-izquierda} unidades.</li>\n 
+        
+        <li>La altura se obtiene midiendo la distancia (vertical) entre el tercer vértice (${c[0]},${c[1]}) y
+        la base. Restamos para ello la coordenada Y del tercer vértice (${c[1]}) menos la coordenada Y de la base (${b[1]}), obteniendo ${c[1]-b[1]} unidades.</li>\n 
+        
+        <li>El resultado final se obtiene aplicando la fórmula y redondeando, obteniendo un área de ${area} unidades cuadradas.</li>\n 
+      </ol>`
+
       this.nota = this.puntuacion;
     } else {
-      this.explicacion.push(`No es correcto. El área redondeada del triángulo es ${area}. Para calcular el área de un triángulo, se puede hallar multiplicando base por altura y dividiendo entre dos. La base se obtiene fácilmente con la distancia entre los puntos (${a[0]},${a[1]}) y (${b[0]}, ${b[1]}), mientras que para la altura basta con medir la distancia entre el tercer vértice (${c[0]}, ${c[1]}) y la base, obteniendo ${Math.abs(c[1]-a[1])} unidades. El producto de ambos da ${Math.abs(a[1]-b[1])*Math.abs(c[1]-a[1])} unidades cuadradas, y se obtiene el área al dividir entre dos y redondear.`);
+
+      mensaje = `No es correcto. El área del triángulo es ${area} unidades cuadradas y se ha calculado aplicando la fórmula del área de un triángulo =  (base por altura) / 2. 
+      <ol>\n 
+        <li>La base se obtiene fácilmente con la distancia entre los puntos (${a[0]},${a[1]}) y (${b[0]},${b[1]}). Están en la misma horizontal, por lo que basta con restar la coordenada X del punto más a la derecha (${derecha})
+        menos la coordenada X del punto más a la izquierda (${izquierda}) para calcular la distancia: ${derecha-izquierda} unidades.</li>\n 
+        
+        <li>La altura se obtiene midiendo la distancia (vertical) entre el tercer vértice (${c[0]},${c[1]}) y
+        la base. Restamos para ello la coordenada Y del tercer vértice (${c[1]}) menos la coordenada Y de la base (${b[1]}), obteniendo ${c[1]-b[1]} unidades.</li>\n 
+        
+        <li>El resultado final se obtiene aplicando la fórmula y redondeando, obteniendo un área de ${area} unidades cuadradas.</li>\n 
+      </ol>`
     }
+
+
+    this.explicacion.push(mensaje)
   }
 }
 

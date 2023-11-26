@@ -1,5 +1,13 @@
 /* Ranking.css */
 
+.gray-box {
+    background-color: #f0f0f0; /* Color gris */
+    display: inline-block; /* Cambia a inline-block para ajustarse al contenido */
+    padding: 10px; /* Ajusta el relleno según sea necesario */
+    border-radius: 5px; /* Agrega bordes redondeados si deseas */
+    margin-bottom: 10px; /* Espaciado opcional entre cajas */
+}
+
 table {
     border-radius: 10px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);

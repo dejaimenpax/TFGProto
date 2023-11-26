@@ -47,10 +47,10 @@ class B4Ej8 extends EjGenerico {
     }
   
     if (respuestaMedia === Math.round(media)) {
-      this.explicacion.push(`¡Es correcto! Para hallarla, se han sumado todos los números (obteniendo ${sumaTotal}) y después dividido por la cantidad de números (${numeros.length}).`);
+      this.explicacion.push(`¡Es correcto! Para hallarla, se han sumado todos los números (obteniendo ${sumaTotal}) y después dividido por la cantidad de números (${numeros.length}), para finalmente redondear.`);
       this.nota += this.puntuacion/2; //vale mas calcular la media que el resto
     } else {
-      this.explicacion.push(`No es correcto. La media es ${Math.round(media)}. Para calcularla se debe sumar todos los números (obteniendo ${sumaTotal}) y dividir por la cantidad de números (${numeros.length}).`);
+      this.explicacion.push(`No es correcto. La media es ${Math.round(media)}. Para calcularla se debe sumar todos los números (obteniendo ${sumaTotal}) y dividir por la cantidad de números (${numeros.length}), para finalmente redondear.`);
     }
   
     if (respuestaMinimo === minimo) {

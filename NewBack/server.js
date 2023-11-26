@@ -280,7 +280,7 @@ function initial() {
       });
 
       new Exercise({
-        name: 'Promedio, máximo y mínimo de una muestra.',
+        name: 'Media, máximo y mínimo de una muestra.',
         id_tema: 4.08,
         flag_active: true,
         flag_examen: false
