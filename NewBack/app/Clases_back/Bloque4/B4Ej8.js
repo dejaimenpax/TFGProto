@@ -21,7 +21,7 @@ class B4Ej8 extends EjGenerico {
 
     this.long_input = 3;
     this.etiquetas= ["Máximo:", "Media aritmética (redondeada a la unidad):", "Mínimo:"]
-    this.puntos_explicados = "Las respuestas correctas para el máximo y el mínimo valen 2.5 puntos cada una. Acertar la media cuenta 5 puntos."
+    this.puntos_explicados = "Las respuestas correctas para el máximo y el mínimo valen 2,5 puntos cada una. Acertar la media cuenta 5 puntos."
 
   }
 
