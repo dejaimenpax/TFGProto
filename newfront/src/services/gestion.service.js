@@ -58,6 +58,13 @@ const eraseUserStats = (username) => {
   })
 }
 
+const updateRankingVisibility = (teacher, flag) => {
+  return axios.post(API_URL + "updateRankingVisibility", {teacher, flag} , {
+    headers: authHeader()
+  })
+}
+
+
 const restorePassword = (username, password) => {
   return axios.post(API_URL + "restorePassword", {username, password} , {
     headers: authHeader()
@@ -71,6 +78,7 @@ const GestionService = {
   eraseUserStats,
   getTeachers,
   restorePassword,
+  updateRankingVisibility,
 };
 
 export default GestionService;

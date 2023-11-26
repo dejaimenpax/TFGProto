@@ -106,6 +106,9 @@ class B2Ej2 extends EjGenerico {
             `¡Es correcto! Hay ${acutangulos} triángulos acutángulos en total. Los triángulos cuyos ángulos son todos menores de 90º son${formattedColors}.`
           );
       }
+
+      this.nota=this.puntuacion;
+
     } else {
       switch (acutangulos) {
         case 0:

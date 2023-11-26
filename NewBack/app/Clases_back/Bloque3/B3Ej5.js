@@ -107,6 +107,9 @@ class B2Ej5 extends EjGenerico {
             `¡Es correcto! Hay ${obtusangulos} triángulos obtusángulos en total. Los triángulos que tienen un ángulo que mide más de 90º son${formattedColors}.`
           );
       }
+
+      this.nota = this.puntuacion;
+
     } else {
       switch (obtusangulos) {
         case 0:

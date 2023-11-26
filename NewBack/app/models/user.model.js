@@ -11,6 +11,7 @@ const User = mongoose.model(
     scores: [Number], //puntuaciones totales por bloque
     averages: [Number], //puntuaciones medias por bloque
     teacher: String, //username del profesor asociado. si es el mismo, coincide con su mail
+    flag_ranking: Boolean, //flag que informa, en caso de que sea profesor, de si sus alumnos pueden ver el ranking
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,

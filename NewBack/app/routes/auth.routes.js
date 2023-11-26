@@ -26,6 +26,8 @@ module.exports = function(app) {
 
   app.get("/api/auth/teachers", controller.getTeachers)
 
+  app.get("/api/auth/my-teacher", controller.getMyTeacher)
+
   app.get("/api/auth/students", controller.getMyStudents)
 
   app.post("/api/auth/erase-stats", [authJwt.verifyToken], controller.eraseStats);

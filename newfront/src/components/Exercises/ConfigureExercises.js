@@ -35,7 +35,7 @@ const ConfigureExercises = ( {user} ) => {
           setShowSuccessMessage(false);
         }, 3000);
       })
-      .catch((error) => console.error("Error updating exercise visibility:", error));
+      .catch((error) => console.error("Error actualizando la visibilidad de ejercicios:", error));
   };
 
   // Group exercises by their block (id_tema)
@@ -88,7 +88,7 @@ const ConfigureExercises = ( {user} ) => {
         </button>
         {showSuccessMessage && (
           <div className="alert alert-success text-center" role="alert">
-            Se ha guardado la configuración de visibilidad de los ejercicios.
+            Se ha guardado la configuración de visibilidad de los ejercicios
           </div>
         )}
         <p> </p>
