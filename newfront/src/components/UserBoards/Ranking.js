@@ -157,7 +157,8 @@ const Ranking = () => {
             {!showRanking && user?.username!==teacher?.username && (
                 <div>
                     Tu profesor ha desactivado la visualización del Ranking.
-                    <p>
+                    <p> </p>
+                    <p className="mt-2">
                         <Link to={"/resolver"} className="btn btn-custom btn-lg">Resolver ejercicios</Link>
                     </p>
                 </div>

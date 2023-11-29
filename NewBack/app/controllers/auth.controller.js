@@ -9,8 +9,10 @@ var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
 
+  let user = null;
+
   if (req.body.username===req.body.teacher) {
-    const user = new User({
+    user = new User({
       username: req.body.username,
       password: bcrypt.hashSync(req.body.password, 8),
 
@@ -20,10 +22,10 @@ exports.signup = (req, res) => {
       scores: [0,0,0,0], 
       averages: [0,0,0,0],
       teacher: req.body.teacher,
-      flag_visibility: true,
+      flag_ranking: true,
     })
   } else {
-    const user = new User({
+    user = new User({
       username: req.body.username,
       password: bcrypt.hashSync(req.body.password, 8),
 
