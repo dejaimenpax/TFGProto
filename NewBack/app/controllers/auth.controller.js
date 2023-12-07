@@ -200,6 +200,7 @@ exports.getMyStudents = (req, res) => {
 
       User.find({ teacher: user.username, username: { $ne: user.username } })
         .then(students => {
+          students.sort((a, b) => a.username.localeCompare(b.username));
           res.status(200).send(students);
         })
         .catch(err => {
