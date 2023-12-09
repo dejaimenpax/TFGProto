@@ -48,6 +48,21 @@ const ConfigureExercises = ( {user} ) => {
     return grouped;
   }, {});
 
+  const getBlockName = (block) => {
+    switch (block.toString()) {
+      case "1":
+        return "Números y Operaciones";
+      case "2":
+        return "Unidades de Medida";
+      case "3":
+        return "Formas Geométricas";
+      case "4":
+        return "Gráficas y Estadística";
+      default:
+        return "";
+    }
+  };
+
   return (
     <>
       {user?.username!==user?.teacher && //si no es profesor
@@ -59,7 +74,7 @@ const ConfigureExercises = ( {user} ) => {
             <div key={block} className="col">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title text-center">Bloque {block}</h5>
+                  <h5 className="card-title text-center">Bloque {block}: {getBlockName(block)}</h5>
                   {blockExercises.map((exercise) => (
                     <div key={exercise._id} className="form-check">
                       <input

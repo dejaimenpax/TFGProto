@@ -96,13 +96,13 @@ exports.signin = (req, res) => {
       }
 
       var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: 86400 // 24 hours
+        expiresIn: 7200 // 2 hours
       });
 
       var authorities = [];
 
       res.cookie("token", token, {
-        maxAge: 86400, // 24 hours
+        maxAge: 7200, // 2 hours
         httpOnly: true,
         secure: true // HTTPS sólo en producción
       });

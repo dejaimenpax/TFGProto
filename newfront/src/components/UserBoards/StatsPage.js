@@ -136,8 +136,8 @@ const StatsPage = ({user}) => {
             <BlockStatsRow
               data1={data.exercises.BloqueI}
               data2={data.exercises.BloqueII}
-              title1="Bloque I"
-              title2="Bloque II"
+              title1="Bloque 1: Números y Operaciones"
+              title2="Bloque 2: Unidades de Medida"
             />
           )}
         </div>
@@ -146,8 +146,8 @@ const StatsPage = ({user}) => {
             <BlockStatsRow
               data1={data.exercises.BloqueIII}
               data2={data.exercises.BloqueIV}
-              title1="Bloque III"
-              title2="Bloque IV"
+              title1="Bloque 3: Formas Geométricas"
+              title2="Bloque 4: Gráficas y Estadística"
             />
           )}
         </div>
