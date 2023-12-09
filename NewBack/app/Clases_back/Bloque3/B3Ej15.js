@@ -46,30 +46,38 @@ class B3Ej15 extends EjGenerico {
 
     let izquierda = a[0]<=b[0] ? a[0] : b[0]
     let derecha = a[0]>=b[0] ? a[0] : b[0]
-    let ladoMayor = ladoB >= ladoC ? ladoB : ladoC
+    let hipotenusa = ladoB >= ladoC ? ladoB : ladoC
+    let otro_cateto = ladoB < ladoC ? ladoB : ladoC
 
-    let mensaje_aux = (ladoMayor===ladoB) ?
+    let texto_hipotenusa = (hipotenusa===ladoB) ?
       `(${c[0]},${c[1]}) hasta  (${b[0]},${b[1]})`
       :
       `(${a[0]},${a[1]}) hasta  (${c[0]},${c[1]})`
 
+    let otro_cateto_texto = (hipotenusa===ladoB) ?
+    `(${a[0]},${a[1]}) hasta  (${c[0]},${c[1]})`
+    :
+    `(${c[0]},${c[1]}) hasta  (${b[0]},${b[1]})`
+
     if (perimetro === parseInt(this.input[0])) {
 
-      mensaje = `¡Es correcto! Los pasos a seguir son los siguientes: 
+      mensaje = `¡Es correcto! Se utiliza para la resolución el Toerema de Pitágoras, que demuestra que la hipotenusa al cuadrado es igual a la suma de los cuadrados de los catetos. Los pasos a seguir son los siguientes: 
       <ol>\n 
-        <li>Hay un lado sencillo al estar los vértices (${a[0]},${a[1]}) y (${b[0]},${b[1]}) en la misma horizontal. Basta con restar la coordenada X del punto más a la derecha (${derecha})
+        <li>Hay un lado sencillo al estar los vértices (${a[0]},${a[1]}) y (${b[0]},${b[1]}) en la misma horizontal, se trata de un cateto. Basta con restar la coordenada X del punto más a la derecha (${derecha})
         menos la coordenada X del punto más a la izquierda (${izquierda}) para calcular la distancia: ${derecha-izquierda} unidades.</li>\n 
-        <li>El lado que va desde ${mensaje_aux} es la hipotenusa de un triángulo. Podemos usar el Teorema de Pitágoras explicado: la distancia es la raíz cuadrada de la suma al cuadrado de los catetos, obteniendo la distancia de ${ladoMayor.toFixed(2).replace('.',',')} unidades.</li>\n 
+        <li>El lado que va desde ${texto_hipotenusa} es la hipotenusa del triángulo. Podemos usar el Teorema de Pitágoras explicado: la distancia es la raíz cuadrada de la suma al cuadrado de los catetos, obteniendo la distancia de ${hipotenusa.toFixed(2).replace('.',',')} unidades.</li>\n
+        <li>El lado que va desde ${otro_cateto_texto} es el otro cateto del triángulo. Podemos usar el Teorema de Pitágoras explicado: la distancia es la raíz cuadrada de la diferencia entre el cuadrado de la hipotenusa y el cuadrado del otro cateto, obteniendo la distancia de ${otro_cateto.toFixed(2).replace('.',',')} unidades.</li>\n 
         <li>El resultado final es la suma redondeada de los tres lados: ${derecha-izquierda}+${ladoB.toFixed(2).replace('.',',')}+${ladoC.toFixed(2).replace('.',',')}=${perimetro} unidades.</li>\n 
       </ol>`
 
       this.nota = this.puntuacion;
     } else {
-      mensaje = `No es correcto. El perímetro redondeado del triángulo es ${perimetro}. Los pasos a seguir son los siguientes: 
+      mensaje = `No es correcto. El perímetro redondeado del triángulo es ${perimetro}. Se utiliza para la resolución el Toerema de Pitágoras, que demuestra que la hipotenusa al cuadrado es igual a la suma de los cuadrados de los catetos. Los pasos a seguir son los siguientes: 
       <ol>\n 
-        <li>Hay un lado sencillo al estar los vértices (${a[0]},${a[1]}) y (${b[0]},${b[1]}) en la misma horizontal. Basta con restar la coordenada X del punto más a la derecha (${derecha})
+        <li>Hay un lado sencillo al estar los vértices (${a[0]},${a[1]}) y (${b[0]},${b[1]}) en la misma horizontal, se trata de un cateto. Basta con restar la coordenada X del punto más a la derecha (${derecha})
         menos la coordenada X del punto más a la izquierda (${izquierda}) para calcular la distancia: ${derecha-izquierda} unidades.</li>\n 
-        <li>El lado que va desde ${mensaje_aux} es la hipotenusa de un triángulo. Podemos usar el Teorema de Pitágoras explicado: la distancia es la raíz cuadrada de la suma al cuadrado de los catetos, obteniendo la distancia de ${ladoMayor.toFixed(2).replace('.',',')} unidades.</li>\n 
+        <li>El lado que va desde ${texto_hipotenusa} es la hipotenusa del triángulo. Podemos usar el Teorema de Pitágoras explicado: la distancia es la raíz cuadrada de la suma al cuadrado de los catetos, obteniendo la distancia de ${hipotenusa.toFixed(2).replace('.',',')} unidades.</li>\n 
+        <li>El lado que va desde ${otro_cateto_texto} es el otro cateto del triángulo. Podemos usar el Teorema de Pitágoras explicado: la distancia es la raíz cuadrada de la diferencia entre el cuadrado de la hipotenusa y el cuadrado del otro cateto, obteniendo la distancia de ${otro_cateto.toFixed(2).replace('.',',')} unidades.</li>\n 
         <li>El resultado final es la suma redondeada de los tres lados: ${derecha-izquierda}+${ladoB.toFixed(2).replace('.',',')}+${ladoC.toFixed(2).replace('.',',')}=${perimetro} unidades.</li>\n 
       </ol>`
     }

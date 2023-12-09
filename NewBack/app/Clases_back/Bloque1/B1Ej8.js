@@ -91,11 +91,11 @@ class B1Ej8 extends EjGenerico{
                         if (num % 2 === 0) {
                             feedback = `¡Es correcto! Sabemos que su última cifra es un número par, por lo que el segundo divisor es 2.`;
                         } else {
-                            feedback = `¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}, ya que es el ${ordinal} número que, si hacemos con él la división entera de ${num} entre ${this.input[i]}, da resto 0.`;
+                            feedback = `¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}, ya que es el ${ordinal} número que da resto 0 cuando dividimos ${num} entre el número probado.`;
                         }
                         break;
                     default:
-                        feedback = `¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}, ya que es el ${ordinal} número que, si hacemos con él la división entera de ${num} entre ${this.input[i]}, da resto 0.`
+                        feedback = `¡Es correcto! El ${ordinal} divisor de ${num} es ${this.input[i]}, ya que es el ${ordinal} número que da resto 0 cuando dividimos ${num} entre el número probado.`
                         break;
                 }
 

@@ -69,14 +69,14 @@ class B2Ej7 extends EjGenerico {
         // Feedback para los segundos
         if (this.input[0] === this.resultado[2]) {
             (angulo1[2]+angulo2[2]) > 60 ?
-                mensaje = `¡Los segundos son correctos! La suma de segundos es ${angulo1[2]+angulo2[2]} y sobrepasa los 60, por lo que nos quedamos con el resto de la división de ${angulo1[2]+angulo2[2]} entre 60, obteniendo ${this.resultado[2]} minutos. Y nos llevamos una, que deberemos sumar a los minutos.`
+                mensaje = `¡Los segundos son correctos! La suma de segundos es ${angulo1[2]+angulo2[2]} y sobrepasa los 60, por lo que nos quedamos con el resto de la división de ${angulo1[2]+angulo2[2]} entre 60, obteniendo ${this.resultado[2]} segundos. Y nos llevamos una, que deberemos sumar a los minutos.`
                 :
                 mensaje = `¡Los segundos son correctos! La suma de segundos es ${this.resultado[2]}".`
             this.explicacion.push(mensaje);
             contador[0] = true;
         } else {
             (angulo1[2]+angulo2[2]) > 60 ?
-                mensaje = `Los segundos no son correctos. La suma de segundos es ${angulo1[2]+angulo2[2]} y sobrepasa los 60, por lo que nos quedamos con el resto de la división de ${angulo1[2]+angulo2[2]} entre 60, obteniendo ${this.resultado[2]} minutos. Y nos llevamos una, que deberemos sumar a los minutos.`
+                mensaje = `Los segundos no son correctos. La suma de segundos es ${angulo1[2]+angulo2[2]} y sobrepasa los 60, por lo que nos quedamos con el resto de la división de ${angulo1[2]+angulo2[2]} entre 60, obteniendo ${this.resultado[2]} segundos. Y nos llevamos una, que deberemos sumar a los minutos.`
                 :
                 mensaje = `Los segundos no son correctos. La suma de segundos es ${this.resultado[2]}".`
             this.explicacion.push(mensaje);

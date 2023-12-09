@@ -25,7 +25,7 @@ class B2Ej5 extends EjGenerico {
 
     this.long_input=2;
     this.etiquetas=["Hora:", "Minuto:"]
-    this.puntos_explicados = "Responder correctamente para los minutos suma 6 puntos. Responder la hora y minuto exactos suma 10 puntos."
+    this.puntos_explicados = "Responder correctamente la hora suma 6 puntos. Responder la hora y minuto exactos suma 10 puntos."
   }
 
   resolver(input) {
@@ -51,14 +51,19 @@ class B2Ej5 extends EjGenerico {
     }
 
     if (minutosTermino === this.input[1]) {
-      this.explicacion.push(`¡El minuto es correcto! Para hallarlo, hay que multiplicar la duración de cada clase (${duracionClase} minutos) por el total de clases (${totalClases} clases) y sumar después los ${duracionRecreo} minutos de recreo. Ese resultado lo dividiremos entre 60 y nos quedaremos con el resto de la división, que son los minutos correctos: ${minutosTermino} minutos.`);
+      if (contador[0])
+        this.explicacion.push(`¡El minuto es correcto! Para hallarlo, hay que multiplicar la duración de cada clase (${duracionClase} minutos) por el total de clases (${totalClases} clases) y sumar después los ${duracionRecreo} minutos de recreo. Ese resultado lo dividiremos entre 60 y nos quedaremos con el resto de la división, que son los minutos correctos: ${minutosTermino} minutos.`);
+      else
+      this.explicacion.push(`Has acertado el minuto exacto, pero la hora no es correcta. Para hallar el minuto, hay que multiplicar la duración de cada clase (${duracionClase} minutos) por el total de clases (${totalClases} clases) y sumar después los ${duracionRecreo} minutos de recreo. Ese resultado lo dividiremos entre 60 y nos quedaremos con el resto de la división, que son los minutos correctos: ${minutosTermino} minutos.`);
+
+      
       contador[1]=true
     } else {
       this.explicacion.push(`No es correcto para los minutos. Para hallarlos, hay que multiplicar la duración de cada clase (${duracionClase} minutos) por el total de clases (${totalClases} clases) y sumar después los ${duracionRecreo} minutos de recreo. Ese resultado lo dividiremos entre 60 y nos quedaremos con el resto de la división, que son los minutos correctos: ${minutosTermino} minutos.`);
     }
 
-    if (contador[1]){
-      if (contador[2])
+    if (contador[0]){
+      if (contador[1])
         this.nota=10
       else
         this.nota=6
