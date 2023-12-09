@@ -73,8 +73,8 @@ const SelectTopic = () => {
     newExerciseInput[index] = value;
     setExerciseInput(newExerciseInput);
 
-    // Comprueba si algo del exerciseInput tiene caracteres que no sean cifras (incluye al value)
-    let hasForbiddenCharacters = newExerciseInput.some(item => !/^\d+$/.test(item));
+    // Comprueba si algo del exerciseInput tiene algo que no sean numeros reales positivos
+    let hasForbiddenCharacters = newExerciseInput.some(item => !/^\d+(,\d*)?$/.test(item) || item.startsWith(',') || item.endsWith(','));
     setDisableInput(hasForbiddenCharacters);
     setShowForbiddenInput(hasForbiddenCharacters);
     setTimeout(() => {
@@ -157,7 +157,7 @@ const SelectTopic = () => {
 
                 {showForbiddenInput && (
                   <div className="input-error alert alert-danger mt-1 mb-1">
-                    Por favor, introduce solo números.
+                    Por favor, introduce solo números reales positivos.
                   </div>
                 )}
                 
