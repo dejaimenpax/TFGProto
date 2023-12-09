@@ -3,7 +3,7 @@ const EjGenerico = require('../EjGenerico.js');
 class B3Ej9 extends EjGenerico {
 
   constructor(
-    texto = "Calcula el área del siguiente triángulo, y redondea el resultado al entero más cercano.",
+    texto = "Calcula el área del siguiente triángulo, con precisión de un decimal.",
     enunciado = [
       [
         [[-6,-5,-4,-3,-2][Math.floor(Math.random() * 5)], -7],
@@ -26,7 +26,7 @@ class B3Ej9 extends EjGenerico {
     );
 
     this.long_input=1;
-    this.etiquetas= ["Área (redondeada a unidades de área):"]
+    this.etiquetas= ["Área con precisión de un decimal:"]
     this.puntos_explicados = "La respuesta correcta proporciona 10 puntos."
   }
 
@@ -41,13 +41,18 @@ class B3Ej9 extends EjGenerico {
     let area = Math.abs(
       (a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1])) / 2
     );
-    area = Math.round(area);
+
+    area = area.toFixed(1);
+    if (/\.0+$/.test(area))
+      area = parseFloat(area).toString()
+
+    area = area.replace('.',',')
 
     let izquierda = a[0]<=b[0] ? a[0] : b[0]
     let derecha = a[0]>=b[0] ? a[0] : b[0]
     let mensaje = ''
 
-    if (area === parseInt(this.input[0])) {
+    if (area === this.input[0]) {
       
       mensaje = `¡Es correcto! El área del triángulo se ha calculado aplicando la fórmula del área de un triángulo =  (base por altura) / 2. 
       <ol>\n 
@@ -57,7 +62,7 @@ class B3Ej9 extends EjGenerico {
         <li>La altura se obtiene midiendo la distancia (vertical) entre el tercer vértice (${c[0]},${c[1]}) y
         la base. Restamos para ello la coordenada Y del tercer vértice (${c[1]}) menos la coordenada Y de la base (${b[1]}), obteniendo ${c[1]-b[1]} unidades.</li>\n 
         
-        <li>El resultado final se obtiene aplicando la fórmula y redondeando, obteniendo un área de ${area} unidades cuadradas.</li>\n 
+        <li>El resultado final se obtiene aplicando la fórmula con precisión de un decimal, obteniendo un área de ${area} unidades cuadradas.</li>\n 
       </ol>`
 
       this.nota = this.puntuacion;
@@ -71,7 +76,7 @@ class B3Ej9 extends EjGenerico {
         <li>La altura se obtiene midiendo la distancia (vertical) entre el tercer vértice (${c[0]},${c[1]}) y
         la base. Restamos para ello la coordenada Y del tercer vértice (${c[1]}) menos la coordenada Y de la base (${b[1]}), obteniendo ${c[1]-b[1]} unidades.</li>\n 
         
-        <li>El resultado final se obtiene aplicando la fórmula y redondeando, obteniendo un área de ${area} unidades cuadradas.</li>\n 
+        <li>El resultado final se obtiene aplicando la fórmula con precisión de un decimal, obteniendo un área de ${area} unidades cuadradas.</li>\n 
       </ol>`
     }
 

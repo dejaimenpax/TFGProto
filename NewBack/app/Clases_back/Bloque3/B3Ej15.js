@@ -2,7 +2,7 @@ const EjGenerico = require('../EjGenerico.js');
 
 class B3Ej15 extends EjGenerico {
   constructor(
-    texto = "Calcula el perímetro del siguiente triángulo (puede ayudarte usar el Teorema de Pitágoras) y redondea el resultado al entero más cercano.",
+    texto = "Calcula el perímetro del siguiente triángulo (puede ayudarte usar el Teorema de Pitágoras) con precisión de un decimal.",
     enunciado = [
       [
         [[-6,-5,-4,-3,-2][Math.floor(Math.random() * 5)], -7],
@@ -23,7 +23,7 @@ class B3Ej15 extends EjGenerico {
     );
 
     this.long_input = 1;
-    this.etiquetas= ["Perímetro (redondeado a la unidad):"]
+    this.etiquetas= ["Perímetro con precisión de un decimal:"]
     this.puntos_explicados = "La respuesta correcta proporciona 10 puntos."
 
   }
@@ -40,9 +40,13 @@ class B3Ej15 extends EjGenerico {
     let ladoB = Math.sqrt(Math.pow(c[0] - b[0], 2) + Math.pow(c[1] - b[1], 2));
     let ladoC = Math.sqrt(Math.pow(a[0] - c[0], 2) + Math.pow(a[1] - c[1], 2));
 
-    let perimetro = ladoA + ladoB + ladoC;
+    let perimetro = Number(ladoA.toFixed(2)) + Number(ladoB.toFixed(2)) + Number(ladoC.toFixed(2));
     let mensaje = ''
-    perimetro = Math.round(perimetro);
+    perimetro = perimetro.toFixed(1);
+    if (/\.0+$/.test(perimetro))
+      perimetro = parseFloat(perimetro).toString()
+
+    perimetro = perimetro.replace('.',',')
 
     let izquierda = a[0]<=b[0] ? a[0] : b[0]
     let derecha = a[0]>=b[0] ? a[0] : b[0]
@@ -59,7 +63,7 @@ class B3Ej15 extends EjGenerico {
     :
     `(${c[0]},${c[1]}) hasta  (${b[0]},${b[1]})`
 
-    if (perimetro === parseInt(this.input[0])) {
+    if (perimetro === this.input[0]) {
 
       mensaje = `¡Es correcto! Se utiliza para la resolución el Toerema de Pitágoras, que demuestra que la hipotenusa al cuadrado es igual a la suma de los cuadrados de los catetos. Los pasos a seguir son los siguientes: 
       <ol>\n 
@@ -67,7 +71,7 @@ class B3Ej15 extends EjGenerico {
         menos la coordenada X del punto más a la izquierda (${izquierda}) para calcular la distancia: ${derecha-izquierda} unidades.</li>\n 
         <li>El lado que va desde ${texto_hipotenusa} es la hipotenusa del triángulo. Podemos usar el Teorema de Pitágoras explicado: la distancia es la raíz cuadrada de la suma al cuadrado de los catetos, obteniendo la distancia de ${hipotenusa.toFixed(2).replace('.',',')} unidades.</li>\n
         <li>El lado que va desde ${otro_cateto_texto} es el otro cateto del triángulo. Podemos usar el Teorema de Pitágoras explicado: la distancia es la raíz cuadrada de la diferencia entre el cuadrado de la hipotenusa y el cuadrado del otro cateto, obteniendo la distancia de ${otro_cateto.toFixed(2).replace('.',',')} unidades.</li>\n 
-        <li>El resultado final es la suma redondeada de los tres lados: ${derecha-izquierda}+${ladoB.toFixed(2).replace('.',',')}+${ladoC.toFixed(2).replace('.',',')}=${perimetro} unidades.</li>\n 
+        <li>El resultado final es la suma de los tres lados: ${derecha-izquierda}+${ladoB.toFixed(2).replace('.',',')}+${ladoC.toFixed(2).replace('.',',')}=${perimetro} unidades.</li>\n 
       </ol>`
 
       this.nota = this.puntuacion;
@@ -78,7 +82,7 @@ class B3Ej15 extends EjGenerico {
         menos la coordenada X del punto más a la izquierda (${izquierda}) para calcular la distancia: ${derecha-izquierda} unidades.</li>\n 
         <li>El lado que va desde ${texto_hipotenusa} es la hipotenusa del triángulo. Podemos usar el Teorema de Pitágoras explicado: la distancia es la raíz cuadrada de la suma al cuadrado de los catetos, obteniendo la distancia de ${hipotenusa.toFixed(2).replace('.',',')} unidades.</li>\n 
         <li>El lado que va desde ${otro_cateto_texto} es el otro cateto del triángulo. Podemos usar el Teorema de Pitágoras explicado: la distancia es la raíz cuadrada de la diferencia entre el cuadrado de la hipotenusa y el cuadrado del otro cateto, obteniendo la distancia de ${otro_cateto.toFixed(2).replace('.',',')} unidades.</li>\n 
-        <li>El resultado final es la suma redondeada de los tres lados: ${derecha-izquierda}+${ladoB.toFixed(2).replace('.',',')}+${ladoC.toFixed(2).replace('.',',')}=${perimetro} unidades.</li>\n 
+        <li>El resultado final es la suma de los tres lados: ${derecha-izquierda}+${ladoB.toFixed(2).replace('.',',')}+${ladoC.toFixed(2).replace('.',',')}=${perimetro} unidades.</li>\n 
       </ol>`
     }
 
