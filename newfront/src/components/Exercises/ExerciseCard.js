@@ -32,6 +32,7 @@ const ExerciseCard = ({ exercise }) => {
   switch (exercise?.id_tema) {
     case 3.02:
     case 3.05:
+    case 3.06:
     case 3.09:
     case 3.15:
       content = <div className="triangle-exercise"><TriangleExercise enunciado={exercise.enunciado} /></div>

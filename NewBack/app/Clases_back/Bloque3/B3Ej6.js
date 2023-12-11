@@ -1,8 +1,8 @@
 const EjGenerico = require('../EjGenerico.js');
 
-class B2Ej5 extends EjGenerico {
+class B2Ej6 extends EjGenerico {
   constructor(
-    texto = "¿Cuántos de los siguientes triángulos son obtusángulos?",
+    texto = "¿Cuántos de los siguientes triángulos son rectángulos?",
     enunciado = [
         [
           [[-9,-8,-7][Math.floor(Math.random() * 3)], [-9,-8,-7][Math.floor(Math.random() * 3)]],
@@ -27,21 +27,21 @@ class B2Ej5 extends EjGenerico {
     ],
     puntuacion = 10
   ) {
-    console.log("Ha entrado en constructor de Ej3B5");
+    console.log("Ha entrado en constructor de Ej3B16");
     super(
       "Bloque 3 - Formas Geométricas y Orientación Espacial",
-      3.05, // 3.05 dice bloque 3 => ej 5
+      3.06, // 3.06 dice bloque 3 => ej 6
       texto,
       enunciado,
       puntuacion
     );
     this.long_input = 1;
-    this.etiquetas= ["Número de triángulos obtusángulos:"]
+    this.etiquetas= ["Número de triángulos rectángulos"]
     this.puntos_explicados = "La respuesta correcta proporciona 10 puntos."
   }
 
   resolver(input) {
-    console.log("He entrado en resolver Ej3B5");
+    console.log("He entrado en resolver Ej3B16");
     this.input = input;
 
     const mapa = new Map();
@@ -51,11 +51,11 @@ class B2Ej5 extends EjGenerico {
     mapa.set(3, " el amarillo");
 
     // Store the colors of obtuse triangles
-    let obtuNames = new Set();
-    let obtusangulos = 0;
+    let rectaNames = new Set();
+    let rectangulos = 0;
 
     for (let i = 0; i < this.enunciado.length; i++) {
-      let obtu_original = obtusangulos;
+      let recta_original = rectangulos;
 
       let a = this.enunciado[i][0];
       let b = this.enunciado[i][1];
@@ -72,17 +72,17 @@ class B2Ej5 extends EjGenerico {
       let cosC = (sqLengthA + sqLengthB - sqLengthC) / (2 * Math.sqrt(sqLengthA * sqLengthB));
 
       // Check if any angle is greater than 90 degrees
-      if (cosA < 0 || cosB < 0 || cosC < 0) {
-        obtusangulos++;
+      if (cosA === 0 || cosB === 0 || cosC === 0) {
+        rectangulos++;
       }
 
       // If a new obtuse triangle is found, add its color to the set
-      if (obtu_original !== obtusangulos) {
-        obtuNames.add(mapa.get(i));
+      if (recta_original !== rectangulos) {
+        rectaNames.add(mapa.get(i));
       }
     }
 
-    let formattedColors = [...obtuNames];
+    let formattedColors = [...rectaNames];
 
     // This code adds a "y" to the last color
     formattedColors.map((x, i) => {
@@ -90,45 +90,45 @@ class B2Ej5 extends EjGenerico {
         return " y " + x.slice(1);
     });
 
-    if (obtusangulos === parseInt(this.input[0])) {
-      switch (obtusangulos) {
+    if (rectangulos === parseInt(this.input[0])) {
+      switch (rectangulos) {
         case 0:
           this.explicacion.push(
-            `¡Es correcto! Hay ${obtusangulos} triángulos obtusángulos en total.`
+            `¡Es correcto! Hay ${rectangulos} triángulos rectángulos en total.`
           );
           break;
         case 1:
           this.explicacion.push(
-            `¡Es correcto! Hay ${obtusangulos} triángulo obtusángulo en total. El triángulo que tiene un ángulo que mide más de 90º es${formattedColors}.`
+            `¡Es correcto! Hay ${rectangulos} triángulo rectángulo en total. El triángulo que tiene un ángulo que mide exactamente 90º es${formattedColors}.`
           );
           break;
         default:
           this.explicacion.push(
-            `¡Es correcto! Hay ${obtusangulos} triángulos obtusángulos en total. Los triángulos que tienen un ángulo que mide más de 90º son${formattedColors}.`
+            `¡Es correcto! Hay ${rectangulos} triángulos rectángulos en total. Los triángulos que tienen un ángulo que mide exactamente 90º son${formattedColors}.`
           );
       }
 
       this.nota = this.puntuacion;
 
     } else {
-      switch (obtusangulos) {
+      switch (rectangulos) {
         case 0:
           this.explicacion.push(
-            `No es correcto. Hay ${obtusangulos} triángulos obtusángulos en total.`
+            `No es correcto. Hay ${rectangulos} triángulos rectángulos en total.`
           );
           break;
         case 1:
           this.explicacion.push(
-            `No es correcto. Hay ${obtusangulos} triángulo obtusángulo en total. El triángulo que tiene un ángulo que mide más de 90º es${formattedColors}.`
+            `No es correcto. Hay ${rectangulos} triángulo rectángulo en total. El triángulo que tiene un ángulo que mide exactamente 90º es${formattedColors}.`
           );
           break;
         default:
           this.explicacion.push(
-            `No es correcto. Hay ${obtusangulos} triángulos obtusángulos en total. Los triángulos que tienen un ángulo que mide más de 90º son${formattedColors}.`
+            `No es correcto. Hay ${rectangulos} triángulos rectángulos en total. Los triángulos que tienen un ángulo que mide exactamente 90º son${formattedColors}.`
           );
       }
     }
   }
 }
 
-module.exports = B2Ej5;
+module.exports = B2Ej6;

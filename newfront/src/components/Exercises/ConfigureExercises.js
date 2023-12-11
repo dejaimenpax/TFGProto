@@ -9,7 +9,7 @@ const ConfigureExercises = ( {user} ) => {
   useEffect(() => {
     ExerciseService.getAllExercises()
       .then((response) => {
-        setExercises(response.data);
+        setExercises(response.data.sort((a, b) => a.name.localeCompare(b.name)));
       })
       .catch((error) => console.error("Error loading exercises:", error));
   }, []);
@@ -93,6 +93,12 @@ const ConfigureExercises = ( {user} ) => {
                       </label>
                     </div>
                   ))}
+                  {block.toString() === "4" && (
+                    <div className="form-check">
+                      {/* Añadir una línea en blanco después de los ejercicios del bloque 4 */}
+                      <label className="form-check-label">&nbsp;</label>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

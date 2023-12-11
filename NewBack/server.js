@@ -243,6 +243,17 @@ function initial() {
         }
       });
 
+      new Exercise({
+        name: 'Triángulos rectángulos.',
+        id_tema: 3.06,
+        flag_active: true,
+        flag_examen: false
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+      });
+
       //bloque 4
       new Exercise({
         name: 'Diagramas de barras.',
