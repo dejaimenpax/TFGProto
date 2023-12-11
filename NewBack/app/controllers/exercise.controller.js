@@ -10,6 +10,7 @@ const B2Ej7 = require("../Clases_back/Bloque2/B2Ej7");
 
 const B3Ej2 = require("../Clases_back/Bloque3/B3Ej2");
 const B3Ej5 = require("../Clases_back/Bloque3/B3Ej5");
+const B3Ej6 = require("../Clases_back/Bloque3/B3Ej6");
 const B3Ej9 = require("../Clases_back/Bloque3/B3Ej9");
 const B3Ej15 = require("../Clases_back/Bloque3/B3Ej15");
 
@@ -25,7 +26,7 @@ const Exercise = db.exercise;
 exports.create = (req, res) => {
   const { id_bloque } = req.body;
   let exercise;
-  let desactivados = [];
+  let activados = [];
   let randomEx;
 
   Exercise.find({}).exec((err, exercises) => {
@@ -34,17 +35,17 @@ exports.create = (req, res) => {
       return;
     }
 
-    desactivados = exercises
+    activados = exercises
       .filter(ex => ex.id_tema.toString()[0]===id_bloque.toString()[0])
       .filter(ex => ex.flag_active)
       .map(ex => ex.id_tema.toString().substring(2, 4));
 
-    if (desactivados.length === 0) {
+    if (activados.length === 0) {
       res.json({ mensaje: `Los ejercicios del bloque ${id_bloque} están desactivados. Seleccione otro bloque.`});
       return;
     } else {
       // Coje un id de tema aleatorio de entre los que tienen el flag activo
-      randomEx = desactivados[Math.floor(Math.random() * desactivados.length)];
+      randomEx = activados[Math.floor(Math.random() * activados.length)];
 
       switch (id_bloque) {
         case 1:
@@ -94,6 +95,9 @@ exports.create = (req, res) => {
               break;
             case "05":
               exercise = new B3Ej5();
+              break;
+            case "06":
+              exercise = new B3Ej6();
               break;
             case "09":
               exercise = new B3Ej9();
@@ -209,6 +213,10 @@ exports.resolve = (req, res) => {
           case 5:
             exAux = new B3Ej5(exercise.texto, exercise.enunciado, exercise.puntuacion);
             console.log('He creado un ejercicio 5 del bloque 3')
+            break;
+          case 6:
+            exAux = new B3Ej6(exercise.texto, exercise.enunciado, exercise.puntuacion);
+            console.log('He creado un ejercicio 6 del bloque 3')
             break;
           case 9:
             exAux = new B3Ej9(exercise.texto, exercise.enunciado, exercise.puntuacion);
