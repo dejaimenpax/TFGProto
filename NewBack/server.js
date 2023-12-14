@@ -280,7 +280,7 @@ function initial() {
 
 
       new Exercise({
-        name: 'Cálculo de mediana y moda de una muestra.',
+        name: 'Media, moda y mediana de una muestra.',
         id_tema: 4.05,
         flag_active: true,
         flag_examen: false
@@ -291,7 +291,7 @@ function initial() {
       });
 
       new Exercise({
-        name: 'Media, máximo y mínimo de una muestra.',
+        name: 'Máximo y mínimo de una muestra.',
         id_tema: 4.08,
         flag_active: true,
         flag_examen: false

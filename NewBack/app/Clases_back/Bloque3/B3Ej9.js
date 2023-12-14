@@ -3,7 +3,7 @@ const EjGenerico = require('../EjGenerico.js');
 class B3Ej9 extends EjGenerico {
 
   constructor(
-    texto = "Calcula el área del siguiente triángulo, con precisión de un decimal.",
+    texto = "Calcula el área del siguiente triángulo, redondeada a la décima.",
     enunciado = [
       [
         [[-6,-5,-4,-3,-2][Math.floor(Math.random() * 5)], -7],
@@ -26,7 +26,7 @@ class B3Ej9 extends EjGenerico {
     );
 
     this.long_input=1;
-    this.etiquetas= ["Área con precisión de un decimal:"]
+    this.etiquetas= ["Área:"]
     this.puntos_explicados = "La respuesta correcta proporciona 10 puntos."
   }
 
