@@ -2,7 +2,7 @@ const EjGenerico = require('../EjGenerico.js');
 
 class B3Ej15 extends EjGenerico {
   constructor(
-    texto = "Calcula el perímetro del siguiente triángulo (puede ayudarte usar el Teorema de Pitágoras) con precisión de un decimal.",
+    texto = "Calcula el perímetro redondeado a la décima del siguiente triángulo (puede ayudarte usar el Teorema de Pitágoras).",
     enunciado = [
       [
         [[-6,-5,-4,-3,-2][Math.floor(Math.random() * 5)], -7],
@@ -23,7 +23,7 @@ class B3Ej15 extends EjGenerico {
     );
 
     this.long_input = 1;
-    this.etiquetas= ["Perímetro con precisión de un decimal:"]
+    this.etiquetas= ["Perímetro:"]
     this.puntos_explicados = "La respuesta correcta proporciona 10 puntos."
 
   }
