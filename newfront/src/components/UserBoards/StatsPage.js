@@ -78,9 +78,9 @@ const StatsPage = ({user}) => {
 
     return (
       <div className="exercise-stats">
-        <h3 className="text-center"  style={{ whiteSpace: "nowrap" }}>Ejercicios entregados: {submitted}</h3>
-        <h3 className="text-center"  style={{ whiteSpace: "nowrap" }}>Puntuación total: {scores}</h3>
-        <h3 className="text-center" style={{ whiteSpace: "nowrap" }}>Media: {averages}</h3>
+        <h3 className="text-center"  style={{ whiteSpace: "nowrap" }}>Ejercicios entregados: {submitted.toString().replace('.',',')}</h3>
+        <h3 className="text-center"  style={{ whiteSpace: "nowrap" }}>Puntuación total: {scores.toString().replace('.',',')}</h3>
+        <h3 className="text-center" style={{ whiteSpace: "nowrap" }}>Media: {averages.toString().replace('.',',')}</h3>
         <Pie data={chartData} width={200} heigh={200}/>
       </div>
     );
@@ -112,9 +112,9 @@ const StatsPage = ({user}) => {
     return (
       <div className="block-stats">
         <h3>{title}</h3>
-        <h4>Ejercicios entregados: {submitted}</h4>
-        <h4>Puntuación total: {scores}</h4>
-        <h4>Media: {averages}</h4>
+        <h4>Ejercicios entregados: {submitted.toString().replace('.',',')}</h4>
+        <h4>Puntuación total: {scores.toString().replace('.',',')}</h4>
+        <h4>Media: {averages.toString().replace('.',',')}</h4>
         <div className="subpie">
           <Pie data={chartData} />
         </div>
