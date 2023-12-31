@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
+import pitagoras from "../../assets/pitagoras_2.png"
 
-const TriangleExercise = ({ enunciado }) => {
+
+const TriangleExercise = ({ enunciado, perimetro_bool }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -95,6 +97,9 @@ const TriangleExercise = ({ enunciado }) => {
 
   return (
     <div>
+    {perimetro_bool && (
+      <img src={pitagoras} alt="Teorema de Pitágoras" style={{ width: '45%', height: '45%'}}/>
+    )}
       <canvas ref={canvasRef} />
     </div>
   );

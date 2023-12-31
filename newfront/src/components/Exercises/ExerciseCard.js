@@ -34,8 +34,10 @@ const ExerciseCard = ({ exercise }) => {
     case 3.05:
     case 3.06:
     case 3.09:
+      content = <div className="triangle-exercise"><TriangleExercise enunciado={exercise.enunciado} perimetro_bool={false} /></div>
+      break;
     case 3.15:
-      content = <div className="triangle-exercise"><TriangleExercise enunciado={exercise.enunciado} /></div>
+      content = <div className="triangle-exercise"><TriangleExercise enunciado={exercise.enunciado} perimetro_bool={true} /></div>
       break;
     case 4.01:
       content = (

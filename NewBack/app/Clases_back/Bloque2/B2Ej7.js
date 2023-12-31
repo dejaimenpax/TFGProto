@@ -130,6 +130,13 @@ class B2Ej7 extends EjGenerico {
                 mensaje = `Los grados no son correctos. La suma da como resultado ${angulo1[0]+angulo2[0]} grados.`
             this.explicacion.push(mensaje);
         }
+
+
+        //Para casos improbables, como que acierte grados/minutos pero no segundos
+        if (contador[2]&&!contador[0])
+            this.explicacion[2] = this.explicacion[2].replace("¡Los grados son correctos!", "Has acertado los grados, pero los segundos no son correctos.");
+        if (contador[1]&&!contador[0])
+            this.explicacion[1] = this.explicacion[1].replace("¡Los minutos son correctos!", "Has acertado los minutos, pero los segundos no son correctos.");
     
         if (contador[0]&&contador[1]&&contador[2])
             this.nota=10
