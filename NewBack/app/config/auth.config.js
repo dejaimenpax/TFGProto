@@ -1,3 +1,3 @@
 module.exports = {
-  secret: "clave-para-encriptado-token-jaime"
+  secret: "clave-para-encriptado-token"
 };

@@ -16,7 +16,7 @@ const Exercise = db.exercise;
 db.mongoose.set("strictQuery", false);
 
 db.mongoose
-  .connect(`mongodb+srv://tfg:${dbConfig.psw}@cluster1.ox2jmnh.mongodb.net/?retryWrites=true&w=majority`, {
+  .connect(`mongodb+srv://matemapi:${dbConfig.psw}@matemapi-release.efscup6.mongodb.net/?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -50,15 +50,17 @@ app.get("*", (req, res) => {
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
+  //poblar_roles();
+  //poblar_ejercicios();
 });
 
 //Crea tres roles
-/*
-function initial() {
+
+function poblar_roles() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
 
-      /*
+      
       new Role({
         name: "user"
       }).save(err => {
@@ -93,13 +95,13 @@ function initial() {
     }
   });
 }
-*/
+
 
 
 //Crea los ejercicios
 
-/*
-function initial() {
+
+function poblar_ejercicios() {
 
       //bloque 1
       new Exercise({
@@ -302,4 +304,3 @@ function initial() {
       });
 }
 
-*/
