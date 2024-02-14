@@ -1,4 +1,4 @@
-app = "mates-primaria"
+app = "matemapi"
 primary_region = "mad"
 
 [env]

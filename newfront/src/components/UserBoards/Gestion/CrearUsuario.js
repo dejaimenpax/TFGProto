@@ -61,19 +61,29 @@ const CrearUsuario = (props) => {
             </div>
             )}
 
-            {props.showTeacherInput && (
-            <div className="form-group">
-              <label>Código del profesor asociado:</label>
-              <input
-                type="text"
-                className={`form-control ${props.teacherNotFoundError ? 'is-invalid' : ''}`}
-                name="teacherCode"
-                value={props.teacherCode}
-                onChange={props.onChangeTeacherCode}
-                //onBlur={props.onChangeTeacherCode}
-                disabled={props.user.username === props.user.teacher}
-              />
-            </div>
+            {props.showTeacherInput && (<>
+              <div className="form-group">
+                <label>Código del profesor asociado:</label>
+                <input
+                  type="text"
+                  className={`form-control ${props.teacherNotFoundError ? 'is-invalid' : ''}`}
+                  name="teacherCode"
+                  value={props.teacherCode}
+                  onChange={props.onChangeTeacherCode}
+                  disabled={props.user.username === props.user.teacher}
+                />
+              </div>
+
+              <div className="form-group">
+                <div
+                  className={props.teacherNotFoundError ? "text-center alert alert-danger" : "hide"}
+                  role="alert"
+                >
+                  El código de profesor es incorrecto.
+                </div>
+              </div>
+            </>
+            
             )}
             <p className={props.generalErrorMessage ? "alert alert-danger" : "hide"}>
               {props.generalErrorMessage}

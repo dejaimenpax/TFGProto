@@ -146,7 +146,7 @@ const BoardGestion = () => {
     setSuccessfulRegister(false);
 
     if (!newUser.username || (!newUser.role && user.teacher!==user.username) || !newUser.password || (!newUser.teacher && newUser.role==="user")){
-      setGeneralErrorMessage("Recuerda rellenar todos los campos.")
+      setGeneralErrorMessage("Recuerda rellenar todos los campos de manera correcta.")
       setTimeout(() => {
         setGeneralErrorMessage(null)
       }, 3000);

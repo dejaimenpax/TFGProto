@@ -16,7 +16,7 @@ const Exercise = db.exercise;
 db.mongoose.set("strictQuery", false);
 
 db.mongoose
-  .connect(`mongodb+srv://matemapi:${dbConfig.psw}@matemapi-release.efscup6.mongodb.net/?retryWrites=true&w=majority`, {
+  .connect(`mongodb+srv://tfg:${dbConfig.psw}@cluster1.ox2jmnh.mongodb.net/?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
