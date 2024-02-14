@@ -92,6 +92,7 @@ const CrearUsuario = (props) => {
               type="button"
               className="btn btn-custom"
               onClick={props.createUser}
+              disabled={props.teacherNotFoundError}
             >
               Crear usuario
             </button>

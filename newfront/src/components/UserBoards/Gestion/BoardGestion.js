@@ -43,6 +43,9 @@ const BoardGestion = () => {
   
 
   useEffect(() => {
+
+    setShowCreateUserModal(false);
+
     AuthService.getCurrentUserFromDB()
       .then((response) => {
         setUser(response.data);
@@ -182,11 +185,12 @@ const BoardGestion = () => {
           fetchTeachers(user.username);
           // Restablecer los campos del nuevo usuario
           setNewUser({
+            ...newUser,
             username: "",
             password: "",
-            teacher: "",
-            role: "",
-          });
+            teacher: user.teacher,
+            role: "user"
+          })
           setTeacherCode("")
 
         },
