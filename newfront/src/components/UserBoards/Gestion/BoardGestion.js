@@ -7,7 +7,7 @@ import ListaUsuarios from "./ListaUsuarios";
 import CrearUsuario from "./CrearUsuario";
 import ModificarUsuario from "./ModificarUsuario";
 
-import { decrypt, encrypt } from "../../../common/Encryption";
+import { decrypt} from "../../../common/Encryption";
 import { encryptionKey } from "../../../common/Config";
 
 const BoardGestion = () => {
@@ -158,6 +158,16 @@ const BoardGestion = () => {
       setGeneralErrorMessage(null)
     }
 
+    if (teacherNotFoundError){//Si el codigo del profesor es incorrecto al darle a crear
+      setGeneralErrorMessage("El código de profesor es incorrecto.")
+
+      setTimeout(() => {
+        setGeneralErrorMessage("")
+      }, 3000);
+
+      return;
+    }
+
     if (usernameErrorMessage!=="" || passwordErrorMessage!=="")
       return;
 
@@ -278,6 +288,31 @@ const BoardGestion = () => {
 
   const handleCreateUserModalClose = () => {
     setShowCreateUserModal(false);
+    AuthService.getCurrentUserFromDB()
+    .then((response) => {
+      setUser(response.data);
+      getUsersExceptAdmins(response.data.username);
+      fetchTeachers(response.data.username);
+
+      if (response.data.username===response.data.teacher){
+        setNewUser({
+          username: "",
+          password: "",
+          teacher: response.data.teacher,
+          role: "user",
+        })
+      }
+      else{
+        setNewUser({
+          username: "",
+          password: "",
+          teacher: "",
+          role: "",
+        })
+
+      }
+      setTeacherCode("")
+    })
   };
 
   const handlePasswordChange = (usname) => {

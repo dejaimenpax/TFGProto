@@ -73,15 +73,6 @@ const CrearUsuario = (props) => {
                   disabled={props.user.username === props.user.teacher}
                 />
               </div>
-
-              <div className="form-group">
-                <div
-                  className={props.teacherNotFoundError ? "text-center alert alert-danger" : "hide"}
-                  role="alert"
-                >
-                  El código de profesor es incorrecto.
-                </div>
-              </div>
             </>
             
             )}
@@ -92,7 +83,6 @@ const CrearUsuario = (props) => {
               type="button"
               className="btn btn-custom"
               onClick={props.createUser}
-              disabled={props.teacherNotFoundError}
             >
               Crear usuario
             </button>
