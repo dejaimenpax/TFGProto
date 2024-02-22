@@ -331,7 +331,7 @@ const BoardGestion = () => {
       ...newUser,
       teacher: decrypt(code, encryptionKey), //desencripta ese codigo y obtiene el teachername
     })
-    setTeacherNotFoundError(!teachers.includes(newUser.teacher))
+    setTeacherNotFoundError(!teachers.includes( decrypt(code, encryptionKey)))
   };
 
   const handleResetPasswordModalOpen = () => {

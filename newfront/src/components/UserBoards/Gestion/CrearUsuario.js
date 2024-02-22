@@ -70,6 +70,7 @@ const CrearUsuario = (props) => {
                   name="teacherCode"
                   value={props.teacherCode}
                   onChange={props.onChangeTeacherCode}
+                  onInput={props.onChangeTeacherCode}
                   disabled={props.user.username === props.user.teacher}
                 />
               </div>
