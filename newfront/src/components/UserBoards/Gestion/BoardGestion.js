@@ -7,7 +7,7 @@ import ListaUsuarios from "./ListaUsuarios";
 import CrearUsuario from "./CrearUsuario";
 import ModificarUsuario from "./ModificarUsuario";
 
-import { decrypt, encrypt } from "../../../common/Encryption";
+import { decrypt} from "../../../common/Encryption";
 import { encryptionKey } from "../../../common/Config";
 
 const BoardGestion = () => {
@@ -43,6 +43,9 @@ const BoardGestion = () => {
   
 
   useEffect(() => {
+
+    setShowCreateUserModal(false);
+
     AuthService.getCurrentUserFromDB()
       .then((response) => {
         setUser(response.data);
@@ -146,13 +149,23 @@ const BoardGestion = () => {
     setSuccessfulRegister(false);
 
     if (!newUser.username || (!newUser.role && user.teacher!==user.username) || !newUser.password || (!newUser.teacher && newUser.role==="user")){
-      setGeneralErrorMessage("Recuerda rellenar todos los campos.")
+      setGeneralErrorMessage("Recuerda rellenar todos los campos de manera correcta.")
       setTimeout(() => {
         setGeneralErrorMessage(null)
       }, 3000);
       return;
     } else {
       setGeneralErrorMessage(null)
+    }
+
+    if (teacherNotFoundError){//Si el codigo del profesor es incorrecto al darle a crear
+      setGeneralErrorMessage("El código de profesor es incorrecto.")
+
+      setTimeout(() => {
+        setGeneralErrorMessage("")
+      }, 3000);
+
+      return;
     }
 
     if (usernameErrorMessage!=="" || passwordErrorMessage!=="")
@@ -182,11 +195,12 @@ const BoardGestion = () => {
           fetchTeachers(user.username);
           // Restablecer los campos del nuevo usuario
           setNewUser({
+            ...newUser,
             username: "",
             password: "",
-            teacher: "",
-            role: "",
-          });
+            teacher: user.teacher,
+            role: "user"
+          })
           setTeacherCode("")
 
         },
@@ -274,6 +288,31 @@ const BoardGestion = () => {
 
   const handleCreateUserModalClose = () => {
     setShowCreateUserModal(false);
+    AuthService.getCurrentUserFromDB()
+    .then((response) => {
+      setUser(response.data);
+      getUsersExceptAdmins(response.data.username);
+      fetchTeachers(response.data.username);
+
+      if (response.data.username===response.data.teacher){
+        setNewUser({
+          username: "",
+          password: "",
+          teacher: response.data.teacher,
+          role: "user",
+        })
+      }
+      else{
+        setNewUser({
+          username: "",
+          password: "",
+          teacher: "",
+          role: "",
+        })
+
+      }
+      setTeacherCode("")
+    })
   };
 
   const handlePasswordChange = (usname) => {
@@ -292,7 +331,7 @@ const BoardGestion = () => {
       ...newUser,
       teacher: decrypt(code, encryptionKey), //desencripta ese codigo y obtiene el teachername
     })
-    setTeacherNotFoundError(!teachers.includes(newUser.teacher))
+    setTeacherNotFoundError(!teachers.includes( decrypt(code, encryptionKey)))
   };
 
   const handleResetPasswordModalOpen = () => {

@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.b5365c07.css",
-    "main.js": "/static/js/main.57984a8a.js",
+    "main.css": "/static/css/main.c4e59dec.css",
+    "main.js": "/static/js/main.b3fb9df9.js",
     "static/media/block2.png": "/static/media/block2.458a4519720238782d91.png",
     "static/media/block1.png": "/static/media/block1.d8f2ee94fdd39c9071be.png",
     "static/media/block4.png": "/static/media/block4.240c77db717faa9349dc.png",
@@ -9,11 +9,11 @@
     "static/media/matemapi_logo.png": "/static/media/matemapi_logo.b845a20db7de36bd0af5.png",
     "static/media/pitagoras_2.png": "/static/media/pitagoras_2.8459a5dcaa852efe0e86.png",
     "index.html": "/index.html",
-    "main.b5365c07.css.map": "/static/css/main.b5365c07.css.map",
-    "main.57984a8a.js.map": "/static/js/main.57984a8a.js.map"
+    "main.c4e59dec.css.map": "/static/css/main.c4e59dec.css.map",
+    "main.b3fb9df9.js.map": "/static/js/main.b3fb9df9.js.map"
   },
   "entrypoints": [
-    "static/css/main.b5365c07.css",
-    "static/js/main.57984a8a.js"
+    "static/css/main.c4e59dec.css",
+    "static/js/main.b3fb9df9.js"
   ]
 }

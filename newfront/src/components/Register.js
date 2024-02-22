@@ -57,6 +57,8 @@ const Register = () => {
   const [teacherNotFoundError, setTeacherNotFoundError] = useState(true); 
   const [teacherCode, setTeacherCode] = useState("")
 
+  const [processing, setProcessing] = useState(false);
+
   useEffect(() => {
     const fetchTeachers = () => {
       AuthService.getTeachers()
@@ -89,11 +91,13 @@ const Register = () => {
     const code = e.target.value; //coge el codigo introducido
     setTeacherCode(code)
     setTeacherName(decrypt(code, encryptionKey)) //desencripta ese codigo y obtiene el teachername
-    setTeacherNotFoundError(!teacherOptions.includes(teacherName))
+    setTeacherNotFoundError(!teacherOptions.includes(decrypt(code, encryptionKey)))
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
+
+    setProcessing(true); // Establece processing en true
 
     setMessage("");
     setSuccessful(false);
@@ -106,6 +110,7 @@ const Register = () => {
           (response) => {
             setMessage(response.data.message);
             setSuccessful(true);
+            setProcessing(false); // Establece processing en false
             setTimeout(() => {
               navigate("/login"); // Redirigir a "/login" después de 3 segundos
               window.location.reload();
@@ -121,6 +126,8 @@ const Register = () => {
 
             setMessage(resMessage);
             setSuccessful(false);
+
+            setProcessing(false); // Establece processing en false
           }
         );
       } else if (userType === "alumno" && !teacherNotFoundError) {
@@ -128,6 +135,7 @@ const Register = () => {
           (response) => {
             setMessage(response.data.message);
             setSuccessful(true);
+            setProcessing(false); // Establece processing en false
           },
           (error) => {
             const resMessage =
@@ -139,12 +147,14 @@ const Register = () => {
 
             setMessage(resMessage);
             setSuccessful(false);
+            setProcessing(false); // Establece processing en false
           }
         );
       } else {
         if (!userType) {
           setUserTypeError(true);
         }
+        setProcessing(false); // Establece processing en false
       }
     }
   };
@@ -215,18 +225,19 @@ const Register = () => {
                     name="teacherCode"
                     value={teacherCode}
                     onChange={onChangeTeacherCode}
+                    onInput={onChangeTeacherCode}
                     onBlur={onChangeTeacherCode}
                   />
                 </div>
               )}
 
               <div className="form-group">
-                <button 
-                  className="btn btn-custom btn-block"
-                  disabled={teacherNotFoundError && userType === "alumno"}
-                >
-                  Registrarse
-                </button>
+              <button 
+                className="btn btn-custom btn-block"
+                disabled={processing || (teacherNotFoundError && userType === "alumno")}
+              >
+                {processing ? 'Procesando...' : 'Registrarse'}
+              </button>
               </div>
             </div>
           )}
