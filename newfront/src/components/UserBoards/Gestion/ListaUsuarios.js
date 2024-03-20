@@ -36,7 +36,7 @@ const ListaUsuarios = ({
   };
 
   const handleEncryption = (us) => {
-    alert(`El código único del profesor ${us.username} es "${encrypt(us.username, encryptionKey)}". Cópialo para usarlo en el registro de nuevos alumnos.`)
+    alert(`El código único del profesor ${us.username} es ${encrypt(us.username, encryptionKey)}. Cópialo para usarlo en el registro de nuevos alumnos.`)
   }
 
   const eraseStats = (user) => {
